@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import {Link, Redirect} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHamburger } from '@fortawesome/free-solid-svg-icons'
+import FeedbackFooter from "./FeedbackFooter"
 export default function Header() {
     const [show,setShow] = useState(true)
     const [random,setRandom] = useState(null) 
@@ -25,6 +26,7 @@ export default function Header() {
             <li> <Link to ="/">Home</Link></li>
             <li><Link to ="/Blog">Blog</Link></li> 
             <li onClick ={handleClick}>Random </li>
+            <li><FeedbackFooter/></li>
         </ul>
     </div>
     : null }
