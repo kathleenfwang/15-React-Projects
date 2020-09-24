@@ -4,7 +4,7 @@ export default function Circle({i}) {
     let maxWidth = window.innerWidth
  
     let randomNum = Math.floor(Math.random() * maxWidth)  - 200 
-    let randomOpacity = Math.floor(Math.random()*10)
+    let randomOpacity = Math.floor(Math.random()*5) + 5
  
  
     function randomColor() {

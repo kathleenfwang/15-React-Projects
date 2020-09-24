@@ -24,7 +24,7 @@ export default function Home() {
                         <p>Software Engineer</p>
                     </div>
                     <div className="desc">
-                        <p>I enjoy working with multiple problems. I love design and want to study the interesection between art and coding! </p>
+                        <p>I enjoy working with multiple problems. I love design and want to study the interesection between art and coding! Also a sucker for pixel art apparently.</p>
                     </div>
                     <div>
                         <div className="links">

@@ -106,10 +106,12 @@ a {
     color:palevioletred;
   }
   .day2 { 
+    color:whitesmoke;
     height:100vw;
     padding:30px;
     border-radius:30px;
-    background-color:rgba(247, 181, 181, 0.2);
+    /* background-color:rgba(247, 181, 181, 0.2); */
+    background-image: url("https://i.gifer.com/guk.gif");
   }
 
  .footer {
