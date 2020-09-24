@@ -42,7 +42,7 @@ export default function Home() {
                     <button onClick = {handleClick}> Feeling Lucky </button>
                     <ul ref = {projList}>
                         <Day i = "1" title = "This Website"/>
-                        <Day i = "2" title = "Bubbles"/>
+                        <Day i = "2" title = "Solar System"/>
                         <Day i = "3" title = "Day 3"/>
                     </ul>
                 </div>

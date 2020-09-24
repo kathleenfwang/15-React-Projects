@@ -31,6 +31,7 @@
    border:none;
    border-radius:5px;
    cursor: pointer;
+   margin-left:10px;
  }
  button:active{
    border:none;
@@ -76,8 +77,12 @@ a {
    margin-left:30px;
    list-style-type:circle;
  }
+ .center {
+   text-align: center;
+ }
  .header {
    display:flex;
+   align-items: baseline;
    margin-top:-10px;
    margin-bottom:10px;
    width:20%;
@@ -85,8 +90,7 @@ a {
  .nav ul {
   display:flex;
    grid-gap:10px;
-   position:fixed;
-    top:0;
+   height:10px;
   
    list-style-type: none;
  }
@@ -102,6 +106,7 @@ a {
     color:palevioletred;
   }
   .day2 { 
+    height:100vw;
     padding:30px;
     border-radius:30px;
     background-color:rgba(247, 181, 181, 0.2);

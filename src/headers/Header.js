@@ -3,7 +3,7 @@ import {Link, Redirect} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHamburger } from '@fortawesome/free-solid-svg-icons'
 export default function Header() {
-    const [show,setShow] = useState(false)
+    const [show,setShow] = useState(true)
     const [random,setRandom] = useState(null) 
     const [clicked,setClick] = useState(false)
     function handleClick(e) {

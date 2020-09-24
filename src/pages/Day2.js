@@ -7,6 +7,7 @@ export default function Day2() {
        height:100
    }
     const [count,setCount] = useState(0)
+    const [name,setName] = useState("") 
     function circles() {
         circles = [] 
         for (let i =0;i<count;i++) {
@@ -15,18 +16,19 @@ export default function Day2() {
         return circles
     }
     function handleClick() {
-
         setCount(prevCount => prevCount + 1)
     }
-    console.log(count)
+    function destroyPlanet() {
+        setCount(prevCount => prevCount - 1)
+    }
+ 
     return (
-       
         <div className ="day2">
-            <h1> Fill this page with colored bubbles</h1>
-            <button onClick = {handleClick}> Bubble </button>
-            <div >
-            <img style = {sidePic} src ="https://www.netclipart.com/pp/m/274-2743302_silhouette-blowing-bubbles-clipart.png"></img>
-            </div>
+            <h1 className ="center"> Make your own solar system!</h1>
+            <h3 className ="center"> Planets in orbit: {count} </h3>
+ 
+            <button onClick = {handleClick}> Planet </button>
+            <button onClick ={destroyPlanet}> Destroy </button>
             {circles()}
         </div>
     )
