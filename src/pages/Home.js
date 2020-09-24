@@ -1,7 +1,18 @@
-import React from "react"
-
+import React, {useRef,useState} from "react"
+import Projects from "./Projects"
+import Day from "./Day"
+import {Link, Redirect} from "react-router-dom"
 export default function Home() {
-
+    const projList = useRef(null)
+    const [clicked,setClick] = useState(false)
+    const [randomNum,setRandomNum] = useState(null)
+    function handleClick(e) {
+        let max = (projList.current.children.length)
+        let randomNum =  Math.floor(Math.random() * Math.floor(max)) + 1;
+        setClick(!clicked)
+        setRandomNum(randomNum)
+     
+    }
     return (
         <div className="home">
             <div className="firstPanel">
@@ -16,30 +27,31 @@ export default function Home() {
                         <p>I enjoy working with multiple problems. I love design and want to study the interesection between art and coding! </p>
                     </div>
                     <div>
-                        <button>Get in touch</button>
                         <div className="links">
                             <p>Twitter</p>
                             <p>Github</p>
                             <p>Linkedin</p>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className="projects">
+                    <div className>
                 <div>
-                    <h1> Projects: </h1>
-                    <div className="projDesc">
-                        <h3>180 React Projects in 180 Days!</h3>
+                    <h1> Projects: <span className ="smallTxt">180 React Projects in 180 Days!</span></h1>
                         <p><i> Inspired by Jennifer Dewalt's <a href="https://jenniferdewalt.com/" target="_blank"> 180 Projects in 180 Days</a></i></p>
-                      
-                    </div>
                 </div>
                 <div className="projectList">
-                    <ul>
-                        <li> Day 1: </li>
+                    <button onClick = {handleClick}> Feeling Lucky </button>
+                    <ul ref = {projList}>
+                        <Day i = "1" title = "This Website"/>
+                        <Day i = "2" title = "Day 2"/>
+                        <Day i = "3" title = "Day 3"/>
                     </ul>
                 </div>
+                {clicked ? randomNum == 1 ? <Redirect to = "/"/> : <Redirect to = {`/day/${randomNum}`} /> : null }
             </div>
+                </div>
+
+            </div>
+            
         </div>
 
     )
