@@ -44,6 +44,7 @@ export default function Home() {
                         <Day i = "1" title = "This Website"/>
                         <Day i = "2" title = "Solar System"/>
                         <Day i = "3" title = "Day 3"/>
+                        <Day i = "4" title = "Day 4"/>
                     </ul>
                 </div>
                 {clicked ? randomNum == 1 ? <Redirect to = "/"/> : <Redirect to = {`/day/${randomNum}`} /> : null }

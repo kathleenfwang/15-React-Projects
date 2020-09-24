@@ -113,6 +113,9 @@ a {
     /* background-color:rgba(247, 181, 181, 0.2); */
     background-image: url("https://i.gifer.com/guk.gif");
   }
+  .day4 {
+    text-align:center;
+  }
 
  .footer {
    font-style: italic;
