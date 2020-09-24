@@ -114,7 +114,16 @@ a {
     background-image: url("https://i.gifer.com/guk.gif");
   }
   .day4 {
+    padding:30px;
     text-align:center;
+  }
+
+  .day4 button {
+    margin-top:10px;
+    padding:10px;
+  }
+  .day4 p {
+    font-family: 'Times New Roman', Times, serif;
   }
 
  .footer {
