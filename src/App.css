@@ -49,7 +49,7 @@ a {
   text-decoration: none;
 }
 .home a {
-  color:teal;
+  color:palevioletred;
 }
  .links {
    display:flex;
@@ -90,6 +90,23 @@ a {
   
    list-style-type: none;
  }
+ .error {
+   padding:30px;
+  text-align: center;
+  height: 50vw;
+   background-image: url("https://i.imgur.com/FujY37n.gif");
+   background-repeat: no-repeat;
+   background-size:cover;
+ }
+  .error h1,a{
+    color:palevioletred;
+  }
+  .day2 { 
+    padding:30px;
+    border-radius:30px;
+    background-color:rgba(247, 181, 181, 0.2);
+  }
+
  .footer {
    font-style: italic;
    text-align: right;
