@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from "react"
-
+import {TwitterIcon, TwitterShareButton} from "react-share"
 export default function Day4() {
     const [mouseX,setMouseX] = useState(0)
     const [mouseY,setMouseY] = useState(0)
@@ -14,8 +14,12 @@ export default function Day4() {
  
     })
     let style = {
-        display:"grid",
-        gridTemplateColumns:"1fr 1fr 1fr"
+
+        margin: "0 auto", 
+        marginTop: 10,
+        display: "grid", 
+        gridTemplateColumns: "1fr 1fr 1fr",
+        width: "90%"
     }
 
     function mouseStyle(num) {
@@ -65,20 +69,30 @@ export default function Day4() {
     }
     function downloadTxtFile(){
         const element = document.createElement("a");
-        const file = new Blob(textList, {type: 'text/plain'});
+        let textString = textList.join(" ").split() // join back into an array of one big string with spaces
+        const file = new Blob(textString, {type: 'text/plain'});
         element.href = URL.createObjectURL(file);
         element.download = "feelings.txt";
         document.body.appendChild(element); // Required for this to work in FireFox
         element.click();
       }
+      console.log(text)
     return(
         <div className ="day4">
              <h1>FEELINGS </h1>
              
              <textarea id ="myInput" autoFocus placeholder ="How are you feeling?" value ={text} onChange = {handleChange} onKeyPress = {soTired}></textarea>
              <br></br>
-            <button onClick ={clear}>Clear </button>
-            <button onClick ={downloadTxtFile}>Save as .txt</button>
+             <div className ="buttons">
+            <button className ="clear" onClick ={clear}>Clear </button>
+            <button className ="secondary" onClick ={downloadTxtFile}>Save as .txt</button>
+            <TwitterShareButton
+        url= {`Feelings: ${textList.length == 0 ? text : textList.join(" ")} ${"\n"} Shared from http://kathleenwang180projects.surge.sh/day/4`}>
+        <TwitterIcon
+          size={32}
+          round />
+      </TwitterShareButton>
+      </div>
              <div style ={mouseStyle(1)}>
         </div>
         <div style ={mouseStyle(3)}>

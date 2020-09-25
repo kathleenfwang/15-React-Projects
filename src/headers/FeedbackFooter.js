@@ -18,6 +18,8 @@ export default function FeedbackFooter() {
     function form() {
         return (
             <form className={`form ${show}Form`} onSubmit={submit}>
+                <p>I would love to hear your feedback! Feel free to send comments or any questions.</p>
+                <br></br>
                 <label htmlFor="name">Name *</label>
                 <br></br>
                 <input id="name" type="name" name="name" />
@@ -26,14 +28,14 @@ export default function FeedbackFooter() {
                 <br></br>
                 <textarea placeHolder="Message here .." id="message" name="message" />
                 <br></br>
-                <button type="submit">Send</button>
+                <button className ="secondary" type="submit">Send</button>
             </form>
         )
     }
     return (
         <div className="feedbackFooter">
             <p onClick={handleShow}>
-                <FontAwesomeIcon icon={faCommentDots} /></p>
+                <FontAwesomeIcon style ={{color:"moccasin"}} icon={faCommentDots} /></p>
             {form()}
 
 

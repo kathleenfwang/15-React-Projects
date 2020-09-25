@@ -39,12 +39,12 @@ export default function Home() {
                         <p><i> Inspired by Jennifer Dewalt's <a href="https://jenniferdewalt.com/" target="_blank"> 180 Projects in 180 Days</a></i></p>
                 </div>
                 <div className="projectList">
-                    <button onClick = {handleClick}> Feeling Lucky </button>
+                    <button className ="whiteButton" onClick = {handleClick}> Feeling Lucky </button>
                     <ul ref = {projList}>
                         <Day i = "1" title = "This Website"/>
                         <Day i = "2" title = "Solar System"/>
                         <Day i = "3" title = "Day 3"/>
-                        <Day i = "4" title = "Day 4"/>
+                        <Day i = "4" title = "Feelings"/>
                     </ul>
                 </div>
                 {clicked ? randomNum == 1 ? <Redirect to = "/"/> : <Redirect to = {`/day/${randomNum}`} /> : null }

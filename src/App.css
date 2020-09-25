@@ -8,6 +8,10 @@
    height:100%;
 
  }
+ .whiteButton {
+   color:#333;
+   background-color: whitesmoke;
+ }
  .firstPanel {
  margin-left:52%;
  background-color:rgba(247, 181, 181, 0.2);
@@ -15,6 +19,10 @@
  padding-left:50px;
  border-radius:10px;
  overflow: auto;
+ }
+ .secondary {
+   background-color: moccasin;
+   color: #333;
  }
  .home {
   background-image: url("https://i.imgur.com/P77Lkbg.gif");
@@ -26,6 +34,9 @@
  
  }
  button {
+   border: 2px solid white;
+   color:palevioletred;
+   font-weight: bold;
    background-color:whitesmoke;
    padding:20px;
    border:none;
@@ -127,18 +138,24 @@ a {
     margin-top:10px;
     padding:10px;
   }
+  .day4 textarea {
+    padding: 10px;
+    margin: 0px;
+    width: 360px;
+    height: 86px;
+  }
   .day4 p {
     font-family: 'Times New Roman', Times, serif;
   }
   .form {
-
+    margin-top:10px;
     text-align: left;
     display:flex;
     flex-direction: column;;
     font-size:14px;
     border-radius: 4px;
     padding:30px;
-    background-color:wheat;
+    background-color:moccasin;
     box-shadow: 5px 5px rgba(177, 174, 174, 0.2);
   }
   .form label {
@@ -165,6 +182,15 @@ a {
  .feedbackFooter {
  }
  .feedbackFooter p {
+   margin:0px;
    cursor: pointer;
    clear:both;
+ }
+ .clear {
+   background-color:palevioletred;
+   color:white;
+ }
+ .buttons {
+  justify-content: center;
+  display: flex;
  }

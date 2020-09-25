@@ -7,8 +7,8 @@ export default function Blog() {
             date: "9/23/20"
         }, 
         {
-            p: "test", 
-            date: "234234"
+            p: "Even though it's already been 6 months since the pandemic started, I do feel it is a good respite in this chaotic world. I realized I do so many things and so much of my identity is based on my \"outside persona\". But now we have to all live with ourselves and I'm starting to learn how to live for myself! I know I am incredible privileged to say but this time for me includes more time for self-learning and programming and less time for distractions and societal obligations.", 
+            date: "9/24/20"
         }, 
         {
             p: "test", 

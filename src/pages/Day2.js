@@ -26,7 +26,6 @@ export default function Day2() {
         <div className ="day2">
             <h1 className ="center"> Make your own solar system!</h1>
             <h3 className ="center"> Planets in orbit: {count} </h3>
- 
             <button onClick = {handleClick}> Planet </button>
             <button onClick ={destroyPlanet}> Destroy </button>
             {circles()}
