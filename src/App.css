@@ -129,11 +129,16 @@ a {
     text-align:center;
   }
   .trueForm {
-    display:block
+    visibility: visible;
   }
   .falseForm {
-    visibility: hidden;
+    display:none;
   }
+  form {
+    display: flex;
+ 
+  }
+  
   .day4 button {
     margin-top:10px;
     padding:10px;
@@ -151,13 +156,19 @@ a {
     position:relative;
     margin-top:10px;
     text-align: left;
-    display:flex;
     flex-direction: column;;
     font-size:14px;
     border-radius: 4px;
     padding:30px;
     background-color:moccasin;
     box-shadow: 5px 5px rgba(177, 174, 174, 0.2);
+  }
+  nav {
+    display:flex;
+    list-style-type: none;
+  }
+  nav li {
+    margin-left:20px;
   }
   .form label {
     font-weight: bold;
@@ -167,6 +178,7 @@ a {
     padding:10px;
   }
   .form input {
+    width:70%;
     padding:10px;
     border:none;
     border-radius:5px;
@@ -206,3 +218,4 @@ a {
    width:30%;
    height:30%;
  }
+ 
