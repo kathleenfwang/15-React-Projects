@@ -8,7 +8,9 @@ export default function Home() {
     const [randomNum,setRandomNum] = useState(null)
     function handleClick(e) {
         let max = (projList.current.children.length)
+ 
         let randomNum =  Math.floor(Math.random() * Math.floor(max)) + 1;
+        console.log(randomNum)
         setClick(!clicked)
         setRandomNum(randomNum)
      
@@ -43,8 +45,10 @@ export default function Home() {
                     <ul ref = {projList}>
                         <Day i = "1" title = "This Website"/>
                         <Day i = "2" title = "Solar System"/>
-                        <Day i = "3" title = "Day 3"/>
+                        <Day i = "3" title = "Animation Practice"/>
                         <Day i = "4" title = "Feelings"/>
+                        <Day i = "5" title = "Picture Canvas"/>
+                        <Day i ="6" title = "Plants" />
                     </ul>
                 </div>
                 {clicked ? randomNum == 1 ? <Redirect to = "/"/> : <Redirect to = {`/day/${randomNum}`} /> : null }

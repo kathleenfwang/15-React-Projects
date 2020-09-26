@@ -18,7 +18,7 @@ export default function FeedbackFooter() {
     function form() {
         return (
             <form className={`form ${show}Form`} onSubmit={submit}>
-                <p>I would love to hear your feedback! Feel free to send comments or any questions.</p>
+                <p>I would love to hear your feedback! Feel free to send any comments or suggestions.</p>
                 <br></br>
                 <label htmlFor="name">Name *</label>
                 <br></br>

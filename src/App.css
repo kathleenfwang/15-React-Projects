@@ -148,6 +148,7 @@ a {
     font-family: 'Times New Roman', Times, serif;
   }
   .form {
+    position:relative;
     margin-top:10px;
     text-align: left;
     display:flex;
@@ -184,7 +185,7 @@ a {
  .feedbackFooter p {
    margin:0px;
    cursor: pointer;
-   clear:both;
+ 
  }
  .clear {
    background-color:palevioletred;
@@ -193,4 +194,15 @@ a {
  .buttons {
   justify-content: center;
   display: flex;
+ }
+ .day5 {
+   padding:30px;
+ }
+ .day5 h3 {
+   font-size:18px;
+   width:50%;
+ }
+ .medImg {
+   width:30%;
+   height:30%;
  }

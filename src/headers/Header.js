@@ -26,7 +26,7 @@ export default function Header() {
             <li> <Link to ="/">Home</Link></li>
             <li><Link to ="/Blog">Blog</Link></li> 
             <li onClick ={handleClick}>Random </li>
-            <li><FeedbackFooter/></li>
+            {/* <li><FeedbackFooter/></li> */}
         </ul>
     </div>
     : null }

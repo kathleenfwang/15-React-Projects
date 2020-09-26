@@ -76,7 +76,6 @@ export default function Day4() {
         document.body.appendChild(element); // Required for this to work in FireFox
         element.click();
       }
-      console.log(text)
     return(
         <div className ="day4">
              <h1>FEELINGS </h1>
