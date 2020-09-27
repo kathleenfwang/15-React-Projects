@@ -1,5 +1,6 @@
 import React from "react"
 import axios from "axios"
+import { withRouter } from "react-router-dom"
 
 export default class Day6 extends React.Component{
  constructor() {
@@ -24,6 +25,8 @@ export default class Day6 extends React.Component{
         padding: 30, 
         gridGap: 20
      }
+ 
+    
      this.proxyurl = "https://cors-anywhere.herokuapp.com/"
      this.url = `${this.proxyurl}https://plant-app-1.herokuapp.com/plants`
  }
@@ -37,7 +40,13 @@ export default class Day6 extends React.Component{
       });
     })
  }
- 
+ plantCardStyle =(plant) => {
+     console.log(plant)
+     return {
+         backgroundImage: `url(${plant.image})`,
+         backgroundSize: "cover" ,
+     }
+ }
  loadPlants = () => {
      let reversePlants = [] 
 
@@ -46,13 +55,15 @@ export default class Day6 extends React.Component{
          reversePlants.unshift(plant) 
      })
     return reversePlants.map((plant,i) => {
-   
+        const dateToString = plant.createdAt.slice(0,10)
          return (
-             <div  key = {i}>
+             <div  style ={this.plantCardStyle(plant)} className = "plantCard" key = {i}>
+                 <div className ="innerPlantCard">
                  <h3>{plant.name}</h3>
                  {undos[plant._id] ? <button onClick ={() => this.deletePlant(plant._id)}>Undo</button> : null}
-                 <p>{plant.description}</p>
-                 <img className ="medImg" src ={plant.image} />
+                 <p><span className ="smallTxt">{dateToString}</span> <br></br>{plant.description}</p>
+               <img className ="medImg" src ={plant.image} />
+                 </div>
              </div>
          )
      })
@@ -155,6 +166,7 @@ handleImg = (e) => {
   this.setState({plants: sortedPlants})
     }
     else {
+        // sort 
         this.setState(prevState => ({
             newest: !prevState.newest
         }))
@@ -164,16 +176,17 @@ handleImg = (e) => {
  render = () => {
      const {az,newest,plantDivs} = this.state
      return(
-         <div>
-             <h1>Plant Library</h1> 
+         <div className ="day6">
+             <h1 className ="titlePicture"><img className ="titleImg" src ="https://lh3.googleusercontent.com/proxy/HUpgd_GnqlKKlKAOtP9jKzIvuc3PwpIdI9fQ_UNfC-gPETbKtBxhoaGxubJhFaIk2z2UVqBCWebHgpnS-yqWt8pwPGKnWEGt"></img> Plant Library <img className ="titleImg" src ="https://64.media.tumblr.com/2a3a3cad8d4a29a261d5a40961c77562/tumblr_n4v0vcbOAx1snc5kxo1_500.gif"></img> </h1>
+             
              <nav>
                  <li> <button onClick ={this.addPlant}>Add Plant </button></li>
                  <li>{this.form()}</li>
                  <li><button onClick ={() => this.sortPlants("name")}>Sort {az ? "Z-A" : "A-Z"}</button></li>
-                 <li><button onClick ={() => this.sortPlants("date")}>Sort {newest ? "newest - oldest" : "oldest - newest"}</button></li>
+            
              </nav>
              <div style ={this.plantsStyle}>
-             {this.state.loaded ? this.loadPlants(): <img src ="https://i.pinimg.com/originals/47/72/87/477287eff59923ade6336b5eb3307de4.gif"></img>}
+             {this.state.loaded ? this.loadPlants(): <img className ="loadImg" src ="https://i.pinimg.com/originals/47/72/87/477287eff59923ade6336b5eb3307de4.gif"></img>}
              </div>
          </div>
      )
