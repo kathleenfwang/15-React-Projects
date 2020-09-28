@@ -49,6 +49,7 @@ export default function Home() {
                         <Day i = "4" title = "Feelings"/>
                         <Day i = "5" title = "Picture Canvas"/>
                         <Day i ="6" title = "Plants" />
+                        <Day i ="7" title = "Color Extractor" />
                     </ul>
                 </div>
                 {clicked ? randomNum == 1 ? <Redirect to = "/"/> : <Redirect to = {`/day/${randomNum}`} /> : null }

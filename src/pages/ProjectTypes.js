@@ -4,6 +4,7 @@ import Day3 from "./Day3"
 import Day4 from "./Day4"
 import Day5 from "./Day5"
 import Day6 from "./Day6"
+import Day7 from "./Day7"
 
 function day2() {
     return <Day2 />
@@ -22,5 +23,7 @@ function day5() {
 function day6() {
     return <Day6/>
 }
-
-export {day2,day3,day4, day5,day6}
+function day7() {
+    return <Day7/>
+}
+export {day2,day3,day4, day5,day6,day7}
