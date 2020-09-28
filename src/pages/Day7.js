@@ -84,6 +84,7 @@ export default class Day7 extends React.Component {
         var rgba = 'rgba(' + data[0] + ', ' + data[1] +
             ', ' + data[2] + ', ' + (data[3] / 255) + ')';
         this.setState(prevState => ({
+            eraser:false,
             colorDiv: false,
             singleClickRgba: rgba,
             clickRgba: [...prevState.clickRgba, rgba]
