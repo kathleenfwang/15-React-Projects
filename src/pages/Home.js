@@ -15,6 +15,14 @@ export default function Home() {
         setRandomNum(randomNum)
      
     }
+    function days() {
+        let daysList = []
+        let days = [
+            "Color Extractor","Plant Library","Picture Canvas","feelings","Animation Practice","Solar System","This Website"]
+            for (let i = days.length;i>0;i--)
+             daysList.push(<Day i = {i} title = {days[days.length - i]} /> )
+             return daysList
+    }
     return (
         <div className="home">
             <div className="firstPanel">
@@ -43,13 +51,8 @@ export default function Home() {
                 <div className="projectList">
                     <button className ="whiteButton" onClick = {handleClick}> Feeling Lucky </button>
                     <ul ref = {projList}>
-                        <Day i = "1" title = "This Website"/>
-                        <Day i = "2" title = "Solar System"/>
-                        <Day i = "3" title = "Animation Practice"/>
-                        <Day i = "4" title = "Feelings"/>
-                        <Day i = "5" title = "Picture Canvas"/>
-                        <Day i ="6" title = "Plants" />
-                        <Day i ="7" title = "Color Extractor" />
+                        {days()}
+    
                     </ul>
                 </div>
                 {clicked ? randomNum == 1 ? <Redirect to = "/"/> : <Redirect to = {`/day/${randomNum}`} /> : null }

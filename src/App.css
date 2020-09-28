@@ -147,6 +147,27 @@ a {
   .loadImg {
     text-align:center;
   }
+  .trueBorder {
+    border: 1px dashed #ddd;
+  }
+  .falseBorder {
+    border:1px solid transparent;
+  }
+  .twoGrid {
+    grid-gap:20px;
+    padding:0px 30px;
+    display:flex;
+  }
+  .oneGrid {
+    margin-left:200px;
+    grid-gap:10px;
+    display: flex;
+    flex-direction: column;
+  }
+  .smSq {
+    width:20px;
+    height:20px;
+  }
   .titlePicture {
     display: flex;
     align-items: center;

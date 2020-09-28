@@ -173,11 +173,12 @@ handleImg = (e) => {
     }
 
  }
+
  render = () => {
      const {az,newest,plantDivs} = this.state
      return(
          <div className ="day6">
-             <h1 className ="titlePicture"><img className ="titleImg" src ="https://lh3.googleusercontent.com/proxy/HUpgd_GnqlKKlKAOtP9jKzIvuc3PwpIdI9fQ_UNfC-gPETbKtBxhoaGxubJhFaIk2z2UVqBCWebHgpnS-yqWt8pwPGKnWEGt"></img> Plant Library <img className ="titleImg" src ="https://64.media.tumblr.com/2a3a3cad8d4a29a261d5a40961c77562/tumblr_n4v0vcbOAx1snc5kxo1_500.gif"></img> </h1>
+             <h1 className ="titlePicture"><img className ="titleImg" src ="https://64.media.tumblr.com/2a3a3cad8d4a29a261d5a40961c77562/tumblr_n4v0vcbOAx1snc5kxo1_500.gif"></img> Plant Library <img className ="titleImg" src ="https://64.media.tumblr.com/2a3a3cad8d4a29a261d5a40961c77562/tumblr_n4v0vcbOAx1snc5kxo1_500.gif"></img> </h1>
              
              <nav>
                  <li> <button onClick ={this.addPlant}>Add Plant </button></li>
