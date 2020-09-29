@@ -1,8 +1,7 @@
 import React from "react"
-import clouds from "./Components1/clouds.jpg"
-import ocean from "./Components1/ocean.jpg"
-import parot from "./Components1/parot.jpg"
-import ocean2 from "./Components1/ocean2.jpg"
+import pixelart1 from "./Components1/pixelart1.gif"
+import pixelart2 from "./Components1/pixelart2.gif"
+import pixelart3 from "./Components1/pixelart3.gif"
 import domtoimage from 'dom-to-image';
 import saveAs from 'file-saver'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,8 +14,8 @@ export default class Day7 extends React.Component {
     constructor() {
         super()
         this.state = {
-            img: clouds,
-            photos: [clouds, ocean, parot],
+            img: pixelart3,
+            photos: [pixelart3,pixelart2,pixelart1],
             input: "",
             ctx: null,
             rgba: null,

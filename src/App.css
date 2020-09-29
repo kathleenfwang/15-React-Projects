@@ -196,6 +196,7 @@ a {
     grid-gap:20px;
     padding:0px 30px;
     display:flex;
+    flex-wrap: wrap;
   }
 
 
