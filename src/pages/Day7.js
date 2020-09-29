@@ -27,14 +27,17 @@ export default class Day7 extends React.Component {
             colorDiv: false,
             columns: 20,
             sqSize: "medSq",
-            active: "medSq"
+            active: "medSq", 
+            isShown: false,
+            index: null
         }
         this.canvasDiv = {
             width: 450,
             height: 450,
         }
         this.canvasStyle = {
-            cursor: "crosshair"
+            cursor: "crosshair", 
+            objectFit: "contain"
         }
         this.colorDiv = {
             border: "1px solid #ddd",
@@ -60,13 +63,16 @@ export default class Day7 extends React.Component {
     }
     images = () => {
         let { photos } = this.state
-        while (photos.length < 5) {
+        while (photos.length < 6) {
             photos.push("")
         }
         return photos.map((photo, i) => {
             if (photo === "") {
-                return <div id={i} onClick={this.handleUpload} className="square alignInMiddle">
-                    <FontAwesomeIcon icon={faPlus} style={{ color: "lightgrey" }} />
+                return <div id={i} className="square alignInMiddle">
+                        <input ref = {`fileUpload${i}`} style ={{display:"none"}}type="file" name="imgUpload" id="file" className="inputfile" onChange={(e) => this.handleUpload(e,i)}
+                                accept=".png,.jpg"
+                            />
+                    <FontAwesomeIcon onClick = {() => this.inputUpload(i)}icon={faPlus} style={{ color: "lightgrey" }} />
                 </div>
             }
             else {
@@ -76,8 +82,31 @@ export default class Day7 extends React.Component {
                 }} onClick={this.handleClickImage} />
             }
         })
+        
     }
-    handleUpload = (e) => {
+    inputUpload = (i) => {
+        console.log('clicked')
+        let file = `fileUpload${i}`
+        let upload = this.refs[file]
+        upload.click()
+    }
+    handleUpload = (e,i) => {
+        console.log('uploading',i)
+        const {photos} = this.state
+     
+        if (e.target.files && e.target.files[0]) {
+            let img = e.target.files[0];
+            let src = URL.createObjectURL(img);
+            if (i !== 5 && i) {
+                photos.splice(i,1,src)
+                this.setState({
+                    photos: photos
+                })
+            }
+            this.setState({
+                img:src
+            })       
+        }
     }
     onDrop = (picture) => {
         this.setState({
@@ -115,7 +144,6 @@ export default class Day7 extends React.Component {
 
     }
     canvasClick = (event) => {
-        console.log('click')
         var x = event.layerX;
         var y = event.layerY;
         const { ctx } = this.state
@@ -173,19 +201,36 @@ export default class Day7 extends React.Component {
             eraser: false
         })
     }
+    handleMouseEnter = (i) => {
+        console.log(i)
+        this.setState(prevState => ({
+            isShown: !prevState.isShown,
+            index: i 
+        }))
+    }
     colorDivs = () => {
-        const { clickRgba } = this.state
+        const { clickRgba,isShown, index} = this.state
         let num = 7
         let divs = []
         for (let i = 0; i < num; i++) {
             divs.push(
+                <div className ="flex">
                 <div style={{
                     backgroundColor: clickRgba[i] ? clickRgba[i] : "white",
-                }} className="square" onClick={this.handleColor} key={i}></div>
+                }}  onMouseLeave = {() => this.handleMouseEnter(i)}onMouseEnter ={() => this.handleMouseEnter(i)} className="square" onClick={this.handleColor} key={i}></div>
+                    <div style ={{color: clickRgba[i]}} className ={`${isShown && index === i}Show`}> { clickRgba[i] ? this.rgb2hex(clickRgba[i]) : "white"} </div>
+                  </div>
             )
         }
         return divs
     }
+     rgb2hex = (rgb) => {
+        rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+        return (rgb && rgb.length === 4) ? "#" +
+         ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+         ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+         ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+       }
     handleGridClick = (e) => {
         const { singleClickRgba, colorPicker, eraser, colorDiv } = this.state
         if (eraser) {
@@ -214,7 +259,6 @@ export default class Day7 extends React.Component {
     }
     handleEraser = () => {
         let grid = this.refs.grid
-        console.log(grid.style)
         grid.style.cursor = "crosshair"
         this.setState(prevState => ({
             eraser: !prevState.eraser
@@ -230,7 +274,6 @@ export default class Day7 extends React.Component {
             .then(function (dataUrl) {
                 var img = new Image();
                 img.src = dataUrl;
-                console.log(img.src)
             })
             .catch(function (error) {
                 console.error('oops, something went wrong!', error);
@@ -268,7 +311,6 @@ export default class Day7 extends React.Component {
         })
     }
     render() {
-        console.log(this.state.img)
         let buttons = [
             <button className={this.state.sqSize === "smSq" ? 'active' : ''} onClick={this.handleSmall}><FontAwesomeIcon icon={faTh} /></button>,
             <button className={this.state.sqSize === "medSq" ? 'active' : ''} onClick={this.handleMedium}><FontAwesomeIcon icon={faThLarge} /></button>,
