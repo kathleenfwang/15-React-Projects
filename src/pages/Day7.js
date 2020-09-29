@@ -269,7 +269,10 @@ export default class Day7 extends React.Component {
         ]
         return (
             <div >
+                <div className ="flex" style ={{justifyContent:"space-around"}}>
                 <h1>Create your own pixel art</h1>
+                <div className ="smallImgDiv" style ={{backgroundImage: `url("https://media.discordapp.net/attachments/701277128951595032/760060989982113832/pixel-art_2.png")`}}></div> 
+                </div>
                 <form onSubmit={this.handleSubmit}>
                     {/* <input onChange={this.handleChange} value={this.state.input} ref="urlinput" placeholder="enter img url"></input>
                     <button type="submit">Submit</button> */}
