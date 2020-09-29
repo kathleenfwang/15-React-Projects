@@ -12,7 +12,7 @@ export default function Error({components}) {
     return (
         <>
         <div className ="error">
-            <h1> Error! </h1> 
+            <h1> Oops! </h1> 
             <h2>This day has not been completed yet! We only have these days: 
             {listComponents()}
             </h2>

@@ -1,5 +1,6 @@
 import React, {useEffect,useState} from "react"
 import {TwitterIcon, TwitterShareButton} from "react-share"
+import { Form, TextArea, Button } from 'semantic-ui-react'
 export default function Day4() {
     const [mouseX,setMouseX] = useState(0)
     const [mouseY,setMouseY] = useState(0)
@@ -80,11 +81,11 @@ export default function Day4() {
         <div className ="day4">
              <h1>FEELINGS </h1>
              
-             <textarea id ="myInput" autoFocus placeholder ="How are you feeling?" value ={text} onChange = {handleChange} onKeyPress = {soTired}></textarea>
+             <TextArea id ="myInput" autoFocus placeholder ="How are you feeling?" value ={text} onChange = {handleChange} onKeyPress = {soTired}></TextArea>
              <br></br>
              <div className ="buttons">
-            <button className ="clear" onClick ={clear}>Clear </button>
-            <button className ="secondary" onClick ={downloadTxtFile}>Save as .txt</button>
+            <Button  onClick ={clear}>Clear </Button>
+            <Button className ="secondary" onClick ={downloadTxtFile}>Save as .txt</Button>
             <TwitterShareButton
         url= {`Feelings: ${textList.length == 0 ? text : textList.join(" ")} ${"\n"} Shared from http://kathleenwang180projects.surge.sh/day/4`}>
         <TwitterIcon
