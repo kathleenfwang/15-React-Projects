@@ -186,7 +186,7 @@ a {
     text-align:center;
   }
   .trueBorder {
-    border: 0.5px dotted #ddd;
+    border:1px solid white;
  
   }
   .falseBorder {
@@ -345,7 +345,8 @@ a {
   width: 50px;
   height:50px;
   border-radius:5px;
-  margin: 5px;
+  margin: 5px; 
+  background-color: whitesmoke;
 }
 .lgSq {
   border-radius: 0px;
@@ -361,4 +362,19 @@ a {
   background-size:cover;
   width:100px;
   height:100px;
+}
+
+.day7 {
+  overflow:auto;
+ background-image: url('https://i.pinimg.com/originals/36/85/08/3685088f9111d12a0549c04b082e717a.gif');
+  padding:10px;
+  border-radius: 4px;
+  background-size:cover;
+  background-color: whitesmoke;
+}
+.block {
+  border-radius:5px;
+  width:100%;
+  display:block;
+  background-color: rgba(255, 255, 255, 0.6);
 }

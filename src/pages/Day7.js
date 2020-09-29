@@ -16,7 +16,7 @@ export default class Day7 extends React.Component {
         super()
         this.state = {
             img: clouds,
-            photos: [clouds,ocean,parot],
+            photos: [clouds, ocean, parot],
             input: "",
             ctx: null,
             rgba: null,
@@ -30,9 +30,9 @@ export default class Day7 extends React.Component {
             sqSize: "medSq",
             active: "medSq"
         }
-        this.canvasDiv ={
-            width:450,
-            height:450,
+        this.canvasDiv = {
+            width: 450,
+            height: 450,
         }
         this.canvasStyle = {
             cursor: "crosshair"
@@ -40,9 +40,9 @@ export default class Day7 extends React.Component {
         this.colorDiv = {
             border: "1px solid #ddd",
             backgroundColor: "white",
-            width: 50, height: 50, 
-            borderRadius:5,
-            marginLeft:5
+            width: 50, height: 50,
+            borderRadius: 5,
+            marginLeft: 5
         }
         this.grid = {
             width: 200,
@@ -60,25 +60,25 @@ export default class Day7 extends React.Component {
         console.log('clicked')
     }
     images = () => {
-        let {photos} = this.state
-       while (photos.length < 5) {
-           photos.push("")
-       }
-        return photos.map((photo,i) => {
+        let { photos } = this.state
+        while (photos.length < 5) {
+            photos.push("")
+        }
+        return photos.map((photo, i) => {
             if (photo === "") {
-                return <div id ={i} onClick ={this.handleUpload}className ="square alignInMiddle">
-                    <FontAwesomeIcon icon ={faPlus}  style ={{color:"lightgrey"}}/>
-                    </div>
+                return <div id={i} onClick={this.handleUpload} className="square alignInMiddle">
+                    <FontAwesomeIcon icon={faPlus} style={{ color: "lightgrey" }} />
+                </div>
             }
             else {
-            return <div id ={i} className ="square" style={{
-                backgroundImage: `url(${photo})`,
-                backgroundSize: "cover",
-            }} onClick ={this.handleClickImage}/>
-        }
+                return <div id={i} className="square" style={{
+                    backgroundImage: `url(${photo})`,
+                    backgroundSize: "cover",
+                }} onClick={this.handleClickImage} />
+            }
         })
     }
-    handleUpload =(e) => {
+    handleUpload = (e) => {
     }
     onDrop = (picture) => {
         this.setState({
@@ -87,10 +87,10 @@ export default class Day7 extends React.Component {
         });
     }
     handleClickImage = (e) => {
-        const {photos} = this.state
+        const { photos } = this.state
         let id = e.target.id
         this.setState({
-            img:photos[id]
+            img: photos[id]
         })
     }
     loadImg = () => {
@@ -182,7 +182,7 @@ export default class Day7 extends React.Component {
             divs.push(
                 <div style={{
                     backgroundColor: clickRgba[i] ? clickRgba[i] : "white",
-                }} className ="square" onClick={this.handleColor} key={i}></div>
+                }} className="square" onClick={this.handleColor} key={i}></div>
             )
         }
         return divs
@@ -260,6 +260,14 @@ export default class Day7 extends React.Component {
             columns: 10
         })
     }
+    pixelImgs = () => {
+        let pixelImgs = ['https://media.discordapp.net/attachments/701277128951595032/760057518931181568/pixel-art_1.png', 'https://media.discordapp.net/attachments/701277128951595032/760395150382989342/pixel-art_9.png', 'https://media.discordapp.net/attachments/701277128951595032/760060999855636520/pixel-art_3.png','https://media.discordapp.net/attachments/701277128951595032/760060989982113832/pixel-art_2.png']
+        return pixelImgs.map((img) => {
+            return (
+                <div className="smallImgDiv" style={{ backgroundImage: `url(${img})` }}></div>
+            )
+        })
+    }
     render() {
         console.log(this.state.img)
         let buttons = [
@@ -268,52 +276,60 @@ export default class Day7 extends React.Component {
             <button className={this.state.sqSize === "lgSq" ? 'active' : ''} onClick={this.handleLarge}><FontAwesomeIcon icon={faSquare} /></button>
         ]
         return (
-            <div >
-                <div className ="flex" style ={{justifyContent:"space-around"}}>
-                <h1>Create your own pixel art</h1>
-                <div className ="smallImgDiv" style ={{backgroundImage: `url("https://media.discordapp.net/attachments/701277128951595032/760060989982113832/pixel-art_2.png")`}}></div> 
+            <div className="day7" >
+                 <div className="block">
+                <div className="flex" style={{ justifyContent: "space-around" }}>
+               
+                    <div className='flex'>
+                        {this.pixelImgs()}
+                    </div>
+
+                    <h1>Create your own pixel art</h1>
+
+                    <div className='flex' style ={{flexDirection: 'row-reverse'}}>
+                        {this.pixelImgs()}
+                    </div>
                 </div>
-                <form onSubmit={this.handleSubmit}>
-                    {/* <input onChange={this.handleChange} value={this.state.input} ref="urlinput" placeholder="enter img url"></input>
-                    <button type="submit">Submit</button> */}
-                </form>
-                <div className="twoGrid">
-                    <h4>Click anywhere on the image to extract colors to create pixel art!</h4>
-                    <h4>Use your extracted colors or click anywhere on the image for colors to create pixel art</h4>
-                </div>
-                <div className="twoGrid">
+           
                     <div className="twoGrid">
-                        <div className ="twoGrid">
-                            <div>
-                                <div style ={this.canvasDiv}>
-                                <canvas style={this.canvasStyle} ref="canvas"/>
-                                </div>
-                                <div className ="flex">
-                                    {this.images()}
-                                </div>
-                            </div>
-                            <div>
-                                <div className ="square" style={{ border: "1px solid #ddd", backgroundColor: this.state.rgba, width: 50, height: 50 }} onClick={this.handleColor}></div>
-                                {this.colorDivs()}
-                            </div>
-                        </div>
+                        <h4>Click anywhere on the image to extract colors to create pixel art!</h4>
+                        <h4>Use your extracted colors or click anywhere on the image for colors to create pixel art</h4>
+                    </div>
+                    <div className="twoGrid">
                         <div className="twoGrid">
-                            <div>
-                                <div ref="grid" className="grid" style={{ gridTemplateColumns: `repeat(${this.state.columns}, 1fr)`, }}>
-                                    {this.grids()}
+                            <div className="twoGrid">
+                                <div>
+                                    <div style={this.canvasDiv}>
+                                        <canvas style={this.canvasStyle} ref="canvas" />
+                                    </div>
+                                    <div className="flex">
+                                        {this.images()}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="square" style={{ border: "1px solid #ddd", backgroundColor: this.state.rgba, width: 50, height: 50 }} onClick={this.handleColor}></div>
+                                    {this.colorDivs()}
                                 </div>
                             </div>
-                            <br></br>
-                        </div>
-                        <div className="oneGrid">
-                            <button onClick={this.handleEraser}><FontAwesomeIcon icon={faEraser} /></button>
-                            <button onClick={this.download}>Download</button>
-                            <button onClick={this.removeLines}>{this.state.removeLines ? "Remove Borders" : "Add Borders"}</button>
-                            <h3>Change Grid size: </h3>
-                            <div>
-                                {buttons}
+                            <div className="twoGrid">
+                                <div>
+                                    <div ref="grid" className="grid" style={{ gridTemplateColumns: `repeat(${this.state.columns}, 1fr)`, }}>
+                                        {this.grids()}
+                                    </div>
+                                </div>
+                                <br></br>
+                            </div>
+                            <div className="oneGrid">
+                                <button onClick={this.handleEraser}><FontAwesomeIcon icon={faEraser} /></button>
+                                <button onClick={this.download}>Download</button>
+                                <button onClick={this.removeLines}>{this.state.removeLines ? "Remove Borders" : "Add Borders"}</button>
+                                <h3>Change Grid size: </h3>
+                                <div>
+                                    {buttons}
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
