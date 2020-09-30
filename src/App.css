@@ -29,7 +29,11 @@
   color:#333;
   background-color:   #B3D4F3;
  }
+ .gap {
+  grid-gap:10px;
+ }
  .flex {
+   grid-gap:5px;
    align-items: center;
    display:flex;
  }

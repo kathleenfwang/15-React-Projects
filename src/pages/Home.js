@@ -2,6 +2,8 @@ import React, {useRef,useState} from "react"
 import Projects from "./Projects"
 import Day from "./Day"
 import {Link, Redirect} from "react-router-dom"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 export default function Home() {
     const projList = useRef(null)
     const [clicked,setClick] = useState(false)
@@ -38,17 +40,18 @@ export default function Home() {
                 <div>
                     <div>
                         <h1>Hi, I'm Kathleen Wang!</h1>
+                        <div className ="flex"  >
                         <p>Software Engineer</p>
+                        <div style ={{fontSize:20}} className ='flex' >
+                        <p><FontAwesomeIcon icon ={faGithub}/></p>
+                        <p><FontAwesomeIcon icon ={faLinkedin}/></p>
+                        </div>
+                        </div>
                     </div>
                     <div className="desc">
                         <p>I enjoy working with multiple problems. I love design and want to study the interesection between art and coding! Also a sucker for pixel art apparently.</p>
                     </div>
                     <div>
-                        <div className="links">
-                            <p>Twitter</p>
-                            <p>Github</p>
-                            <p>Linkedin</p>
-                        </div>
                     </div>
                     <div className>
                 <div>
