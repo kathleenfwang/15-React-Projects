@@ -412,6 +412,10 @@ a {
   visibility: hidden;
 }
 /* -----------------------------------Day 8-------------------------------  */
+.between {
+  display:flex;
+  justify-content: space-between;
+}
 .day8 {
   padding:20px;
   background-color:lightgrey;
@@ -422,7 +426,7 @@ a {
   outline:none;
   border-radius:5px; 
   width:80%;
-  height:500px; 
+  height:200px; 
   padding:30px; 
   font-size:1.5em;
   font-family:Georgia, 'Times New Roman', Times, serif;
