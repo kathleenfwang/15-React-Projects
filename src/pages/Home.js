@@ -6,6 +6,7 @@ export default function Home() {
     const projList = useRef(null)
     const [clicked,setClick] = useState(false)
     const [randomNum,setRandomNum] = useState(null)
+    const [recentTitle,setRecentTitle] = useState(null)
     function handleClick(e) {
         let max = (projList.current.children.length)
  
@@ -18,11 +19,17 @@ export default function Home() {
     function days() {
         let daysList = []
         let days = [
-            "Color Extractor","Plant Library","Picture Canvas","feelings","Animation Practice","Solar System","This Website"]
+            "Pixel Art Maker","Plant Library","Picture Canvas","feelings","Animation Practice","Solar System","This Website"]
             for (let i = days.length;i>0;i--)
              daysList.push(<Day i = {i} title = {days[days.length - i]} /> )
-             return daysList
+        return [days,daysList]
     }
+    function handleRecent() {
+        let max = (projList.current.children.length)
+        setClick(!clicked)
+        setRandomNum(max)
+    }
+     
     return (
         <div className="home">
             <div className="firstPanel">
@@ -50,8 +57,9 @@ export default function Home() {
                 </div>
                 <div className="projectList">
                     <button className ="whiteButton" onClick = {handleClick}> Feeling Lucky </button>
+                    <button className ="blueButton" onClick = {handleRecent}> Most Recent: <span style ={{color:"moccasin"}}>{days()[0][0]}</span></button>
                     <ul ref = {projList}>
-                        {days()}
+                        {days()[1]}
     
                     </ul>
                 </div>

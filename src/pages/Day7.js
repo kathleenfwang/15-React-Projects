@@ -5,7 +5,7 @@ import pixelart3 from "./Components1/pixelart3.gif"
 import domtoimage from 'dom-to-image';
 import saveAs from 'file-saver'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTh, faThLarge, faPlus, faSquare, faEraser, faDownload } from '@fortawesome/free-solid-svg-icons'
+import { faTh, faThLarge, faPlus, faSquare, faEraser, faDownload, faTrashAlt, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { TwitterIcon, TwitterShareButton } from "react-share"
 import { urlencoded } from "body-parser";
 import ImageUploader from 'react-images-upload';
@@ -58,9 +58,6 @@ export default class Day7 extends React.Component {
     componentDidMount() {
         this.loadImg()
     }
-    documentClick = () => {
-        console.log('clicked')
-    }
     images = () => {
         let { photos } = this.state
         while (photos.length < 6) {
@@ -85,13 +82,11 @@ export default class Day7 extends React.Component {
         
     }
     inputUpload = (i) => {
-        console.log('clicked')
         let file = `fileUpload${i}`
         let upload = this.refs[file]
         upload.click()
     }
     handleUpload = (e,i) => {
-        console.log('uploading',i)
         const {photos} = this.state
      
         if (e.target.files && e.target.files[0]) {
@@ -202,7 +197,6 @@ export default class Day7 extends React.Component {
         })
     }
     handleMouseEnter = (i) => {
-        console.log(i)
         this.setState(prevState => ({
             isShown: !prevState.isShown,
             index: i 
@@ -218,7 +212,7 @@ export default class Day7 extends React.Component {
                 <div style={{
                     backgroundColor: clickRgba[i] ? clickRgba[i] : "white",
                 }}  onMouseLeave = {() => this.handleMouseEnter(i)}onMouseEnter ={() => this.handleMouseEnter(i)} className="square" onClick={this.handleColor} key={i}></div>
-                    <div style ={{color: clickRgba[i], padding:3, backgroundColor: this.isLight(clickRgba[i])}} className ={`${isShown && index === i}Show`}> { clickRgba[i] ? this.rgb2hex(clickRgba[i]) : <>#ffffff<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></>}</div>
+                    <div style ={{color: clickRgba[i], borderRadius:4,padding:3, backgroundColor: this.isLight(clickRgba[i])}} className ={`${isShown && index === i}Show`}> { clickRgba[i] ? this.rgb2hex(clickRgba[i]) : <>empty<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></>}</div>
                   </div>
             )
         }
@@ -229,7 +223,7 @@ export default class Day7 extends React.Component {
         let colorArr = color.slice(5,-4).split(',')
         // check if all colors are > 150 
         colorArr = colorArr.filter((x) => x >= 150)
-        return colorArr.length >=2 ? "#4d4d4d" : "#fefefe"
+        return colorArr.length >=2 ? "#404040" : "#fefefe"
         }
     }
      rgb2hex = (rgb) => {
@@ -311,14 +305,22 @@ export default class Day7 extends React.Component {
         })
     }
     pixelImgs = () => {
-        let pixelImgs = ['https://media.discordapp.net/attachments/701277128951595032/760057518931181568/pixel-art_1.png', 'https://media.discordapp.net/attachments/701277128951595032/760395150382989342/pixel-art_9.png', 'https://media.discordapp.net/attachments/701277128951595032/760060999855636520/pixel-art_3.png','https://media.discordapp.net/attachments/701277128951595032/760060989982113832/pixel-art_2.png']
+        let pixelImgs = ['https://media.discordapp.net/attachments/701277128951595032/760395150382989342/pixel-art_9.png', 'https://media.discordapp.net/attachments/701277128951595032/760060989982113832/pixel-art_2.png']
         return pixelImgs.map((img) => {
             return (
                 <div className="smallImgDiv" style={{ backgroundImage: `url(${img})` }}></div>
             )
         })
     }
+    handleDelete = () => {
+        const {clickRgba} = this.state
+        let clickRgbaNew =  [...clickRgba]
+        clickRgbaNew.pop()
+        console.log(clickRgbaNew)
+        this.setState({clickRgba:clickRgbaNew})
+    }
     render() {
+        const {clickRgba} = this.state
         let buttons = [
             <button className={this.state.sqSize === "smSq" ? 'active' : ''} onClick={this.handleSmall}><FontAwesomeIcon icon={faTh} /></button>,
             <button className={this.state.sqSize === "medSq" ? 'active' : ''} onClick={this.handleMedium}><FontAwesomeIcon icon={faThLarge} /></button>,
@@ -364,6 +366,7 @@ export default class Day7 extends React.Component {
                                 <div>
                                     <div className="square" style={{ border: "1px solid #ddd", backgroundColor: this.state.rgba, width: 50, height: 50 }} onClick={this.handleColor}></div>
                                     {this.colorDivs()}
+                                    <button style ={{backgroundColor: clickRgba.length ? "whitesmoke" : "lightgrey"}} onClick ={this.handleDelete}><FontAwesomeIcon icon ={faTrash}/></button>
                                 </div>
                             </div>
                             <div className="twoGrid">

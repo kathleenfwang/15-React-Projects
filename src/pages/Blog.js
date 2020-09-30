@@ -11,17 +11,21 @@ export default function Blog() {
             date: "9/24/20"
         }, 
         {
-            p: "test", 
-            date: "234234"
+            p: "So I actually spent like 3 days on the Day 7 project.. Wow writing 2 days makes it seem very insignificant, and here I was stressing that I 'missed 2 days of projects'. Overall I am proud of the functionality, but I think the UI could use some work and it just feels a little wonky. I would LOVE to redesign it somehow. I feel sad that it seems like no matter how much functionality you put, if its hard for the users to use then it will be pretty much useless to everyone except you :( ", 
+            date: "9/29/20"
         }, 
         {
-            p: "test", 
-            date: "234234"
+            p: "Write an entry!", 
+            date: ""
         }, 
         {
-            p: "test", 
-            date: "234234"
-        }
+            p: "Write an entry!", 
+            date: ""
+        },
+        {
+            p: "Write an entry!", 
+            date: ""
+        }, 
     ]
     function getEntries() {
        return entries.map((entry,i) => {

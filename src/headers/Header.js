@@ -9,10 +9,10 @@ export default function Header() {
     const [clicked,setClick] = useState(false)
     const [page,setPage] = useState(0)
     function handleClick(e) {
-      console.log(window.location.href)
+     let url = window.location.href
      let page = window.location.href.slice(-2) 
      console.log(page)
-     if (page[1] === "/") page = 1
+     if (page[1] === "/" || url.includes('Blog')) page = 1
      else if (page[0] === "/") page = page[1]
       page++
       console.log(page)

@@ -3,6 +3,10 @@
   color: #1E2939;
   font-size:.8em;
  }
+ h1,h2,h4{
+   color:#555;
+   font-weight:normal
+ }
  .pic {
    border:2px solid whitesmoke;
    width:100%;
@@ -15,6 +19,15 @@
  .whiteButton {
    color:#333;
    background-color: whitesmoke;
+ }
+ .blueButton {
+  border: 1px solid transparent;
+  background-color: #B3D4F3;
+  color:white;
+ }
+ .blueButton:hover {
+  color:#333;
+  background-color:   #B3D4F3;
  }
  .flex {
    align-items: center;
@@ -148,6 +161,7 @@ a {
    list-style-type:none;
  }
  .error h1 {
+   font-weight:bold;
    color:palevioletred;
  }
  
@@ -158,6 +172,9 @@ a {
     border-radius:30px;
     /* background-color:rgba(247, 181, 181, 0.2); */
     background-image: url("https://i.gifer.com/guk.gif");
+  }
+  .day2 h1 {
+    color:whitesmoke;
   }
   .day4 {
     padding:30px;
@@ -360,6 +377,7 @@ a {
   flex-direction: column;
 }
 .smallImgDiv {
+  margin-left:10px;
   background-size:cover;
   width:100px;
   height:100px;
