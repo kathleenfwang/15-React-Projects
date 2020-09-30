@@ -204,7 +204,7 @@ export default class Day7 extends React.Component {
     }
     colorDivs = () => {
         const { clickRgba,isShown, index} = this.state
-        let num = 7
+        let num = 8
         let divs = []
         for (let i = 0; i < num; i++) {
             divs.push(
@@ -364,9 +364,10 @@ export default class Day7 extends React.Component {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="square" style={{ border: "1px solid #ddd", backgroundColor: this.state.rgba, width: 50, height: 50 }} onClick={this.handleColor}></div>
+                                    <div className="square" style={{ backgroundColor: this.state.rgba,}} onClick={this.handleColor}></div>
                                     {this.colorDivs()}
-                                    <button style ={{backgroundColor: clickRgba.length ? "whitesmoke" : "lightgrey"}} onClick ={this.handleDelete}><FontAwesomeIcon icon ={faTrash}/></button>
+                          
+                                    <button style ={{marginTop:5,backgroundColor: clickRgba.length ? "whitesmoke" : "lightgrey"}} onClick ={this.handleDelete}><FontAwesomeIcon icon ={faTrash}/></button>
                                 </div>
                             </div>
                             <div className="twoGrid">
