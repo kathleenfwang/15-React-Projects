@@ -63,7 +63,7 @@
    color:#B3D4F3;
    font-weight: bold;
    outline:none;
-   padding:15px;
+   padding:10px;
    border:1px solid #B3D4F3;
    border-radius:5px;
    cursor: pointer;
@@ -194,8 +194,8 @@ a {
     border:1px solid transparent;
   }
   .twoGrid {
-  
-    padding:0px 30px;
+    padding-left:20px;
+    justify-content: center;
     display:flex;
     flex-wrap: wrap;
   }
@@ -366,12 +366,16 @@ a {
 }
 
 .day7 {
+  color:#666;
   overflow:auto;
  background-image: url('https://i.pinimg.com/originals/36/85/08/3685088f9111d12a0549c04b082e717a.gif');
   padding:10px;
   border-radius: 4px;
   background-size:cover;
   background-color: whitesmoke;
+}
+.day7 h4 {
+  margin:0px;
 }
 .block {
   border-radius:5px;
@@ -380,7 +384,7 @@ a {
   background-color: rgba(255, 255, 255, 0.6);
 }
 .trueShow {
-  display:block;
+  visibility: visible;
 }
 .falseShow {
   visibility: hidden;

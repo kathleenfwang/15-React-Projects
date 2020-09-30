@@ -5,7 +5,7 @@ import pixelart3 from "./Components1/pixelart3.gif"
 import domtoimage from 'dom-to-image';
 import saveAs from 'file-saver'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTh, faThLarge, faPlus, faSquare, faEraser } from '@fortawesome/free-solid-svg-icons'
+import { faTh, faThLarge, faPlus, faSquare, faEraser, faDownload } from '@fortawesome/free-solid-svg-icons'
 import { TwitterIcon, TwitterShareButton } from "react-share"
 import { urlencoded } from "body-parser";
 import ImageUploader from 'react-images-upload';
@@ -14,8 +14,8 @@ export default class Day7 extends React.Component {
     constructor() {
         super()
         this.state = {
-            img: pixelart3,
-            photos: [pixelart3,pixelart2,pixelart1],
+            img: pixelart1,
+            photos: [pixelart1,pixelart2,pixelart3],
             input: "",
             ctx: null,
             rgba: null,
@@ -68,11 +68,11 @@ export default class Day7 extends React.Component {
         }
         return photos.map((photo, i) => {
             if (photo === "") {
-                return <div id={i} className="square alignInMiddle">
+                return <div id={i} className="square alignInMiddle" onClick = {() => this.inputUpload(i)}>
                         <input ref = {`fileUpload${i}`} style ={{display:"none"}}type="file" name="imgUpload" id="file" className="inputfile" onChange={(e) => this.handleUpload(e,i)}
                                 accept=".png,.jpg"
                             />
-                    <FontAwesomeIcon onClick = {() => this.inputUpload(i)}icon={faPlus} style={{ color: "lightgrey" }} />
+                    <FontAwesomeIcon icon={faPlus} style={{ color: "lightgrey" }} />
                 </div>
             }
             else {
@@ -218,11 +218,19 @@ export default class Day7 extends React.Component {
                 <div style={{
                     backgroundColor: clickRgba[i] ? clickRgba[i] : "white",
                 }}  onMouseLeave = {() => this.handleMouseEnter(i)}onMouseEnter ={() => this.handleMouseEnter(i)} className="square" onClick={this.handleColor} key={i}></div>
-                    <div style ={{color: clickRgba[i]}} className ={`${isShown && index === i}Show`}> { clickRgba[i] ? this.rgb2hex(clickRgba[i]) : "white"} </div>
+                    <div style ={{color: clickRgba[i], padding:3, backgroundColor: this.isLight(clickRgba[i])}} className ={`${isShown && index === i}Show`}> { clickRgba[i] ? this.rgb2hex(clickRgba[i]) : <>#ffffff<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></>}</div>
                   </div>
             )
         }
         return divs
+    }
+    isLight = (color) => {
+        if (color) {
+        let colorArr = color.slice(5,-4).split(',')
+        // check if all colors are > 150 
+        colorArr = colorArr.filter((x) => x >= 150)
+        return colorArr.length >=2 ? "#4d4d4d" : "#fefefe"
+        }
     }
      rgb2hex = (rgb) => {
         rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
@@ -316,6 +324,11 @@ export default class Day7 extends React.Component {
             <button className={this.state.sqSize === "medSq" ? 'active' : ''} onClick={this.handleMedium}><FontAwesomeIcon icon={faThLarge} /></button>,
             <button className={this.state.sqSize === "lgSq" ? 'active' : ''} onClick={this.handleLarge}><FontAwesomeIcon icon={faSquare} /></button>
         ]
+        let downloadButtons  =[
+            <button onClick={this.handleEraser}><FontAwesomeIcon icon={faEraser} /></button>,
+            <button onClick={this.download}><FontAwesomeIcon icon = {faDownload}/></button>,
+            <button onClick={this.removeLines}>{this.state.removeLines ? "No Borders" : "Add Borders"}</button>
+        ]
         return (
             <div className="day7" >
                  <div className="block">
@@ -334,8 +347,9 @@ export default class Day7 extends React.Component {
            
                     <div className="twoGrid">
                         <h4>Click anywhere on the image to extract colors to create pixel art!</h4>
-                        <h4>Use your extracted colors or click anywhere on the image for colors to create pixel art</h4>
+                        <h4><span>&nbsp;</span>Use your extracted colors or click anywhere on the image for colors to create pixel art</h4>
                     </div>
+                    <br></br>
                     <div className="twoGrid">
                         <div className="twoGrid">
                             <div className="twoGrid">
@@ -357,18 +371,16 @@ export default class Day7 extends React.Component {
                                     <div ref="grid" className="grid" style={{ gridTemplateColumns: `repeat(${this.state.columns}, 1fr)`, }}>
                                         {this.grids()}
                                     </div>
+                                    <br></br>
+                                    <div>
+                                    {buttons}
+                                    {downloadButtons}
                                 </div>
+                                </div>
+                                
                                 <br></br>
                             </div>
-                            <div className="oneGrid">
-                                <button onClick={this.handleEraser}><FontAwesomeIcon icon={faEraser} /></button>
-                                <button onClick={this.download}>Download</button>
-                                <button onClick={this.removeLines}>{this.state.removeLines ? "Remove Borders" : "Add Borders"}</button>
-                                <h3>Change Grid size: </h3>
-                                <div>
-                                    {buttons}
-                                </div>
-                            </div>
+                     
                         </div>
 
                     </div>
