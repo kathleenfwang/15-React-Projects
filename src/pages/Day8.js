@@ -9,7 +9,7 @@ export default class Day8 extends React.Component {
             text: "",
             wordCount: 0,
             score: 0.5,
-            show: true,
+            show: false,
             phrases: []
         }
         this.url = process.env.REACT_APP_SENTIMENT_URL
@@ -24,6 +24,11 @@ export default class Day8 extends React.Component {
 
     componentDidMount() {
         this.getDate()
+    }
+    componentDidUpdate(prevprops,prevState) {
+        if (prevState.text !== this.state.text) {
+            this.sentimentAnalyzer()
+        }
     }
     handleShow = () => {
         this.setState((prevState) => ({
@@ -48,13 +53,13 @@ export default class Day8 extends React.Component {
             data: data
         }).then((res) => {
             let score = (res.data.documents[0].score.toFixed(5))
-            this.setState({ score: score })
+            this.setState({ score: score },this.keyPhrases())
         })
             .catch((e) => console.log(e))
-        this.keyPhrases()
+         
     }
     keyPhrases = () => {
-        console.log(this.url)
+        console.log('hi')
         let data = {
             documents: [
                 {
@@ -88,23 +93,24 @@ export default class Day8 extends React.Component {
     }
     handlePaste = (e) => {
         let text = (e.clipboardData.getData('Text'));
-
-        this.setState({ text: text }, () => {
+        this.setState(prevState => (
+            {
+                text: prevState.text 
+            }
+        ), () => {
             let wordCount = text.split(" ").length
             if (wordCount >= 10) {
                 this.sentimentAnalyzer()
             }
-        });
+        })
 
     }
     handleChange = (e) => {
+         console.log(e.type)
         let text = e.target.value
-        this.setState({
-            text: text
-        })
-        if (e.type == "keydown") {
-
-        }
+       this.setState({text:text})
+      
+        
         let wordCount = this.state.text.split(" ").length
         let listener = wordCount
         // every 20 words, will give sentiment? 
@@ -155,11 +161,10 @@ export default class Day8 extends React.Component {
             <div className="day8">
                 <h1 style ={{fontWeight:"bold",color:this.colors[2]}}>{date}</h1>
                 <div className="flex center">
-                    <textarea placeHolder ={this.getText()}value={text} onInput={this.handleChange} onKeyDown={this.handleChange} onPaste={this.handlePaste} autoFocus />
+                    <textarea placeHolder ={this.getText()}value={text} onChange={this.handleChange} onKeyDown={this.handleChange} onPaste={this.handlePaste} autoFocus />
                 </div>
                 <div className ="flex between">
                 <PieChart
-                        className={`${show}Show`}
                         style={{ width: '20%', height: '20%' }}
                         data={[
                             { title: 'Negative', value: Number(1 - score), color: this.colors[4] },
