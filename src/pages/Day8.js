@@ -10,7 +10,8 @@ export default class Day8 extends React.Component {
             wordCount: 0,
             score: 0.5,
             show: false,
-            phrases: []
+            phrases: [],
+            begColors: []
         }
         this.url = process.env.REACT_APP_SENTIMENT_URL
         this.key = process.env.REACT_APP_AZURE_KEY
@@ -24,8 +25,9 @@ export default class Day8 extends React.Component {
 
     componentDidMount() {
         this.getDate()
+        this.beginningColors()
     }
-    componentDidUpdate(prevprops,prevState) {
+    componentDidUpdate(prevprops, prevState) {
         if (prevState.text !== this.state.text) {
             this.sentimentAnalyzer()
         }
@@ -53,10 +55,10 @@ export default class Day8 extends React.Component {
             data: data
         }).then((res) => {
             let score = (res.data.documents[0].score.toFixed(5))
-            this.setState({ score: score },this.keyPhrases())
+            this.setState({ score: score }, this.keyPhrases())
         })
             .catch((e) => console.log(e))
-         
+
     }
     keyPhrases = () => {
         console.log('hi')
@@ -93,24 +95,20 @@ export default class Day8 extends React.Component {
     }
     handlePaste = (e) => {
         let text = (e.clipboardData.getData('Text'));
+        // to prevent copy/paste from duplicating, make text previous
         this.setState(prevState => (
-            {
-                text: prevState.text 
-            }
+            {text: prevState.text}
         ), () => {
             let wordCount = text.split(" ").length
             if (wordCount >= 10) {
                 this.sentimentAnalyzer()
             }
         })
-
     }
     handleChange = (e) => {
-         console.log(e.type)
+        console.log(e.type)
         let text = e.target.value
-       this.setState({text:text})
-      
-        
+        this.setState({ text: text })
         let wordCount = this.state.text.split(" ").length
         let listener = wordCount
         // every 20 words, will give sentiment? 
@@ -120,7 +118,6 @@ export default class Day8 extends React.Component {
         if (listener % 5 == 0) {
             this.sentimentAnalyzer()
         }
-
     }
     downloadTxtFile = () => {
         const { text, date } = this.state
@@ -145,32 +142,45 @@ export default class Day8 extends React.Component {
     randColor = () => {
         return this.colors[this.randSize(0, this.colors.length)]
     }
-    getPhrases = () => {
-        const { phrases } = this.state
+    beginningWeights = () => {
 
-        return phrases.map((phrase) => {
-            return (<p style={{ fontFamily:"sans-serif",fontSize: this.randSize(18, 20), margin: 0, fontWeight: this.randWeight(), color: this.randColor() }}>{phrase}</p>)
+    }
+    // [{color: x, weight: y, size: z}]
+    beginningColors = () => {
+        // set initial color state: 
+        let begColors = [] 
+        this.colors.map((color) =>{
+            begColors.push( this.colors[this.randSize(0, this.colors.length)])
+        })
+        this.setState({
+            begColors: begColors
+        })
+    }
+    getPhrases = () => {
+        const { phrases,begColors } = this.state
+        return phrases.map((phrase,i) => {
+            return (<p style={{ fontFamily: "sans-serif", fontSize: this.randSize(18, 20), margin: 0, fontWeight: this.randWeight(), color: this.randColor() }}>{phrase}</p>)
         })
     }
     getText = () => {
-        return this.placeholders[this.randSize(0,this.placeholders.length)]
+        return this.placeholders[this.randSize(0, this.placeholders.length)]
     }
     render() {
         const { date, text, wordCount, score, show, phrases } = this.state
         return (
             <div className="day8">
-                <h1 style ={{fontWeight:"bold",color:this.colors[2]}}>{date}</h1>
+                <h1 style={{ fontWeight: "bold", color: this.colors[2] }}>{date}</h1>
                 <div className="flex center">
-                    <textarea placeHolder ={this.getText()}value={text} onChange={this.handleChange} onKeyDown={this.handleChange} onPaste={this.handlePaste} autoFocus />
+                    <textarea placeHolder={this.getText()} value={text} onChange={this.handleChange} onKeyDown={this.handleChange} onPaste={this.handlePaste} autoFocus />
                 </div>
-                <div className ="flex between">
-                <PieChart
+                <div className="flex between">
+                    <PieChart
                         style={{ width: '20%', height: '20%' }}
                         data={[
                             { title: 'Negative', value: Number(1 - score), color: this.colors[4] },
                             { title: 'Positive', value: Number(score), color: this.colors[3] },
                         ]}
-                        animate = {true}
+                        animate={true}
                         startAngle={180}
                         lengthAngle={180}
                         label={({ dataEntry }) => {
@@ -182,14 +192,13 @@ export default class Day8 extends React.Component {
                     <h2>Key Phrases: </h2>
                     <div className="flex">
                         <p>Word count: {wordCount}</p>
-
                         <button className="secondary" onClick={this.downloadTxtFile}>Save as .txt</button>
                         <button onClick={this.handleShow}>{show ? "Hide Text Analyzer" : "Analyze Text"}</button>
-                    </div> 
-                </div>
-                <div style ={{marginTop: '-8%'}} className={`${show}Show flex center`}>
-                        {this.getPhrases()}
                     </div>
+                </div>
+                <div style={{ marginTop: '-8%' }} className={`${show}Show flex center`}>
+                    {this.getPhrases()}
+                </div>
             </div>
         )
     }
