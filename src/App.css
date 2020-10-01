@@ -36,6 +36,7 @@
    grid-gap:5px;
    align-items: center;
    display:flex;
+   flex-wrap:wrap;
  }
  .firstPanel {
  margin-left:52%;
@@ -416,9 +417,14 @@ a {
   display:flex;
   justify-content: space-between;
 }
+.center {
+  display:flex;
+  justify-content: center;
+}
 .day8 {
   padding:20px;
   background-color:lightgrey;
+  border-radius:5px;
 }
 .day8 textarea {
   resize: none;
@@ -426,7 +432,7 @@ a {
   outline:none;
   border-radius:5px; 
   width:80%;
-  height:200px; 
+  height:300px; 
   padding:30px; 
   font-size:1.5em;
   font-family:Georgia, 'Times New Roman', Times, serif;

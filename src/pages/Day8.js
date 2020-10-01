@@ -9,7 +9,8 @@ export default class Day8 extends React.Component {
             text: "",
             wordCount: 0,
             score: 0.5,
-            show:true
+            show: true,
+            phrases: []
         }
         this.url = process.env.REACT_APP_SENTIMENT_URL
         this.key = process.env.REACT_APP_AZURE_KEY
@@ -18,14 +19,14 @@ export default class Day8 extends React.Component {
             fontFamily: 'sans-serif',
         };
     }
-    
+
     componentDidMount() {
         this.getDate()
     }
     handleShow = () => {
         this.setState((prevState) => ({
             show: !prevState.show
-         }))
+        }))
     }
     sentimentAnalyzer = () => {
         let data = {
@@ -37,14 +38,42 @@ export default class Day8 extends React.Component {
                 },
             ]
         }
+        let url = this.url + 'sentiment'
         axios({
             method: 'post',     //put
-            url: this.url,
+            url: url,
             headers: { 'Ocp-Apim-Subscription-Key': this.key },
             data: data
         }).then((res) => {
             let score = (res.data.documents[0].score.toFixed(5))
             this.setState({ score: score })
+        })
+            .catch((e) => console.log(e))
+        this.keyPhrases()
+    }
+    keyPhrases = () => {
+        console.log(this.url)
+        let data = {
+            documents: [
+                {
+                    language: "en",
+                    id: 1,
+                    text: this.state.text
+                },
+            ]
+        }
+        let url = this.url + 'keyPhrases'
+        axios({
+            method: 'post',     //put
+            url: url,
+            headers: { 'Ocp-Apim-Subscription-Key': this.key },
+            data: data
+        }).then((res) => {
+            let phrases = res.data.documents[0].keyPhrases
+            this.setState({
+                phrases: phrases
+            })
+
         })
             .catch((e) => console.log(e))
     }
@@ -56,23 +85,23 @@ export default class Day8 extends React.Component {
         this.setState({ date: fullDate })
     }
     handlePaste = (e) => {
-            let text = (e.clipboardData.getData('Text'));
-           
-            this.setState({text:text}, () => { 
-                let wordCount = text.split(" ").length
-                if (wordCount >= 10) {
-                 this.sentimentAnalyzer()
-                }
-            });
-            
+        let text = (e.clipboardData.getData('Text'));
+
+        this.setState({ text: text }, () => {
+            let wordCount = text.split(" ").length
+            if (wordCount >= 10) {
+                this.sentimentAnalyzer()
+            }
+        });
+
     }
     handleChange = (e) => {
         let text = e.target.value
         this.setState({
             text: text
         })
-        if(e.type == "keydown") {
- 
+        if (e.type == "keydown") {
+
         }
         let wordCount = this.state.text.split(" ").length
         let listener = wordCount
@@ -95,23 +124,41 @@ export default class Day8 extends React.Component {
         document.body.appendChild(element); // Required for this to work in FireFox
         element.click();
     }
+    randSize = (first, max) => {
+        return Math.floor(Math.random() * Math.floor(max) + first);
+    }
+    randWeight = () => {
+        let weights = []
+        for (let i = 100; i <= 900; i += 100) {
+            weights.push(i)
+        }
+        return weights[this.randSize(0, weights.length)]
+
+    }
+    randColor = () => {
+        let colors = ['#E64A39', ' #E97439', '#FBF87D', '#65ED99', '#5F8BE9', '#6F1BC6']
+        console.log(colors[this.randSize(0, colors.length)])
+        return colors[this.randSize(0, colors.length)]
+    }
+    getPhrases = () => {
+        const { phrases } = this.state
+
+        return phrases.map((phrase) => {
+            return (<p style={{ fontFamily:"sans-serif",fontSize: this.randSize(18, 20), margin: 0, fontWeight: this.randWeight(), color: this.randColor() }}>{phrase}</p>)
+        })
+    }
     render() {
-        const { date, text, wordCount, score,show} = this.state
+        const { date, text, wordCount, score, show, phrases } = this.state
         return (
             <div className="day8">
                 <h1>{date}</h1>
-                <textarea value={text} onInput = {this.handleChange} onKeyDown={this.handleChange} onPaste={this.handlePaste} autoFocus />
-
-                <div className="flex between">
-                    <div className ="flex">
-                        <p>Word count: {wordCount}</p>
-
-                        <button className="secondary" onClick={this.downloadTxtFile}>Save as .txt</button>
-                    </div>
-                    <div>
-                    <PieChart
-                        className = {`${show}Show`}
-                
+                <div className="flex center">
+                    <textarea placeHolder ='Type or copy/paste text here...' value={text} onInput={this.handleChange} onKeyDown={this.handleChange} onPaste={this.handlePaste} autoFocus />
+                </div>
+                <div className ="flex between">
+                <PieChart
+                        className={`${show}Show`}
+                        style={{ width: '20%', height: '20%' }}
                         data={[
                             { title: 'Negative', value: Number(1 - score), color: '#E38627' },
                             { title: 'Positive', value: Number(score), color: '#C13C37' },
@@ -125,9 +172,15 @@ export default class Day8 extends React.Component {
                         }
                         labelStyle={this.defaultLabelStyle}
                     />
-                    <button onClick = {this.handleShow}>{show ? "Hide Text Analyzer" : "Analyze Text"}</button>
-                    </div>
+                    <div className="flex">
+                        <p>Word count: {wordCount}</p>
 
+                        <button className="secondary" onClick={this.downloadTxtFile}>Save as .txt</button>
+                        <button onClick={this.handleShow}>{show ? "Hide Text Analyzer" : "Analyze Text"}</button>
+                    </div> 
+                </div>
+                <div style ={{marginTop: -100}} className={`${show}Show flex center`}>
+                        {this.getPhrases()}
                     </div>
             </div>
         )
