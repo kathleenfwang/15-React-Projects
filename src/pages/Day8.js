@@ -18,6 +18,7 @@ export default class Day8 extends React.Component {
             fontSize: '5px',
             fontFamily: 'sans-serif',
         };
+        this.colors = ['#E64A39', ' #E97439', '#FBF87D', '#65ED99', '#5F8BE9', '#6F1BC6']
     }
 
     componentDidMount() {
@@ -81,7 +82,7 @@ export default class Day8 extends React.Component {
         let d = new Date();
         let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
         let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        let fullDate = `${days[d.getDay()]},${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`
+        let fullDate = `${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`
         this.setState({ date: fullDate })
     }
     handlePaste = (e) => {
@@ -133,12 +134,9 @@ export default class Day8 extends React.Component {
             weights.push(i)
         }
         return weights[this.randSize(0, weights.length)]
-
     }
     randColor = () => {
-        let colors = ['#E64A39', ' #E97439', '#FBF87D', '#65ED99', '#5F8BE9', '#6F1BC6']
-        console.log(colors[this.randSize(0, colors.length)])
-        return colors[this.randSize(0, colors.length)]
+        return this.colors[this.randSize(0, this.colors.length)]
     }
     getPhrases = () => {
         const { phrases } = this.state
@@ -151,8 +149,8 @@ export default class Day8 extends React.Component {
         const { date, text, wordCount, score, show, phrases } = this.state
         return (
             <div className="day8">
-                <h1>{date}</h1>
-                <div className="flex center">
+                <h1 style ={{fontWeight:"bold",color:this.colors[2]}}>{date}</h1>
+                <div data-aos="fade-zoom-in" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="600" className="flex center">
                     <textarea placeHolder ='Type or copy/paste text here...' value={text} onInput={this.handleChange} onKeyDown={this.handleChange} onPaste={this.handlePaste} autoFocus />
                 </div>
                 <div className ="flex between">
@@ -160,15 +158,15 @@ export default class Day8 extends React.Component {
                         className={`${show}Show`}
                         style={{ width: '20%', height: '20%' }}
                         data={[
-                            { title: 'Negative', value: Number(1 - score), color: '#E38627' },
-                            { title: 'Positive', value: Number(score), color: '#C13C37' },
+                            { title: 'Negative', value: Number(1 - score), color: this.colors[4] },
+                            { title: 'Positive', value: Number(score), color: this.colors[3] },
                         ]}
+                        animate = {true}
                         startAngle={180}
                         lengthAngle={180}
                         label={({ dataEntry }) => {
                             return `${dataEntry.title}:${Math.round(dataEntry.percentage) + '%'}`
                         }
-
                         }
                         labelStyle={this.defaultLabelStyle}
                     />
@@ -179,7 +177,7 @@ export default class Day8 extends React.Component {
                         <button onClick={this.handleShow}>{show ? "Hide Text Analyzer" : "Analyze Text"}</button>
                     </div> 
                 </div>
-                <div style ={{marginTop: -100}} className={`${show}Show flex center`}>
+                <div style ={{marginTop: '-8%'}} className={`${show}Show flex center`}>
                         {this.getPhrases()}
                     </div>
             </div>
