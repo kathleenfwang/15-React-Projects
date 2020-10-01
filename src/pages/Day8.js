@@ -19,6 +19,7 @@ export default class Day8 extends React.Component {
             fontFamily: 'sans-serif',
         };
         this.colors = ['#E64A39', ' #E97439', '#FBF87D', '#65ED99', '#5F8BE9', '#6F1BC6']
+        this.placeholders = ['What they REALLY mean...', 'Sparknotes a text: ', 'Write or copy/paste text here...']
     }
 
     componentDidMount() {
@@ -145,13 +146,16 @@ export default class Day8 extends React.Component {
             return (<p style={{ fontFamily:"sans-serif",fontSize: this.randSize(18, 20), margin: 0, fontWeight: this.randWeight(), color: this.randColor() }}>{phrase}</p>)
         })
     }
+    getText = () => {
+        return this.placeholders[this.randSize(0,this.placeholders.length)]
+    }
     render() {
         const { date, text, wordCount, score, show, phrases } = this.state
         return (
             <div className="day8">
                 <h1 style ={{fontWeight:"bold",color:this.colors[2]}}>{date}</h1>
-                <div data-aos="fade-zoom-in" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="600" className="flex center">
-                    <textarea placeHolder ='Type or copy/paste text here...' value={text} onInput={this.handleChange} onKeyDown={this.handleChange} onPaste={this.handlePaste} autoFocus />
+                <div className="flex center">
+                    <textarea placeHolder ={this.getText()}value={text} onInput={this.handleChange} onKeyDown={this.handleChange} onPaste={this.handlePaste} autoFocus />
                 </div>
                 <div className ="flex between">
                 <PieChart
@@ -170,6 +174,7 @@ export default class Day8 extends React.Component {
                         }
                         labelStyle={this.defaultLabelStyle}
                     />
+                    <h2>Key Phrases: </h2>
                     <div className="flex">
                         <p>Word count: {wordCount}</p>
 
