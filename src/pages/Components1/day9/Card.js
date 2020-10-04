@@ -4,26 +4,26 @@ import { faHeart, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 export default function Card(props) {
     return (
         <div className="inktoberCard">
-            <h1>
-                {props.title}
+            <h1 className ="upLess">
+                <span style ={{fontWeight:"bold"}}>{props.title}</span>
                 <FontAwesomeIcon
                     className={`${props.notLikes}Show icon`}
                     onClick={() => props.handleLike(props.i)}
                     id="outerHeart"
                     style={{
                         color: props.active.includes(props.i) ? "palevioletred" : "",
-                        position: "absolute", right: 5, top: 5
+                        position: "absolute", right: 10, top: 10
                     }}
                     icon={faHeart} />
 
                 <FontAwesomeIcon
                     id="icon"
-                    style={{ position: "absolute", right: 5, top: 5 }}
+                    style={{ position: "absolute", right: 10, top: 10 }}
                     onClick={() => props.handleLike(props.i)}
                     className={`${!props.notLikes}Show`}
                     icon={faTrashAlt} />
             </h1>
-            <h2>Day: {props.day}</h2>
+            <h2 className ="up">Day: {props.day}</h2>
             <img src={props.src} />
         </div>
     )

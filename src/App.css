@@ -292,6 +292,12 @@ a {
     width:30%;
     padding:10px;
   }
+  input {
+    border: 2px solid whitesmoke;
+    padding: 5px 10px;
+    border-radius: 5px;
+    outline: none;
+  }
   .form input {
     width:70%;
     padding:10px;
@@ -470,4 +476,10 @@ a {
     margin: 10px;
     padding: 30px;
     border-radius: 5px;
+}
+.up {
+  margin-top:-20px;
+}
+.upLess {
+  margin-top:-10px;
 }
