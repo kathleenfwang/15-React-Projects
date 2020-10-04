@@ -87,7 +87,7 @@ export default class Day9 extends React.Component {
                     <h1>Inktober is here! </h1>
                     <h4>I drew these with pen and then scanned into my computer using Adobe Capture :) </h4>
                 </div>
-                <nav className="nav center" >
+                <nav className="nav center " >
                     <li style={{ borderBottom: show ? "2px solid pink" : "none" }} onClick={this.handleToggle}>All</li>
                     <li style={{ borderBottom: show ? "none" : "2px solid pink" }} onClick={this.handleToggle}>Likes</li>
                     {/* <li onClick={this.handlePromptList}>Prompt List</li> */}

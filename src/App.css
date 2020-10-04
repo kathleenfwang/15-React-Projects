@@ -6,6 +6,9 @@
     scroll-behavior: smooth;
   
  }
+ .white, #white {
+  color:white;
+}
  h1,h2,h4{
    color:#555;
    font-weight:normal
@@ -460,8 +463,9 @@ a {
 .down {
   margin-top:20px;
 }
+
 .day9 {
-  padding-left:30px;
+padding-left:30px;
 }
 .icon,#icon{
   cursor: pointer;
@@ -477,6 +481,7 @@ a {
   color:palevioletred;
 }
 .inktoberCard {
+  background-color: white;
   position:relative;
   border: 1px solid gainsboro;
     margin: 10px;
