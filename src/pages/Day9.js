@@ -7,10 +7,12 @@ export default class Day9 extends React.Component {
             show: true,
             likes: [],
             active: [],
-            filtered: null
+            filtered: null,
+            promptList: false
         }
         this.srcs = ['https://media.discordapp.net/attachments/701277128951595030/762123087553888307/Shape_4.png?width=347&height=490', 'https://media.discordapp.net/attachments/701277128951595030/762123167476613130/Shape_5.png?width=355&height=489', 'https://media.discordapp.net/attachments/701277128951595030/762116290059698186/imgonline-com-ua-twotoone-DRi4gTlNCiK6Jvq.jpg?width=403&height=457',]
         this.titles = ['fish', 'wisp', 'bulky',]
+        this.promptListUrl = 'https://media.discordapp.net/attachments/701277128951595030/762183039857065994/official-inktober-2020-prompt-list.png?width=461&height=461'
     }
     makeCards = (notLikes) => {
         const { active } = this.state
@@ -41,7 +43,8 @@ export default class Day9 extends React.Component {
     }
     handleToggle = () => {
         this.setState((prevState) => ({
-            show: !prevState.show
+            show: !prevState.show, 
+            promptList: false
         }))
     }
     handleInput = (e) => {
@@ -51,7 +54,8 @@ export default class Day9 extends React.Component {
             if (Number(value)) {
 
                 this.setState({
-                    filtered: Number(value) - 1}
+                    filtered: Number(value) - 1
+                }
                 )
             }
             else {
@@ -63,12 +67,20 @@ export default class Day9 extends React.Component {
         }
         else {
             this.setState({
-                filtered: null
+                filtered: null,
+                promptList: false
             })
         }
     }
+    handlePromptList = () => {
+        this.setState(prevState => ({
+            promptList: !prevState.promptList
+        }))
+    }
+   
     render() {
-        const { show, likes, filtered } = this.state
+        const { show, likes, filtered, promptList } = this.state
+        console.log(promptList)
         return (
             <div className="day9">
                 <div className="flex">
@@ -78,22 +90,27 @@ export default class Day9 extends React.Component {
                 <nav className="nav center" >
                     <li style={{ borderBottom: show ? "2px solid pink" : "none" }} onClick={this.handleToggle}>All</li>
                     <li style={{ borderBottom: show ? "none" : "2px solid pink" }} onClick={this.handleToggle}>Likes</li>
+                    {/* <li onClick={this.handlePromptList}>Prompt List</li> */}
                     <li><input placeholder="Search by day or name..." onChange={this.handleInput}></input></li>
+
                 </nav>
-                { filtered || filtered == 0 ?
-                    <div className="flex center">
-                        {this.makeCards(true)[filtered]}
-                    </div>
-                    :
-                    show ? <div className="flex center">
-                        {this.makeCards(true)}
-                    </div>
-                        :
-                        <div>
-                            <div className="flex center">
-                                {likes.length > 0 ? likes : <h3>Empty :( Click the heart icon to like!</h3>}
-                            </div>
+                { promptList ?
+                    <div className ="flex center down">
+                        <img src={this.promptListUrl} />
+                    </div> : filtered || filtered == 0 ?
+                        <div className="flex center">
+                            {this.makeCards(true)[filtered]}
                         </div>
+                        :
+                        show ? <div className="flex center">
+                            {this.makeCards(true)}
+                        </div>
+                            :
+                            <div>
+                                <div className="flex center">
+                                    {likes.length > 0 ? likes : <h3>Empty :( Click the heart icon to like!</h3>}
+                                </div>
+                            </div>
                 }
             </div>
         )

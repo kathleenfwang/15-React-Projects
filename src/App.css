@@ -457,6 +457,9 @@ a {
   height:100%;
   position:fixed;
 }
+.down {
+  margin-top:20px;
+}
 .day9 {
   padding-left:30px;
 }
