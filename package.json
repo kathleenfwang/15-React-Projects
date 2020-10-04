@@ -19,6 +19,7 @@
     "file-saver": "^2.0.2",
     "radium": "^0.26.0",
     "react": "^16.13.1",
+    "react-animate-on-scroll": "^2.1.5",
     "react-dom": "^16.13.1",
     "react-images-upload": "^1.2.8",
     "react-minimal-pie-chart": "^8.0.1",
