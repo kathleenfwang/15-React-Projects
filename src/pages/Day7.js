@@ -329,7 +329,8 @@ export default class Day7 extends React.Component {
         let downloadButtons  =[
             <button onClick={this.handleEraser}><FontAwesomeIcon icon={faEraser} /></button>,
             <button onClick={this.download}><FontAwesomeIcon icon = {faDownload}/></button>,
-            <button onClick={this.removeLines}>{this.state.removeLines ? "No Borders" : "Add Borders"}</button>
+            <button onClick={this.removeLines}>{this.state.removeLines ? "No Borders" : "Add Borders"}</button>,
+ 
         ]
         return (
             <div className="day7" >

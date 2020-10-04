@@ -1,6 +1,7 @@
 import React from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
+import {faHeart as faFilledHeart,faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faHeart,faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 export default function Card(props) {
     return (
         <div className="inktoberCard">
@@ -14,11 +15,11 @@ export default function Card(props) {
                         color: props.active.includes(props.i) ? "palevioletred" : "",
                         position: "absolute", right: 10, top: 10
                     }}
-                    icon={faHeart} />
+                    icon={props.active.includes(props.i) ? faFilledHeart : faHeart} />
 
                 <FontAwesomeIcon
                     id="icon"
-                    style={{ position: "absolute", right: 10, top: 10 }}
+                    style={{position: "absolute", right: 10, top: 10 }}
                     onClick={() => props.handleLike(props.i)}
                     className={`${!props.notLikes}Show`}
                     icon={faTrashAlt} />
