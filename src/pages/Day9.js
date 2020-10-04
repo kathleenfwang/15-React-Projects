@@ -18,11 +18,25 @@ export default class Day9 extends React.Component {
                 <Card key = {i} notLikes = {notLikes} active = {active} i = {i} handleLike = {this.handleLike} src = {this.srcs[i]} day = {i+1} title ={title}/>)
         })
     }
-    handleLike = (key) => {
+    handleLike = (i) => {
+        const {active} = this.state 
+        // if already liked, take away like status
+        if (active.includes(i)) {
+            this.setState(prevState =>({
+                active: [...prevState.active.filter((x) => x !== i)],
+                likes: [...prevState.likes.filter((x) =>{
+                    return x.props.i !== i 
+                 })],
+            }))
+        }
+        else {
         this.setState((prevState) => ({
-            likes: [...prevState.likes,this.makeCards(false)[key]],
-            active: [...prevState.active,key]
+            likes: [...prevState.likes,...this.makeCards(false).filter((x) =>{
+               return x.props.i === i 
+            })],
+            active: [...prevState.active,i]
         }))
+    }
     }
     handleToggle = () => {
         this.setState((prevState) => ({
@@ -30,7 +44,7 @@ export default class Day9 extends React.Component {
         }))
     }
     render() {
-        console.log(this.state.likes)
+ 
         const {show,likes} = this.state
         return(
             <div className ="day9">

@@ -454,10 +454,14 @@ a {
 .day9 {
   padding-left:30px;
 }
+.icon,#icon{
+  cursor: pointer;
+}
+ 
 #nav li:hover {
   border-bottom: 2px solid pink;
 }
-#outerHeart:hover {
+#outerHeart:hover, #icon:hover {
   color:palevioletred;
 }
 .inktoberCard {
