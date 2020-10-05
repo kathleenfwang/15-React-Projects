@@ -11,6 +11,7 @@ import Header from "./headers/Header"
 import Home from "./pages/Home"
 import Blog from "./pages/Blog"
 import Footer from "./headers/Footer"
+import FeedbackFooter from "./headers/FeedbackFooter"
 function App() {
   return (
     <Router>
@@ -22,6 +23,9 @@ function App() {
         </Route>
         <Route exact path ="/Blog">
           <Blog />
+        </Route>
+        <Route exact path ="/Contact">
+          <FeedbackFooter />
         </Route>
         {/* have to pass component into exact path to get params lol */}
         <Route exact path ="/day/:num" component = {Projects}/>

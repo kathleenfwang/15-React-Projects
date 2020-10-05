@@ -1,5 +1,5 @@
  body {
-  padding:30px;
+   padding:20px;
   color: #1E2939;
   font-size:.8em;
  
@@ -96,12 +96,12 @@
  
  .card {
    /* background-image: url ("https://i.imgur.com/P77Lkbg.gif"); */
-
+  background-color:whitesmoke;
    border-radius:10px; 
   background-size: cover;
   padding:30px;
   background-repeat: no-repeat;
-  color:black;
+ 
   margin-top:30px;
  }
 a {
@@ -109,7 +109,7 @@ a {
   text-decoration: none;
 }
 .home a, a:hover {
-  color:#528FBB;
+  color: #9599E2;
 }
  .links {
    display:flex;
@@ -133,6 +133,7 @@ a {
    width:40%;
  }
  .projectList ul {
+   font-weight:bold;
    margin-left:30px;
    list-style-type:circle;
  }
@@ -153,7 +154,7 @@ a {
   color: #CAA8C7;
  }
  .header a:hover, .nav li:hover {
-   color:#528FBB;
+   color:#9599E2;
  }
  .nav ul {
   display:flex;
@@ -178,7 +179,13 @@ a {
    font-weight:bold;
    color:palevioletred;
  }
- 
+ .blog {
+   border-radius:5px;
+   padding:20px;
+  background-color: #D9AFD9;
+  background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+  
+ }
   .day2 { 
     color:whitesmoke;
     height:100vw;
@@ -262,14 +269,15 @@ a {
     font-family: 'Times New Roman', Times, serif;
   }
   .form {
+    width:35%;
     position:relative;
     margin-top:10px;
     text-align: left;
     flex-direction: column;;
-    font-size:14px;
+    font-size:12px;
     border-radius: 4px;
     padding:30px;
-    background-color:moccasin;
+    background-color:white;
     box-shadow: 5px 5px rgba(177, 174, 174, 0.2);
   }
   .plantCard {
@@ -288,35 +296,62 @@ a {
   nav li {
     margin-left:20px;
   }
-  .form label {
-    font-weight: bold;
+   
+  :placeholder-shown{
+    font-family:sans-serif;
+    color: #666;
+    font-size:1.5em;
   }
   .form button {
-    width:30%;
-    padding:10px;
+ 
+    font-weight:normal;
+    border:none;
+    color:white;
+    background-color: #8EC5FC;
+background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+
+    
   }
   input {
-    border: 2px solid whitesmoke;
+    border: 1px solid transparent;
+    border-bottom: 1px solid lightgrey;
     padding: 5px 10px;
     border-radius: 5px;
     outline: none;
   }
+  .bold {
+    font-weight:bold;
+  }
+  label {
+    padding:10px;
+    color: #9599E2;
+  } 
   .form input {
+    
     width:70%;
     padding:10px;
-    border:none;
     border-radius:5px;
   }
   .form textarea {
-    padding:20px;
-    border:none;
+    outline:none;
+    resize:none;
+    height:100px;
+    padding:10px;
+    border: 1px solid transparent;
+    border-bottom: 1px solid lightgrey;
     border-radius:5px;
   }
  .footer {
    font-style: italic;
    text-align: right;
  }
- .feedbackFooter {
+ .feedback {
+   border-radius:5px;
+   height:100vh;
+   background-color: #8EC5FC;
+   background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+   
+  
  }
  .feedbackFooter p {
    margin:0px;

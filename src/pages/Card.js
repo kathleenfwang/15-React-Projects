@@ -5,7 +5,7 @@ export default function Card(props) {
     console.log(i)
     let color = `rgba(${50}, ${i * 50}, ${i*50}, 0.2)`
     return (
-        <div className ="card" style ={{backgroundColor: color}}>
+        <div className ="card">
            <h3>{date}</h3>
            <p> {p}</p>
         </div>

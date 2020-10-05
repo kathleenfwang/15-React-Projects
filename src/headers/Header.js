@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import {Link, Redirect} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHamburger,faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faHamburger,faArrowRight, faCommentDots } from '@fortawesome/free-solid-svg-icons'
 import FeedbackFooter from "./FeedbackFooter"
 export default function Header() {
     const [show,setShow] = useState(true)
@@ -12,7 +12,7 @@ export default function Header() {
      let url = window.location.href
      let page = window.location.href.slice(-2) 
      console.log(page)
-     if (page[1] === "/" || url.includes('Blog')) page = 1
+     if (page[1] === "/" || url.includes('Blog') || url.includes('Contact')) page = 1
      else if (page[0] === "/") page = page[1]
       page++
       console.log(page)
@@ -31,6 +31,7 @@ export default function Header() {
         <ul>
             <li> <Link to ="/">Home</Link></li>
             <li><Link to ="/Blog">Blog</Link></li> 
+            <li><Link to ="/Contact"> <FontAwesomeIcon icon={faCommentDots} /></Link></li>
             <li onClick ={handleClick}>Next Project <FontAwesomeIcon icon = {faArrowRight}></FontAwesomeIcon> </li>
             {/* <li><FeedbackFooter/></li> */}
         </ul>
