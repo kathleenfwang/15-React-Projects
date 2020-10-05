@@ -8,15 +8,15 @@ export default class Day9 extends React.Component {
             active: [],
             filtered: [],
             activeList: 0,
-            titles: ['fish', 'wisp', 'bulky','radio']
+            titles: ['fish', 'wisp', 'bulky', 'radio']
         }
         this.promptListUrl = 'https://media.discordapp.net/attachments/701277128951595030/762183039857065994/official-inktober-2020-prompt-list.png?width=461&height=461'
-        this.srcs = ['https://media.discordapp.net/attachments/701277128951595030/762123087553888307/Shape_4.png?width=347&height=490', 'https://media.discordapp.net/attachments/701277128951595030/762123167476613130/Shape_5.png?width=355&height=489', 'https://media.discordapp.net/attachments/701277128951595030/762116290059698186/imgonline-com-ua-twotoone-DRi4gTlNCiK6Jvq.jpg?width=403&height=457','https://media.discordapp.net/attachments/701277128951595030/762471917680459786/Shape_9.png?width=327&height=491']
- 
+        this.srcs = ['https://media.discordapp.net/attachments/701277128951595030/762123087553888307/Shape_4.png?width=347&height=490', 'https://media.discordapp.net/attachments/701277128951595030/762123167476613130/Shape_5.png?width=355&height=489', 'https://media.discordapp.net/attachments/701277128951595030/762116290059698186/imgonline-com-ua-twotoone-DRi4gTlNCiK6Jvq.jpg?width=403&height=457', 'https://media.discordapp.net/attachments/701277128951595030/762471917680459786/Shape_9.png?width=327&height=491']
+
 
     }
     makeCards = (notLikes) => {
-        const { active,titles } = this.state
+        const { active, titles } = this.state
         return titles.map((title, i) => {
             return (
                 <Card key={i} notLikes={notLikes} active={active} i={i} handleLike={this.handleLike} src={this.srcs[i]} day={i + 1} title={title} />)
@@ -48,7 +48,7 @@ export default class Day9 extends React.Component {
         })
     }
     handleInput = (e) => {
-        const {titles} =this.state
+        const { titles } = this.state
         let value = e.target.value !== "" ? e.target.value : null
         if (titles.join().includes(value)) {
             this.setState({
@@ -70,11 +70,11 @@ export default class Day9 extends React.Component {
         }
     }
     getList = () => {
-        let list = ['All', 'Likes', 'Prompt List']
+        let list = ['All', 'Likes', 'Prompt List', 'About']
         const { activeList } = this.state
         return list.map((x, i) => {
             return (
-                <li i={i} style={{ borderBottom: activeList == i ? "2px solid pink" : "none" }} onClick={() => this.handleToggle(i)} >{x}</li>
+                <li i={i} className ="navList" style={{ borderBottom: activeList == i ? "2px solid #E0C3FC" : "none" }} onClick={() => this.handleToggle(i)} >{x}</li>
             )
         })
     }
@@ -97,15 +97,23 @@ export default class Day9 extends React.Component {
                     <div className="flex center down">
                         <img src={this.promptListUrl} />
                     </div>)
+            case 3:
+                return (
+                    <div style ={{marginTop: 40}}>
+                        <h4>I drew these with pen and then scanned using Adobe Capture :) </h4>
+                        <p>Honestly this is my first year actually really trying to commit the whole month of Inktober. <br></br>Every other year I tell myself that but end up only completing the first week. <br></br>But what better time than quarantine to start.</p>
+                        <p>In the future, I am planning on converting this into a full stack app with database storage and authentication, to allow authenticated users to upload their entries and like and comment on others. <br></br>It would be a fun way to encourage my friends to participate and share our progress with each other.</p>
+                        <p><a href ="https://inktober.com/" target ="_blank">Official Inktober Website</a></p>
+                    </div>
+                )
         }
     }
     render() {
         const { filtered } = this.state
         return (
             <div className="day9">
-                <div className="flex">
-                    <h1>Inktober is here! </h1>
-                    <h4>I drew these with pen and then scanned into my computer using Adobe Capture :) </h4>
+                <div className="flex center bold">
+                    <h1><b>Inktober is here!</b> </h1>
                 </div>
                 <nav className="nav center " >
                     {this.getList()}
@@ -116,7 +124,7 @@ export default class Day9 extends React.Component {
                         {this.makeCards(true).filter((x, i) => {
                             return filtered.includes(i)
                         })}
-                    </div> : this.items()}
+                    </div> : <div className="down">{this.items()}</div>}
             </div>
         )
     }

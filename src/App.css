@@ -9,6 +9,9 @@
  .white, #white {
   color:white;
 }
+.bold {
+  font-weight:bold;
+}
  h1,h2,h4{
    color:#555;
    font-weight:normal
@@ -108,7 +111,7 @@ a {
   color:#CAA8C7;
   text-decoration: none;
 }
-.home a, a:hover {
+.home a, a:hover ,.navList:hover{
   color: #9599E2;
 }
  .links {
@@ -137,9 +140,7 @@ a {
    margin-left:30px;
    list-style-type:circle;
  }
- .center {
-   text-align: center;
- }
+ 
  .header {
    color: #CAA8C7;
    display:flex;
@@ -268,7 +269,12 @@ a {
   .day4 p {
     font-family: 'Times New Roman', Times, serif;
   }
+  textarea {
+    font-size:1.2em;
+    font-family: sans-serif;
+  }
   .form {
+
     width:35%;
     position:relative;
     margin-top:10px;
@@ -319,9 +325,7 @@ background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
     border-radius: 5px;
     outline: none;
   }
-  .bold {
-    font-weight:bold;
-  }
+
   label {
     padding:10px;
     color: #9599E2;
@@ -468,6 +472,7 @@ background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
   justify-content: space-between;
 }
 .center {
+  align-items: center;
   display:flex;
   justify-content: center;
 }
@@ -509,6 +514,7 @@ padding-left:30px;
   color:lightgrey;
 }
  
+ 
 #nav li:hover {
   border-bottom: 2px solid pink;
 }
@@ -518,7 +524,7 @@ padding-left:30px;
 .inktoberCard {
   background-color: white;
   position:relative;
-  border: 1px solid gainsboro;
+  border: 1px solid #E0C3FC;
     margin: 10px;
     padding: 30px;
     border-radius: 5px;
@@ -528,4 +534,11 @@ padding-left:30px;
 }
 .upLess {
   margin-top:-10px;
+}
+.day9 input {
+  color:#333;
+  font-size:1.2em;
+}
+.day9 :placeholder-shown {
+  font-size:1.2em;
 }

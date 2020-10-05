@@ -10,10 +10,9 @@ export default function Home() {
     const [randomNum,setRandomNum] = useState(null)
     const [recentTitle,setRecentTitle] = useState(null)
     function handleClick(e) {
-        let max = (projList.current.children.length)
+        let max = (projList.current.children.length) - 1
  
-        let randomNum =  Math.floor(Math.random() * Math.floor(max)) + 1;
-        console.log(randomNum)
+        let randomNum =  Math.floor(Math.random() * Math.floor(max)) + 2;
         setClick(!clicked)
         setRandomNum(randomNum)
      
@@ -66,7 +65,7 @@ export default function Home() {
     
                     </ul>
                 </div>
-                {clicked ? randomNum == 1 ? <Redirect to = "/"/> : <Redirect to = {`/day/${randomNum}`} /> : null }
+                {clicked ? <Redirect to = {`/day/${randomNum}`} /> : null }
             </div>
                 </div>
 

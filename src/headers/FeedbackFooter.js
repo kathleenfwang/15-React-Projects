@@ -19,11 +19,11 @@ export default function FeedbackFooter() {
         return (
             <div className = "feedback flex center">
             <form className={`up form`} onSubmit={submit}>
-                <h1 className ="bold center">I would love to hear your comments or feedback!</h1>
+                <h1 className ="bold center">Say hello or leave a comment!</h1>
                 <br></br>
-                <label htmlFor="name">Name *</label>
+                <label htmlFor="email">Email *</label>
                 <br></br>
-                <input placeHolder ="Enter your name.."id="name" type="name" name="name" />
+                <input placeHolder ="Enter your email.."id="email" type="email" name="email" />
                 <br></br>
                 <label htmlFor="message">Message *</label>
                 <br></br>
