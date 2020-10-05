@@ -7,16 +7,17 @@ export default class Day9 extends React.Component {
             likes: [],
             active: [],
             filtered: [],
-            activeList: 0
+            activeList: 0,
+            titles: ['fish', 'wisp', 'bulky','radio']
         }
         this.promptListUrl = 'https://media.discordapp.net/attachments/701277128951595030/762183039857065994/official-inktober-2020-prompt-list.png?width=461&height=461'
-        this.srcs = ['https://media.discordapp.net/attachments/701277128951595030/762123087553888307/Shape_4.png?width=347&height=490', 'https://media.discordapp.net/attachments/701277128951595030/762123167476613130/Shape_5.png?width=355&height=489', 'https://media.discordapp.net/attachments/701277128951595030/762116290059698186/imgonline-com-ua-twotoone-DRi4gTlNCiK6Jvq.jpg?width=403&height=457',]
-        this.titles = ['fish', 'wisp', 'bulky',]
+        this.srcs = ['https://media.discordapp.net/attachments/701277128951595030/762123087553888307/Shape_4.png?width=347&height=490', 'https://media.discordapp.net/attachments/701277128951595030/762123167476613130/Shape_5.png?width=355&height=489', 'https://media.discordapp.net/attachments/701277128951595030/762116290059698186/imgonline-com-ua-twotoone-DRi4gTlNCiK6Jvq.jpg?width=403&height=457','https://media.discordapp.net/attachments/701277128951595030/762471917680459786/Shape_9.png?width=327&height=491']
+ 
 
     }
     makeCards = (notLikes) => {
-        const { active } = this.state
-        return this.titles.map((title, i) => {
+        const { active,titles } = this.state
+        return titles.map((title, i) => {
             return (
                 <Card key={i} notLikes={notLikes} active={active} i={i} handleLike={this.handleLike} src={this.srcs[i]} day={i + 1} title={title} />)
         })
@@ -47,16 +48,17 @@ export default class Day9 extends React.Component {
         })
     }
     handleInput = (e) => {
+        const {titles} =this.state
         let value = e.target.value !== "" ? e.target.value : null
-        if (this.titles[0].includes(value)) {
+        if (titles.join().includes(value)) {
             this.setState({
-                filtered: this.titles.reduce((prev, next, i) => {
+                filtered: titles.reduce((prev, next, i) => {
                     if (next.includes(value)) prev.push(i)
                     return prev
                 }, [])
             })
         }
-        else if (this.titles[Number(value) - 1]) {
+        else if (titles[Number(value) - 1]) {
             this.setState({
                 filtered: [Number(value) - 1]
             })
