@@ -30,26 +30,23 @@ export default class Day9 extends React.Component {
                 title: 'radio',
                 src: ['https://media.discordapp.net/attachments/701277128951595030/762471917680459786/Shape_9.png?width=327&height=491', 'https://media.discordapp.net/attachments/519058439339507743/762476509633576990/Shape_10.png?width=340&height=489'],
             },
-
         ]
-
     }
     makeCards = (notLikes) => {
         const { active } = this.state
         let cards = []
         let index = 0
-        let titles = this.titles[0]
-        for (let key in titles) {
-            if (Array.isArray(titles[key])) {
-                cards.push(...titles[key].map((x,i) => {
-                    return <Card notLikes={notLikes} active={active} i={index + i} handleLike={this.handleLike} src={x} day={index + 1} title={`${key} ${i+1}`} />
-                }))
+        let titles = this.titles
+        titles.forEach((obj,i) =>{
+            if (Array.isArray(obj.src)) {
+                obj.src.forEach((x,ind) =>{
+                    cards.push(<Card notLikes={notLikes} active={active} i={ind + i} handleLike={this.handleLike} src={x} day={i + 1} title={`${obj.title} ${ind+1}`} />)
+                })
             }
             else {
-                cards.push(<Card notLikes={notLikes} active={active} i={index} handleLike={this.handleLike} src={titles[key]} day={index + 1} title={key} />)
+            cards.push(<Card notLikes={notLikes} active={active} i={i} handleLike={this.handleLike} src={obj.src} day={i + 1} title={obj.title} />)
             }
-            index++
-        }
+        })
         return cards
     }
     handleLike = (i) => {
@@ -78,15 +75,16 @@ export default class Day9 extends React.Component {
         })
     }
     handleInput = (e) => {
-        let titles = Object.keys(this.titles[0])
+        let titles = this.titles
         let value = e.target.value !== "" ? e.target.value : null
-        if (titles.join().includes(value)) {
+        let allTitles = titles.map((obj) => obj.title)
+        if (allTitles.join().includes(value)) {
             this.setState({
                 filtered: titles.reduce((prev, next, i) => {
-                    if (next.includes(value)) 
+                    if (next.title.includes(value)) 
                     {   
-                         if (Array.isArray(this.titles[0][next])) {
-                             this.titles[0][next].forEach((x,ind) => {
+                         if (Array.isArray(next.src)) {
+                            next.src.forEach((x,ind) => {
                                  prev.push(i + ind) })
                          }
                          else {
