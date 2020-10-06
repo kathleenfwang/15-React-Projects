@@ -13,7 +13,11 @@ export default function FeedbackFooter() {
 
     // Success message
     if (state.submitted) {
-        return <div>Thank you! We received your submission.</div>;
+        return(
+        <div className ="flex center feedback">
+            <form className ="form center">
+            <h1 classname ="bold center">Thank you! I will get back to you as soon as I can.</h1></form>
+        </div>);
     }
     function form() {
         return (
