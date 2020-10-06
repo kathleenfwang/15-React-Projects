@@ -28,11 +28,15 @@ export default class Day9 extends React.Component {
             },
             {
                 title: 'radio',
-                src: ['https://media.discordapp.net/attachments/701277128951595030/762471917680459786/Shape_9.png?width=327&height=491', 'https://media.discordapp.net/attachments/519058439339507743/762476509633576990/Shape_10.png?width=340&height=489'],
+                src: ['https://media.discordapp.net/attachments/701277128951595030/762471917680459786/Shape_9.png?width=327&height=491', 'https://media.discordapp.net/attachments/519058439339507743/762476509633576990/Shape_10.png'],
             },
             {
                 title: 'blade',
                 src: 'https://media.discordapp.net/attachments/701277128951595030/762848428199641138/Shape_14.png?width=340&height=490'
+            }, 
+            {
+                title: 'rodent',
+                src: 'https://media.discordapp.net/attachments/701277128951595030/763182790686277662/Shape_15.png'
             }
         ]
     }

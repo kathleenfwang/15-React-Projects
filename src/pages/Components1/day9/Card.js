@@ -4,7 +4,7 @@ import {faHeart as faFilledHeart,faTrash} from '@fortawesome/free-solid-svg-icon
 import { faHeart,faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 export default function Card(props) {
     return (
-        <div className="inktoberCard">
+        <div className="inktoberCard"  >
             <h1 className ="upLess">
                 <span style ={{fontWeight:"bold"}}>{props.title}</span>
                 <FontAwesomeIcon
@@ -25,7 +25,7 @@ export default function Card(props) {
                     icon={faTrashAlt} />
             </h1>
             <h2 className ="up">Day: {props.day}</h2>
-            <img src={props.src} />
+            <img  src={props.src} />
         </div>
     )
 }
