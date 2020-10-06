@@ -12,6 +12,7 @@ import Home from "./pages/Home"
 import Blog from "./pages/Blog"
 import Footer from "./headers/Footer"
 import FeedbackFooter from "./headers/FeedbackFooter"
+import CreditFooter from "./headers/CreditFooter"
 function App() {
   return (
     <Router>
@@ -31,6 +32,7 @@ function App() {
         <Route exact path ="/day/:num" component = {Projects}/>
       </Switch>
     </Router>
+
   )
    
 }
