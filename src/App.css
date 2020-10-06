@@ -44,10 +44,11 @@
    flex-wrap:wrap;
  }
  .firstPanel {
+ 
    font-size:1.2em;
    height:90%;
  margin-left:52%;
- background-color:rgba(247, 181, 181, 0.2);
+ background-color:rgba(211, 208, 208, 0.221);
  padding:30px;
  padding-left:50px;
  border-radius:10px;
