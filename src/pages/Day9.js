@@ -83,33 +83,34 @@ export default class Day9 extends React.Component {
         let titles = this.titles
         let value = e.target.value !== "" ? e.target.value : null
         let allTitles = titles.map((obj) => obj.title)
-        console.log(titles)
+        let titleNum = Number(value)-1
         if (allTitles.join().includes(value)) {
             this.setState({
                 filtered: titles.reduce((prev, next, i) => {
-                    console.log(i)
                     if (next.title.includes(value)) 
                     {   
                          if (Array.isArray(next.src)) {
                             next.src.forEach((x,ind) => {
                                  prev.push(ind + i + titles.length) })}
                          else {
-                             console.log(i)
                          prev.push(i)}}
                     return prev
                 }, [])
             })
         }
-        
-        else if (titles[Number(value)-1]) {
-            if (Array.isArray(titles[Number(value)-1].src)){
+        else if (titles[titleNum]) {
+            if (Array.isArray(titles[titleNum].src)){
+                let arr = [] 
+                titles[titleNum].src.forEach( (x,i) =>{
+                    arr.push(titleNum + titles.length + i)
+                })
                 this.setState({
-                    filtered:[Number(value)-1,Number(value)+titles.length]
+                    filtered:[...arr]
                 })
             }
                 else {
                     this.setState({
-                        filtered:[Number(value)-1]
+                        filtered:[titleNum]
                     })
                 }
             }
@@ -169,7 +170,6 @@ export default class Day9 extends React.Component {
     }
     render() {
         const { filtered } = this.state
- 
         return (
             <div className="day9">
                 <div className="flex center bold">
@@ -182,7 +182,6 @@ export default class Day9 extends React.Component {
                 {filtered.length > 0 ?
                     <div className="flex center down">
                         {this.makeCards(true).filter((x,ind) => {
-                            console.log(filtered)
                             return filtered.includes(x.props.i)  
                         })}
                     </div> : <div className="down">{this.items()}</div>}
