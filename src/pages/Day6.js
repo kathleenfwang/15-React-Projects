@@ -127,13 +127,13 @@ handleImg = (e) => {
      const {state} = this.state
     return (
         <form style ={{width:'70%'}} onSubmit = {this.addPlant}className ={`form ${this.state.showForm}Form`}>
-                     <label>name</label>
+                     <label>Name *</label>
                      <input placeholder ="Aloe" onChange = {this.handleName}value ={this.state.name}></input>
                      <br></br>
-                     <label>Description</label>
+                     <label>Description *</label>
                      <textarea placeholder = "Best plant" onChange = {this.handleDesc}value ={this.state.description}></textarea>
                      <br></br>
-                     <label>Image Src</label>
+                     <label>Image Src *</label>
                      <input placeHolder ="aloeplant.png" onChange = {this.handleImg}value ={this.state.image}></input>
                      <br></br>
                      <button type ="submit">Submit</button>

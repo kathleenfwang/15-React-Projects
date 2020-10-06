@@ -2,10 +2,9 @@
    padding:20px;
   color: #1E2939;
   font-size:.8em;
- 
     scroll-behavior: smooth;
-  
  }
+ 
  .white, #white {
   color:white;
 }
@@ -75,6 +74,7 @@
    color:darkgrey;
  }
  .home {
+   height:100%;
   background-image: url("https://i.imgur.com/P77Lkbg.gif");
   border-radius:10px; 
   background-size: cover;
@@ -157,9 +157,13 @@ a {
  .header a:hover, .nav li:hover {
    color:#9599E2;
  }
+ .icons {
+   font-size:1.5em;
+   grid-gap:10px;
+ }
  .nav ul {
   display:flex;
-   grid-gap:10px;
+   grid-gap:20px;
    height:10px;
    cursor:pointer;
    list-style-type: none;

@@ -30,6 +30,10 @@ export default class Day9 extends React.Component {
                 title: 'radio',
                 src: ['https://media.discordapp.net/attachments/701277128951595030/762471917680459786/Shape_9.png?width=327&height=491', 'https://media.discordapp.net/attachments/519058439339507743/762476509633576990/Shape_10.png?width=340&height=489'],
             },
+            {
+                title: 'blade',
+                src: 'https://media.discordapp.net/attachments/701277128951595030/762848428199641138/Shape_14.png?width=340&height=490'
+            }
         ]
     }
     makeCards = (notLikes) => {
@@ -40,7 +44,7 @@ export default class Day9 extends React.Component {
         titles.forEach((obj,i) =>{
             if (Array.isArray(obj.src)) {
                 obj.src.forEach((x,ind) =>{
-                    cards.push(<Card notLikes={notLikes} active={active} i={ind + i} handleLike={this.handleLike} src={x} day={i + 1} title={`${obj.title} ${ind+1}`} />)
+                    cards.push(<Card notLikes={notLikes} active={active} i={ind + i +titles.length } handleLike={this.handleLike} src={x} day={i + 1} title={`${obj.title} ${ind+1}`} />)
                 })
             }
             else {
@@ -85,12 +89,9 @@ export default class Day9 extends React.Component {
                     {   
                          if (Array.isArray(next.src)) {
                             next.src.forEach((x,ind) => {
-                                 prev.push(i + ind) })
-                         }
+                                 prev.push(i + ind) })}
                          else {
-                         prev.push(i) 
-                        }
-                    }
+                         prev.push(i)}}
                     return prev
                 }, [])
             })
@@ -163,7 +164,7 @@ export default class Day9 extends React.Component {
                     <li><input ref = "input" placeholder="Search by day or name..." onChange={this.handleInput}></input><FontAwesomeIcon onClick = {this.handleClear} icon = {faCalendarTimes}/></li>
                 </nav>
                 {filtered.length > 0 ?
-                    <div className="flex center">
+                    <div className="flex center down">
                         {this.makeCards(true).filter((x, i) => {
                             return filtered.includes(i)
                         })}

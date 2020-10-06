@@ -4,6 +4,7 @@ import Day from "./Day"
 import {Link, Redirect} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 export default function Home() {
     const projList = useRef(null)
     const [clicked,setClick] = useState(false)
@@ -11,7 +12,6 @@ export default function Home() {
     const [recentTitle,setRecentTitle] = useState(null)
     function handleClick(e) {
         let max = (projList.current.children.length) - 1
- 
         let randomNum =  Math.floor(Math.random() * Math.floor(max)) + 2;
         setClick(!clicked)
         setRandomNum(randomNum)
@@ -30,7 +30,6 @@ export default function Home() {
         setClick(!clicked)
         setRandomNum(max)
     }
-     
     return (
         <div className="home">
             <div className="firstPanel">
@@ -39,15 +38,14 @@ export default function Home() {
                 <div>
                     <div>
                         <h1>Hi, I'm Kathleen Wang!</h1>
-                        <div className ="flex"  >
                         <p>Software Engineer</p>
-                        <div style ={{fontSize:20}} className ='flex' >
+                        <div className ="flex icons up" >
                         <p><FontAwesomeIcon icon ={faGithub}/></p>
                         <p><FontAwesomeIcon icon ={faLinkedin}/></p>
-                        </div>
+                        <p><FontAwesomeIcon icon = {faEnvelope}/></p>
                         </div>
                     </div>
-                    <div className="desc">
+                    <div className="desc up">
                         <p>I enjoy working with multiple problems. I love design and want to study the interesection between art and coding! Also a sucker for pixel art apparently.</p>
                     </div>
                     <div>
@@ -68,10 +66,7 @@ export default function Home() {
                 {clicked ? <Redirect to = {`/day/${randomNum}`} /> : null }
             </div>
                 </div>
-
             </div>
-            
         </div>
-
     )
 }
