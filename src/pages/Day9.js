@@ -44,6 +44,7 @@ export default class Day9 extends React.Component {
         titles.forEach((obj,i) =>{
             if (Array.isArray(obj.src)) {
                 obj.src.forEach((x,ind) =>{
+ 
                     cards.push(<Card notLikes={notLikes} active={active} i={ind + i +titles.length } handleLike={this.handleLike} src={x} day={i + 1} title={`${obj.title} ${ind+1}`} />)
                 })
             }
@@ -82,25 +83,37 @@ export default class Day9 extends React.Component {
         let titles = this.titles
         let value = e.target.value !== "" ? e.target.value : null
         let allTitles = titles.map((obj) => obj.title)
+        console.log(titles)
         if (allTitles.join().includes(value)) {
             this.setState({
                 filtered: titles.reduce((prev, next, i) => {
+                    console.log(i)
                     if (next.title.includes(value)) 
                     {   
                          if (Array.isArray(next.src)) {
                             next.src.forEach((x,ind) => {
-                                 prev.push(i + ind) })}
+                                 prev.push(ind + i + titles.length) })}
                          else {
+                             console.log(i)
                          prev.push(i)}}
                     return prev
                 }, [])
             })
         }
-        else if (titles[Number(value) - 1]) {
-            this.setState({
-                filtered: [Number(value) - 1]
-            })
-        }
+        
+        else if (titles[Number(value)-1]) {
+            if (Array.isArray(titles[Number(value)-1].src)){
+                this.setState({
+                    filtered:[Number(value)-1,Number(value)+titles.length]
+                })
+            }
+                else {
+                    this.setState({
+                        filtered:[Number(value)-1]
+                    })
+                }
+            }
+      
         else {
             this.setState({
                 filtered: []
@@ -156,6 +169,7 @@ export default class Day9 extends React.Component {
     }
     render() {
         const { filtered } = this.state
+ 
         return (
             <div className="day9">
                 <div className="flex center bold">
@@ -167,8 +181,9 @@ export default class Day9 extends React.Component {
                 </nav>
                 {filtered.length > 0 ?
                     <div className="flex center down">
-                        {this.makeCards(true).filter((x, i) => {
-                            return filtered.includes(i)
+                        {this.makeCards(true).filter((x,ind) => {
+                            console.log(filtered)
+                            return filtered.includes(x.props.i)  
                         })}
                     </div> : <div className="down">{this.items()}</div>}
             </div>
