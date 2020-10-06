@@ -25,17 +25,14 @@
    color:#CAA8C7;
  }
  .whiteButton {
+ 
    color:#333;
    background-color: whitesmoke;
  }
- .blueButton {
-  border: 1px solid transparent;
-  background-color: #B3D4F3;
-  color:white;
- }
+ 
  .blueButton:hover {
   color:#333;
-  background-color:   #B3D4F3;
+ 
  }
  .gap {
   grid-gap:10px;
@@ -47,6 +44,8 @@
    flex-wrap:wrap;
  }
  .firstPanel {
+   font-size:1.2em;
+   height:90%;
  margin-left:52%;
  background-color:rgba(247, 181, 181, 0.2);
  padding:30px;
@@ -55,6 +54,7 @@
  overflow: auto;
  }
  button:hover, .active{
+
    border: 1px solid transparent;
  background-color: #B3D4F3;
  color:white;
@@ -74,7 +74,7 @@
    color:darkgrey;
  }
  .home {
-   height:100%;
+  height: 100vh;
   background-image: url("https://i.imgur.com/P77Lkbg.gif");
   border-radius:10px; 
   background-size: cover;
@@ -136,9 +136,15 @@ a {
    width:40%;
  }
  .projectList ul {
-   font-weight:bold;
+ 
    margin-left:30px;
    list-style-type:circle;
+ }
+ .projectList ul li {
+   margin-bottom:5px;
+ }
+ .projectList a {
+   color:palevioletred;
  }
  
  .header {
@@ -159,14 +165,19 @@ a {
  }
  .icons {
    font-size:1.5em;
-   grid-gap:10px;
+ 
+ }
+ .icons p {
+   margin-right:10px;
  }
  .nav ul {
   display:flex;
-   grid-gap:20px;
    height:10px;
    cursor:pointer;
    list-style-type: none;
+ }
+ .nav ul li {
+   margin-right:10px;
  }
  .error {
    font-size:.8em;
@@ -265,10 +276,16 @@ a {
     padding:10px;
   }
   .day4 textarea {
+    outline: none;
     padding: 10px;
     margin: 0px;
     width: 360px;
     height: 86px;
+    resize: none;
+    border-radius: 10px;
+    border: 1px solid gainsboro;
+    height: 150px;
+ 
   }
   .day4 p {
     font-family: 'Times New Roman', Times, serif;
@@ -312,10 +329,8 @@ a {
     color: #666;
     font-size:1.5em;
   }
-  .form button {
- 
-    font-weight:normal;
-    border:none;
+  .form button, .blueButton {
+    font-size:1.1em;
     color:white;
     background-color: #8EC5FC;
 background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);

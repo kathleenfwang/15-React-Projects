@@ -33,8 +33,6 @@ export default function Home() {
     return (
         <div className="home">
             <div className="firstPanel">
-                <div className="pic">
-                </div>
                 <div>
                     <div>
                         <h1>Hi, I'm Kathleen Wang!</h1>
@@ -56,8 +54,8 @@ export default function Home() {
                         <p><i> Inspired by Jennifer Dewalt's <a href="https://jenniferdewalt.com/" target="_blank"> 180 Projects in 180 Days</a></i></p>
                 </div>
                 <div className="projectList">
+                <button className ="blueButton" onClick = {handleRecent}> Most Recent: <span style ={{color:"moccasin"}}>{days()[0][0]}</span></button>
                     <button className ="whiteButton" onClick = {handleClick}> Feeling Lucky </button>
-                    <button className ="blueButton" onClick = {handleRecent}> Most Recent: <span style ={{color:"moccasin"}}>{days()[0][0]}</span></button>
                     <ul ref = {projList}>
                         {days()[1]}
     

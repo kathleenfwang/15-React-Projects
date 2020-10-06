@@ -137,11 +137,13 @@ export default class Day9 extends React.Component {
                     </div>)
             case 3:
                 return (
-                    <div style={{ marginTop: 40 }}>
+                    <div className ="flex center" style={{ marginTop: 40 }}>
                         <h4>I drew these with pen and then scanned using Adobe Capture :) </h4>
+                        <div>
                         <p>Honestly this is my first year actually really trying to commit the whole month of Inktober. <br></br>Every other year I tell myself that but end up only completing the first week. <br></br>But what better time than quarantine to start.</p>
                         <p>In the future, I am planning on converting this into a full stack app with database storage and authentication, to allow authenticated users to upload their entries and like and comment on others. <br></br>It would be a fun way to encourage my friends to participate and share our progress with each other.</p>
                         <p><a href="https://inktober.com/" target="_blank">Official Inktober Website</a></p>
+                        </div>
                     </div>
                 )
         }
