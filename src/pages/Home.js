@@ -40,9 +40,9 @@ export default function Home() {
                         <h1>Hi, I'm Kathleen Wang!</h1>
                         <p>Software Engineer</p>
                         <div className ="flex icons up" >
-                        <p><FontAwesomeIcon icon ={faGithub}/></p>
-                        <p><FontAwesomeIcon icon ={faLinkedin}/></p>
-                        <p><FontAwesomeIcon icon = {faEnvelope}/></p>
+                        <p><a href ="https://github.com/kathleenfwang"><FontAwesomeIcon icon ={faGithub}/></a></p>
+                        <p><a href ="https://www.linkedin.com/in/kathleen-wang/"><FontAwesomeIcon icon ={faLinkedin}/></a></p>
+                        <p><Link to ="/Contact"><FontAwesomeIcon icon = {faEnvelope}/></Link></p>
                         </div>
                     </div>
                     <div className="desc up">
