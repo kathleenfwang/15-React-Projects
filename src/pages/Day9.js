@@ -24,7 +24,7 @@ export default class Day9 extends React.Component {
             },
             {
                 title: 'bulky',
-                src: 'https://media.discordapp.net/attachments/701277128951595030/762116290059698186/imgonline-com-ua-twotoone-DRi4gTlNCiK6Jvq.jpg?width=403&height=457',
+                src: 'https://media.discordapp.net/attachments/701277128951595030/762116290059698186/imgonline-com-ua-twotoone-DRi4gTlNCiK6Jvq.jpg?width=340&height=490',
             },
             {
                 title: 'radio',
@@ -36,7 +36,11 @@ export default class Day9 extends React.Component {
             }, 
             {
                 title: 'rodent',
-                src: 'https://media.discordapp.net/attachments/701277128951595030/763182790686277662/Shape_15.png'
+                src: 'https://media.discordapp.net/attachments/701277128951595030/763532867190915100/Shape_23.png?width=340&height=490'
+            },
+            {
+                title:'fancy',
+                src: ['https://media.discordapp.net/attachments/701277128951595030/763528715812077568/Shape_20.png?width=400&height=490','https://media.discordapp.net/attachments/701277128951595030/763529565616078898/Shape_21.png?width=360&height=490']
             }
         ]
     }
@@ -56,7 +60,7 @@ export default class Day9 extends React.Component {
             cards.push(<Card notLikes={notLikes} active={active} i={i} handleLike={this.handleLike} src={obj.src} day={i + 1} title={obj.title} />)
             }
         })
-        return cards
+        return cards.reverse()
     }
     handleLike = (i) => {
         const { active } = this.state
