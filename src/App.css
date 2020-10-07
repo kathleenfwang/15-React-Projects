@@ -565,3 +565,11 @@ padding-left:30px;
 .day9 :placeholder-shown {
   font-size:1.2em;
 }
+
+.day10 {
+  position:relative;
+  width:500px;
+  height:600px;
+  overflow:auto;
+ 
+}
