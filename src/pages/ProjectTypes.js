@@ -8,6 +8,7 @@ import Day7 from "./Day7"
 import Day8 from "./Day8"
 import Day9 from "./Day9"
 import Day10 from "./Day10"
+import Day11 from "./Day11"
 import Footer from "../headers/Footer"
 function day2() {
     return <Day2 />
@@ -43,4 +44,7 @@ function day9() {
 function day10() {
     return <Day10/>
 }
-export {day2,day3,day4, day5,day6,day7,day8,day9,day10}
+function day11() {
+    return <Day11/>
+}
+export {day2,day3,day4, day5,day6,day7,day8,day9,day10,day11}

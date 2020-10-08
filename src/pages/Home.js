@@ -5,6 +5,7 @@ import {Link, Redirect} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import Fade from 'react-reveal'
 export default function Home() {
     const projList = useRef(null)
     const [clicked,setClick] = useState(false)
@@ -20,7 +21,7 @@ export default function Home() {
     function days() {
         let daysList = []
         let days = [
-            "Inktober","Text Analyzer","Pixel Art Maker","Plant Library","Picture Canvas","feelings","Petals","Solar System","This Website"]
+            "Color Palette","Inktober","Text Analyzer","Pixel Art Maker","Plant Library","Picture Canvas","feelings","Petals","Solar System","This Website"]
             for (let i = days.length;i>0;i--)
              daysList.push(<Day i = {i} title = {days[days.length - i]} /> )
         return [days,daysList]
@@ -35,16 +36,25 @@ export default function Home() {
             <div className="firstPanel">
                 <div>
                     <div>
+                 
+                        <Fade left cascade>
                         <h1>Hi, I'm Kathleen Wang!</h1>
                         <p>Software Engineer</p>
+                        </Fade>
+                       <Fade left cascade>
                         <div className ="flex icons up" >
                         <p><a target="_blank" href ="https://github.com/kathleenfwang"><FontAwesomeIcon icon ={faGithub}/></a></p>
                         <p><a target="_blank" href ="https://www.linkedin.com/in/kathleen-wang/"><FontAwesomeIcon icon ={faLinkedin}/></a></p>
                         <p><Link to ="/Contact"><FontAwesomeIcon icon = {faEnvelope}/></Link></p>
-                        </div>
+                      
+                    
+                    </div> 
+                    </Fade>
                     </div>
                     <div className="desc up">
+                        <Fade clear cascade>
                         <p>I enjoy working with multiple problems. I love design and want to study the interesection between art and coding! Also a sucker for pixel art apparently.</p>
+                        </Fade>
                     </div>
                     <div>
                     </div>
@@ -56,10 +66,13 @@ export default function Home() {
                 <div className="projectList">
                 <button className ="blueButton" onClick = {handleRecent}> Most Recent: <span style ={{color:"moccasin"}}>{days()[0][0]}</span></button>
                     <button className ="whiteButton" onClick = {handleClick}> Feeling Lucky </button>
+              
                     <ul ref = {projList}>
+                        <Fade clear cascade>
                         {days()[1]}
-    
+                        </Fade>
                     </ul>
+                  
                 </div>
                 {clicked ? <Redirect to = {`/day/${randomNum}`} /> : null }
             </div>

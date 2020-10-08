@@ -573,3 +573,12 @@ padding-left:30px;
   overflow:auto;
  
 }
+ 
+.day11 {
+  transition: 1s;
+  height:100vh;
+  background-image: url("https://img.freepik.com/free-photo/background-crumpled-paper-sheet_1194-7545.jpg?size=626&ext=jpg");
+  background-repeat:none;
+  background-size: cover;
+ 
+}
