@@ -1,15 +1,27 @@
 import React from "react"
 import Fade from 'react-reveal/Fade';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 export default class Day11 extends React.Component {
     constructor() {
         super() 
         this.state = {
             text:false
         }
+        this.items =  [
+            {id: 1, text: "Your skin isn't paper, don't cut it"},
+            {id: 2, text: "Your face isn't a mask, don't hide it"},
+            {id: 3, text: "Your size isn't a book, don't judge it"},
+            {id: 4, text: "Your life isn't a film, don't end it"},
+            {id: 5, text:"National Suicide Prevention Lifeline"},
+            {id: 6, text:"Available 24 hours. Languages: English, Spanish. Learn more 800-273-8255"}
+          ]
+          this.image = "https://img.freepik.com/free-photo/background-crumpled-paper-sheet_1194-7545.jpg?size=626&ext=jpg"
     }
 
   componentDidMount() {
    this.startCount()
+   let canvas = this.refs.canvas 
+
   }
   startCount = () => {
     setInterval(() => {
@@ -53,9 +65,10 @@ export default class Day11 extends React.Component {
     render() {
         return(
             <div className ="day11 flex center">
+            <canvas ref = "canvas"></canvas>
             <div style ={{textAlign:"center", fontFamily: "Times New Roman", alignItems: "center"}}>
             <Fade top cascade>
-           <h2>{this.state.text && this.renderText(1)}</h2>
+           <h2 >{this.state.text && this.renderText(1)}</h2>
            
             </Fade>
             <Fade right cascade>
@@ -70,6 +83,8 @@ export default class Day11 extends React.Component {
             <Fade clear bottom cascade>
             {this.state.text && this.renderText(5)}
             </Fade>
+    
+    );
             </div>
             </div>
         )
