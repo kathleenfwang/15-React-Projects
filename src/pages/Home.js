@@ -21,7 +21,7 @@ export default function Home() {
     function days() {
         let daysList = []
         let days = [
-            "Color Palette","Inktober","Text Analyzer","Pixel Art Maker","Plant Library","Picture Canvas","feelings","Petals","Solar System","This Website"]
+            "Mental Health Message","Color Palette","Inktober","Text Analyzer","Pixel Art Maker","Plant Library","Picture Canvas","feelings","Petals","Solar System","This Website"]
             for (let i = days.length;i>0;i--)
              daysList.push(<Day i = {i} title = {days[days.length - i]} /> )
         return [days,daysList]
