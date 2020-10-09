@@ -86,6 +86,7 @@ export default class Day11 extends React.Component {
     render() {
         return (
             <div className ="day11">
+                <h2 style ={{color:"white",textAlign:"center",fontStyle:"italic"}}>Pride month is celebrated every June to honor the 1969 Stonewall riots in Manhattan</h2>
                 <div style ={this.grid} className ="center">
                     <div>
                     <div className="flex">
