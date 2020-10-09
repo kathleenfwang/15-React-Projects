@@ -587,6 +587,9 @@ padding-left:30px;
 .day11 {
   border-radius:5px;
   height:100vh;
+  background-image: url("https://i.pinimg.com/originals/41/72/ab/4172ab9e2a618a5f12d1c30a3e709d6e.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
   background-color: #E4E8FF;
   padding:20px;
  
