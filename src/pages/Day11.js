@@ -3,16 +3,16 @@ export default class Day11 extends React.Component {
     constructor() {
         super()
         this.state = {
-            loaded: false,
+ 
             num: 3,
             currentColor: "white"
         }
-        this.colorFont = {color:"#5FD7C3",textAlign:"center",fontWeight:"bold"}
+        this.colorFont = { color: "#5FD7C3", textAlign: "center", fontWeight: "bold" }
         this.grid = {
-            display:"grid",
+            display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            alignItems:'center',
-            marginTop:50,
+            alignItems: 'center',
+            marginTop: 50,
         }
         this.bigDiv = {
             width: 600,
@@ -34,17 +34,13 @@ export default class Day11 extends React.Component {
             { transexual: ['rgb(81,184,222)', '#DA98A4', 'white'] }
         ]
     }
-    componentDidMount() {
-        this.setState({
-            loaded: true
-        })
-    }
+ 
     getDivs = (num) => {
         let divs = []
         for (let i = 0; i < num; i++) {
             divs.push(<div onClick={this.setColor} refs={`div${i}`} style={{
                 height: 400 / (this.state.num), width: 600,
-                borderBottom: '1px solid gainsboro', backgroundColor:"white"
+                borderBottom: '1px solid gainsboro', backgroundColor: "white"
             }}></div>)
         }
         return divs
@@ -60,7 +56,7 @@ export default class Day11 extends React.Component {
             }
             return (
                 <div style={{ marginLeft: 20 }}>
-                    <p style = {{color: "#5F73D7"}}>{name[0].toUpperCase() + name.slice(1)}</p>
+                    <p style={{ color: "#5F73D7" }}>{name[0].toUpperCase() + name.slice(1)}</p>
                     <div className="flex">
                         {squares}
                     </div>
@@ -85,19 +81,18 @@ export default class Day11 extends React.Component {
     }
     render() {
         return (
-            <div className ="day11">
-                <h2 style ={{color:"white",textAlign:"center",fontStyle:"italic"}}>Pride month is celebrated every June to honor the 1969 Stonewall riots in Manhattan</h2>
-                <div style ={this.grid} className ="center">
+            <div className="day11">
+                <h2 style={{ color: "white", textAlign: "center", fontStyle: "italic" }}>Pride month is celebrated every June to honor the 1969 Stonewall riots in Manhattan</h2>
+                <div style={this.grid} className="center">
                     <div>
-                    <div className="flex">
-                        {this.getRainbowSquares()}
+                        <div className="flex">
+                            {this.getRainbowSquares()}
                         </div>
                         <br></br>
                         <div>
-                            <button><a href ="https://www.pride.com/pride/2018/6/13/complete-guide-queer-pride-flags-0#media-gallery-media-1" target = "_blank">Learn more about the pride flags</a></button>
+                            <button><a href="https://www.pride.com/pride/2018/6/13/complete-guide-queer-pride-flags-0#media-gallery-media-1" target="_blank">Learn more about the pride flags</a></button>
                         </div>
                     </div>
-                    
                     <div style={this.bigDiv}>
                         {this.getDivs(this.state.num)}
                         <br></br>
@@ -105,11 +100,8 @@ export default class Day11 extends React.Component {
                             <button onClick={() => { this.addLines(1) }}>Add Lines</button>
                             <button onClick={() => { this.addLines(-1) }}>Subtract Lines</button>
                         </div>
-                  
                     </div>
-           
                     <div>
-
                     </div>
                 </div>
             </div>
