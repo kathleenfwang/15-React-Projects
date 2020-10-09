@@ -73,7 +73,7 @@ export default class Day11 extends React.Component {
  
     render() {
         return(
-            <div className ="day11 flex center">
+            <div className ="day3 flex center">
  
             <div style ={{textAlign:"center", fontFamily: "Times New Roman", alignItems: "center"}}>
             <Fade top cascade>

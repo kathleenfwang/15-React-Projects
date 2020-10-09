@@ -38,7 +38,7 @@
   grid-gap:10px;
  }
  .flex {
-   grid-gap:5px;
+   grid-gap:10px;
    align-items: center;
    display:flex;
    flex-wrap:wrap;
@@ -574,7 +574,7 @@ padding-left:30px;
  
 }
  
-.day11 {
+.day3 {
   opacity:0.8;
   transition: 1s;
   height:100vh;
@@ -584,3 +584,10 @@ padding-left:30px;
  
 }
  
+.day11 {
+  border-radius:5px;
+  height:100vh;
+  background-color: #E4E8FF;
+  padding:20px;
+ 
+}
