@@ -596,7 +596,7 @@ padding-left:30px;
  
 }
 .photos {
- 
+  transition:1s;
   /* Prevent vertical gaps */
   line-height: 0;
  
@@ -641,4 +641,9 @@ padding-left:30px;
   -webkit-column-count: 1;
   column-count:         1;
   }
+}
+.caption {
+  margin-top:50px;
+  text-align: right;
+  font-style: italic;
 }
