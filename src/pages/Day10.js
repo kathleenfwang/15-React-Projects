@@ -3,8 +3,7 @@ export default class Day10 extends React.Component {
     constructor() {
         super()
         this.state = {
- 
-            num: 3,
+            num: 4,
             currentColor: "white"
         }
         this.colorFont = { color: "#5FD7C3", textAlign: "center", fontWeight: "bold" }
@@ -17,8 +16,8 @@ export default class Day10 extends React.Component {
         this.bigDiv = {
             width: 600,
             height: 400,
-            border: '2px solid whitesmoke',
-            borderRadius: 4,
+            border: '1px solid gainsboro',
+            borderRadius: 5,
             boxShadow: '0 4px 7px 0 rgba(0,0,0,0.1)'
         }
         this.colors = [

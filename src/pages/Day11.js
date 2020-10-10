@@ -53,7 +53,9 @@ export default class Day11 extends React.Component {
             .then(toJson)
             .then(json => {
                 if (json.results.length > 29) {
+                    console.log(json)
                     let data = json.results
+                   
                     this.setState({
                         loaded: true,
                         data: data})
@@ -179,7 +181,7 @@ export default class Day11 extends React.Component {
             <>
                 <h1>Make your own image collage of anything:</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <input onChange={this.handleChange} value={this.state.value} placeholder="'Cats','Japan'.."></input>
+                    <input onChange={this.handleChange} value={this.state.value} placeholder="Cats.."></input>
                     <button><FontAwesomeIcon icon={faSearch} /></button>
                 </form>
             </>
