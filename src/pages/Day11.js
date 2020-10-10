@@ -48,7 +48,7 @@ export default class Day11 extends React.Component {
     }
     callImages = () => {
         let { value } = this.state
-        if (!value) value = "dogs"
+        if (!value) value = "cats"
         unsplash.search.photos(value, 1, 30,)
             .then(toJson)
             .then(json => {
@@ -68,11 +68,11 @@ export default class Day11 extends React.Component {
             firstHalf.push(
                 <div style={{ position: "relative" }}>
                     <FontAwesomeIcon
-                        className ={`${show}Show`}
+                        className ={`${show}Show cursor`}
                         onClick={show ? () => this.handleLike(data[i]) : () => this.handleTrash(data[i])}
                         id="outerHeart"
                         style={{
-                            color: show ? "palevioletred" : "lightgrey",
+                            color: show ? "#ff6666" : "lightgrey",
                             position: "absolute", right: 10, top: 10
                         }}
                         icon={show ? active.includes(data[i]) ? faFilledHeart : faHeart : faTimes} />
@@ -148,10 +148,6 @@ export default class Day11 extends React.Component {
         this.setState({
             value: e.target.value})
     }
-    handleChangeAmount = () => {
-        this.setState(prevState => ({
-            amount: prevState.amount === 30 ? 15 : 30}))
-    }
     handleToggle = (i) => {
         this.setState({
             activeList: i})
@@ -183,10 +179,9 @@ export default class Day11 extends React.Component {
             <>
                 <h1>Make your own image collage of anything:</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <input onChange={this.handleChange} value={this.state.value} placeholder="'Dogs','Brugge'.."></input>
+                    <input onChange={this.handleChange} value={this.state.value} placeholder="'Cats','Japan'.."></input>
                     <button><FontAwesomeIcon icon={faSearch} /></button>
                 </form>
-                <button onClick={this.handleChangeAmount}>Show {amount === 30 ? 'Less' : 'More'}</button>
             </>
         )
     }
@@ -211,7 +206,7 @@ export default class Day11 extends React.Component {
                             className={`${isShown}Show cursor`}
                             style={{
                                 fontSize: '1.5em',
-                                color: heart ? "palevioletred" : "lightgrey",
+                                color: heart ? "#ff6666" : "lightgrey",
                             }}
                             icon={heart ? active.includes(imageData) ? faFilledHeart : faHeart : faTrashAlt} />
                     </div>
