@@ -35,8 +35,17 @@
   color:#333;
  
  }
+ .borderRadius {
+   border-radius:3px;
+ }
  .gap {
   grid-gap:10px;
+ }
+ .left {
+   margin-left:10px;
+ }
+ .lineHeight {
+   line-height: 1px;
  }
  .flex {
    grid-gap:10px;
@@ -553,6 +562,9 @@ padding-left:30px;
     padding: 30px;
     border-radius: 5px;
 }
+.padding {
+  padding:10px;
+}
 .up {
   margin-top:-20px;
 }
@@ -596,7 +608,6 @@ padding-left:30px;
  
 }
 .photos {
-  transition:1s;
   /* Prevent vertical gaps */
   line-height: 0;
  
@@ -605,12 +616,12 @@ padding-left:30px;
   -moz-column-count:    5;
   -moz-column-gap:      0px;
   column-count:         5;
-  column-gap:           5px;  
+  column-gap:           3px;  
  
 }
 .photos img {
   /* Just in case there are inline attributes */
-  margin-bottom:3px;
+  margin-bottom:2px;
   width: 100% !important;
   height: auto !important;
 }
