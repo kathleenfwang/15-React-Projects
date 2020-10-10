@@ -68,13 +68,14 @@ export default class Day11 extends React.Component {
             firstHalf.push(
                 <div style={{ position: "relative" }}>
                     <FontAwesomeIcon
+                        className ={`${show}Show`}
                         onClick={show ? () => this.handleLike(data[i]) : () => this.handleTrash(data[i])}
                         id="outerHeart"
                         style={{
                             color: show ? "palevioletred" : "lightgrey",
                             position: "absolute", right: 10, top: 10
                         }}
-                        icon={show ? active.includes(data[i]) ? faFilledHeart : faHeart : faTrashAlt} />
+                        icon={show ? active.includes(data[i]) ? faFilledHeart : faHeart : faTimes} />
                     <img className="cursor borderRadius" onClick={() => this.handleClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
                 </div>)
         }
