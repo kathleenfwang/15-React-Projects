@@ -53,7 +53,7 @@ export default function Home() {
                     </div>
                     <div className="desc up">
                         <Fade clear cascade>
-                        <p>I enjoy working with multiple problems. I love design and want to study the interesection between art and coding! Also a sucker for pixel art apparently.</p>
+                        <p>I enjoy working with multiple problems. I love design and enjoy looking for ways to incorporate the two in my work. Also a sucker for pixel art apparently. I am also interestd in AI and machine learning. </p>
                         </Fade>
                     </div>
                     <div>

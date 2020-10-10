@@ -45,6 +45,10 @@ export default class Day9 extends React.Component {
             {
                 title: 'teeth',
                 src: 'https://media.discordapp.net/attachments/701277128951595030/763944853159018506/Shape_24.png?width=340&height=490'
+            }, 
+            {
+                title: 'hope',
+                src: 'https://media.discordapp.net/attachments/701277128951595030/764310842556416020/Shape_28.png?width=350&height=490'
             }
         ]
     }
