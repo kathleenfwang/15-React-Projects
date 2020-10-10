@@ -3,7 +3,8 @@ import sf from "./Components1/sf.jpg"
 import Unsplash, { toJson } from 'unsplash-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart,faTrashAlt } from '@fortawesome/free-regular-svg-icons'
-import { faDownload, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faDownload, faTimes, faSearch,faHeart as faFilledHeart } from '@fortawesome/free-solid-svg-icons'
+ 
 // import {faTimes} from '@fortawesome/free-regular-svg-icons'
 const APP_ACCESS_KEY = 'kHTYj3FV6pkquHtwCsHJQdBU2lqx6WY2z-FZm7iXukQ'
 const unsplash = new Unsplash({ accessKey: APP_ACCESS_KEY });
@@ -21,7 +22,8 @@ export default class Day11 extends React.Component {
             img: sf,
             loaded: false,
             data: null,
-            bigImage: null
+            bigImage: null, 
+            active: [] 
         }
         this.bigDiv = {
             borderRadius: 4,
@@ -63,6 +65,7 @@ export default class Day11 extends React.Component {
     }
     getImages = (data) => {
         let firstHalf = []
+        const {active} = this.state
         for (let i = 0; i < this.state.amount; i++) {
             firstHalf.push(
                 <div style ={{position:"relative"}}>
@@ -71,10 +74,11 @@ export default class Day11 extends React.Component {
                     onClick={() => this.handleLike(data[i])}
                     id="outerHeart"
                     style={{
+                        fontSize:'1.5em',
                          color:"palevioletred", 
                         position: "absolute", right: 10, top: 10
                     }}
-                    icon={faHeart} />
+                    icon={active.includes(data[i]) ? faFilledHeart : faHeart} />
 
                 {/* <FontAwesomeIcon
                     id="icon"
@@ -88,7 +92,9 @@ export default class Day11 extends React.Component {
         return firstHalf
     }
     handleLike =(info) =>{
-        console.log(info)
+       this.setState((prevState) => ({
+           active: [...prevState.active,info]
+       }))
     }
     handleClick = (i, stuff) => {
         console.log(stuff)
@@ -158,7 +164,8 @@ export default class Day11 extends React.Component {
         }))
     }
     render() {
-        const { loaded, data, amount, bigImage, isShown, imageData } = this.state
+        const { loaded, data, amount, bigImage, isShown, imageData, active } = this.state
+        console.log(active)
         return (
             <div style={{ position: "relative" }}>
                 <div className="flex center">
@@ -184,8 +191,19 @@ export default class Day11 extends React.Component {
                                         <p className="left"><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
                                     </div>
                                 </div>
+                                <FontAwesomeIcon
+                    className={`${true}Show icon`}
+                    onClick={() => this.handleLike(imageData)}
+                    id="outerHeart"
+                    className={`${isShown}Show cursor`}
+                    style={{
+                        fontSize:'1.5em',
+                         color:"palevioletred", 
+                    }}
+                    icon={active.includes(imageData) ? faFilledHeart : faHeart} />
                             </div>
                         </div>
+
                         <FontAwesomeIcon 
                         icon={faTimes} 
                         style={{ cursor: "pointer", color: "#555", fontSize: "2em", position: "absolute", top: 5, right: 5 }} 
