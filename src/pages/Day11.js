@@ -23,7 +23,8 @@ export default class Day11 extends React.Component {
             loaded: false,
             data: null,
             bigImage: null, 
-            active: [] 
+            active: [],
+            activeList:0
         }
         this.bigDiv = {
             borderRadius: 4,
@@ -43,7 +44,7 @@ export default class Day11 extends React.Component {
         }
     }
     componentDidMount() {
-        this.callImages()
+        this.callImages(30,true)
     }
     callImages = () => {
         let { value } = this.state
@@ -63,14 +64,14 @@ export default class Day11 extends React.Component {
                 }
             })
     }
-    getImages = (data) => {
+    getImages = (data,show) => {
         let firstHalf = []
         const {active} = this.state
-        for (let i = 0; i < this.state.amount; i++) {
+        for (let i = 0; i < data.length; i++) {
             firstHalf.push(
                 <div style ={{position:"relative"}}>
                   <FontAwesomeIcon
-                    className={`${true}Show icon`}
+                    className={`${show}Show icon`}
                     onClick={() => this.handleLike(data[i])}
                     id="outerHeart"
                     style={{
@@ -80,16 +81,23 @@ export default class Day11 extends React.Component {
                     }}
                     icon={active.includes(data[i]) ? faFilledHeart : faHeart} />
 
-                {/* <FontAwesomeIcon
+                <FontAwesomeIcon
                     id="icon"
-                    style={{position: "absolute", right: 10, top: 10 }}
-                    onClick={() => props.handleLike(props.i)}
-                    className={`${!props.notLikes}Show`}
-                    icon={faTrashAlt} /> */}
+                    style={{position: "absolute", right: 10, top: 10,fontSize:'1.5em', }}
+                    onClick={() => this.handleTrash(data[i])}
+                    className={`${!show}Show`}
+                    icon={faTrashAlt} />
                     <img className="cursor borderRadius" onClick={() => this.handleClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
                 </div>)
         }
         return firstHalf
+    }
+    handleTrash = (info) =>{
+        const {active} = this.state
+        let filtered = active.filter((x) => x !== info)
+        this.setState((prevState) => ({
+            active: [...filtered]
+        }))
     }
     handleLike =(info) =>{
        this.setState((prevState) => ({
@@ -163,6 +171,34 @@ export default class Day11 extends React.Component {
             amount: prevState.amount === 30 ? 15 : 30
         }))
     }
+    handleToggle = (i) => {
+        this.setState({
+            activeList: i
+        })
+    }
+    items = () => {
+        const { activeList, active,data} = this.state
+        switch (activeList) {
+            case 0:
+                return this.getImages(data,true)
+            case 1:
+                return (
+                        active.length > 0 ? this.getImages(active,false) :
+                            <div className ="flex center">
+                            <img src ="https://thumbs.gfycat.com/GlossyImpishFrilledlizard-small.gif"></img>
+                            </div> 
+)
+        }
+    }
+    getList = () => {
+        let list = ['All', 'Likes']
+        const { activeList } = this.state
+        return list.map((x, i) => {
+            return (
+                <li i={i} className="navList" style={{ fontSize: '1.2em', borderBottom: activeList == i ? "2px solid #E0C3FC" : "2px solid transparent" }} onClick={() => this.handleToggle(i)} >{x}</li>
+            )
+        })
+    }
     render() {
         const { loaded, data, amount, bigImage, isShown, imageData, active } = this.state
         console.log(active)
@@ -174,9 +210,13 @@ export default class Day11 extends React.Component {
                         <input onChange={this.handleChange} value={this.state.value} placeholder="'Dogs','Brugge'.."></input>
                         <button><FontAwesomeIcon icon={faSearch} /></button>
                     </form>
+              
                     <button onClick={this.handleChangeAmount}>Show {amount === 30 ? 'Less' : 'More'}</button>
+                    <nav>
+                    {this.getList()}
+                    </nav>
                     <div className="photos down">
-                        {loaded ? this.getImages(data) : null}
+                        {loaded ? this.items() : null}
                     </div>
                 </div>
                 <br></br>
