@@ -1,184 +1,109 @@
 import React from "react"
-import sf from "./Components1/sf.jpg"
-import Unsplash, { toJson } from 'unsplash-js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDownload, faTimes } from '@fortawesome/free-solid-svg-icons'
-// import {faTimes} from '@fortawesome/free-regular-svg-icons'
-const APP_ACCESS_KEY = 'kHTYj3FV6pkquHtwCsHJQdBU2lqx6WY2z-FZm7iXukQ'
-const unsplash = new Unsplash({ accessKey: APP_ACCESS_KEY });
-
 export default class Day10 extends React.Component {
-
     constructor() {
         super()
         this.state = {
-            imageData: null,
-            isShown: false,
-            index: null,
-            amount: 30,
-            value: 'dogs',
-            img: sf,
-            loaded: false,
-            data: null,
-            bigImage: null
+ 
+            num: 3,
+            currentColor: "white"
+        }
+        this.colorFont = { color: "#5FD7C3", textAlign: "center", fontWeight: "bold" }
+        this.grid = {
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            alignItems: 'center',
+            marginTop: 50,
         }
         this.bigDiv = {
+            width: 600,
+            height: 400,
+            border: '2px solid whitesmoke',
             borderRadius: 4,
-            width: '100vw',
-            height: '100vh',
-            backgroundColor: 'rgb(0,0,0,.5)',
-            position: "fixed", top: 0
+            boxShadow: '0 4px 7px 0 rgba(0,0,0,0.1)'
         }
-        this.middleDiv = {
-            fontSize:'1.2em',
-            position: "relative",
-            backgroundColor: "whitesmoke",
-            padding: 30,
-            borderRadius: 5,
-            width: '80%',
-            height: '90%',
-
+        this.colors = [
+            { rainbow: ["red", "orange", "yellow", "green", "blue", "purple"] },
+            { lesbian: ["rgb(189,40,0)", "#D46923", "#E2894C", "white", "#BA5792", "#A14C80", "#A14C80"] },
+            { genderQueer: ["rgb(144,100,174)", "white", "rgb(58,102,24)"] },
+            { agender: ["rgb(58,102,24)", "rgb(147,147,147)", "white", "rgb(146,193,104)"] },
+            { genderFluid: ["#E26991", "white", "#AA0FBF", "black", "#2B35A9"] },
+            { asexual: ["black", "#919191", "white", "#720072"] },
+            { nonbinary: ['rgb(199,193,39)', 'white', 'rgb(123,73,168)', 'black'] },
+            { pansexual: ['#D11D7D', '#E0C005', '#1D9DE2'] },
+            { bisexual: ['#BF0064', '#8B4586', '#002F97'] },
+            { transexual: ['rgb(81,184,222)', '#DA98A4', 'white'] }
+        ]
+    }
+ 
+    getDivs = (num) => {
+        let divs = []
+        for (let i = 0; i < num; i++) {
+            divs.push(<div onClick={this.setColor} refs={`div${i}`} style={{
+                height: 400 / (this.state.num), width: 600,
+                borderBottom: '1px solid gainsboro', backgroundColor: "white"
+            }}></div>)
         }
+        return divs
     }
-
-    componentDidMount() {
-        this.callImages()
-    }
-    componentDidUpdate(prevprops, prevState) {
-
-    }
-    callImages = () => {
-        const { value } = this.state
-        unsplash.search.photos(value, 1, 30,)
-            .then(toJson)
-            .then(json => {
-                // Your code
-                let data = json.results
-                this.setState({
-                    loaded: true,
-                    data: data
+    getRainbowSquares = () => {
+        return this.colors.map((color) => {
+            let squares = []
+            for (let key in color) {
+                var name = key
+                squares = color[key].map((x) => {
+                    return (<div onClick={this.chooseColor} className="square" style={{ backgroundColor: x }} />)
                 })
-            });
-    }
-
-
-    getImages = (data) => {
-        let firstHalf = []
-        for (let i = 0; i < this.state.amount; i++) {
-            firstHalf.push(
-                <div>
-                    <img className ="borderRadius" onClick={() => this.handleClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
+            }
+            return (
+                <div style={{ marginLeft: 20 }}>
+                    <p style={{ color: "#5F73D7" }}>{name[0].toUpperCase() + name.slice(1)}</p>
+                    <div className="flex">
+                        {squares}
+                    </div>
                 </div>)
-        }
-        return firstHalf
-    }
-    handleClick = (i, stuff) => {
-        console.log(stuff)
-        this.setState(prevState => ({
-            imageData: stuff,
-            bigImage: stuff.urls.regular,
-            index: i,
-            isShown: !prevState.isShown
-
-        }))
-    }
-    handleClose = () => {
-        this.setState(prevState => ({
-
-            isShown: !prevState.isShown
-
-        }))
-    }
-    handleDownload = () => {
-        console.log('click')
-        let data = this.state.imageData
-        let url = data.urls.regular
-        // console.log(url)
-        // var element = document.createElement("a");
-        // var file = new Blob([url],
-        //   { type: "image/*" }
-        // );
-        // element.href = URL.createObjectURL(file);
-        // element.download = "image.jpg";
-        // element.click();
-        var img = new Image;
-        var c = document.createElement("canvas");
-        var ctx = c.getContext("2d");
-
-        img.onload = () => {
-            c.width = this.naturalWidth;     // update canvas size to match image
-            c.height = this.naturalHeight;
-            ctx.drawImage(this, 0, 0);       // draw in image
-
-        };
-        img.crossOrigin = "";              // if from different origin
-        img.src = url;
-    }
-
-    handleUpload = (e) => {
-        console.log('lcick')
-        if (e.target.files && e.target.files[0]) {
-            let img = e.target.files[0];
-            let src = URL.createObjectURL(img);
-            this.setState({
-                img: src
-            })
-        }
-    }
-    inputUpload = () => {
-        let upload = this.refs.upload
-        upload.click()
-    }
-    handleSubmit = (e) => {
-        e.preventDefault()
-        this.callImages()
-    }
-    handleChange = (e) => {
-        this.setState({
-            value: e.target.value
         })
     }
-    handleChangeAmount = () => {
+    chooseColor = (e) => {
+        let color = e.target.style.backgroundColor
+        this.setState({
+            currentColor: color
+        })
+    }
+    setColor = (e) => {
+        const { currentColor } = this.state
+        console.log(currentColor)
+        e.target.style.backgroundColor = currentColor
+    }
+    addLines = (lines) => {
         this.setState(prevState => ({
-            amount: prevState.amount === 30 ? 15 : 30
+            num: prevState.num + lines
         }))
     }
     render() {
-        const { loaded, data, amount, bigImage, isShown, imageData } = this.state
         return (
-            <div style={{ position: "relative" }}>
-                <div className="flex center">
-                    <h1>Make your own image collage of anything:</h1>
-                    <form onSubmit={this.handleSubmit}>
-                        <input onChange={this.handleChange} value={this.state.value} placeholder="'Dogs','Brugge'.."></input>
-                        <button>Submit</button>
-                    </form>
-                    <button onClick={this.handleChangeAmount}>Show {amount === 30 ? 'Less' : 'More'}</button>
-                    <div className="photos down">
-                        {loaded ? this.getImages(data) : null}
-                    </div>
-                </div>
-                <br></br>
-                {imageData ? <div className={`${isShown}Show flex center`} style={this.bigDiv}>
-
-                    <div style={this.middleDiv}>
-                        <div>
-                            <div className="flex padding">
-                                <img src={imageData.user.profile_image.small} />
-                                <div className ="lineHeight">
-                                    <p className="left">{`${imageData.user.name}`}</p>
-                                    <p className = "left"><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
-                                </div>
-                            </div>
-
+            <div className="day11">
+                <h2 style={{ color: "white", textAlign: "center", fontStyle: "italic" }}>Pride month is celebrated every June to honor the 1969 Stonewall riots in Manhattan</h2>
+                <div style={this.grid} className="center">
+                    <div>
+                        <div className="flex">
+                            {this.getRainbowSquares()}
                         </div>
-                        <FontAwesomeIcon icon={faTimes} style={{ cursor: "pointer", color: "#555", fontSize: "2em", position: "absolute", top: 5, right: 5 }} onClick={this.handleClose} />
-                        <img style={{ borderRadius:5,objectFit: "contain", width: '100%', height: '90%', overflow:"auto" }} src={bigImage} />
-
+                        <br></br>
+                        <div>
+                            <button><a href="https://www.pride.com/pride/2018/6/13/complete-guide-queer-pride-flags-0#media-gallery-media-1" target="_blank">Learn more about the pride flags</a></button>
+                        </div>
+                    </div>
+                    <div style={this.bigDiv}>
+                        {this.getDivs(this.state.num)}
+                        <br></br>
+                        <div className="flex center">
+                            <button onClick={() => { this.addLines(1) }}>Add Lines</button>
+                            <button onClick={() => { this.addLines(-1) }}>Subtract Lines</button>
+                        </div>
+                    </div>
+                    <div>
                     </div>
                 </div>
-                    : null}
-                <p className="caption">Images provided by <a href="https://unsplash.com/developers" target="_blank">Unsplash API</a></p>
             </div>
         )
     }
