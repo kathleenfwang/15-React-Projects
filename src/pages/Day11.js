@@ -2,9 +2,9 @@ import React from "react"
 import sf from "./Components1/sf.jpg"
 import Unsplash, { toJson } from 'unsplash-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart,faTrashAlt } from '@fortawesome/free-regular-svg-icons'
-import { faDownload, faTimes, faSearch,faHeart as faFilledHeart } from '@fortawesome/free-solid-svg-icons'
- 
+import { faHeart, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
+import { faDownload, faTimes, faSearch, faHeart as faFilledHeart } from '@fortawesome/free-solid-svg-icons'
+
 // import {faTimes} from '@fortawesome/free-regular-svg-icons'
 const APP_ACCESS_KEY = 'kHTYj3FV6pkquHtwCsHJQdBU2lqx6WY2z-FZm7iXukQ'
 const unsplash = new Unsplash({ accessKey: APP_ACCESS_KEY });
@@ -22,9 +22,9 @@ export default class Day11 extends React.Component {
             img: sf,
             loaded: false,
             data: null,
-            bigImage: null, 
+            bigImage: null,
             active: [],
-            activeList:0
+            activeList: 0
         }
         this.bigDiv = {
             borderRadius: 4,
@@ -44,7 +44,7 @@ export default class Day11 extends React.Component {
         }
     }
     componentDidMount() {
-        this.callImages(30,true)
+        this.callImages(30, true)
     }
     callImages = () => {
         let { value } = this.state
@@ -56,53 +56,47 @@ export default class Day11 extends React.Component {
                     let data = json.results
                     this.setState({
                         loaded: true,
-                        data: data
-                    })
+                        data: data})
                 }
-                else {
-                    console.log('error')
-                }
+                else {console.log('error')}
             })
     }
-    getImages = (data,show) => {
+    getImages = (data, show) => {
         let firstHalf = []
-        const {active} = this.state
+        const { active } = this.state
         for (let i = 0; i < data.length; i++) {
             firstHalf.push(
-                <div style ={{position:"relative"}}>
-                  <FontAwesomeIcon
-                    className={`${show}Show icon`}
-                    onClick={() => this.handleLike(data[i])}
-                    id="outerHeart"
-                    style={{
-                        fontSize:'1.5em',
-                         color:"palevioletred", 
-                        position: "absolute", right: 10, top: 10
-                    }}
-                    icon={active.includes(data[i]) ? faFilledHeart : faHeart} />
-
-                <FontAwesomeIcon
-                    id="icon"
-                    style={{position: "absolute", right: 10, top: 10,fontSize:'1.5em', }}
-                    onClick={() => this.handleTrash(data[i])}
-                    className={`${!show}Show`}
-                    icon={faTrashAlt} />
+                <div style={{ position: "relative" }}>
+                    <FontAwesomeIcon
+                        className={`${show}Show icon`}
+                        onClick={() => this.handleLike(data[i])}
+                        id="outerHeart"
+                        style={{
+                            fontSize: '1.5em',
+                            color: "palevioletred",
+                            position: "absolute", right: 10, top: 10
+                        }}
+                        icon={active.includes(data[i]) ? faFilledHeart : faHeart} />
+                    <FontAwesomeIcon
+                        id="icon"
+                        style={{ position: "absolute", right: 10, top: 10, fontSize: '1.5em', }}
+                        onClick={() => this.handleTrash(data[i])}
+                        className={`${!show}Show`}
+                        icon={faTrashAlt} />
                     <img className="cursor borderRadius" onClick={() => this.handleClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
                 </div>)
         }
         return firstHalf
     }
-    handleTrash = (info) =>{
-        const {active} = this.state
+    handleTrash = (info) => {
+        const { active } = this.state
         let filtered = active.filter((x) => x !== info)
         this.setState((prevState) => ({
-            active: [...filtered]
-        }))
+            active: [...filtered] }))
     }
-    handleLike =(info) =>{
-       this.setState((prevState) => ({
-           active: [...prevState.active,info]
-       }))
+    handleLike = (info) => {
+        this.setState((prevState) => ({
+            active: [...prevState.active, info]}))
     }
     handleClick = (i, stuff) => {
         console.log(stuff)
@@ -110,14 +104,11 @@ export default class Day11 extends React.Component {
             imageData: stuff,
             bigImage: stuff.urls.regular,
             index: i,
-            isShown: !prevState.isShown
-
-        }))
+            isShown: !prevState.isShown}))
     }
     handleClose = () => {
         this.setState(prevState => ({
-            isShown: !prevState.isShown
-        }))
+            isShown: !prevState.isShown}))
     }
     handleDownload = () => {
         console.log('click')
@@ -149,8 +140,7 @@ export default class Day11 extends React.Component {
             let img = e.target.files[0];
             let src = URL.createObjectURL(img);
             this.setState({
-                img: src
-            })
+                img: src})
         }
     }
     inputUpload = () => {
@@ -163,31 +153,27 @@ export default class Day11 extends React.Component {
     }
     handleChange = (e) => {
         this.setState({
-            value: e.target.value
-        })
+            value: e.target.value})
     }
     handleChangeAmount = () => {
         this.setState(prevState => ({
-            amount: prevState.amount === 30 ? 15 : 30
-        }))
+            amount: prevState.amount === 30 ? 15 : 30}))
     }
     handleToggle = (i) => {
         this.setState({
-            activeList: i
-        })
+            activeList: i})
     }
     items = () => {
-        const { activeList, active,data} = this.state
+        const { activeList, active, data } = this.state
         switch (activeList) {
             case 0:
-                return this.getImages(data,true)
+                return this.getImages(data, true)
             case 1:
                 return (
-                        active.length > 0 ? this.getImages(active,false) :
-                            <div className ="flex center">
-                            <img src ="https://thumbs.gfycat.com/GlossyImpishFrilledlizard-small.gif"></img>
-                            </div> 
-)
+                    active.length > 0 ? this.getImages(active, false) :
+                        <div className="flex center">
+                            <img src="https://thumbs.gfycat.com/GlossyImpishFrilledlizard-small.gif"></img>
+                        </div>)
         }
     }
     getList = () => {
@@ -195,68 +181,73 @@ export default class Day11 extends React.Component {
         const { activeList } = this.state
         return list.map((x, i) => {
             return (
-                <li i={i} className="navList" style={{ fontSize: '1.2em', borderBottom: activeList == i ? "2px solid #E0C3FC" : "2px solid transparent" }} onClick={() => this.handleToggle(i)} >{x}</li>
-            )
+                <li i={i} className="navList" style={{ fontSize: '1.2em', borderBottom: activeList == i ? "2px solid #E0C3FC" : "2px solid transparent" }} onClick={() => this.handleToggle(i)} >{x}</li>)
         })
     }
-    showPopOut = () => {
-        const { loaded, data, amount, bigImage, isShown, imageData, active } = this.state
-        return (<div className={`${isShown}Show flex center`} style={this.bigDiv}>
-        <div style={this.middleDiv}>
-            <div>
-                <div className="flex padding" style={{ justifyContent: "space-between" }}>
-                    <div className="flex">
-                        <img src={imageData.user.profile_image.small} />
-                        <div className="lineHeight">
-                            <p className="left">{`${imageData.user.name}`}</p>
-                            <p className="left"><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
-                        </div>
-                    </div>
-                    <FontAwesomeIcon
-        className={`${true}Show icon`}
-        onClick={() => this.handleLike(imageData)}
-        id="outerHeart"
-        className={`${isShown}Show cursor`}
-        style={{
-            fontSize:'1.5em',
-             color:"palevioletred", 
-        }}
-        icon={active.includes(imageData) ? faFilledHeart : faHeart} />
-                </div>
-            </div>
-
-            <FontAwesomeIcon 
-            icon={faTimes} 
-            style={{ cursor: "pointer", color: "#555", fontSize: "2em", position: "absolute", top: 5, right: 5 }} 
-            onClick={this.handleClose} 
-            />
-            <img 
-            style={{ borderRadius: 5, objectFit: "contain", width: '100%', height: '90%', overflow: "auto" }} src={bigImage} />
-        </div>
-    </div>)
+    getHeader = () => {
+        const { amount } = this.state
+        return (
+            <>
+                <h1>Make your own image collage of anything:</h1>
+                <form onSubmit={this.handleSubmit}>
+                    <input onChange={this.handleChange} value={this.state.value} placeholder="'Dogs','Brugge'.."></input>
+                    <button><FontAwesomeIcon icon={faSearch} /></button>
+                </form>
+                <button onClick={this.handleChangeAmount}>Show {amount === 30 ? 'Less' : 'More'}</button>
+            </>
+        )
     }
+    showPopOut = () => {
+        const { bigImage, isShown, imageData, active } = this.state
+        return (<div className={`${isShown}Show flex center`} style={this.bigDiv}>
+            <div style={this.middleDiv}>
+                <div>
+                    <div className="flex padding" style={{ justifyContent: "space-between" }}>
+                        <div className="flex">
+                            <img src={imageData.user.profile_image.small} />
+                            <div className="lineHeight">
+                                <p className="left">{`${imageData.user.name}`}</p>
+                                <p className="left"><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
+                            </div>
+                        </div>
+                        <FontAwesomeIcon
+                            className={`${true}Show icon`}
+                            onClick={() => this.handleLike(imageData)}
+                            id="outerHeart"
+                            className={`${isShown}Show cursor`}
+                            style={{
+                                fontSize: '1.5em',
+                                color: "palevioletred",
+                            }}
+                            icon={active.includes(imageData) ? faFilledHeart : faHeart} />
+                    </div>
+                </div>
+                <FontAwesomeIcon
+                    icon={faTimes}
+                    style={{ cursor: "pointer", color: "#555", fontSize: "2em", position: "absolute", top: 5, right: 5 }}
+                    onClick={this.handleClose}/>
+                <img
+                    style={{ borderRadius: 5, objectFit: "contain", width: '100%', height: '90%', overflow: "auto" }} src={bigImage} />
+            </div>
+        </div>)
+    }
+
     render() {
-        const { loaded, data, amount, bigImage, isShown, imageData, active } = this.state
+        const { loaded, imageData, active } = this.state
         console.log(active)
         return (
             <div style={{ position: "relative" }}>
                 <div className="flex center">
-                    <h1>Make your own image collage of anything:</h1>
-                    <form onSubmit={this.handleSubmit}>
-                        <input onChange={this.handleChange} value={this.state.value} placeholder="'Dogs','Brugge'.."></input>
-                        <button><FontAwesomeIcon icon={faSearch} /></button>
-                    </form>
-              
-                    <button onClick={this.handleChangeAmount}>Show {amount === 30 ? 'Less' : 'More'}</button>
+                    {this.getHeader()}
                     <nav>
-                    {this.getList()}
+                        {this.getList()}
                     </nav>
                     <div className="photos down">
                         {loaded ? this.items() : null}
                     </div>
                 </div>
                 <br></br>
-                {imageData ? this.showPopOut(): null}
+                {imageData ? this.showPopOut() : null}
                 <p className="caption">Images provided by <a href="https://unsplash.com/developers" target="_blank">Unsplash API</a></p>
             </div>
         )
