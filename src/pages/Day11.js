@@ -63,26 +63,18 @@ export default class Day11 extends React.Component {
     }
     getImages = (data, show) => {
         let firstHalf = []
-        const { active } = this.state
+        const { active,activeList } = this.state
         for (let i = 0; i < data.length; i++) {
             firstHalf.push(
                 <div style={{ position: "relative" }}>
                     <FontAwesomeIcon
-                        className={`${show}Show icon`}
-                        onClick={() => this.handleLike(data[i])}
+                        onClick={show ? () => this.handleLike(data[i]) : () => this.handleTrash(data[i])}
                         id="outerHeart"
                         style={{
-                            fontSize: '1.5em',
-                            color: "palevioletred",
+                            color: show ? "palevioletred" : "lightgrey",
                             position: "absolute", right: 10, top: 10
                         }}
-                        icon={active.includes(data[i]) ? faFilledHeart : faHeart} />
-                    <FontAwesomeIcon
-                        id="icon"
-                        style={{ position: "absolute", right: 10, top: 10, fontSize: '1.5em', }}
-                        onClick={() => this.handleTrash(data[i])}
-                        className={`${!show}Show`}
-                        icon={faTrashAlt} />
+                        icon={show ? active.includes(data[i]) ? faFilledHeart : faHeart : faTrashAlt} />
                     <img className="cursor borderRadius" onClick={() => this.handleClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
                 </div>)
         }
@@ -177,11 +169,11 @@ export default class Day11 extends React.Component {
         }
     }
     getList = () => {
-        let list = ['All', 'Likes']
+        let list = ['All', <FontAwesomeIcon icon = {faFilledHeart}/>]
         const { activeList } = this.state
         return list.map((x, i) => {
             return (
-                <li i={i} className="navList" style={{ fontSize: '1.2em', borderBottom: activeList == i ? "2px solid #E0C3FC" : "2px solid transparent" }} onClick={() => this.handleToggle(i)} >{x}</li>)
+                <li i={i} className="navList" style={{ fontSize: '1.3em', backgroundColor: activeList == i ? "#F0F0F0": "white", padding:10,borderBottom: activeList == i ? "2px solid #E0C3FC" : "2px solid transparent" }} onClick={() => this.handleToggle(i)} >{x}</li>)
         })
     }
     getHeader = () => {
@@ -198,7 +190,8 @@ export default class Day11 extends React.Component {
         )
     }
     showPopOut = () => {
-        const { bigImage, isShown, imageData, active } = this.state
+        const { bigImage, isShown, imageData, active,activeList } = this.state
+        let heart = activeList === 0 
         return (<div className={`${isShown}Show flex center`} style={this.bigDiv}>
             <div style={this.middleDiv}>
                 <div>
@@ -212,14 +205,14 @@ export default class Day11 extends React.Component {
                         </div>
                         <FontAwesomeIcon
                             className={`${true}Show icon`}
-                            onClick={() => this.handleLike(imageData)}
+                            onClick={heart ? () => this.handleLike(imageData) : () => this.handleTrash(imageData)}
                             id="outerHeart"
                             className={`${isShown}Show cursor`}
                             style={{
                                 fontSize: '1.5em',
-                                color: "palevioletred",
+                                color: heart ? "palevioletred" : "lightgrey",
                             }}
-                            icon={active.includes(imageData) ? faFilledHeart : faHeart} />
+                            icon={heart ? active.includes(imageData) ? faFilledHeart : faHeart : faTrashAlt} />
                     </div>
                 </div>
                 <FontAwesomeIcon
