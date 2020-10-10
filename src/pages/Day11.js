@@ -30,7 +30,7 @@ export default class Day11 extends React.Component {
             position: "fixed", top: 0
         }
         this.middleDiv = {
-            fontSize:'1.2em',
+            fontSize: '1.2em',
             position: "relative",
             backgroundColor: "whitesmoke",
             padding: 30,
@@ -49,15 +49,15 @@ export default class Day11 extends React.Component {
             .then(toJson)
             .then(json => {
                 if (json.results.length > 29) {
-                let data = json.results
-                this.setState({
-                    loaded: true,
-                    data: data
-                })
-            }
-            else {
-                console.log('error')
-            }
+                    let data = json.results
+                    this.setState({
+                        loaded: true,
+                        data: data
+                    })
+                }
+                else {
+                    console.log('error')
+                }
             })
     }
     getImages = (data) => {
@@ -65,7 +65,7 @@ export default class Day11 extends React.Component {
         for (let i = 0; i < this.state.amount; i++) {
             firstHalf.push(
                 <div>
-                    <img className ="cursor borderRadius" onClick={() => this.handleClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
+                    <img className="cursor borderRadius" onClick={() => this.handleClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
                 </div>)
         }
         return firstHalf
@@ -91,7 +91,7 @@ export default class Day11 extends React.Component {
         let url = data.urls.regular
         var element = document.createElement("a");
         var file = new Blob([url],
-          { type: "image/*" }
+            { type: "image/*" }
         );
         element.href = URL.createObjectURL(file);
         element.download = "image.jpg";
@@ -145,7 +145,7 @@ export default class Day11 extends React.Component {
                     <h1>Make your own image collage of anything:</h1>
                     <form onSubmit={this.handleSubmit}>
                         <input onChange={this.handleChange} value={this.state.value} placeholder="'Dogs','Brugge'.."></input>
-                        <button><FontAwesomeIcon icon ={faSearch}/></button>
+                        <button><FontAwesomeIcon icon={faSearch} /></button>
                     </form>
                     <button onClick={this.handleChangeAmount}>Show {amount === 30 ? 'Less' : 'More'}</button>
                     <div className="photos down">
@@ -154,21 +154,25 @@ export default class Day11 extends React.Component {
                 </div>
                 <br></br>
                 {imageData ? <div className={`${isShown}Show flex center`} style={this.bigDiv}>
-
                     <div style={this.middleDiv}>
                         <div>
-                            <div className="flex padding"style ={{justifyContent:"space-between"}}>
-                            <div className ="flex">
-                                <img src={imageData.user.profile_image.small} />
-                                <div className ="lineHeight">
-                                    <p className="left">{`${imageData.user.name}`}</p>
-                                    <p className = "left"><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
+                            <div className="flex padding" style={{ justifyContent: "space-between" }}>
+                                <div className="flex">
+                                    <img src={imageData.user.profile_image.small} />
+                                    <div className="lineHeight">
+                                        <p className="left">{`${imageData.user.name}`}</p>
+                                        <p className="left"><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
                         </div>
-                        <FontAwesomeIcon icon={faTimes} style={{ cursor: "pointer", color: "#555", fontSize: "2em", position: "absolute", top: 5, right: 5 }} onClick={this.handleClose} />
-                        <img style={{ borderRadius:5,objectFit: "contain", width: '100%', height: '90%', overflow:"auto" }} src={bigImage} />
+                        <FontAwesomeIcon 
+                        icon={faTimes} 
+                        style={{ cursor: "pointer", color: "#555", fontSize: "2em", position: "absolute", top: 5, right: 5 }} 
+                        onClick={this.handleClose} 
+                        />
+                        <img 
+                        style={{ borderRadius: 5, objectFit: "contain", width: '100%', height: '90%', overflow: "auto" }} src={bigImage} />
                     </div>
                 </div>
                     : null}

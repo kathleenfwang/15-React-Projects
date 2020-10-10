@@ -22,7 +22,6 @@ export default class Day8 extends React.Component {
         this.colors = ['#E64A39', ' #E97439', '#FBF87D', '#65ED99', '#5F8BE9', '#6F1BC6']
         this.placeholders = ['What they REALLY mean...', 'Sparknotes a text: ', 'Write or copy/paste text here...']
     }
-
     componentDidMount() {
         this.getDate()
         this.beginningColors()
@@ -58,7 +57,6 @@ export default class Day8 extends React.Component {
             this.setState({ score: score }, this.keyPhrases())
         })
             .catch((e) => console.log(e))
-
     }
     keyPhrases = () => {
         console.log('hi')
@@ -82,7 +80,6 @@ export default class Day8 extends React.Component {
             this.setState({
                 phrases: phrases
             })
-
         })
             .catch((e) => console.log(e))
     }
@@ -97,7 +94,7 @@ export default class Day8 extends React.Component {
         let text = (e.clipboardData.getData('Text'));
         // to prevent copy/paste from duplicating, make text previous
         this.setState(prevState => (
-            {text: prevState.text}
+            { text: prevState.text }
         ), () => {
             let wordCount = text.split(" ").length
             if (wordCount >= 10) {
@@ -142,23 +139,19 @@ export default class Day8 extends React.Component {
     randColor = () => {
         return this.colors[this.randSize(0, this.colors.length)]
     }
-    beginningWeights = () => {
-
-    }
-    // [{color: x, weight: y, size: z}]
     beginningColors = () => {
         // set initial color state: 
-        let begColors = [] 
-        this.colors.map((color) =>{
-            begColors.push( this.colors[this.randSize(0, this.colors.length)])
+        let begColors = []
+        this.colors.map((color) => {
+            begColors.push(this.colors[this.randSize(0, this.colors.length)])
         })
         this.setState({
             begColors: begColors
         })
     }
     getPhrases = () => {
-        const { phrases,begColors } = this.state
-        return phrases.map((phrase,i) => {
+        const { phrases, begColors } = this.state
+        return phrases.map((phrase, i) => {
             return (<p style={{ fontFamily: "sans-serif", fontSize: this.randSize(18, 20), margin: 0, fontWeight: this.randWeight(), color: this.randColor() }}>{phrase}</p>)
         })
     }

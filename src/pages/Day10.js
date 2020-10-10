@@ -34,7 +34,6 @@ export default class Day10 extends React.Component {
             { transexual: ['rgb(81,184,222)', '#DA98A4', 'white'] }
         ]
     }
- 
     getDivs = (num) => {
         let divs = []
         for (let i = 0; i < num; i++) {
