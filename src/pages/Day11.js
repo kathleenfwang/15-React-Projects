@@ -68,7 +68,7 @@ export default class Day11 extends React.Component {
             firstHalf.push(
                 <div style={{ position: "relative" }}>
                     <FontAwesomeIcon
-                        className ={`${show}Show cursor`}
+                        className ={`cursor`}
                         onClick={show ? () => this.handleLike(data[i]) : () => this.handleTrash(data[i])}
                         id="outerHeart"
                         style={{
