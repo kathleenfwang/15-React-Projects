@@ -199,6 +199,42 @@ export default class Day11 extends React.Component {
             )
         })
     }
+    showPopOut = () => {
+        const { loaded, data, amount, bigImage, isShown, imageData, active } = this.state
+        return (<div className={`${isShown}Show flex center`} style={this.bigDiv}>
+        <div style={this.middleDiv}>
+            <div>
+                <div className="flex padding" style={{ justifyContent: "space-between" }}>
+                    <div className="flex">
+                        <img src={imageData.user.profile_image.small} />
+                        <div className="lineHeight">
+                            <p className="left">{`${imageData.user.name}`}</p>
+                            <p className="left"><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
+                        </div>
+                    </div>
+                    <FontAwesomeIcon
+        className={`${true}Show icon`}
+        onClick={() => this.handleLike(imageData)}
+        id="outerHeart"
+        className={`${isShown}Show cursor`}
+        style={{
+            fontSize:'1.5em',
+             color:"palevioletred", 
+        }}
+        icon={active.includes(imageData) ? faFilledHeart : faHeart} />
+                </div>
+            </div>
+
+            <FontAwesomeIcon 
+            icon={faTimes} 
+            style={{ cursor: "pointer", color: "#555", fontSize: "2em", position: "absolute", top: 5, right: 5 }} 
+            onClick={this.handleClose} 
+            />
+            <img 
+            style={{ borderRadius: 5, objectFit: "contain", width: '100%', height: '90%', overflow: "auto" }} src={bigImage} />
+        </div>
+    </div>)
+    }
     render() {
         const { loaded, data, amount, bigImage, isShown, imageData, active } = this.state
         console.log(active)
@@ -220,40 +256,7 @@ export default class Day11 extends React.Component {
                     </div>
                 </div>
                 <br></br>
-                {imageData ? <div className={`${isShown}Show flex center`} style={this.bigDiv}>
-                    <div style={this.middleDiv}>
-                        <div>
-                            <div className="flex padding" style={{ justifyContent: "space-between" }}>
-                                <div className="flex">
-                                    <img src={imageData.user.profile_image.small} />
-                                    <div className="lineHeight">
-                                        <p className="left">{`${imageData.user.name}`}</p>
-                                        <p className="left"><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
-                                    </div>
-                                </div>
-                                <FontAwesomeIcon
-                    className={`${true}Show icon`}
-                    onClick={() => this.handleLike(imageData)}
-                    id="outerHeart"
-                    className={`${isShown}Show cursor`}
-                    style={{
-                        fontSize:'1.5em',
-                         color:"palevioletred", 
-                    }}
-                    icon={active.includes(imageData) ? faFilledHeart : faHeart} />
-                            </div>
-                        </div>
-
-                        <FontAwesomeIcon 
-                        icon={faTimes} 
-                        style={{ cursor: "pointer", color: "#555", fontSize: "2em", position: "absolute", top: 5, right: 5 }} 
-                        onClick={this.handleClose} 
-                        />
-                        <img 
-                        style={{ borderRadius: 5, objectFit: "contain", width: '100%', height: '90%', overflow: "auto" }} src={bigImage} />
-                    </div>
-                </div>
-                    : null}
+                {imageData ? this.showPopOut(): null}
                 <p className="caption">Images provided by <a href="https://unsplash.com/developers" target="_blank">Unsplash API</a></p>
             </div>
         )
