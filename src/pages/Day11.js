@@ -2,6 +2,7 @@ import React from "react"
 import sf from "./Components1/sf.jpg"
 import Unsplash, { toJson } from 'unsplash-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart,faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 import { faDownload, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons'
 // import {faTimes} from '@fortawesome/free-regular-svg-icons'
 const APP_ACCESS_KEY = 'kHTYj3FV6pkquHtwCsHJQdBU2lqx6WY2z-FZm7iXukQ'
@@ -64,11 +65,30 @@ export default class Day11 extends React.Component {
         let firstHalf = []
         for (let i = 0; i < this.state.amount; i++) {
             firstHalf.push(
-                <div>
+                <div style ={{position:"relative"}}>
+                  <FontAwesomeIcon
+                    className={`${true}Show icon`}
+                    onClick={() => this.handleLike(data[i])}
+                    id="outerHeart"
+                    style={{
+                         color:"palevioletred", 
+                        position: "absolute", right: 10, top: 10
+                    }}
+                    icon={faHeart} />
+
+                {/* <FontAwesomeIcon
+                    id="icon"
+                    style={{position: "absolute", right: 10, top: 10 }}
+                    onClick={() => props.handleLike(props.i)}
+                    className={`${!props.notLikes}Show`}
+                    icon={faTrashAlt} /> */}
                     <img className="cursor borderRadius" onClick={() => this.handleClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
                 </div>)
         }
         return firstHalf
+    }
+    handleLike =(info) =>{
+        console.log(info)
     }
     handleClick = (i, stuff) => {
         console.log(stuff)
