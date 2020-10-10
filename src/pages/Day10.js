@@ -22,7 +22,7 @@ export default class Day10 extends React.Component {
             boxShadow: '0 4px 7px 0 rgba(0,0,0,0.1)'
         }
         this.colors = [
-            { rainbow: ["red", "orange", "yellow", "green", "blue", "purple"] },
+            { pride: ["red", "orange", "yellow", "green", "blue", "purple"] },
             { lesbian: ["rgb(189,40,0)", "#D46923", "#E2894C", "white", "#BA5792", "#A14C80", "#A14C80"] },
             { genderQueer: ["rgb(144,100,174)", "white", "rgb(58,102,24)"] },
             { agender: ["rgb(58,102,24)", "rgb(147,147,147)", "white", "rgb(146,193,104)"] },
