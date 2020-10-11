@@ -2,7 +2,7 @@ import React from "react"
 import Fade from 'react-reveal/Fade';
 import { TwitterIcon, TwitterShareButton } from "react-share"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay, faPause} from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 import truecolors from "./Components1/truecolors.mp3"
 export default class Day11 extends React.Component {
     constructor() {
@@ -39,7 +39,6 @@ export default class Day11 extends React.Component {
         this.setState({ play: true, pause: false })
         this.audio.play();
     }
-
     pause = () => {
         this.setState({ play: false, pause: true })
         this.audio.pause();
@@ -58,39 +57,36 @@ export default class Day11 extends React.Component {
                 return (<div><h2>National Suicide Prevention Lifeline</h2>
                     <p style={{ fontSize: '1.2em', }}>Available 24 hours. Languages: English, Spanish. Learn more
             800-273-8255</p>
-                    {/* <p style={{ fontSize: '1.2em', }}>Please share this link with someone you may know.</p>
-                    <TwitterShareButton
-                        url={`National Suicide Prevention Lifeline - Available 24 hours. Languages: English, Spanish. Learn more 800-273-8255 http://kathleenwang180projects.surge.sh/day/11`}>
-                        <TwitterIcon
-                            size={32}
-                            round />
-                    </TwitterShareButton> */}
+                    <p style={{ fontSize: '1.2em', }}>Please reach out to someone you may know who is struggling.</p>
                 </div>)
         }
     }
+    getText = () => {
+        return (<div style={{ textAlign: "center", fontFamily: "Times New Roman", alignItems: "center", }}>
+            <Fade top cascade>
+                <h2 >{this.state.text && this.renderText(1)}</h2>
+            </Fade>
+            <Fade right cascade>
+                <h2>{this.state.text && this.renderText(2)}</h2>
+            </Fade>
+            <Fade clear cascade>
+                <h2>{this.state.text && this.renderText(3)}</h2>
+            </Fade>
+            <Fade clear left cascade>
+                <h2>{this.state.text && this.renderText(4)}</h2>
+            </Fade>
+            <Fade clear bottom cascade>
+                {this.state.text && this.renderText(5)}
+            </Fade>
+        </div>)
+    }
     render() {
-        const {play} = this.state
+        const { play } = this.state
+        const musicControl = <FontAwesomeIcon style={{ color: "grey" }} icon={play ? faPause : faPlay} onClick={play ? this.pause : this.play} />
         return (
             <div className="day3 flex center">
-                <div style={{ textAlign: "center", fontFamily: "Times New Roman", alignItems: "center", }}>
-                    <Fade top cascade>
-                        <h2 >{this.state.text && this.renderText(1)}</h2>
-                    </Fade>
-                    <Fade right cascade>
-                        <h2>{this.state.text && this.renderText(2)}</h2>
-                    </Fade>
-                    <Fade clear cascade>
-                        <h2>{this.state.text && this.renderText(3)}</h2>
-                    </Fade>
-                    <Fade clear left cascade>
-                        <h2>{this.state.text && this.renderText(4)}</h2>
-                    </Fade>
-                    <Fade clear bottom cascade>
-                        {this.state.text && this.renderText(5)}
-                    </Fade>
-      
-                </div>
-            <FontAwesomeIcon style = {{color: "grey"}} icon = {play ? faPause : faPlay} onClick={play ? this.pause : this.play}/> 
+                {this.getText()}
+                {musicControl}
             </div>
         )
     }
