@@ -159,8 +159,26 @@ export default class Day8 extends React.Component {
     getText = () => {
         return this.placeholders[this.randSize(0, this.placeholders.length)]
     }
+    getPieChart = () => {
+        const {score} = this.state
+        return <PieChart
+        style={{ width: '20%', height: '20%' }}
+        data={[
+            { title: 'Negative', value: Number(1 - score), color: this.colors[4] },
+            { title: 'Positive', value: Number(score), color: this.colors[3] },
+        ]}
+        animate={true}
+        startAngle={180}
+        lengthAngle={180}
+        label={({ dataEntry }) => {
+            return `${dataEntry.title}:${Math.round(dataEntry.percentage) + '%'}`
+        }
+        }
+        labelStyle={this.defaultLabelStyle}
+    />
+    }
     render() {
-        const { date, text, wordCount, score, show, phrases } = this.state
+        const { date, text, wordCount, show} = this.state
         return (
             <div className="day8">
                 <h1 style={{ fontWeight: "bold", color: this.colors[2] }}>{date}</h1>
@@ -168,21 +186,7 @@ export default class Day8 extends React.Component {
                     <textarea placeHolder={this.getText()} value={text} onChange={this.handleChange} onKeyDown={this.handleChange} onPaste={this.handlePaste} autoFocus />
                 </div>
                 <div className="flex between">
-                    <PieChart
-                        style={{ width: '20%', height: '20%' }}
-                        data={[
-                            { title: 'Negative', value: Number(1 - score), color: this.colors[4] },
-                            { title: 'Positive', value: Number(score), color: this.colors[3] },
-                        ]}
-                        animate={true}
-                        startAngle={180}
-                        lengthAngle={180}
-                        label={({ dataEntry }) => {
-                            return `${dataEntry.title}:${Math.round(dataEntry.percentage) + '%'}`
-                        }
-                        }
-                        labelStyle={this.defaultLabelStyle}
-                    />
+                    {this.getPieChart()}
                     <h2>Key Phrases: </h2>
                     <div className="flex">
                         <p>Word count: {wordCount}</p>

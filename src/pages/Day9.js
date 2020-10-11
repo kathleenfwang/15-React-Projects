@@ -60,7 +60,6 @@ export default class Day9 extends React.Component {
         titles.forEach((obj, i) => {
             if (Array.isArray(obj.src)) {
                 obj.src.forEach((x, ind) => {
-
                     cards.push(<Card notLikes={notLikes} active={active} i={ind + i + titles.length} handleLike={this.handleLike} src={x} day={i + 1} title={`${obj.title} ${ind + 1}`} />)
                 })
             }
@@ -95,7 +94,7 @@ export default class Day9 extends React.Component {
             activeList: i
         })
     }
-    handleInput = (e) => {
+    handleSearchInput = (e) => {
         let titles = this.titles
         let value = e.target.value !== "" ? e.target.value : null
         let allTitles = titles.map((obj) => obj.title)
@@ -140,7 +139,7 @@ export default class Day9 extends React.Component {
             })
         }
     }
-    getList = () => {
+    getNavList = () => {
         let list = ['All', 'Likes', 'Prompt List', 'About']
         const { activeList } = this.state
         return list.map((x, i) => {
@@ -149,8 +148,8 @@ export default class Day9 extends React.Component {
             )
         })
     }
-    items = () => {
-        const { activeList, filtered, likes } = this.state
+    pageItems = () => {
+        const { activeList, likes } = this.state
         switch (activeList) {
             case 0:
                 return (
@@ -198,15 +197,15 @@ export default class Day9 extends React.Component {
                     <h1><b>Inktober is here!</b> </h1>
                 </div>
                 <nav className="nav center " >
-                    {this.getList()}
-                    <li><input ref="input" placeholder="Search by day or name..." onChange={this.handleInput}></input><FontAwesomeIcon onClick={this.handleClear} icon={faCalendarTimes} /></li>
+                    {this.getNavList()}
+                    <li><input ref="input" placeholder="Search by day or name..." onChange={this.handleSearchInput}></input><FontAwesomeIcon onClick={this.handleClear} icon={faCalendarTimes} /></li>
                 </nav>
                 {filtered.length > 0 ?
                     <div className="flex center down">
                         {this.makeCards(true).filter((x, ind) => {
                             return filtered.includes(x.props.i)
                         })}
-                    </div> : <div className="down">{this.items()}</div>}
+                    </div> : <div className="down">{this.pageItems()}</div>}
             </div>
         )
     }

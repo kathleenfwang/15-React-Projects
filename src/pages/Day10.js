@@ -1,4 +1,5 @@
 import React from "react"
+import {colors} from "./Components1/data"
 export default class Day10 extends React.Component {
     constructor() {
         super()
@@ -20,20 +21,9 @@ export default class Day10 extends React.Component {
             borderRadius: 5,
             boxShadow: '0 4px 7px 0 rgba(0,0,0,0.1)'
         }
-        this.colors = [
-            { pride: ["red", "orange", "yellow", "green", "blue", "purple"] },
-            { lesbian: ["rgb(189,40,0)", "#D46923", "#E2894C", "white", "#BA5792", "#A14C80", "#A14C80"] },
-            { genderQueer: ["rgb(144,100,174)", "white", "rgb(58,102,24)"] },
-            { agender: ["rgb(58,102,24)", "rgb(147,147,147)", "white", "rgb(146,193,104)"] },
-            { genderFluid: ["#E26991", "white", "#AA0FBF", "black", "#2B35A9"] },
-            { asexual: ["black", "#919191", "white", "#720072"] },
-            { nonbinary: ['rgb(199,193,39)', 'white', 'rgb(123,73,168)', 'black'] },
-            { pansexual: ['#D11D7D', '#E0C005', '#1D9DE2'] },
-            { bisexual: ['#BF0064', '#8B4586', '#002F97'] },
-            { transexual: ['rgb(81,184,222)', '#DA98A4', 'white'] }
-        ]
+       
     }
-    getDivs = (num) => {
+    getRectangles = (num) => {
         let divs = []
         for (let i = 0; i < num; i++) {
             divs.push(<div onClick={this.setColor} refs={`div${i}`} style={{
@@ -44,12 +34,12 @@ export default class Day10 extends React.Component {
         return divs
     }
     getRainbowSquares = () => {
-        return this.colors.map((color) => {
+        return colors.map((color) => {
             let squares = []
             for (let key in color) {
                 var name = key
                 squares = color[key].map((x) => {
-                    return (<div onClick={this.chooseColor} className="square" style={{ backgroundColor: x }} />)
+                    return (<div onClick={this.chooseColor} className="square" style={{ backgroundColor: x, margin: 3 }} />)
                 })
             }
             return (
@@ -77,28 +67,38 @@ export default class Day10 extends React.Component {
             num: prevState.num + lines
         }))
     }
+    getRectangleOutline = () => {
+        return (
+            <div style={this.bigDiv}>
+                {this.getRectangles(this.state.num)}
+                <br></br>
+                <div className="flex center">
+                    <button onClick={() => { this.addLines(1) }}>Add Lines</button>
+                    <button onClick={() => { this.addLines(-1) }}>Subtract Lines</button>
+                </div>
+            </div>
+        )
+    }
+    getSquaresSection = () => {
+        return (
+            <div>
+                <div className="flex">
+                    {this.getRainbowSquares()}
+                </div>
+                <br></br>
+                <div>
+                    <button><a href="https://www.pride.com/pride/2018/6/13/complete-guide-queer-pride-flags-0#media-gallery-media-1" target="_blank">Learn more about the pride flags</a></button>
+                </div>
+            </div>
+        )
+    }
     render() {
         return (
             <div className="day11">
-                <h2 style={{ color: "white", textAlign: "center", fontStyle: "italic" }}>Pride month is celebrated every June to honor the 1969 Stonewall riots in Manhattan</h2>
+                <h2 style={{ marginBottom: -30, color: "white", textAlign: "center", fontStyle: "italic" }}>Pride month is celebrated every June to honor the 1969 Stonewall riots in Manhattan</h2>
                 <div style={this.grid} className="center">
-                    <div>
-                        <div className="flex">
-                            {this.getRainbowSquares()}
-                        </div>
-                        <br></br>
-                        <div>
-                            <button><a href="https://www.pride.com/pride/2018/6/13/complete-guide-queer-pride-flags-0#media-gallery-media-1" target="_blank">Learn more about the pride flags</a></button>
-                        </div>
-                    </div>
-                    <div style={this.bigDiv}>
-                        {this.getDivs(this.state.num)}
-                        <br></br>
-                        <div className="flex center">
-                            <button onClick={() => { this.addLines(1) }}>Add Lines</button>
-                            <button onClick={() => { this.addLines(-1) }}>Subtract Lines</button>
-                        </div>
-                    </div>
+                    {this.getSquaresSection()}
+                    {this.getRectangleOutline()}
                     <div>
                     </div>
                 </div>

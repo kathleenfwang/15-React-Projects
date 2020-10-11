@@ -1,5 +1,4 @@
 import React from "react"
-import sf from "./Components1/sf.jpg"
 import Unsplash, { toJson } from 'unsplash-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
@@ -16,14 +15,12 @@ export default class Day11 extends React.Component {
             index: null,
             amount: 30,
             value: '',
-            img: sf,
             loaded: false,
             data: null,
             bigImage: null,
             active: [],
             activeList: 0
         }
-        
         this.bigDiv = {
             borderRadius: 4,
             width: '100vw',
@@ -161,8 +158,8 @@ export default class Day11 extends React.Component {
                         <div className="flex">
                             <img src={imageData.user.profile_image.small} />
                             <div className="lineHeight">
-                                <p className="left">{`${imageData.user.name}`}</p>
-                                <p className="left"><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
+                                <p>{`${imageData.user.name}`}</p>
+                                <p><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
                             </div>
                         </div>
                         <FontAwesomeIcon
@@ -186,7 +183,9 @@ export default class Day11 extends React.Component {
             </div>
         </div>)
     }
-
+    getFooter = () => {
+        return (<p className="caption">Images provided by <a href="https://unsplash.com/developers" target="_blank">Unsplash API</a></p>)
+    }
     render() {
         const { loaded, imageData, active } = this.state
         console.log(active)
@@ -203,7 +202,7 @@ export default class Day11 extends React.Component {
                 </div>
                 <br></br>
                 {imageData ? this.showPopOut() : null}
-                <p className="caption">Images provided by <a href="https://unsplash.com/developers" target="_blank">Unsplash API</a></p>
+               {this.getFooter()}
             </div>
         )
     }

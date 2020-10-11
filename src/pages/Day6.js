@@ -163,16 +163,20 @@ export default class Day6 extends React.Component {
             }))
         }
     }
+    getNav = () => {
+        const {az} = this.state
+        return(
+        <nav>
+            <li> <button onClick={this.addPlant}>Add Plant </button></li>
+            <li>{this.form()}</li>
+            <li><button onClick={() => this.sortPlants("name")}>Sort {az ? "Z-A" : "A-Z"}</button></li>
+        </nav>)
+    }
     render = () => {
-        const { az, newest, plantDivs } = this.state
         return (
             <div className="day6">
                 <h1 className="titlePicture"><img className="titleImg" src="https://64.media.tumblr.com/2a3a3cad8d4a29a261d5a40961c77562/tumblr_n4v0vcbOAx1snc5kxo1_500.gif"></img> Plant Library <img className="titleImg" src="https://64.media.tumblr.com/2a3a3cad8d4a29a261d5a40961c77562/tumblr_n4v0vcbOAx1snc5kxo1_500.gif"></img> </h1>
-                <nav>
-                    <li> <button onClick={this.addPlant}>Add Plant </button></li>
-                    <li>{this.form()}</li>
-                    <li><button onClick={() => this.sortPlants("name")}>Sort {az ? "Z-A" : "A-Z"}</button></li>
-                </nav>
+                {this.getNav()}
                 <div style={this.plantsStyle}>
                     {this.state.loaded ? this.loadPlants() : <img className="loadImg" src="https://i.pinimg.com/originals/47/72/87/477287eff59923ade6336b5eb3307de4.gif"></img>}
                 </div>

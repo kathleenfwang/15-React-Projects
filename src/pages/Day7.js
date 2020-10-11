@@ -82,7 +82,6 @@ export default class Day7 extends React.Component {
     }
     handleUpload = (e, i) => {
         const { photos } = this.state
-
         if (e.target.files && e.target.files[0]) {
             let img = e.target.files[0];
             let src = URL.createObjectURL(img);
@@ -260,7 +259,6 @@ export default class Day7 extends React.Component {
         }))
     }
     download = () => {
-
         domtoimage.toBlob(this.refs.grid)
             .then(function (blob) {
                 window.saveAs(blob, 'pixel-art.png');
@@ -312,6 +310,30 @@ export default class Day7 extends React.Component {
         console.log(clickRgbaNew)
         this.setState({ clickRgba: clickRgbaNew })
     }
+    getHeader = () => {
+        return <> <div className="flex" style={{ justifyContent: "space-around" }}>
+        <div className='flex'>
+            {this.pixelImgs()}
+        </div>
+        <h1>Create your own pixel art</h1>
+        <div className='flex' style={{ flexDirection: 'row-reverse' }}>
+            {this.pixelImgs()}
+        </div>
+    </div>
+    <div className="twoGrid">
+        <h4>Click anywhere on the image to extract colors to create pixel art!</h4>
+        <h4><span>&nbsp;</span>Use your extracted colors or click anywhere on the image for colors to create pixel art</h4>
+    </div> </>
+    }
+    getEmptySquares = () => {
+        const {clickRgba} = this.state
+        return  (
+        <>
+        <div className="square" style={{ backgroundColor: this.state.rgba, }} onClick={this.handleColor}></div>
+        {this.colorDivs()}
+        <button style={{ marginTop: 5, backgroundColor: clickRgba.length ? "whitesmoke" : "lightgrey" }} onClick={this.handleDelete}><FontAwesomeIcon icon={faTrash} /></button>
+        </>)
+    }
     render() {
         const { clickRgba } = this.state
         let buttons = [
@@ -328,19 +350,7 @@ export default class Day7 extends React.Component {
         return (
             <div className="day7" >
                 <div className="block">
-                    <div className="flex" style={{ justifyContent: "space-around" }}>
-                        <div className='flex'>
-                            {this.pixelImgs()}
-                        </div>
-                        <h1>Create your own pixel art</h1>
-                        <div className='flex' style={{ flexDirection: 'row-reverse' }}>
-                            {this.pixelImgs()}
-                        </div>
-                    </div>
-                    <div className="twoGrid">
-                        <h4>Click anywhere on the image to extract colors to create pixel art!</h4>
-                        <h4><span>&nbsp;</span>Use your extracted colors or click anywhere on the image for colors to create pixel art</h4>
-                    </div>
+                    {this.getHeader()}
                     <br></br>
                     <div className="twoGrid">
                         <div className="twoGrid">
@@ -354,10 +364,7 @@ export default class Day7 extends React.Component {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="square" style={{ backgroundColor: this.state.rgba, }} onClick={this.handleColor}></div>
-                                    {this.colorDivs()}
-
-                                    <button style={{ marginTop: 5, backgroundColor: clickRgba.length ? "whitesmoke" : "lightgrey" }} onClick={this.handleDelete}><FontAwesomeIcon icon={faTrash} /></button>
+                                   {this.getEmptySquares()}
                                 </div>
                             </div>
                             <div className="twoGrid">
