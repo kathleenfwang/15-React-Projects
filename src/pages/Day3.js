@@ -57,7 +57,7 @@ export default class Day11 extends React.Component {
                 return (<div><h2>National Suicide Prevention Lifeline</h2>
                     <p style={{ fontSize: '1.2em', }}>Available 24 hours. Languages: English, Spanish. Learn more
             800-273-8255</p>
-                    <p style={{ fontSize: '1.2em', }}>Please reach out to someone you may know who is struggling.</p>
+                    <p style={{ fontSize: '1.2em', }}>"Don't be afraid, to let them show, your true colors are beautiful".</p>
                 </div>)
         }
     }
