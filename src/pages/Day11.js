@@ -79,7 +79,7 @@ export default class Day11 extends React.Component {
                             position: "absolute", right: 10, top: 10
                         }}
                         icon={show ? active.includes(data[i]) ? faFilledHeart : faHeart : faTimes} />
-                    <img className="cursor borderRadius" onClick={() => this.handleClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
+                    <img className="cursor borderRadius" onClick={() => this.handleImgClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
                 </div>)
         }
         return firstHalf
@@ -94,7 +94,7 @@ export default class Day11 extends React.Component {
         this.setState((prevState) => ({
             active: [...prevState.active, info]}))
     }
-    handleClick = (i, stuff) => {
+    handleImgClick = (i, stuff) => {
         console.log(stuff)
         this.setState(prevState => ({
             imageData: stuff,
