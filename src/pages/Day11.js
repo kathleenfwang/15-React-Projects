@@ -3,7 +3,7 @@ import Unsplash, { toJson } from 'unsplash-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 import { faDownload, faTimes, faSearch, faHeart as faFilledHeart } from '@fortawesome/free-solid-svg-icons'
-
+import FlipMove from 'react-flip-move';
 
 export default class Day11 extends React.Component {
 
@@ -79,15 +79,16 @@ export default class Day11 extends React.Component {
         icon={show ? active.includes(data) ? faFilledHeart : faHeart : icon} />
     }
     getImages = (data, show) => {
-        let firstHalf = []
+        console.log(data)
+        let images = []
         for (let i = 0; i < data.length; i++) {
-            firstHalf.push(
+            images.push(
                 <div style={{ position: "relative" }}>
                     {this.toggleHeartImage(data[i],show,'1.2em',10,10,faTimes)}
                     <img className="cursor borderRadius" onClick={() => this.handleImgClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
                 </div>)
         }
-        return firstHalf
+        return images
     }
     handleTrash = (info) => {
         const { active } = this.state
@@ -130,7 +131,7 @@ export default class Day11 extends React.Component {
                 return this.getImages(data, true)
             case 1:
                 return (
-                    active.length > 0 ? this.getImages(active, false) :
+                    active.length > 0 ? <FlipMove>{this.getImages(active, false) }</FlipMove>:
                         <div className="flex center">
                             <img src="https://thumbs.gfycat.com/GlossyImpishFrilledlizard-small.gif"></img>
                         </div>)
