@@ -1,7 +1,7 @@
 import React from "react"
 import Card from "./Card"
 export default function Blog() {
-    const entries = [
+    let entries = [
         {
             p: "Today is the first day of this coding challenge. I feel pretty good about this project. I am actually excited and can't wait to keep this up. I am surprised I didn't do something like this earlier.. I always thought I would have to do really big projects instead of small things everyday.", 
             date: "9/23/20"
@@ -15,12 +15,12 @@ export default function Blog() {
             date: "9/29/20"
         }, 
         {
-            p: "Write an entry!", 
-            date: ""
+            p: "One of my close friends' relative came out recently, and I became inspired to dedicate a LGBQT+ project. I am always fascinated by the different types of sexual identities, as well as the flags and colors that represent them. I honestly never heard about aromantic or agender until recently. I think quarantine is a good time to explore ourselves more closely, since we are spending more time with ourselves and less outside distractions. Of course, this is also an upsetting time for those with toxic households.", 
+            date: "10/5/2020"
         }, 
         {
-            p: "Write an entry!", 
-            date: ""
+            p: "I really like BlackPink's new album. For my next project, I'll make something music playlist-y related. :)", 
+            date: "10/10/2020"
         },
         {
             p: "Write an entry!", 
@@ -28,14 +28,17 @@ export default function Blog() {
         }, 
     ]
     function getEntries() {
+        entries = entries.reverse()
        return entries.map((entry,i) => {
+           if (entry.date === "") {
+               return
+           }
             return <Card i = {i} p = {entry.p} date = {entry.date} key = {i} />
         })
         
     }
     return (
         <div className ="blog">
- 
             {getEntries()}
         </div>
     )

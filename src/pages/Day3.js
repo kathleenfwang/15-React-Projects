@@ -1,13 +1,18 @@
 import React from "react"
 import Fade from 'react-reveal/Fade';
-import TransitionGroup from 'react-transition-group/TransitionGroup';
 import { TwitterIcon, TwitterShareButton } from "react-share"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlay, faPause} from '@fortawesome/free-solid-svg-icons'
+import truecolors from "./Components1/truecolors.mp3"
 export default class Day11 extends React.Component {
     constructor() {
         super()
         this.state = {
+            play: true,
+            pause: true,
             text: false
         }
+        this.audio = new Audio(truecolors);
         this.items = [
             { id: 1, text: "Your skin isn't paper, don't cut it" },
             { id: 2, text: "Your face isn't a mask, don't hide it" },
@@ -19,8 +24,8 @@ export default class Day11 extends React.Component {
         this.image = "https://img.freepik.com/free-photo/background-crumpled-paper-sheet_1194-7545.jpg?size=626&ext=jpg"
     }
     componentDidMount() {
+        this.play()
         this.startCount()
-        let canvas = this.refs.canvas
     }
     startCount = () => {
         setInterval(() => {
@@ -29,6 +34,15 @@ export default class Day11 extends React.Component {
             })
         },
             500);
+    }
+    play = () => {
+        this.setState({ play: true, pause: false })
+        this.audio.play();
+    }
+
+    pause = () => {
+        this.setState({ play: false, pause: true })
+        this.audio.pause();
     }
     renderText = (num) => {
         switch (num) {
@@ -44,20 +58,21 @@ export default class Day11 extends React.Component {
                 return (<div><h2>National Suicide Prevention Lifeline</h2>
                     <p style={{ fontSize: '1.2em', }}>Available 24 hours. Languages: English, Spanish. Learn more
             800-273-8255</p>
-                    <p style={{ fontSize: '1.2em', }}>Please share this link with someone you may know.</p>
+                    {/* <p style={{ fontSize: '1.2em', }}>Please share this link with someone you may know.</p>
                     <TwitterShareButton
                         url={`National Suicide Prevention Lifeline - Available 24 hours. Languages: English, Spanish. Learn more 800-273-8255 http://kathleenwang180projects.surge.sh/day/11`}>
                         <TwitterIcon
                             size={32}
                             round />
-                    </TwitterShareButton>
+                    </TwitterShareButton> */}
                 </div>)
         }
     }
     render() {
+        const {play} = this.state
         return (
             <div className="day3 flex center">
-                <div style={{ textAlign: "center", fontFamily: "Times New Roman", alignItems: "center" }}>
+                <div style={{ textAlign: "center", fontFamily: "Times New Roman", alignItems: "center", }}>
                     <Fade top cascade>
                         <h2 >{this.state.text && this.renderText(1)}</h2>
                     </Fade>
@@ -73,7 +88,9 @@ export default class Day11 extends React.Component {
                     <Fade clear bottom cascade>
                         {this.state.text && this.renderText(5)}
                     </Fade>
+      
                 </div>
+            <FontAwesomeIcon style = {{color: "grey"}} icon = {play ? faPause : faPlay} onClick={play ? this.pause : this.play}/> 
             </div>
         )
     }
