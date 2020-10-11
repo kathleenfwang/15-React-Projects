@@ -124,24 +124,9 @@ export default class Day11 extends React.Component {
             c.width = this.naturalWidth;     // update canvas size to match image
             c.height = this.naturalHeight;
             ctx.drawImage(this, 0, 0);       // draw in image
-
         };
         img.crossOrigin = "";              // if from different origin
         img.src = url;
-    }
-
-    handleUpload = (e) => {
-        console.log('lcick')
-        if (e.target.files && e.target.files[0]) {
-            let img = e.target.files[0];
-            let src = URL.createObjectURL(img);
-            this.setState({
-                img: src})
-        }
-    }
-    inputUpload = () => {
-        let upload = this.refs.upload
-        upload.click()
     }
     handleSubmit = (e) => {
         e.preventDefault()
