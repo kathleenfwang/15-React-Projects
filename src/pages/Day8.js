@@ -15,6 +15,7 @@ export default class Day8 extends React.Component {
         }
         this.url = process.env.REACT_APP_SENTIMENT_URL
         this.key = process.env.REACT_APP_AZURE_KEY
+        console.log(this.key)
         this.defaultLabelStyle = {
             fontSize: '5px',
             fontFamily: 'sans-serif',

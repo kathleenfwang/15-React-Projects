@@ -5,9 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 import { faDownload, faTimes, faSearch, faHeart as faFilledHeart } from '@fortawesome/free-solid-svg-icons'
 
-// import {faTimes} from '@fortawesome/free-regular-svg-icons'
-const APP_ACCESS_KEY = 'kHTYj3FV6pkquHtwCsHJQdBU2lqx6WY2z-FZm7iXukQ'
-const unsplash = new Unsplash({ accessKey: APP_ACCESS_KEY });
 
 export default class Day11 extends React.Component {
 
@@ -26,6 +23,7 @@ export default class Day11 extends React.Component {
             active: [],
             activeList: 0
         }
+        
         this.bigDiv = {
             borderRadius: 4,
             width: '100vw',
@@ -42,6 +40,8 @@ export default class Day11 extends React.Component {
             width: '70%',
             height: '90%',
         }
+        this.key = process.env.REACT_APP_ACCESS_KEY
+        this.unsplash = new Unsplash({ accessKey: this.key });
     }
     componentDidMount() {
         this.callImages(30, true)
@@ -49,10 +49,11 @@ export default class Day11 extends React.Component {
     callImages = () => {
         let { value } = this.state
         if (!value) value = "cats"
-        unsplash.search.photos(value, 1, 30,)
+        this.unsplash.search.photos(value, 1, 30,)
             .then(toJson)
             .then(json => {
-                if (json.results.length > 29) {
+                console.log(json)
+                if (json && json.results.length > 29) {
                     console.log(json)
                     let data = json.results
                    
