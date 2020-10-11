@@ -49,14 +49,14 @@ export default class Day11 extends React.Component {
     callImages = () => {
         let { value } = this.state
         if (!value) value = "cats"
-        this.unsplash.search.photos(value, 1, 30,)
+        this.unsplash.search.photos(value, 1, 30)
+        // only getting 30 images because search data will return undefined if there is less than 30 images available
             .then(toJson)
             .then(json => {
                 console.log(json)
                 if (json && json.results.length > 29) {
                     console.log(json)
                     let data = json.results
-                   
                     this.setState({
                         loaded: true,
                         data: data})
@@ -98,35 +98,12 @@ export default class Day11 extends React.Component {
         console.log(stuff)
         this.setState(prevState => ({
             imageData: stuff,
-            bigImage: stuff.urls.regular,
             index: i,
             isShown: !prevState.isShown}))
     }
     handleClose = () => {
         this.setState(prevState => ({
             isShown: !prevState.isShown}))
-    }
-    handleDownload = () => {
-        console.log('click')
-        let data = this.state.imageData
-        let url = data.urls.regular
-        var element = document.createElement("a");
-        var file = new Blob([url],
-            { type: "image/*" }
-        );
-        element.href = URL.createObjectURL(file);
-        element.download = "image.jpg";
-        element.click();
-        var img = new Image;
-        var c = document.createElement("canvas");
-        var ctx = c.getContext("2d");
-        img.onload = () => {
-            c.width = this.naturalWidth;     // update canvas size to match image
-            c.height = this.naturalHeight;
-            ctx.drawImage(this, 0, 0);       // draw in image
-        };
-        img.crossOrigin = "";              // if from different origin
-        img.src = url;
     }
     handleSubmit = (e) => {
         e.preventDefault()
@@ -141,6 +118,7 @@ export default class Day11 extends React.Component {
             activeList: i})
     }
     items = () => {
+        // toggle between the "All" and "Likes" tab
         const { activeList, active, data } = this.state
         switch (activeList) {
             case 0:
@@ -153,7 +131,7 @@ export default class Day11 extends React.Component {
                         </div>)
         }
     }
-    getList = () => {
+    getNavList = () => {
         let list = ['All', <FontAwesomeIcon icon = {faFilledHeart}/>]
         const { activeList } = this.state
         return list.map((x, i) => {
@@ -174,7 +152,7 @@ export default class Day11 extends React.Component {
         )
     }
     showPopOut = () => {
-        const { bigImage, isShown, imageData, active,activeList } = this.state
+        const {isShown, imageData, active,activeList } = this.state
         let heart = activeList === 0 
         return (<div className={`${isShown}Show flex center`} style={this.bigDiv}>
             <div style={this.middleDiv}>
@@ -204,7 +182,7 @@ export default class Day11 extends React.Component {
                     style={{ cursor: "pointer", color: "#555", fontSize: "2em", position: "absolute", top: 5, right: 5 }}
                     onClick={this.handleClose}/>
                 <img
-                    style={{ borderRadius: 5, objectFit: "contain", width: '100%', height: '90%', overflow: "auto" }} src={bigImage} />
+                    style={{ borderRadius: 5, objectFit: "contain", width: '100%', height: '90%', overflow: "auto" }} src={imageData.urls.regular} />
             </div>
         </div>)
     }
@@ -217,7 +195,7 @@ export default class Day11 extends React.Component {
                 <div className="flex center">
                     {this.getHeader()}
                     <nav>
-                        {this.getList()}
+                        {this.getNavList()}
                     </nav>
                     <div className="photos down">
                         {loaded ? this.items() : null}
