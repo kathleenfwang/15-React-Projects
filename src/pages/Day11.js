@@ -41,17 +41,19 @@ export default class Day11 extends React.Component {
         this.unsplash = new Unsplash({ accessKey: this.key });
     }
     componentDidMount() {
-        this.callImages(30, true)
+        this.callImages()
     }
     callImages = () => {
+        const defaultSearch = "cats"
+        const start = 1, imgAmount = 30
         let { value } = this.state
-        if (!value) value = "cats"
-        this.unsplash.search.photos(value, 1, 30)
+        if (!value) value = defaultSearch
+        this.unsplash.search.photos(value, start,imgAmount)
         // only getting 30 images because search data will return undefined if there is less than 30 images available
             .then(toJson)
             .then(json => {
                 console.log(json)
-                if (json && json.results.length > 29) {
+                if (json) {
                     console.log(json)
                     let data = json.results
                     this.setState({
@@ -60,22 +62,28 @@ export default class Day11 extends React.Component {
                 }
                 else {console.log('error')}
             })
+            .catch((e) => console.log(e))
+    }
+    toggleHeartImage = (data,show,size,right,top,icon) => {
+        const { active} = this.state
+        return   <FontAwesomeIcon
+        className ={`cursor`}
+        onClick={show ? () => this.handleLike(data) : () => this.handleTrash(data)}
+        id="outerHeart"
+        style={{
+            fontSize: size, 
+            color: show ? "#ff6666" : "lightgrey",
+            position: "absolute", 
+            right: right, top: top
+        }}
+        icon={show ? active.includes(data) ? faFilledHeart : faHeart : icon} />
     }
     getImages = (data, show) => {
         let firstHalf = []
-        const { active,activeList } = this.state
         for (let i = 0; i < data.length; i++) {
             firstHalf.push(
                 <div style={{ position: "relative" }}>
-                    <FontAwesomeIcon
-                        className ={`cursor`}
-                        onClick={show ? () => this.handleLike(data[i]) : () => this.handleTrash(data[i])}
-                        id="outerHeart"
-                        style={{
-                            color: show ? "#ff6666" : "lightgrey",
-                            position: "absolute", right: 10, top: 10
-                        }}
-                        icon={show ? active.includes(data[i]) ? faFilledHeart : faHeart : faTimes} />
+                    {this.toggleHeartImage(data[i],show,'1.2em',10,10,faTimes)}
                     <img className="cursor borderRadius" onClick={() => this.handleImgClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
                 </div>)
         }
@@ -158,25 +166,16 @@ export default class Day11 extends React.Component {
                         <div className="flex">
                             <img src={imageData.user.profile_image.small} />
                             <div className="lineHeight">
-                                <p>{`${imageData.user.name}`}</p>
-                                <p><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
+                                <p className ="left">{`${imageData.user.name}`}</p>
+                                <p className ="left"><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
                             </div>
                         </div>
-                        <FontAwesomeIcon
-                            className={`${true}Show icon`}
-                            onClick={heart ? () => this.handleLike(imageData) : () => this.handleTrash(imageData)}
-                            id="outerHeart"
-                            className={`${isShown}Show cursor`}
-                            style={{
-                                fontSize: '1.5em',
-                                color: heart ? "#ff6666" : "lightgrey",
-                            }}
-                            icon={heart ? active.includes(imageData) ? faFilledHeart : faHeart : faTrashAlt} />
+                        {this.toggleHeartImage(imageData,heart,'2em',60,50,faTrashAlt)}
                     </div>
                 </div>
                 <FontAwesomeIcon
                     icon={faTimes}
-                    style={{ cursor: "pointer", color: "#555", fontSize: "2em", position: "absolute", top: 5, right: 5 }}
+                    style={{ cursor: "pointer", color: "#777", fontSize: "1.5em", position: "absolute", top: 10, right: 10 }}
                     onClick={this.handleClose}/>
                 <img
                     style={{ borderRadius: 5, objectFit: "contain", width: '100%', height: '90%', overflow: "auto" }} src={imageData.urls.regular} />
