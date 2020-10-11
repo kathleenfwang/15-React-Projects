@@ -8,7 +8,7 @@ export default class Day11 extends React.Component {
     constructor() {
         super()
         this.state = {
-            play: true,
+            play: false,
             pause: true,
             text: false
         }
@@ -24,7 +24,6 @@ export default class Day11 extends React.Component {
         this.image = "https://img.freepik.com/free-photo/background-crumpled-paper-sheet_1194-7545.jpg?size=626&ext=jpg"
     }
     componentDidMount() {
-        this.play()
         this.startCount()
     }
     startCount = () => {
@@ -57,7 +56,7 @@ export default class Day11 extends React.Component {
                 return (<div><h2>National Suicide Prevention Lifeline</h2>
                     <p style={{ fontSize: '1.2em', }}>Available 24 hours. Languages: English, Spanish. Learn more
             800-273-8255</p>
-                    <p style={{ fontSize: '1.2em', }}>Please reach out if you or someone you know is struggling.<FontAwesomeIcon icon = {faHeart}/></p>
+                    <p style={{ fontSize: '1.2em', }}>Please reach out if you or someone you know is struggling <FontAwesomeIcon icon = {faHeart}/></p>
                 </div>)
         }
     }
