@@ -2,7 +2,7 @@ import React from "react"
 import Fade from 'react-reveal/Fade';
 import { TwitterIcon, TwitterShareButton } from "react-share"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faPause, faHeart } from '@fortawesome/free-solid-svg-icons'
 import truecolors from "./Components1/truecolors.mp3"
 export default class Day11 extends React.Component {
     constructor() {
@@ -57,7 +57,7 @@ export default class Day11 extends React.Component {
                 return (<div><h2>National Suicide Prevention Lifeline</h2>
                     <p style={{ fontSize: '1.2em', }}>Available 24 hours. Languages: English, Spanish. Learn more
             800-273-8255</p>
-                    <p style={{ fontSize: '1.2em', }}>Please reach out if you or someone you know is struggling.</p>
+                    <p style={{ fontSize: '1.2em', }}>Please reach out if you or someone you know is struggling.<FontAwesomeIcon icon = {faHeart}/></p>
                 </div>)
         }
     }
