@@ -1,8 +1,8 @@
 import React from "react"
 import Unsplash, { toJson } from 'unsplash-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
-import { faDownload, faTimes, faSearch, faHeart as faFilledHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faTrashAlt, } from '@fortawesome/free-regular-svg-icons'
+import { faDownload, faTimes, faSearch, faArrowRight, faArrowLeft, faHeart as faFilledHeart } from '@fortawesome/free-solid-svg-icons'
 import FlipMove from 'react-flip-move';
 
 export default class Day11 extends React.Component {
@@ -22,16 +22,17 @@ export default class Day11 extends React.Component {
             activeList: 0
         }
         this.bigDiv = {
-            borderRadius: 4,
+            borderRadius: 8,
             width: '100vw',
             height: '100vh',
             backgroundColor: 'rgb(0,0,0,.5)',
-            position: "fixed", top: 0
+            position: "fixed", top: 0,
+            boxShadow: '2px 4px 25px rgba(0, 0, 0, .5)'
         }
         this.middleDiv = {
             fontSize: '1.2em',
             position: "relative",
-            backgroundColor: "whitesmoke",
+            backgroundColor: "#f2f3f4",
             padding: 30,
             borderRadius: 5,
             width: '70%',
@@ -52,9 +53,7 @@ export default class Day11 extends React.Component {
         // only getting 30 images because search data will return undefined if there is less than 30 images available
             .then(toJson)
             .then(json => {
-                console.log(json)
                 if (json) {
-                    console.log(json)
                     let data = json.results
                     this.setState({
                         loaded: true,
@@ -79,13 +78,12 @@ export default class Day11 extends React.Component {
         icon={show ? active.includes(data) ? faFilledHeart : faHeart : icon} />
     }
     getImages = (data, show) => {
-        console.log(data)
         let images = []
         for (let i = 0; i < data.length; i++) {
             images.push(
-                <div style={{ position: "relative" }}>
+                <div style={{ position: "relative",  }}>
                     {this.toggleHeartImage(data[i],show,'1.2em',10,10,faTimes)}
-                    <img className="cursor borderRadius" onClick={() => this.handleImgClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
+                    <img style ={{boxShadow: '2px 4px 25px rgba(0, 0, 0, .1)'}}className="cursor borderRadius" onClick={() => this.handleImgClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
                 </div>)
         }
         return images 
@@ -101,7 +99,6 @@ export default class Day11 extends React.Component {
             active: [...prevState.active, info]}))
     }
     handleImgClick = (i, stuff) => {
-        console.log(stuff)
         this.setState(prevState => ({
             imageData: stuff,
             index: i,
@@ -157,27 +154,48 @@ export default class Day11 extends React.Component {
             </>
         )
     }
+    handleNextImage =(imageData, activeList, direction) =>{
+        const {data,active} = this.state
+        const currentIndexAll = data.indexOf(imageData) 
+        const currentIndexLikes = active.indexOf(imageData)
+        const directionCount = direction === "right" ? 1 : -1 
+        if (activeList === 0) {
+        this.setState({
+            imageData: this.state.data[currentIndexAll + directionCount]
+        })
+    }
+        else {
+            this.setState({
+                imageData: this.state.active[currentIndexLikes + directionCount]
+            })
+        }
+
+    }
     showPopOut = () => {
-        const {isShown, imageData, active,activeList } = this.state
+        const {isShown, imageData,activeList } = this.state
         let heart = activeList === 0 
         return (<div className={`${isShown}Show flex center`} style={this.bigDiv}>
             <div style={this.middleDiv}>
                 <div>
-                    <div className="flex padding" style={{ justifyContent: "space-between" }}>
+                    <div className="flex padding" style={{ justifyContent: "space-between", }}>
                         <div className="flex">
-                            <img src={imageData.user.profile_image.small} />
+                            <img style ={{borderRadius:5,boxShadow: '2px 4px 25px rgba(0, 0, 0, .2)'}} src={imageData.user.profile_image.small} />
                             <div className="lineHeight">
-                                <p className ="left">{`${imageData.user.name}`}</p>
+                                <p className ="left" style ={{color:"#333"}}>{`${imageData.user.name}`}</p>
                                 <p className ="left"><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
                             </div>
-                        </div>
-                        {this.toggleHeartImage(imageData,heart,'2em',60,50,faTrashAlt)}
+                            <FontAwesomeIcon className ="cursor dark rightarrow" icon = {faArrowRight} onClick = {() => this.handleNextImage(imageData,activeList,'right')}/>
+                                <FontAwesomeIcon className ="cursor dark leftarrow" icon = {faArrowLeft} onClick = {() => this.handleNextImage(imageData,activeList,'left')}/>
+                            </div>
+                              
                     </div>
+                    {this.toggleHeartImage(imageData,heart,'1.5em',60,50,faTrashAlt)}
                 </div>
                 <FontAwesomeIcon
                     icon={faTimes}
                     style={{ cursor: "pointer", color: "#777", fontSize: "1.5em", position: "absolute", top: 10, right: 10 }}
                     onClick={this.handleClose}/>
+                <div className ="flex"></div>
                 <img
                     style={{ borderRadius: 5, objectFit: "contain", width: '100%', height: '90%', overflow: "auto" }} src={imageData.urls.regular} />
             </div>
@@ -188,7 +206,6 @@ export default class Day11 extends React.Component {
     }
     render() {
         const { loaded, imageData, active } = this.state
-        console.log(active)
         return (
             <div style={{ position: "relative" }}>
                 <div className="flex center">
