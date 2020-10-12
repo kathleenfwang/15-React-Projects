@@ -118,14 +118,14 @@
    padding: 30px;
    background-repeat: no-repeat;
    margin-top: 30px;
-   color: rgb(34, 33, 33);
+   color: rgb(26, 25, 25);
    border-radius:5px;
    width:50%;
    margin-left:22%;
  }
  .card h3 {
    font-weight: lighter;
-   color:rgb(212, 230, 247);
+   color:rgb(205, 231, 253);
  }
 a {
   color:#CAA8C7;
