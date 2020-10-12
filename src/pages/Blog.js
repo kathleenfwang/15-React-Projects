@@ -19,7 +19,7 @@ export default function Blog() {
             date: "10/5/2020"
         }, 
         {
-            p: "I really like BlackPink's new album. For my next project, I'll make something music playlist-y related. :)", 
+            p: "I really like BlackPink's new album. For my next project, I'll make a music playlist.", 
             date: "10/10/2020"
         },
         {
