@@ -2,6 +2,7 @@ import React from "react"
 import Card from "./Components1/day9/Card"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarTimes, faSmile } from '@fortawesome/free-solid-svg-icons'
+import FlipMove from 'react-flip-move';
 export default class Day9 extends React.Component {
     constructor() {
         super()
@@ -16,11 +17,11 @@ export default class Day9 extends React.Component {
         this.titles = [
             {
                 title: 'fish',
-                src: 'https://media.discordapp.net/attachments/701277128951595030/762123087553888307/Shape_4.png?width=347&height=490',
+                src: 'https://media.discordapp.net/attachments/701277128951595030/762123087553888307/Shape_4.png?width=340&height=490',
             },
             {
                 title: 'wisp',
-                src: 'https://media.discordapp.net/attachments/701277128951595030/762123167476613130/Shape_5.png?width=355&height=489',
+                src: 'https://media.discordapp.net/attachments/701277128951595030/762123167476613130/Shape_5.png?width=340&height=489',
             },
             {
                 title: 'bulky',
@@ -40,7 +41,7 @@ export default class Day9 extends React.Component {
             },
             {
                 title: 'fancy',
-                src: ['https://media.discordapp.net/attachments/701277128951595030/763528715812077568/Shape_20.png?width=400&height=490', 'https://media.discordapp.net/attachments/701277128951595030/763529565616078898/Shape_21.png?width=360&height=490']
+                src: ['https://media.discordapp.net/attachments/701277128951595030/763528715812077568/Shape_20.png?width=350&height=490', 'https://media.discordapp.net/attachments/701277128951595030/763529565616078898/Shape_21.png?width=350&height=490']
             },
             {
                 title: 'teeth',
@@ -48,8 +49,12 @@ export default class Day9 extends React.Component {
             }, 
             {
                 title: 'hope',
-                src: 'https://media.discordapp.net/attachments/701277128951595030/764310842556416020/Shape_28.png?width=350&height=490'
-            }
+                src: 'https://media.discordapp.net/attachments/701277128951595030/764310842556416020/Shape_28.png?width=340&height=490'
+            },
+    {title: 'disgusting',
+    src: 'https://media.discordapp.net/attachments/701277128951595030/764985707965579264/Shape_29.png?width=340&height=490'},
+{title: 'slippery',
+src: 'https://media.discordapp.net/attachments/701277128951595030/764985655196647424/Shape_30.png?width=340&height=490'}
         ]
     }
     makeCards = (notLikes) => {
@@ -153,13 +158,15 @@ export default class Day9 extends React.Component {
         switch (activeList) {
             case 0:
                 return (
+                    <FlipMove> 
                     <div className="flex center">
-                        {this.makeCards(true)}
-                    </div>)
+                       {this.makeCards(true)}
+                    </div>
+                    </FlipMove> )
             case 1:
                 return (
                     <div className="flex center">
-                        {likes.length > 0 ? likes :
+                        {likes.length > 0 ?  likes  :
                             <h3>Empty :( Click the heart icon to like!</h3>}
                     </div>)
             case 2:
@@ -169,14 +176,14 @@ export default class Day9 extends React.Component {
                     </div>)
             case 3:
                 return (
-                    <div style={{ backgroundColor: "#222", padding: 30, color: "white", margin: '0 auto', marginTop: 40, fontSize: '1.5em', width: '50%', borderRadius: 5 }}>
-                        <div className="flex center">
+                    <div style={{ backgroundColor: "#222", padding: 30, color: "white", margin: '0 auto', marginTop: 20, fontSize: '1.5em', width: '50%', borderRadius: 5 }}>
+                        <div className="flex center up">
                             <p>I drew these with pen and then scanned using Adobe Capture <FontAwesomeIcon icon={faSmile} /> </p>
                         </div>
-                        <div  >
+                        <div className ="up">
                             <p>Honestly this is my first year I am really trying to commit the whole month of Inktober. Every other year I attempt to but ultimately forget after the first week, due to the business of everyday life. This year's Inktober is during quarantine, so what other commitments could I possibly have.
                         </p>
-                            <p>In the future, I am planning on converting this into a full stack app with database storage and authentication, to allow authenticated users to upload their entries and like and comment on others. <br></br>It would be a convenient and fun way to encourage my friends to participate and share our progress together.</p>
+                            <p>In the future, I am planning on converting this into a full stack app with database storage and authentication, to allow authenticated users to upload their entries and like and comment on others.It would be a convenient and fun way to encourage my friends to participate and share our progress together.</p>
                             <p className="flex center"><a href="https://inktober.com/" target="_blank">Official Inktober Website</a></p>
                         </div>
                     </div>

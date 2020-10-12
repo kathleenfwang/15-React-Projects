@@ -88,7 +88,7 @@ export default class Day11 extends React.Component {
                     <img className="cursor borderRadius" onClick={() => this.handleImgClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
                 </div>)
         }
-        return images
+        return images 
     }
     handleTrash = (info) => {
         const { active } = this.state
@@ -123,7 +123,7 @@ export default class Day11 extends React.Component {
         this.setState({
             activeList: i})
     }
-    items = () => {
+    pageItems = () => {
         // toggle between the "All" and "Likes" tab
         const { activeList, active, data } = this.state
         switch (activeList) {
@@ -197,7 +197,7 @@ export default class Day11 extends React.Component {
                         {this.getNavList()}
                     </nav>
                     <div className="photos down">
-                        {loaded ? this.items() : null}
+                        {loaded ? this.pageItems() : null}
                     </div>
                 </div>
                 <br></br>
