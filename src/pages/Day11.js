@@ -142,7 +142,7 @@ export default class Day11 extends React.Component {
         const { activeList } = this.state
         return list.map((x, i) => {
             return (
-                <li i={i} className="navList" style={{ fontSize: '1.3em',  padding:10,borderBottom: activeList == i ? "2px solid #E0C3FC" : "2px solid transparent" }} onClick={() => this.handleToggle(i)} >{x}</li>)
+                <li i={i} className="navList" style={{ fontSize: '1.3em',  padding:10,borderBottom: activeList == i ? "2px solid #E0C3FC" : "2px solid transparent", boxShadow: activeList == i ? ' 2px 4px 25px rgba(0, 0, 0, .1)' : 'none'}} onClick={() => this.handleToggle(i)} >{x}</li>)
         })
     }
     getHeader = () => {
