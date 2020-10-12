@@ -8,6 +8,7 @@ export default function Header() {
     const [random,setRandom] = useState(null) 
     const [clicked,setClick] = useState(false)
     const [page,setPage] = useState(0)
+    const [dark,setDark] = useState(true)
     function handleClick(e) {
      let url = window.location.href
      let page = window.location.href.slice(-2) 
@@ -21,7 +22,20 @@ export default function Header() {
     function handleShow() {
       setShow(!show)
     }
-  
+    function handleDark() {
+        setDark(!dark)
+        console.log(dark)
+       
+    }
+    if (dark) {
+        document.body.style.backgroundColor = "#333";
+        document.body.style.color = "white";
+    }
+    else {
+        document.body.style.backgroundColor = "whitesmoke"
+        document.body.style.color = "#333"
+    }
+    console.log(document.body.style.backgroundColor)
     return (
         <div className ="header">
         <button onClick ={handleShow}><FontAwesomeIcon icon={faHamburger} /></button>
@@ -32,6 +46,7 @@ export default function Header() {
             <li><Link to ="/Blog">Blog</Link></li> 
             <li><Link to ="/Contact"> <FontAwesomeIcon icon={faCommentDots} /></Link></li>
             <li onClick ={handleClick}>Next Project <FontAwesomeIcon icon = {faArrowRight}></FontAwesomeIcon> </li>
+            <li onClick ={handleDark}> {dark ? "Light Mode" : "Dark Mode" }</li>
             {/* <li><FeedbackFooter/></li> */}
         </ul>
     </div>
