@@ -19,7 +19,7 @@ export default class Day10 extends React.Component {
             height: 400,
             border: '1px solid gainsboro',
             borderRadius: 5,
-            boxShadow: '2px 4px 25px rgba(0, 0, 0, .1)'
+            boxShadow: '2px 4px 25px rgba(0, 0, 0, .2)'
         }
        
     }
