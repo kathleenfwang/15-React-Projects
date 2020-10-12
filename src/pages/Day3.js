@@ -54,9 +54,9 @@ export default class Day11 extends React.Component {
                 return <h2>Your life isn't a film, don't end it.</h2>
             case 5:
                 return (<div><h2>National Suicide Prevention Lifeline</h2>
-                    <p style={{ fontSize: '1.2em', }}>Available 24 hours. Languages: English, Spanish. Learn more
+                    <p style={{ color:"#555",fontSize: '1.2em', }}>Available 24 hours. Languages: English, Spanish. Learn more
             800-273-8255</p>
-                    <p style={{ fontSize: '1.2em', }}>Please reach out if you or someone you know is struggling <FontAwesomeIcon icon = {faHeart}/></p>
+                    <p style={{ color:"#555",fontSize: '1.2em', }}>Please reach out if you or someone you know is struggling <FontAwesomeIcon icon = {faHeart}/></p>
                 </div>)
         }
     }

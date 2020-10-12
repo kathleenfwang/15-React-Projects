@@ -332,6 +332,7 @@ a {
     text-align:center
   }
   nav {
+    width:100%;
     display:flex;
     list-style-type: none;
   }

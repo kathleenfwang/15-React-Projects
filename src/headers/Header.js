@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import {Link, Redirect} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHamburger,faArrowRight, faCommentDots } from '@fortawesome/free-solid-svg-icons'
+import { faHamburger,faArrowRight, faCommentDots, faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 import FeedbackFooter from "./FeedbackFooter"
 export default function Header() {
     const [show,setShow] = useState(true)
@@ -45,7 +45,8 @@ export default function Header() {
             <li><Link to ="/Blog">Blog</Link></li> 
             <li><Link to ="/Contact"> <FontAwesomeIcon icon={faCommentDots} /></Link></li>
             <li onClick ={handleClick}>Next Project <FontAwesomeIcon icon = {faArrowRight}></FontAwesomeIcon> </li>
-            <li onClick ={handleDark}> {dark ? "Light Mode" : "Dark Mode" }</li>
+            <li onClick ={handleDark}> <FontAwesomeIcon icon = {dark ? faSun: faMoon} /> Mode</li>
+ 
             {/* <li><FeedbackFooter/></li> */}
         </ul>
     </div>
