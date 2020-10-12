@@ -35,7 +35,6 @@ export default function Header() {
         document.body.style.backgroundColor = "whitesmoke"
         document.body.style.color = "#333"
     }
-    console.log(document.body.style.backgroundColor)
     return (
         <div className ="header">
         <button onClick ={handleShow}><FontAwesomeIcon icon={faHamburger} /></button>
