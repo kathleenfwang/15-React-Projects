@@ -3,6 +3,7 @@ import Card from "./Components1/day9/Card"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarTimes, faSmile } from '@fortawesome/free-solid-svg-icons'
 import FlipMove from 'react-flip-move';
+import inktoberEntries from './Components1/day9/inktoberEntries'
 export default class Day9 extends React.Component {
     constructor() {
         super()
@@ -13,63 +14,13 @@ export default class Day9 extends React.Component {
             activeList: 0,
         }
         this.promptListUrl = 'https://media.discordapp.net/attachments/701277128951595030/762183039857065994/official-inktober-2020-prompt-list.png?width=490&height=490'
-
-        this.titles = [
-            {
-                title: 'fish',
-                src: 'https://media.discordapp.net/attachments/701277128951595030/762123087553888307/Shape_4.png?width=340&height=490',
-            },
-            {
-                title: 'wisp',
-                src: 'https://media.discordapp.net/attachments/701277128951595030/762123167476613130/Shape_5.png?width=340&height=489',
-            },
-            {
-                title: 'bulky',
-                src: 'https://media.discordapp.net/attachments/701277128951595030/762116290059698186/imgonline-com-ua-twotoone-DRi4gTlNCiK6Jvq.jpg?width=340&height=490',
-            },
-            {
-                title: 'radio',
-                src: ['https://media.discordapp.net/attachments/701277128951595030/762471917680459786/Shape_9.png?width=327&height=491', 'https://media.discordapp.net/attachments/519058439339507743/762476509633576990/Shape_10.png'],
-            },
-            {
-                title: 'blade',
-                src: 'https://media.discordapp.net/attachments/701277128951595030/764016427316281374/Shape_26.png?width=340&height=490'
-            },
-            {
-                title: 'rodent',
-                src: 'https://media.discordapp.net/attachments/701277128951595030/763532867190915100/Shape_23.png?width=340&height=490'
-            },
-            {
-                title: 'fancy',
-                src: ['https://media.discordapp.net/attachments/701277128951595030/763528715812077568/Shape_20.png?width=350&height=490', 'https://media.discordapp.net/attachments/701277128951595030/763529565616078898/Shape_21.png?width=350&height=490']
-            },
-            {
-                title: 'teeth',
-                src: 'https://media.discordapp.net/attachments/701277128951595030/763944853159018506/Shape_24.png?width=340&height=490'
-            }, 
-            {
-                title: 'hope',
-                src: 'https://media.discordapp.net/attachments/701277128951595030/764310842556416020/Shape_28.png?width=340&height=490'
-            },
-            {
-                title: 'throw',
-                src: 'https://media.discordapp.net/attachments/701277128951595030/765460253536944128/Shape_32.png?width=340&height=490'
-            },
-    {title: 'disgusting',
-    src: 'https://media.discordapp.net/attachments/701277128951595030/764985707965579264/Shape_29.png?width=340&height=490'},
-{title: 'slippery',
-src: 'https://media.discordapp.net/attachments/701277128951595030/764985655196647424/Shape_30.png?width=340&height=490'}, 
-{
-    title: 'dune',
-    src: 'https://media.discordapp.net/attachments/701277128951595030/765453761019510784/Shape_31.png?width=340&height=490'
-}
-        ]
+ 
     }
     makeCards = (notLikes) => {
         const { active } = this.state
         let cards = []
         let index = 0
-        let titles = this.titles
+        let titles = inktoberEntries
         titles.forEach((obj, i) => {
             if (Array.isArray(obj.src)) {
                 obj.src.forEach((x, ind) => {
@@ -108,7 +59,7 @@ src: 'https://media.discordapp.net/attachments/701277128951595030/76498565519664
         })
     }
     handleSearchInput = (e) => {
-        let titles = this.titles
+        let titles = inktoberEntries
         let value = e.target.value !== "" ? e.target.value : null
         let allTitles = titles.map((obj) => obj.title)
         let titleNum = Number(value) - 1
@@ -136,20 +87,17 @@ src: 'https://media.discordapp.net/attachments/701277128951595030/76498565519664
                     arr.push(titleNum + titles.length + i)
                 })
                 this.setState({
-                    filtered: [...arr]
-                })
+                    filtered: [...arr]})
             }
             else {
                 this.setState({
-                    filtered: [titleNum]
-                })
+                    filtered: [titleNum]})
             }
         }
 
         else {
             this.setState({
-                filtered: []
-            })
+                filtered: []})
         }
     }
     getNavList = () => {
@@ -166,15 +114,15 @@ src: 'https://media.discordapp.net/attachments/701277128951595030/76498565519664
         switch (activeList) {
             case 0:
                 return (
-                    <FlipMove> 
-                    <div className="flex center">
-                       {this.makeCards(true)}
-                    </div>
-                    </FlipMove> )
+                    <FlipMove>
+                        <div className="flex center">
+                            {this.makeCards(true)}
+                        </div>
+                    </FlipMove>)
             case 1:
                 return (
                     <div className="flex center">
-                        {likes.length > 0 ?  likes  :
+                        {likes.length > 0 ? likes :
                             <h3>Empty :( Click the heart icon to like!</h3>}
                     </div>)
             case 2:
@@ -188,7 +136,7 @@ src: 'https://media.discordapp.net/attachments/701277128951595030/76498565519664
                         <div className="flex center up">
                             <p>I drew these with pen and then scanned using Adobe Capture <FontAwesomeIcon icon={faSmile} /> </p>
                         </div>
-                        <div className ="up">
+                        <div className="up">
                             <p>Honestly this is my first year I am really trying to commit the whole month of Inktober. Every other year I attempt to but ultimately forget after the first week, due to the business of everyday life. This year's Inktober is during quarantine, so what other commitments could I possibly have.
                         </p>
                             <p>In the future, I am planning on converting this into a full stack app with database storage and authentication, to allow authenticated users to upload their entries and like and comment on others.It would be a convenient and fun way to encourage my friends to participate and share our progress together.</p>
