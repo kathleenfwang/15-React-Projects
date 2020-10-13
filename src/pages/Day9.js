@@ -3,7 +3,7 @@ import Card from "./Components1/day9/Card"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarTimes, faSmile } from '@fortawesome/free-solid-svg-icons'
 import FlipMove from 'react-flip-move';
-import inktoberEntries from './Components1/day9/inktoberEntries'
+import {inktoberEntries,promptListUrl,about,future} from './Components1/day9/inktoberEntries'
 export default class Day9 extends React.Component {
     constructor() {
         super()
@@ -13,8 +13,6 @@ export default class Day9 extends React.Component {
             filtered: [],
             activeList: 0,
         }
-        this.promptListUrl = 'https://media.discordapp.net/attachments/701277128951595030/762183039857065994/official-inktober-2020-prompt-list.png?width=490&height=490'
- 
     }
     makeCards = (notLikes) => {
         const { active } = this.state
@@ -128,7 +126,7 @@ export default class Day9 extends React.Component {
             case 2:
                 return (
                     <div className="flex center down">
-                        <img src={this.promptListUrl} />
+                        <img src={promptListUrl} />
                     </div>)
             case 3:
                 return (
@@ -137,9 +135,8 @@ export default class Day9 extends React.Component {
                             <p>I drew these with pen and then scanned using Adobe Capture <FontAwesomeIcon icon={faSmile} /> </p>
                         </div>
                         <div className="up">
-                            <p>Honestly this is my first year I am really trying to commit the whole month of Inktober. Every other year I attempt to but ultimately forget after the first week, due to the business of everyday life. This year's Inktober is during quarantine, so what other commitments could I possibly have.
-                        </p>
-                            <p>In the future, I am planning on converting this into a full stack app with database storage and authentication, to allow authenticated users to upload their entries and like and comment on others.It would be a convenient and fun way to encourage my friends to participate and share our progress together.</p>
+                            <p>{about}</p>
+                            <p>{future}</p>
                             <p className="flex center"><a href="https://inktober.com/" target="_blank">Official Inktober Website</a></p>
                         </div>
                     </div>
