@@ -51,10 +51,18 @@ export default class Day9 extends React.Component {
                 title: 'hope',
                 src: 'https://media.discordapp.net/attachments/701277128951595030/764310842556416020/Shape_28.png?width=340&height=490'
             },
+            {
+                title: 'throw',
+                src: 'https://media.discordapp.net/attachments/701277128951595030/765460253536944128/Shape_32.png?width=340&height=490'
+            },
     {title: 'disgusting',
     src: 'https://media.discordapp.net/attachments/701277128951595030/764985707965579264/Shape_29.png?width=340&height=490'},
 {title: 'slippery',
-src: 'https://media.discordapp.net/attachments/701277128951595030/764985655196647424/Shape_30.png?width=340&height=490'}
+src: 'https://media.discordapp.net/attachments/701277128951595030/764985655196647424/Shape_30.png?width=340&height=490'}, 
+{
+    title: 'dune',
+    src: 'https://media.discordapp.net/attachments/701277128951595030/765453761019510784/Shape_31.png?width=340&height=490'
+}
         ]
     }
     makeCards = (notLikes) => {
