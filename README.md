@@ -15,6 +15,7 @@ Curent Projects:
 ## Update: 
 * Now responsive on iPad!
 * Added light mode/dark mode toggle
+* ![Image Collage iPad](https://media.discordapp.net/attachments/701277128951595030/765401705256058910/image.png?width=338&height=400)
  
 
  
