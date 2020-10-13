@@ -12,4 +12,11 @@ Curent Projects:
 - Day 2: Solar System
 - Day 1: This Website
 
+## Update: 🎉 10/10/20
+* Now responsive on iPad!
+* Added light mode/dark mode toggle
+
+![Image Collage iPad](https://media.discordapp.net/attachments/701277128951595030/765401705256058910/image.png?width=338&height=400)
+ 
+
  
