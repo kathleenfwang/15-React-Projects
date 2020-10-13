@@ -12,4 +12,10 @@ Curent Projects:
 - Day 2: Solar System
 - Day 1: This Website
 
+## Update: 
+* Now responsive on iPad!
+* Added light mode/dark mode toggle
+* ![Inktober iPad](https://media.discordapp.net/attachments/701277128951595030/765091272179318794/image.png?width=400&height=300)
+ 
+
  
