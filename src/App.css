@@ -368,7 +368,6 @@ a {
   :placeholder-shown{
     font-family:sans-serif;
     color: #666;
-    font-size:1.5em;
   }
   .form button, .blueButton {
     font-size:1.1em;
@@ -660,6 +659,9 @@ padding-left:30px;
 }
 .bigger {
   font-size: 1.5em;
+}
+.left {
+  margin-left:5px;
 }
 .leftarrow {
   position:absolute;

@@ -89,6 +89,11 @@ export default class Day11 extends React.Component {
         }
         return images
     }
+    handleClear = () => {
+        this.setState({
+            value: ""
+        })
+    }
     handleTrash = (info) => {
         const { active } = this.state
         let filtered = active.filter((x) => x !== info)
@@ -150,12 +155,12 @@ export default class Day11 extends React.Component {
         })
     }
     getHeader = () => {
-        const { amount } = this.state
+        const { amount,value} = this.state
         return (
             <>
                 <h1>Make your own image collage of anything:</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <input onChange={this.handleChange} value={this.state.value} placeholder="Cats.."></input>
+                <form className ="flex center" onSubmit={this.handleSubmit}>
+                    <input className ="lightDark" onChange={this.handleChange} value={value} placeholder="Cats.."></input> {<FontAwesomeIcon className ={`cursor ${value !== "" ? 'trueShow' : 'falseShow'}`}style ={{color:"#777",backgroundColor: "whitesmoke",marginLeft : -40,borderRadius:5,height:41}} onClick={this.handleClear} icon={faTimes} />}
                     <button><FontAwesomeIcon icon={faSearch} /></button>
                 </form>
             </>

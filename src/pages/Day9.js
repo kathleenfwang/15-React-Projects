@@ -1,7 +1,7 @@
 import React from "react"
 import Card from "./Components1/day9/Card"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarTimes, faSmile } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faSmile } from '@fortawesome/free-solid-svg-icons'
 import FlipMove from 'react-flip-move';
 import {inktoberEntries,promptListUrl,about,future} from './Components1/day9/inktoberEntries'
 export default class Day9 extends React.Component {
@@ -59,6 +59,7 @@ export default class Day9 extends React.Component {
     handleSearchInput = (e) => {
         let titles = inktoberEntries
         let value = e.target.value !== "" ? e.target.value : null
+        this.setState({value: value})
         let allTitles = titles.map((obj) => obj.title)
         let titleNum = Number(value) - 1
         if (allTitles.join().includes(value)) {
@@ -145,12 +146,13 @@ export default class Day9 extends React.Component {
     }
     handleClear = () => {
         this.setState({
-            filtered: []
+            filtered: [],
+            value: ""
         })
         this.refs.input.value = ""
     }
     render() {
-        const { filtered } = this.state
+        const { filtered,value } = this.state
         return (
             <div className="day9">
                 <div className="flex center bold">
@@ -158,7 +160,7 @@ export default class Day9 extends React.Component {
                 </div>
                 <nav className="nav center " >
                     {this.getNavList()}
-                    <li><input ref="input" placeholder="Search by day or name..." onChange={this.handleSearchInput}></input><FontAwesomeIcon onClick={this.handleClear} icon={faCalendarTimes} /></li>
+        <li><input ref="input" value = {value} placeholder="Search by day or name..." onChange={this.handleSearchInput}></input>{value && <FontAwesomeIcon className ="left" onClick={this.handleClear} icon={faTimes} />}</li>
                 </nav>
                 {filtered.length > 0 ?
                     <div className="flex center down">
