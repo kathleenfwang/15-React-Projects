@@ -160,7 +160,7 @@ export default class Day11 extends React.Component {
             <>
                 <h1>Make your own image collage of anything:</h1>
                 <form className ="flex center" onSubmit={this.handleSubmit}>
-                    <input className ="lightDark" onChange={this.handleChange} value={value} placeholder="Cats.."></input> {<FontAwesomeIcon className ={`cursor ${value !== "" ? 'trueShow' : 'falseShow'}`}style ={{color:"#777",backgroundColor: "whitesmoke",marginLeft : -40,borderRadius:5,height:41}} onClick={this.handleClear} icon={faTimes} />}
+                    <input className ="lightDark" onChange={this.handleChange} value={value} placeholder="Cats.."></input> {<FontAwesomeIcon className ={`cursor ${value !== "" ? 'trueShow' : 'falseShow'}`} style ={{color:"#777",backgroundColor: "whitesmoke",marginLeft : -40,borderRadius:5,height:41}} onClick={this.handleClear} icon={faTimes} />}
                     <button><FontAwesomeIcon icon={faSearch} /></button>
                 </form>
             </>
