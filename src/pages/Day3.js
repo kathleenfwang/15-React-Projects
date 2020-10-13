@@ -34,6 +34,10 @@ export default class Day11 extends React.Component {
         },
             500);
     }
+    componentWillUnmount() {
+        this.setState({ play: false, pause: true })
+        this.audio.pause();
+    }
     play = () => {
         this.setState({ play: true, pause: false })
         this.audio.play();
@@ -81,7 +85,7 @@ export default class Day11 extends React.Component {
     }
     render() {
         const { play } = this.state
-        const musicControl = <FontAwesomeIcon style={{ color: "grey" }} icon={play ? faPause : faPlay} onClick={play ? this.pause : this.play} />
+        const musicControl = <FontAwesomeIcon className ="cursor" style={{ color: "grey" }} icon={play ? faPause : faPlay} onClick={play ? this.pause : this.play} />
         return (
             <div className="day3 flex center">
                 {this.getText()}

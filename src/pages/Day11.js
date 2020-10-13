@@ -215,7 +215,7 @@ export default class Day11 extends React.Component {
             <div style={{ position: "relative" }}>
                 <div className="flex center">
                     {this.getHeader()}
-                    <nav className="up" style={{ justifyContent: "center" }}>
+                    <nav style={{ justifyContent: "center" }}>
                         {this.getNavList()}
                     </nav>
                     <div className="photos down">
