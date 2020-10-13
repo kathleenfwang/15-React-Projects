@@ -12,7 +12,7 @@ Curent Projects:
 - Day 2: Solar System
 - Day 1: This Website
 
-## Update: 
+## Update: 🎉 10/10/20
 * Now responsive on iPad!
 * Added light mode/dark mode toggle
 
