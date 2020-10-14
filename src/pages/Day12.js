@@ -39,6 +39,7 @@ export default class Day12 extends React.Component {
     render(){
         return(
             <div className ="day12">
+                <p>Halloween special :) </p>
                 <h1>Press the "up" arrow key to start walking</h1>
             </div>
         )
