@@ -24,11 +24,17 @@ export default class Day12 extends React.Component {
         setTimeout(() => {
             this.laugh.play()
         }, 2000)
+        setTimeout(() => {
+            this.showFirst()
+        },4000)
         }
     }
     pauseFoosteps = (e) => {
         this.sneaker.pause()
         this.laugh.pause()
+    }
+    showFirst = () => {
+    
     }
     render(){
         return(
