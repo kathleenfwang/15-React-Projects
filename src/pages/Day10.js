@@ -8,12 +8,7 @@ export default class Day10 extends React.Component {
             currentColor: "white"
         }
         this.colorFont = { color: "#5FD7C3", textAlign: "center", fontWeight: "bold" }
-        this.grid = {
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            alignItems: 'center',
-            marginTop: 50,
-        }
+ 
         this.bigDiv = {
             width: 600,
             height: 400,
@@ -96,7 +91,7 @@ export default class Day10 extends React.Component {
         return (
             <div className="day11">
                 <h2 style={{ marginBottom: -30, color: "white", textAlign: "center", fontStyle: "italic" }}>Pride month is celebrated every June to honor the 1969 Stonewall riots in Manhattan</h2>
-                <div style={this.grid} className="center">
+                <div  className="biggrid center">
                     {this.getSquaresSection()}
                     {this.getRectangleOutline()}
                     <div>
