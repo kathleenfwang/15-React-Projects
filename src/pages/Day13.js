@@ -15,7 +15,7 @@ startAnimate = () => {
     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth, window.innerHeight );
-    document.body.appendChild( renderer.domElement );
+    this.refs.div.appendChild( renderer.domElement );
     camera.position.z = 5;
     var geometry2 = new THREE.TorusKnotBufferGeometry( 10, 3, 100, 16 );
     var material2 = new THREE.MeshNormalMaterial({wireframe:true,depthTest:false,side:THREE.BackSide});
@@ -42,7 +42,7 @@ startAnimate = () => {
  
     render() {
         return(
-            <div>
+            <div ref ="div">
             </div>
         )
     }

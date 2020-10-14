@@ -21,14 +21,13 @@ export default function Home() {
     function days() {
         let daysList = []
         let days = [
-           "Animated Shapes","Halloween special","Collage Maker","Pride Flags","Inktober","Text Analyzer","Pixel Art Maker","Plant Library","Picture Canvas","feelings", "Mental Health Message","Solar System","This Website"]
+           "Animated Shapes","Collage Maker","Pride Flags","Inktober","Text Analyzer","Pixel Art Maker","Plant Library","Picture Canvas","feelings", "Mental Health Message","Solar System","This Website"]
             for (let i = days.length;i>0;i--)
              daysList.push(<Day i = {i} title = {days[days.length - i]} /> )
         return [days,daysList]
     }
     function handleRecent() {
-        // let max = (projList.current.children.length)
-        let max = 11
+        let max = (projList.current.children.length)
         setClick(!clicked)
         setRandomNum(max)
     }
@@ -65,7 +64,7 @@ export default function Home() {
                         <p><i> Inspired by Jennifer Dewalt's <a href="https://jenniferdewalt.com/" target="_blank"> 180 Projects in 180 Days</a></i></p>
                 </div>
                 <div className="projectList">
-                <button className ="blueButton" onClick = {handleRecent}> Featured: <span style ={{color:"moccasin"}}>Collage Maker</span></button>
+                <button className ="blueButton" onClick = {handleRecent}> Recent: <span style ={{color:"moccasin"}}>{days()[0][0]}</span></button>
                     <button className ="whiteButton" onClick = {handleClick}> Feeling Lucky </button>
               
                     <ul ref = {projList}>
