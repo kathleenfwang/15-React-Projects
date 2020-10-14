@@ -22,7 +22,6 @@ export default class Day13 extends React.Component {
     }
 startAnimate = () => {
     const {value1,value2} = this.state
-   
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
     var renderer = new THREE.WebGLRenderer();
@@ -66,15 +65,16 @@ handleChange1 = (e) =>{
               <label>Choose an outer shape:</label>
 <select onChange ={this.handleChange2}id="cars" name="cars">
   <option value="torusKnot">Torus Knot</option>
-  <option value="saab">Saab</option>
-  <option value="fiat">Fiat</option>
-  <option value="audi">Audi</option>
+  <option value="torus">Torus</option>
+  <option value="ring">Ring</option>
+  <option value="tube">Tube</option>
 </select>
               <label>Choose an inner shape:</label>
 <select onChange ={this.handleChange1}id="cars" name="cars">
   <option value="icosahedron">Icosahedron</option>
   <option value="dodecahedron">Dodecahedron</option>
   <option value="octahedron">Octahedron</option>
+  <option value="tetrahedron">Tetrahedron</option>
   <option value="cone">Cone</option>
 </select>
               </div>
