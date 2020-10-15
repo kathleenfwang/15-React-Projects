@@ -1,7 +1,7 @@
 import React from "react"
 import * as THREE from 'three';
 import { shapesInner, shapesOuter } from "./Components1/day13/shapes"
-
+var id = null 
 export default class Day13 extends React.Component {
     constructor() {
         super()
@@ -9,7 +9,7 @@ export default class Day13 extends React.Component {
             value1: "icosahedron",
             value2: "torusKnot"
         }
-        this.id = null 
+        
     }
     componentDidMount() {
         this.startAnimate()
@@ -32,10 +32,10 @@ export default class Day13 extends React.Component {
         this.refs.div.appendChild(renderer.domElement);
         let shapes = [shapesInner[value1], shapesOuter[value2]]
         shapes.forEach((shape) => scene.add(shape))
-        if (this.id !== null)
-            cancelAnimationFrame(this.id)
+        if (id !== null)
+            cancelAnimationFrame(id)
         const animate = () => {
-            this.id = requestAnimationFrame(animate);
+            id = requestAnimationFrame(animate);
             shapes.forEach((shape) => {
                 shape.rotation.x += 0.01
                 shape.rotation.y += 0.01
