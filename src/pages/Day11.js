@@ -38,11 +38,14 @@ export default class Day11 extends React.Component {
             width: '70%',
             height: '90%',
         }
-        this.key = process.env.REACT_APP_ACCESS_KEY
+        this.key = process.env.REACT_APP_ACCESS_KEY || null 
         this.unsplash = new Unsplash({ accessKey: this.key });
     }
     componentDidMount() {
-        this.callImages()
+        if (this.key) this.callImages()
+        else {
+            console.log("INVALID KEY! register your own key from Unsplash Developer and add it")
+        }
     }
     callImages = () => {
         const defaultSearch = "cats"
@@ -158,7 +161,7 @@ export default class Day11 extends React.Component {
         const { amount,value} = this.state
         return (
             <>
-                <h1>Make your own image collage of anything:</h1>
+                <h1>Make your own image collage of anything&nbsp;</h1>
                 <form className ="flex center" onSubmit={this.handleSubmit}>
                     <input className ="lightDark" onChange={this.handleChange} value={value} placeholder="Cats.."></input> {<FontAwesomeIcon className ={`cursor ${value !== "" ? 'trueShow' : 'falseShow'}`} style ={{color:"#777",backgroundColor: "whitesmoke",marginLeft : -40}} onClick={this.handleClear} icon={faTimes} />}
                     <button><FontAwesomeIcon icon={faSearch} /></button>
