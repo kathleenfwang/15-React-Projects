@@ -1,5 +1,6 @@
 ### Work In Progress - 180 React Projects in 180 Days 
 Curent Projects: 
+- Day 12: Animated Shapes
 - Day 11: Collage Maker
 - Day 10: Pride Flags
 - Day 9: Inktober
