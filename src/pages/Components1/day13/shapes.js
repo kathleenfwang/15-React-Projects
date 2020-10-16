@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-const basic = true, wireframe = false
+const basic = true, wireframe = true
 let geometry1 = new THREE.TorusKnotBufferGeometry(10, 3, 100, 16);
 let material1 = new THREE.MeshNormalMaterial({ wireframe: true, depthTest: false, side: THREE.BackSide });
 let torusKnot = new THREE.Mesh(geometry1, material1);
