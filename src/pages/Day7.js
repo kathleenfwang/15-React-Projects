@@ -1,7 +1,7 @@
 import React from "react"
-import pixelart1 from "./Components1/pixelart1.gif"
-import pixelart2 from "./Components1/pixelart2.gif"
-import pixelart3 from "./Components1/pixelart3.gif"
+import pixelart1 from "./Components1/day7/pixelart1.gif"
+import pixelart2 from "./Components1/day7/pixelart2.gif"
+import pixelart3 from "./Components1/day7/pixelart3.gif"
 import domtoimage from 'dom-to-image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTh, faThLarge, faPlus, faSquare, faEraser, faDownload, faTrash } from '@fortawesome/free-solid-svg-icons'

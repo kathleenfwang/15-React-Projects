@@ -3,7 +3,7 @@ import Fade from 'react-reveal/Fade';
 import { TwitterIcon, TwitterShareButton } from "react-share"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faHeart } from '@fortawesome/free-solid-svg-icons'
-import truecolors from "./Components1/truecolors.mp3"
+import truecolors from "./Components1/day3/truecolors.mp3"
 export default class Day11 extends React.Component {
     constructor() {
         super()

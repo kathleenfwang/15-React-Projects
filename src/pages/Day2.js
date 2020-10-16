@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Circle from "./Components1/Circle"
+import Circle from "./Components1/day2/Circle"
 export default function Day2() {
     const sidePic = {
         marginTop: 50,

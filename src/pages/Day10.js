@@ -1,5 +1,5 @@
 import React from "react"
-import {colors} from "./Components1/data"
+import {colors} from "./Components1/day10/data"
 export default class Day10 extends React.Component {
     constructor() {
         super()
