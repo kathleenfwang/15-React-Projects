@@ -14,13 +14,13 @@ export default class Day14 extends React.Component {
     handleScroll = (e) => {
         let y = window.scrollY
         console.log(y)
-        if (y > 800 && y < 1500) {
+        if (y > 600 && y < 1500) {
             this.setState({ show: true,div2:false})
         }
         else if (y > 1500) {
             this.setState({div2:true,show:false})
         }
-        else if (y<700){
+        else if (y<600){
             this.setState({ show: false,div2:false })
         }
     }
@@ -30,6 +30,10 @@ export default class Day14 extends React.Component {
             backgroundColor: color
         }
     }
+    getDivs = () => {
+        const titles = ["Art", "Music","Reading"] 
+        return titles.map((title) => <div className = "card">{title}</div>)
+    }
     render() {
         const { show,div2 } = this.state
         console.log(div2)
@@ -37,7 +41,7 @@ export default class Day14 extends React.Component {
             <div className ="bigger">
                 <Fade>
                 <div className="center" style={this.bigDiv("palevioletred")}>{!show && <Fade>
-                    <div className="card">This is a big div</div>
+                    <div className="card">What I've been up to:</div>
                 </Fade>}
                 </div>
                 </Fade>
@@ -46,9 +50,7 @@ export default class Day14 extends React.Component {
              
                         {show && <Slide right cascade>
                             <div className="flexDirection width">
-                            <div className="card">This is another big div</div>
-                            <div className="card">This is another big div</div>
-                            <div className="card">This is another big div</div>
+                           {this.getDivs()}
                             </div>
                         </Slide>}
                 
@@ -57,7 +59,7 @@ export default class Day14 extends React.Component {
                 <Fade>
                 <div className={`${div2}Show center`} style={this.bigDiv("lightblue")}>
                 {div2 && <Rotate top left>
-                    <div className="card">This is another big div</div>
+                    <div className="card">under construction :)</div>
                     </Rotate>}
                 </div>
                 </Fade>
