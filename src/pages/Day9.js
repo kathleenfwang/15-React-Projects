@@ -3,6 +3,7 @@ import Card from "./Components1/day9/Card"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faSmile } from '@fortawesome/free-solid-svg-icons'
 import FlipMove from 'react-flip-move';
+import {Fade,Slide,Rotate} from 'react-reveal';
 import {inktoberEntries,promptListUrl,about,future} from './Components1/day9/inktoberEntries'
 export default class Day9 extends React.Component {
     constructor() {

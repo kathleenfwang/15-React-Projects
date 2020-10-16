@@ -2,11 +2,13 @@ import React from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHeart as faFilledHeart,faTrash} from '@fortawesome/free-solid-svg-icons'
 import { faHeart,faTrashAlt } from '@fortawesome/free-regular-svg-icons'
+import {Fade,Slide,Rotate} from 'react-reveal';
 export default function Card(props) {
     return (
         <div className="inktoberCard"  >
+            <Fade clear cascade>
             <h1 className ="upLess">
-                <span style ={{fontWeight:"bold"}}>{props.title}</span>
+                <span style ={{fontWeight:"bold", color: "#333"}}>{props.title}</span>
                 <FontAwesomeIcon
                     className={`${props.notLikes}Show icon`}
                     onClick={() => props.handleLike(props.i)}
@@ -26,6 +28,7 @@ export default function Card(props) {
             </h1>
             <h2 className ="up">Day: {props.day}</h2>
             <img  src={props.src} />
+            </Fade>
         </div>
     )
 }

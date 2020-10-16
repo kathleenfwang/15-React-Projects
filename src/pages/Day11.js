@@ -3,6 +3,7 @@ import Unsplash, { toJson } from 'unsplash-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faTrashAlt, } from '@fortawesome/free-regular-svg-icons'
 import { faDownload, faTimes, faAngleDoubleRight, faAngleDoubleLeft,faSearch, faHeart as faFilledHeart } from '@fortawesome/free-solid-svg-icons'
+import {Fade,Slide,Rotate} from 'react-reveal';
 import FlipMove from 'react-flip-move';
 
 export default class Day11 extends React.Component {
@@ -86,8 +87,10 @@ export default class Day11 extends React.Component {
         for (let i = 0; i < data.length; i++) {
             images.push(
                 <div style={{ position: "relative", }}>
+                    <Fade clear cascade>
                     {this.toggleHeartImage(data[i], show, '1.2em', 10, 10, faTimes)}
                     <img style={{ boxShadow: '2px 4px 25px rgba(0, 0, 0, .1)' }} className="cursor borderRadius" onClick={() => this.handleImgClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
+                    </Fade>
                 </div>)
         }
         return images

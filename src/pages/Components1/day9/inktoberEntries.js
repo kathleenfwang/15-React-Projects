@@ -50,6 +50,18 @@ const inktoberEntries = [
     {
         title: 'dune',
         src: 'https://media.discordapp.net/attachments/701277128951595030/765453761019510784/Shape_31.png?width=340&height=490'
+    },
+    {
+        title:'armor',
+        src: 'https://media.discordapp.net/attachments/701277128951595030/766434880795574332/Shape_36.png?width=340&height=490'
+    },
+    {
+        title: 'outpost',
+        src: 'https://media.discordapp.net/attachments/701277128951595030/766434826949492766/Shape_36.png?width=340&height=490'
+    }, 
+    {
+        title: 'rocket',
+        src: 'https://media.discordapp.net/attachments/701277128951595030/766439411981221898/Shape_37.png?width=340&height=490'
     }
 ]
 const promptListUrl = 'https://media.discordapp.net/attachments/701277128951595030/762183039857065994/official-inktober-2020-prompt-list.png?width=490&height=490'
