@@ -1,5 +1,6 @@
 import React from "react"
-import {colors} from "./Components1/day10/data"
+import { colors } from "./Components1/day10/data"
+import Fade from 'react-reveal/Fade';
 export default class Day10 extends React.Component {
     constructor() {
         super()
@@ -8,7 +9,7 @@ export default class Day10 extends React.Component {
             currentColor: "white"
         }
         this.colorFont = { color: "#5FD7C3", textAlign: "center", fontWeight: "bold" }
- 
+
         this.bigDiv = {
             width: 600,
             height: 400,
@@ -16,7 +17,7 @@ export default class Day10 extends React.Component {
             borderRadius: 5,
             boxShadow: '2px 4px 25px rgba(0, 0, 0, .2)'
         }
-       
+
     }
     getRectangles = (num) => {
         let divs = []
@@ -90,13 +91,20 @@ export default class Day10 extends React.Component {
     render() {
         return (
             <div className="day11">
+
                 <h2 style={{ marginBottom: -30, color: "white", textAlign: "center", fontStyle: "italic" }}>Pride month is celebrated every June to honor the 1969 Stonewall riots in Manhattan</h2>
-                <div  className="biggrid center">
-                    {this.getSquaresSection()}
-                    {this.getRectangleOutline()}
+
+                <div className="biggrid center">
+                    <Fade clear cascade>
+                        {this.getSquaresSection()}
+                    </Fade>
+                    <Fade up>
+                        {this.getRectangleOutline()}
+                    </Fade>
                     <div>
                     </div>
                 </div>
+
             </div>
         )
     }

@@ -161,7 +161,7 @@ export default class Day9 extends React.Component {
                 </div>
                 <nav className="nav center " >
                     {this.getNavList()}
-        <li><input ref="input" value = {value} placeholder="Search by day or name..." onChange={this.handleSearchInput}></input>{value && <FontAwesomeIcon className ="left" onClick={this.handleClear} icon={faTimes} />}</li>
+        <li><input ref="input" value = {value} placeholder="Search by day or name..." onChange={this.handleSearchInput}></input>{<FontAwesomeIcon className = "left" style ={{visibility: value ? "visible" : "hidden"}} onClick={this.handleClear} icon={faTimes} />}</li>
                 </nav>
                 {filtered.length > 0 ?
                     <div className="flex center down">

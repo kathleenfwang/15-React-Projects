@@ -59,7 +59,7 @@ export default class Day14 extends React.Component {
                 <Fade>
                 <div className={`${div2}Show center`} style={this.bigDiv("lightblue")}>
                 {div2 && <Rotate top left>
-                    <div className="card">under construction :)</div>
+                    <div className="card">Animation practice :)</div>
                     </Rotate>}
                 </div>
                 </Fade>
