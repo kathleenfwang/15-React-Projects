@@ -37,7 +37,7 @@ export default class Day11 extends React.Component {
             padding: 30,
             borderRadius: 5,
             width: '70%',
-            height: '90%',
+            height: '87%',
         }
         this.key = process.env.REACT_APP_ACCESS_KEY || null 
         this.unsplash = new Unsplash({ accessKey: this.key });
@@ -213,7 +213,7 @@ export default class Day11 extends React.Component {
                     style={{ position: "absolute", top: 10, right: 10 }} onClick={this.handleClose} />
                 <div className="flex"></div>
                 <img
-                    style={{ borderRadius: 5, objectFit: "contain", width: '100%', height: '90%', overflow: "auto" }} src={imageData.urls.regular} />
+                    style={{ borderRadius: 5, objectFit: "contain", width: '100%', height: '87%', overflow: "auto" }} src={imageData.urls.regular} />
             </div>
         </div>)
     }
