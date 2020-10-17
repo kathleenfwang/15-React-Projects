@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faSmile } from '@fortawesome/free-solid-svg-icons'
 import FlipMove from 'react-flip-move';
 import {Fade,Slide,Rotate} from 'react-reveal';
+import {svgDark,svgLight} from "./Components1/day9/svg"
 import {inktoberEntries,promptListUrl,about,future} from './Components1/day9/inktoberEntries'
 export default class Day9 extends React.Component {
     constructor() {
@@ -155,7 +156,7 @@ export default class Day9 extends React.Component {
     render() {
         const { filtered,value } = this.state
         return (
-            <div className="day9">
+            <div className="day9" >
                 <div className="flex center bold">
                     <h1><b>Inktober is here!</b> </h1>
                 </div>
@@ -169,6 +170,7 @@ export default class Day9 extends React.Component {
                             return filtered.includes(x.props.i)
                         })}
                     </div> : <div className="down">{this.pageItems()}</div>}
+                    <div>{svgLight}</div>
             </div>
         )
     }
