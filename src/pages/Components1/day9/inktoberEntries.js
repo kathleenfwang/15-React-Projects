@@ -62,6 +62,14 @@ const inktoberEntries = [
     {
         title: 'rocket',
         src: 'https://media.discordapp.net/attachments/701277128951595030/766439411981221898/Shape_37.png?width=340&height=490'
+    }, 
+    {
+        title: 'storm',
+        src: 'https://media.discordapp.net/attachments/701277128951595030/766885507422093312/Shape_39.png?width=340&height=490'
+    }, 
+    {
+        title: 'trap',
+        src: 'https://media.discordapp.net/attachments/701277128951595030/766882419256983582/Shape_38.png?width=340&height=490'
     }
 ]
 const promptListUrl = 'https://media.discordapp.net/attachments/701277128951595030/762183039857065994/official-inktober-2020-prompt-list.png?width=490&height=490'
