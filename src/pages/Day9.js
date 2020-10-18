@@ -168,9 +168,9 @@ class Day9 extends React.Component {
     }
     render() {
         const { filtered,value } = this.state
+        const {theme} = this.props
         return (
-            <div className="day9" >
-      
+            <div className="day9" style ={{backgroundImage: theme ? `url("https://i.pinimg.com/originals/17/aa/40/17aa40cc5530dfb653e172cbe086f6ee.gif")` :`url("https://i.gifer.com/2iiB.gif")`}} >
                 <div className="flex center bold">
                     <h1><b>Inktober is here!</b> </h1>
                 </div>
@@ -185,7 +185,7 @@ class Day9 extends React.Component {
                         })}
                     </div> : <div className="down">{this.pageItems()}</div>}
                   
-                    <div>{this.props.theme ? svgDark : svgLight }</div>
+                    <div>{theme ? svgDark : svgLight }</div>
             </div>
         )
     }

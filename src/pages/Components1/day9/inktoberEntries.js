@@ -74,6 +74,6 @@ const inktoberEntries = [
 ]
 const promptListUrl = 'https://media.discordapp.net/attachments/701277128951595030/762183039857065994/official-inktober-2020-prompt-list.png?width=490&height=490'
 
-const about = "Honestly this is my first year I am really trying to commit the whole month of Inktober. Every other year I attempt to but ultimately forget after the first week, due to the business of everyday life. This year's Inktober is during quarantine, so what other commitments could I possibly have."
+const about = "Honestly this is my first year I am really trying to commit the whole month of Inktober.This year's Inktober is during quarantine, so what other commitments could I possibly have."
 const future = "In the future, I am planning on converting this into a full stack app with database storage and authentication, to allow authenticated users to upload their entries and like and comment on others.It would be a convenient and fun way to encourage my friends to participate and share our progress together."
 export {inktoberEntries,promptListUrl,about,future }
