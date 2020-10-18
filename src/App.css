@@ -68,7 +68,10 @@
   
  
  }
- 
+ .firstPanel:hover {
+   color:red;
+   transform: rotate(20deg);
+ }
   
  button:hover, .active{
   transform: translate3D(0, -2px, 0);
@@ -639,7 +642,7 @@ padding-left:30px;
   transition: all .5s ease-in-out;
 }
 .inktoberCard:hover{
-transform: rotate(-7deg);
+transform: rotate(-3deg);
  
 }
 .square:hover {

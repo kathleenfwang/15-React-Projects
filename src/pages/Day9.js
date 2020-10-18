@@ -144,6 +144,7 @@ class Day9 extends React.Component {
                     </FlipMove>)
             case 1:
                 return (
+                    <Fade>
                     <div className="flex center">
                         {likes.length > 0 ? likes :
                             <div className="down textCenter">
@@ -153,15 +154,19 @@ class Day9 extends React.Component {
                                 </div>
                             </div>
                         }
-                    </div>)
+                    </div>
+                    </Fade>)
             case 2:
                 return (
+                    <Fade>
                     <div className="flex center down">
                         <img src={promptListUrl} />
-                    </div>)
+                    </div>
+                    </Fade>
+                    )
             case 3:
                 return (
-                    <>
+                    <Fade> 
                         <div className="falseShow">
                             {this.getNoLikes()}
                         </div>
@@ -170,7 +175,7 @@ class Day9 extends React.Component {
                                 {this.getAbout()}
                             </div>
                         </div>
-                    </>
+                    </Fade>
                 )
         }
     }
