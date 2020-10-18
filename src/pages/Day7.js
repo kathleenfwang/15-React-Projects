@@ -5,6 +5,7 @@ import pixelart3 from "./Components1/day7/pixelart3.gif"
 import domtoimage from 'dom-to-image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTh, faThLarge, faPlus, faSquare, faEraser, faDownload, faTrash } from '@fortawesome/free-solid-svg-icons'
+import Fade from "react-reveal"
 
 export default class Day7 extends React.Component {
     constructor() {
@@ -349,6 +350,7 @@ export default class Day7 extends React.Component {
         ]
         return (
             <div className="day7" >
+                <Fade clear>
                 <div className="block">
                     {this.getHeader()}
                     <br></br>
@@ -383,6 +385,7 @@ export default class Day7 extends React.Component {
                         </div>
                     </div>
                 </div>
+                </Fade>
             </div>
         )
     }

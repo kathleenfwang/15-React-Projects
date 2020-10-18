@@ -195,6 +195,7 @@ class Day9 extends React.Component {
                     {this.getNavList()}
                     <li><input ref="input" value={value} placeholder="Search by day or name..." onChange={this.handleSearchInput}></input>{<FontAwesomeIcon className="left" style={{ visibility: value ? "visible" : "hidden" }} onClick={this.handleClear} icon={faTimes} />}</li>
                 </nav>
+                <Fade>
                 {filtered.length > 0 ?
                     <div className="flex center down">
                         {this.makeCards(true).filter((x, ind) => {
@@ -202,6 +203,7 @@ class Day9 extends React.Component {
                         })}
                     </div> : <div className="down">{this.pageItems()}</div>}
                 <div>{theme ? svgDark : svgLight}</div>
+                </Fade>
             </div>
         )
     }

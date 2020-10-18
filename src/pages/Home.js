@@ -34,6 +34,7 @@ export default function Home() {
     }
     return (
         <div className="home">
+            <Fade clear>
             <div className="firstPanel">
                 <div>
                     <div>
@@ -79,6 +80,7 @@ export default function Home() {
             </div>
                 </div>
             </div>
+            </Fade>
         </div>
     )
 }
