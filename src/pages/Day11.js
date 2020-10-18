@@ -229,12 +229,15 @@ export default class Day11 extends React.Component {
                     <nav style={{ justifyContent: "center" }}>
                         {this.getNavList()}
                     </nav>
+                    <Fade clear>
                     <div className="photos down">
                         {loaded ? this.pageItems() : null}
                     </div>
+                    </Fade>
                 </div>
                 <br></br>
                 {imageData ? this.showPopOut() : null}
+             
                 {this.getFooter()}
             </div>
         )
