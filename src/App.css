@@ -320,6 +320,7 @@ a {
     display:none;
   }
   form {
+    color: #555;
     display: flex;
     font-size:1.2em;
   }
