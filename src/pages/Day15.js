@@ -1,17 +1,26 @@
-import React from "react"
+import React from "react";
+import {handleThemeToggle} from "../redux"
+import { connect } from "react-redux";
 
-export default class Day15 extends React.Component {
-    constructor() {
-        super() 
-        this.state = {}
-    }
+const Day15 = ({ theme, handleThemeToggle}) => {
+  console.log(theme)
+  return (
+    <div>
+      <button onClick={handleThemeToggle}>+</button>
+      <h4>Light Theme: {`${theme}`}</h4>
+    </div>
+  );
+};
 
-    render() {
-        return(
-            <div>
+const mapStateToProps = state => {
+  return { theme: state };
+};
 
-                
-            </div>
-        )
-    }
-}
+ 
+
+export default connect(
+  mapStateToProps,
+  {handleThemeToggle}
+)(Day15);
+
+  

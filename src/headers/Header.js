@@ -2,13 +2,14 @@ import React, {useState} from "react"
 import {Link, Redirect} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHamburger,faArrowRight, faCommentDots, faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
-import FeedbackFooter from "./FeedbackFooter"
-export default function Header() {
+import {handleThemeToggle} from "../redux"
+import { connect } from "react-redux";
+
+function Header({theme,handleThemeToggle}) {
     const [show,setShow] = useState(true)
     const [random,setRandom] = useState(null) 
     const [clicked,setClick] = useState(false)
     const [page,setPage] = useState(0)
-    const [dark,setDark] = useState(true)
     function handleClick(e) {
      let url = window.location.href
      let page = window.location.href.slice(-2) 
@@ -17,19 +18,14 @@ export default function Header() {
       page++
         setPage(page)
         setClick(true)
- 
     }
-    function handleShow() {
-      setShow(!show)
-    }
-    function handleDark() {
-        setDark(!dark)
-        console.log(dark)
-       
-    }
-    if (dark) {
+   const handleShow = () => {
+       setShow(!show)
+   }
+    if (!theme) {
         document.body.style.backgroundColor = "#333";
         document.body.style.color = "white";
+ 
     }
     else {
         document.body.style.backgroundColor = "whitesmoke"
@@ -45,9 +41,7 @@ export default function Header() {
             <li><Link to ="/Blog">Blog</Link></li> 
             <li><Link to ="/Contact"> <FontAwesomeIcon icon={faCommentDots} /></Link></li>
             <li onClick ={handleClick}>Next Project <FontAwesomeIcon icon = {faArrowRight}></FontAwesomeIcon> </li>
-            <li onClick ={handleDark}> <FontAwesomeIcon icon = {dark ? faSun: faMoon} /> Mode</li>
- 
-            {/* <li><FeedbackFooter/></li> */}
+            <li onClick ={handleThemeToggle}> <FontAwesomeIcon icon = {theme ? faMoon : faSun} /> Mode</li>
         </ul>
     </div>
     : null }
@@ -55,3 +49,9 @@ export default function Header() {
     </div>
     )
 }
+export default connect(
+    state => {
+        return { theme: state };
+      },
+    {handleThemeToggle}
+  )(Header);
