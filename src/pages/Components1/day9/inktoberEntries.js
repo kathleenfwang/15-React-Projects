@@ -1,3 +1,4 @@
+import React from "react"
 const inktoberEntries = [
     {
         title: 'fish',
@@ -80,4 +81,5 @@ const promptListUrl = 'https://media.discordapp.net/attachments/7012771289515950
 
 const about = "Honestly this is my first year I am really trying to commit the whole month of Inktober.This year's Inktober is during quarantine, so what other commitments could I possibly have."
 const future = "In the future, I am planning on converting this into a full stack app with database storage and authentication, to allow authenticated users to upload their entries and like and comment on others.It would be a convenient and fun way to encourage my friends to participate and share our progress together."
-export {inktoberEntries,promptListUrl,about,future }
+const inspo = <p>Some artists I am inspired by: <a href ="https://twitter.com/daisukerichard?lang=en" target = "_blank">Daisuke Richard</a> | <a href ="https://garouma.tumblr.com/" target = "_blank">Garuoma</a></p>
+export {inktoberEntries,promptListUrl,about,future,inspo}

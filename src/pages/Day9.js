@@ -5,7 +5,7 @@ import { faTimes, faSmile } from '@fortawesome/free-solid-svg-icons'
 import FlipMove from 'react-flip-move';
 import { Fade, Slide, Rotate } from 'react-reveal';
 import { svgDark, svgLight } from "./Components1/day9/svg"
-import { inktoberEntries, promptListUrl, about, future } from './Components1/day9/inktoberEntries'
+import { inktoberEntries, promptListUrl, about, future,inspo} from './Components1/day9/inktoberEntries'
 import { connect } from "react-redux";
 
 class Day9 extends React.Component {
@@ -119,9 +119,11 @@ class Day9 extends React.Component {
     getAbout = () => {
         return (
             <>
+             <p ><a href="https://inktober.com/" target="_blank">Official Inktober Website</a></p>
                 <p>{about}</p>
                 <p>{future}</p>
-                <p className="flex center"><a href="https://inktober.com/" target="_blank">Official Inktober Website</a></p> </>
+               <p>{inspo}</p>
+              </>
         )
     }
     getNoLikes = () => {

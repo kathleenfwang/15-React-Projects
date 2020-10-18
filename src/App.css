@@ -65,7 +65,11 @@
  padding-left:50px;
  border-radius:10px;
  overflow: auto;
+  
+ 
  }
+ 
+  
  button:hover, .active{
   transform: translate3D(0, -2px, 0);
    border: 1px solid transparent;
@@ -635,7 +639,7 @@ padding-left:30px;
   transition: all .5s ease-in-out;
 }
 .inktoberCard:hover{
-transform: scale(1.05);
+transform: rotate(-7deg);
  
 }
 .square:hover {
