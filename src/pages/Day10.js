@@ -93,7 +93,6 @@ export default class Day10 extends React.Component {
             <div className="day11">
 
                 <h2 style={{ marginBottom: -30, color: "white", textAlign: "center", fontStyle: "italic" }}>Pride month is celebrated every June to honor the 1969 Stonewall riots in Manhattan</h2>
-
                 <div className="biggrid center">
                     <Fade clear cascade>
                         {this.getSquaresSection()}

@@ -6,7 +6,6 @@ import FlipMove from 'react-flip-move';
 import { Fade, Slide, Rotate } from 'react-reveal';
 import { svgDark, svgLight } from "./Components1/day9/svg"
 import { inktoberEntries, promptListUrl, about, future } from './Components1/day9/inktoberEntries'
-import { handleThemeToggle } from "../redux"
 import { connect } from "react-redux";
 
 class Day9 extends React.Component {
