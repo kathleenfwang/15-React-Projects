@@ -3,15 +3,15 @@ import Card from "./Components1/day9/Card"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faSmile } from '@fortawesome/free-solid-svg-icons'
 import FlipMove from 'react-flip-move';
-import {Fade,Slide,Rotate} from 'react-reveal';
-import {svgDark,svgLight} from "./Components1/day9/svg"
-import {inktoberEntries,promptListUrl,about,future} from './Components1/day9/inktoberEntries'
-import {handleThemeToggle} from "../redux"
+import { Fade, Slide, Rotate } from 'react-reveal';
+import { svgDark, svgLight } from "./Components1/day9/svg"
+import { inktoberEntries, promptListUrl, about, future } from './Components1/day9/inktoberEntries'
+import { handleThemeToggle } from "../redux"
 import { connect } from "react-redux";
 
 class Day9 extends React.Component {
-    constructor({theme}) {
-        super({theme})
+    constructor({ theme }) {
+        super({ theme })
         this.state = {
             likes: [],
             active: [],
@@ -65,7 +65,7 @@ class Day9 extends React.Component {
     handleSearchInput = (e) => {
         let titles = inktoberEntries
         let value = e.target.value !== "" ? e.target.value : null
-        this.setState({value: value})
+        this.setState({ value: value })
         let allTitles = titles.map((obj) => obj.title)
         let titleNum = Number(value) - 1
         if (allTitles.join().includes(value)) {
@@ -92,17 +92,20 @@ class Day9 extends React.Component {
                     arr.push(titleNum + titles.length + i)
                 })
                 this.setState({
-                    filtered: [...arr]})
+                    filtered: [...arr]
+                })
             }
             else {
                 this.setState({
-                    filtered: [titleNum]})
+                    filtered: [titleNum]
+                })
             }
         }
 
         else {
             this.setState({
-                filtered: []})
+                filtered: []
+            })
         }
     }
     getNavList = () => {
@@ -113,6 +116,20 @@ class Day9 extends React.Component {
                 <li i={i} className="navList" style={{ fontSize: '1.2em', borderBottom: activeList == i ? "2px solid #E0C3FC" : "2px solid transparent" }} onClick={() => this.handleToggle(i)} >{x}</li>
             )
         })
+    }
+    getAbout = () => {
+        return (
+            <>
+                <p>{about}</p>
+                <p>{future}</p>
+                <p className="flex center"><a href="https://inktober.com/" target="_blank">Official Inktober Website</a></p> </>
+        )
+    }
+    getNoLikes = () => {
+        return (
+            <> <h3>Empty :(</h3>
+                <h3>Click the heart icon to like!</h3> </>
+        )
     }
     pageItems = () => {
         const { activeList, likes } = this.state
@@ -128,16 +145,13 @@ class Day9 extends React.Component {
                 return (
                     <div className="flex center">
                         {likes.length > 0 ? likes :
-                        <div className = "down textCenter">
-                            <h3>Empty :(</h3>
-                            <h3>Click the heart icon to like!</h3>
-                                <div style ={this.aboutStyle}className="falseShow up">
-                                <p>{about}</p>
-                                <p>{future}</p>
-                                <p className="flex center"><a href="https://inktober.com/" target="_blank">Official Inktober Website</a></p>
+                            <div className="down textCenter">
+                                {this.getNoLikes()}
+                                <div style={this.aboutStyle} className="falseShow up">
+                                    {this.getAbout()}
+                                </div>
                             </div>
-                        </div>
-                            }
+                        }
                     </div>)
             case 2:
                 return (
@@ -146,16 +160,16 @@ class Day9 extends React.Component {
                     </div>)
             case 3:
                 return (
-                    <div style={this.aboutStyle}>
-                        <div className="flex center up">
-                            <p>I drew these with pen and then scanned using Adobe Capture <FontAwesomeIcon icon={faSmile} /> </p>
+                    <>
+                        <div className="falseShow">
+                            {this.getNoLikes()}
                         </div>
-                        <div className="up">
-                            <p>{about}</p>
-                            <p>{future}</p>
-                            <p className="flex center"><a href="https://inktober.com/" target="_blank">Official Inktober Website</a></p>
+                        <div style={this.aboutStyle}>
+                            <div className="flex center">
+                                {this.getAbout()}
+                            </div>
                         </div>
-                    </div>
+                    </>
                 )
         }
     }
@@ -167,16 +181,19 @@ class Day9 extends React.Component {
         this.refs.input.value = ""
     }
     render() {
-        const { filtered,value } = this.state
-        const {theme} = this.props
+        const { filtered, value } = this.state
+        const { theme } = this.props
+        const lightBg = "https://img1.picmix.com/output/stamp/normal/8/4/6/4/1094648_53964.gif"
+        const darkBg = "https://i.gifer.com/2iiB.gif"
+
         return (
-            <div className="day9" style ={{backgroundImage: theme ? `url("https://i.pinimg.com/originals/17/aa/40/17aa40cc5530dfb653e172cbe086f6ee.gif")` :`url("https://i.gifer.com/2iiB.gif")`}} >
+            <div className="day9" style={{ backgroundImage: theme ? `url(${lightBg})` : `url(${darkBg})` }} >
                 <div className="flex center bold">
                     <h1><b>Inktober is here!</b> </h1>
                 </div>
                 <nav className="nav center " >
                     {this.getNavList()}
-        <li><input ref="input" value = {value} placeholder="Search by day or name..." onChange={this.handleSearchInput}></input>{<FontAwesomeIcon className = "left" style ={{visibility: value ? "visible" : "hidden"}} onClick={this.handleClear} icon={faTimes} />}</li>
+                    <li><input ref="input" value={value} placeholder="Search by day or name..." onChange={this.handleSearchInput}></input>{<FontAwesomeIcon className="left" style={{ visibility: value ? "visible" : "hidden" }} onClick={this.handleClear} icon={faTimes} />}</li>
                 </nav>
                 {filtered.length > 0 ?
                     <div className="flex center down">
@@ -184,16 +201,15 @@ class Day9 extends React.Component {
                             return filtered.includes(x.props.i)
                         })}
                     </div> : <div className="down">{this.pageItems()}</div>}
-                  
-                    <div>{theme ? svgDark : svgLight }</div>
+                <div>{theme ? svgDark : svgLight}</div>
             </div>
         )
     }
 }
 const mapStateToProps = state => {
     return { theme: state };
-  };
-  
-  export default connect(
+};
+
+export default connect(
     mapStateToProps,
-  )(Day9);
+)(Day9);
