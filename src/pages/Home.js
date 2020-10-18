@@ -34,7 +34,7 @@ export default function Home() {
     }
     return (
         <div className="home">
-            <Fade clear>
+            <Fade right clear>
             <div className="firstPanel">
                 <div>
                     <div>
@@ -68,12 +68,13 @@ export default function Home() {
                 <div className="projectList">
                 <button className ="blueButton" onClick = {handleRecent}> Featured: <span style ={{color:"moccasin"}}>{days()[0][1]}</span></button>
                     <button className ="whiteButton" onClick = {handleClick}> Feeling Lucky </button>
-              
+ 
                     <ul ref = {projList}>
-                        <Fade clear cascade>
+             
                         {days()[1]}
-                        </Fade>
+                      
                     </ul>
+  
                   
                 </div>
                 {clicked ? <Redirect to = {`/day/${randomNum}`} /> : null }
