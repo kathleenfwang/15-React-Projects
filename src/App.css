@@ -13,7 +13,6 @@
 }
 
  h1,h2,h4{
-   color:#888;
    font-weight:normal
  }
  .pic {
@@ -200,6 +199,9 @@ a {
  }
  .nav ul li {
    margin-right:10px;
+ }
+ .textCenter {
+   text-align: center;
  }
  .error {
    border-radius:5px;

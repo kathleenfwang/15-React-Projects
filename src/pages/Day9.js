@@ -6,15 +6,19 @@ import FlipMove from 'react-flip-move';
 import {Fade,Slide,Rotate} from 'react-reveal';
 import {svgDark,svgLight} from "./Components1/day9/svg"
 import {inktoberEntries,promptListUrl,about,future} from './Components1/day9/inktoberEntries'
-export default class Day9 extends React.Component {
-    constructor() {
-        super()
+import {handleThemeToggle} from "../redux"
+import { connect } from "react-redux";
+
+class Day9 extends React.Component {
+    constructor({theme}) {
+        super({theme})
         this.state = {
             likes: [],
             active: [],
             filtered: [],
             activeList: 0,
         }
+        this.aboutStyle = { backgroundColor: "#222", padding: 30, color: "white", margin: '0 auto', marginTop: 20, fontSize: '1.5em', width: '50%', borderRadius: 5 }
     }
     makeCards = (notLikes) => {
         const { active } = this.state
@@ -124,7 +128,16 @@ export default class Day9 extends React.Component {
                 return (
                     <div className="flex center">
                         {likes.length > 0 ? likes :
-                            <h3>Empty :( Click the heart icon to like!</h3>}
+                        <div className = "down textCenter">
+                            <h3>Empty :(</h3>
+                            <h3>Click the heart icon to like!</h3>
+                                <div style ={this.aboutStyle}className="falseShow up">
+                                <p>{about}</p>
+                                <p>{future}</p>
+                                <p className="flex center"><a href="https://inktober.com/" target="_blank">Official Inktober Website</a></p>
+                            </div>
+                        </div>
+                            }
                     </div>)
             case 2:
                 return (
@@ -133,7 +146,7 @@ export default class Day9 extends React.Component {
                     </div>)
             case 3:
                 return (
-                    <div style={{ backgroundColor: "#222", padding: 30, color: "white", margin: '0 auto', marginTop: 20, fontSize: '1.5em', width: '50%', borderRadius: 5 }}>
+                    <div style={this.aboutStyle}>
                         <div className="flex center up">
                             <p>I drew these with pen and then scanned using Adobe Capture <FontAwesomeIcon icon={faSmile} /> </p>
                         </div>
@@ -157,6 +170,7 @@ export default class Day9 extends React.Component {
         const { filtered,value } = this.state
         return (
             <div className="day9" >
+      
                 <div className="flex center bold">
                     <h1><b>Inktober is here!</b> </h1>
                 </div>
@@ -170,8 +184,16 @@ export default class Day9 extends React.Component {
                             return filtered.includes(x.props.i)
                         })}
                     </div> : <div className="down">{this.pageItems()}</div>}
-                    <div>{svgLight}</div>
+                  
+                    <div>{this.props.theme ? svgDark : svgLight }</div>
             </div>
         )
     }
 }
+const mapStateToProps = state => {
+    return { theme: state };
+  };
+  
+  export default connect(
+    mapStateToProps,
+  )(Day9);
