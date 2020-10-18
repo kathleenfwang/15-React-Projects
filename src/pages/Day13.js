@@ -9,7 +9,6 @@ export default class Day13 extends React.Component {
             value1: "icosahedron",
             value2: "torusKnot"
         }
-        
     }
     componentDidMount() {
         this.startAnimate()

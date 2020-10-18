@@ -38,7 +38,6 @@ export default function Home() {
             <div className="firstPanel">
                 <div>
                     <div>
-                 
                         <Fade left cascade>
                         <h1>Hi, I'm Kathleen Wang!</h1>
                         <p>Software Engineer</p>
@@ -48,8 +47,6 @@ export default function Home() {
                         <p><a target="_blank" href ="https://github.com/kathleenfwang"><FontAwesomeIcon icon ={faGithub}/></a></p>
                         <p><a target="_blank" href ="https://www.linkedin.com/in/kathleen-wang/"><FontAwesomeIcon icon ={faLinkedin}/></a></p>
                         <p><Link to ="/Contact"><FontAwesomeIcon icon = {faEnvelope}/></Link></p>
-                      
-                    
                     </div> 
                     </Fade>
                     </div>
@@ -68,14 +65,9 @@ export default function Home() {
                 <div className="projectList">
                 <button className ="blueButton" onClick = {handleRecent}> Featured: <span style ={{color:"moccasin"}}>{days()[0][1]}</span></button>
                     <button className ="whiteButton" onClick = {handleClick}> Feeling Lucky </button>
- 
                     <ul ref = {projList}>
-             
                         {days()[1]}
-                      
                     </ul>
-  
-                  
                 </div>
                 {clicked ? <Redirect to = {`/day/${randomNum}`} /> : null }
             </div>

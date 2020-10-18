@@ -47,13 +47,11 @@ export default class Day14 extends React.Component {
                 </Fade>
                 <Fade>
                 <div className={`${show}Show center`} style={this.bigDiv("palegoldenrod")}>
-             
                         {show && <Slide right cascade>
                             <div className="flexDirection width">
                            {this.getDivs()}
                             </div>
                         </Slide>}
-                
                 </div>
                 </Fade>
                 <Fade>

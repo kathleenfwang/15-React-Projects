@@ -12,10 +12,7 @@ export default function Projects(props) {
     const ProjectType = components[day]
     return (
         <div>
-            {components[day] ?
-                <>
-                    <ProjectType />
-                </> :
+            {components[day] ? <ProjectType /> :
                 <Error components={components} />}
         </div>
     )
