@@ -650,7 +650,7 @@ transform: rotate(-3deg);
 }
 .dark {
   color:whitesmoke;
-  background: rgba(31, 30, 30, 0.9);
+  background: rgba(22, 21, 21, 0.9);
 }
 .square:hover {
   transform: scale(1.1);
