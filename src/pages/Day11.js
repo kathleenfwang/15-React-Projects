@@ -5,11 +5,11 @@ import { faHeart, faTrashAlt, } from '@fortawesome/free-regular-svg-icons'
 import { faDownload, faTimes, faAngleDoubleRight, faAngleDoubleLeft,faSearch, faHeart as faFilledHeart } from '@fortawesome/free-solid-svg-icons'
 import {Fade,Slide,Rotate} from 'react-reveal';
 import FlipMove from 'react-flip-move';
+import { connect } from "react-redux";
+class Day11 extends React.Component {
 
-export default class Day11 extends React.Component {
-
-    constructor() {
-        super()
+    constructor({theme}) {
+        super({theme})
         this.state = {
             imageData: null,
             isShown: false,
@@ -33,7 +33,6 @@ export default class Day11 extends React.Component {
         this.middleDiv = {
             fontSize: '1.2em',
             position: "relative",
-            backgroundColor: "#f2f3f4",
             padding: 30,
             borderRadius: 5,
             width: '70%',
@@ -192,15 +191,16 @@ export default class Day11 extends React.Component {
     }
     showPopOut = () => {
         const { isShown, imageData, activeList } = this.state
+        const {theme} = this.props
         let heart = activeList === 0
         return (<div className={`${isShown}Show flex center`} style={this.bigDiv}>
-            <div style={this.middleDiv}>
+            <div className = {theme ? 'light' : 'dark'}style={this.middleDiv}>
                 <div>
                     <div className="flex padding" style={{ justifyContent: "space-between", }}>
                         <div className="flex">
                             <img style={{ borderRadius: 5, boxShadow: '2px 4px 25px rgba(0, 0, 0, .2)' }} src={imageData.user.profile_image.small} />
                             <div className="lineHeight">
-                                <p className="left" style={{ color: "#333" }}>{`${imageData.user.name}`}</p>
+                                <p className="left">{`${imageData.user.name}`}</p>
                                 <p className="left"><a href={`https://unsplash.com/@${imageData.user.username}`} target="_blank">{`@${imageData.user.username}`}</a></p>
                             </div>
                             <FontAwesomeIcon className="arrow cursor bigger lightDark rightarrow" icon={faAngleDoubleRight} onClick={() => this.handleNextImage(imageData, activeList, 'right')} />
@@ -244,3 +244,10 @@ export default class Day11 extends React.Component {
         )
     }
 }
+const mapStateToProps = state => {
+    return { theme: state };
+};
+
+export default connect(
+    mapStateToProps,
+)(Day11);

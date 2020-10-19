@@ -644,6 +644,14 @@ padding-left:30px;
 transform: rotate(-3deg);
  
 }
+.light {
+  color: #333;
+  background-color: #f2f3f4;
+}
+.dark {
+  color:whitesmoke;
+  background: rgba(31, 30, 30, 0.9);
+}
 .square:hover {
   transform: scale(1.1);
    
