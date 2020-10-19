@@ -650,7 +650,7 @@ transform: rotate(-3deg);
   transition: all 0.2s ease-in-out;
 }
 .hover:hover { 
-  transform: translate3D(0, -2px, 0);
+  border:1px solid transparent;
 }
 .padding {
   padding:10px;

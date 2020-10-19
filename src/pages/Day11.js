@@ -86,12 +86,13 @@ export default class Day11 extends React.Component {
         let images = []
         for (let i = 0; i < data.length; i++) {
             images.push(
-                <div className = "hover transition" style={{ position: "relative", }}>
-                    <Fade clear cascade>
+                <Fade clear>
+                <div className ="hover transition" style={{position: "relative", }}>
                     {this.toggleHeartImage(data[i], show, '1.2em', 10, 10, faTimes)}
                     <img style={{ boxShadow: '2px 4px 25px rgba(0, 0, 0, .1)' }} className="cursor borderRadius" onClick={() => this.handleImgClick(i, data[i])} title={data[i]['alt_description']} src={data[i].urls.small} />
-                    </Fade>
-                </div>)
+                
+                </div>
+                </Fade>)
         }
         return images
     }
@@ -143,7 +144,7 @@ export default class Day11 extends React.Component {
         const { activeList, active, data } = this.state
         switch (activeList) {
             case 0:
-                return this.getImages(data, true)
+        return <div >{this.getImages(data, true)}</div>
             case 1:
                 return (
                     active.length > 0 ? <FlipMove>{this.getImages(active, false)}</FlipMove> :
