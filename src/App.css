@@ -641,7 +641,8 @@ padding-left:30px;
   transition: all .5s ease-in-out;
 }
 .inktoberCard:hover{
-transform: rotate(-3deg);
+transform: scale(.97);
+cursor:pointer;
  
 }
 .light {
@@ -658,7 +659,7 @@ transform: rotate(-3deg);
   transition: all 0.2s ease-in-out;
 }
 .hover:hover { 
-  border:1px solid transparent;
+ 
 }
 .padding {
   padding:10px;
@@ -769,20 +770,24 @@ transform: rotate(-3deg);
 .photos {
   /* Prevent vertical gaps */
   line-height: 0;
- 
   -webkit-column-count: 5;
-  -webkit-column-gap:   0px;
+  -webkit-column-gap:   5px;
   -moz-column-count:    5;
   -moz-column-gap:      0px;
   column-count:         5;
-  column-gap:           3px;  
+  column-gap:           5px;  
+
  
 }
 .photos img {
   /* Just in case there are inline attributes */
+ 
   margin-bottom:2px;
   width: 100% !important;
   height: auto !important;
+}
+.photos img:hover {
+border:1px solid transparent;
 }
 @media (max-width: 1200px) {
   .photos {
