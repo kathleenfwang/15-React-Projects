@@ -647,7 +647,7 @@ cursor:pointer;
 }
 .light {
   color: #333;
-  background-color: #f2f3f4;
+  background: rgba(224, 224, 224, 0.9);
 }
 .dark {
   color:whitesmoke;
