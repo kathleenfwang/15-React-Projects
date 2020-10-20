@@ -14,7 +14,7 @@ export default function Card(props) {
                     onClick={() => props.handleLike(props.i)}
                     id="outerHeart"
                     style={{
-                        color: props.active.includes(props.i) ? "palevioletred" : "",
+                        color: props.active.includes(props.i) ? "#ff8080" : "",
                         position: "absolute", right: 10, top: 10
                     }}
                     icon={props.active.includes(props.i) ? faFilledHeart : faHeart} />

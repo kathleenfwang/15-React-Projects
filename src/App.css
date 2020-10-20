@@ -245,7 +245,7 @@ a {
  }
  .error h1 {
    font-weight:bold;
-   color:palevioletred;
+   color:#ff8080;
  }
  .dark {
    color: #333;
@@ -321,6 +321,12 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .trueVisible {
+    visibility: visible;
+  }
+  .falseVisible {
+    visibility: hidden;
   }
   .trueForm {
     visibility: visible;
@@ -623,12 +629,14 @@ padding-left:30px;
   color:lightgrey;
 }
  
- 
+.red {
+  color:#ff8080;
+}
 #nav li:hover {
   border-bottom: 2px solid pink;
 }
 #outerHeart:hover, #icon:hover {
-  color:palevioletred;
+  color:#ff8080;
 }
 .inktoberCard {
   box-shadow: 2px 4px 25px rgba(0, 0, 0, .1);

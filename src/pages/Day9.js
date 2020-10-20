@@ -1,7 +1,7 @@
 import React from "react"
 import Card from "./Components1/day9/Card"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faSmile, faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faSmile, faArrowUp, faHeart } from '@fortawesome/free-solid-svg-icons'
 import FlipMove from 'react-flip-move';
 import { Fade, Slide, Rotate } from 'react-reveal';
 import { svgDark, svgLight } from "./Components1/day9/svg"
@@ -19,6 +19,7 @@ class Day9 extends React.Component {
         }
         this.aboutStyle = { backgroundColor: "#222", padding: 30, color: "white", margin: '0 auto', marginTop: 20, fontSize: '1.5em', width: '50%', borderRadius: 5 }
     }
+
     makeCards = (notLikes) => {
         const { active } = this.state
         let cards = []
@@ -133,7 +134,7 @@ class Day9 extends React.Component {
         )
     }
     pageItems = () => {
-        const { activeList, likes } = this.state
+        const { activeList, likes} = this.state
         switch (activeList) {
             case 0:
                 return (
@@ -141,6 +142,9 @@ class Day9 extends React.Component {
                         <div className="flex center">
                             {this.makeCards(true)}
                         </div>
+                        <div className ="down" style ={{textAlign:"center"}}> 
+                   <a href="#start"> <button><FontAwesomeIcon icon ={faArrowUp}/></button></a>
+                   </div>
                     </FlipMove>)
             case 1:
                 return (
@@ -187,7 +191,7 @@ class Day9 extends React.Component {
         this.refs.input.value = ""
     }
     render() {
-        const { filtered, value } = this.state
+        const { filtered, value, likes } = this.state
         const { theme } = this.props
         const lightBg = "https://img1.picmix.com/output/stamp/normal/8/4/6/4/1094648_53964.gif"
         const darkBg = "https://i.gifer.com/2iiB.gif"
@@ -200,6 +204,7 @@ class Day9 extends React.Component {
                 <nav className="nav center " >
                     {this.getNavList()}
                     <li><input ref="input" value={value} placeholder="Search by day or name..." onChange={this.handleSearchInput}></input>{<FontAwesomeIcon className="left" style={{ visibility: value ? "visible" : "hidden" }} onClick={this.handleClear} icon={faTimes} />}</li>
+                  <li style ={{width:70, overflow:"hidden"}} className ={`${likes}Visible bigger`}><FontAwesomeIcon className ="red" icon = {faHeart}></FontAwesomeIcon> = {likes.length}<span className = "falseVisible">5</span></li>
                 </nav>
                 <Fade>
                 {filtered.length > 0 ?
@@ -208,9 +213,6 @@ class Day9 extends React.Component {
                             return filtered.includes(x.props.i)
                         })}
                     </div> : <div className="down">{this.pageItems()}</div>}
-                   <div className ="down" style ={{textAlign:"center"}}> 
-                   <a href="#start"> <button><FontAwesomeIcon icon ={faArrowUp}/></button></a>
-                   </div>
                 <div>{theme ? svgDark : svgLight}</div>
             
                 </Fade>
