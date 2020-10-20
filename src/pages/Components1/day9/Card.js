@@ -26,7 +26,7 @@ export default function Card(props) {
                     className={`${!props.notLikes}Show`}
                     icon={faTrashAlt} />
             </h1>
-            <h2 className ="up">Day: {props.day}</h2>
+            <h2 style ={{color: "#666",marginTop:"-15px"}}>Day: {props.day}</h2>
             <img  src={props.src} />
             </Fade>
         </div>
