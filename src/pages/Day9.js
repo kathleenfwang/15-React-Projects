@@ -151,7 +151,7 @@ class Day9 extends React.Component {
                     <Fade>
                     <div className="flex center">
                         {likes.length > 0 ? likes :
-                            <div className="down textCenter">
+                            <div className="textCenter">
                                 {this.getNoLikes()}
                                 <div style={this.aboutStyle} className="falseShow up">
                                     {this.getAbout()}
@@ -201,10 +201,10 @@ class Day9 extends React.Component {
                 <div className="flex center bold">
                     <h1 ><b>Inktober is here!</b> </h1>
                 </div>
-                <nav className="nav center " >
+                <nav style ={{lineHeight:3,marginLeft:30}} className="nav center" >
                     {this.getNavList()}
                     <li><input ref="input" value={value} placeholder="Search by day or name..." onChange={this.handleSearchInput}></input>{<FontAwesomeIcon className="left" style={{ visibility: value ? "visible" : "hidden" }} onClick={this.handleClear} icon={faTimes} />}</li>
-                  <li style ={{width:70, overflow:"hidden"}} className ={`${likes}Visible bigger`}><FontAwesomeIcon className ="red" icon = {faHeart}></FontAwesomeIcon> = {likes.length}<span className = "falseVisible">5</span></li>
+                    <li style ={{position:"relative", right: 5, width:70, overflow:"hidden"}} className ={`${likes.length >0}Show bigger transitionVisible`}><FontAwesomeIcon className ="red" icon = {faHeart}></FontAwesomeIcon> = {likes.length}</li>
                 </nav>
                 <Fade>
                 {filtered.length > 0 ?
