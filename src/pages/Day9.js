@@ -1,7 +1,7 @@
 import React from "react"
 import Card from "./Components1/day9/Card"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faSmile } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faSmile, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import FlipMove from 'react-flip-move';
 import { Fade, Slide, Rotate } from 'react-reveal';
 import { svgDark, svgLight } from "./Components1/day9/svg"
@@ -208,8 +208,8 @@ class Day9 extends React.Component {
                             return filtered.includes(x.props.i)
                         })}
                     </div> : <div className="down">{this.pageItems()}</div>}
-                   <div style ={{textAlign:"right"}}> 
-                       <button><a href="#start">Top</a></button>
+                   <div className ="down" style ={{textAlign:"center"}}> 
+                   <a href="#start"> <button><FontAwesomeIcon icon ={faArrowUp}/></button></a>
                    </div>
                 <div>{theme ? svgDark : svgLight}</div>
             

@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import {Link, Redirect} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHamburger,faArrowRight, faCommentDots, faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
+import { faHamburger,faArrowRight, faCommentDots, faSun, faMoon, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import {handleThemeToggle} from "../redux"
 import { connect } from "react-redux";
 
@@ -39,7 +39,7 @@ function Header({theme,handleThemeToggle}) {
         <ul>
             <li> <Link to ="/">Home</Link></li>
             <li><Link to ="/Blog">Blog</Link></li> 
-            <li><Link to ="/Contact"> <FontAwesomeIcon icon={faCommentDots} /></Link></li>
+            <li><Link to ="/Contact"> <FontAwesomeIcon icon={faEnvelope} /></Link></li>
             <li onClick ={handleClick}>Next Project <FontAwesomeIcon icon = {faArrowRight}></FontAwesomeIcon> </li>
             <li onClick ={handleThemeToggle}> <FontAwesomeIcon icon = {theme ? faMoon : faSun} /> Mode</li>
         </ul>
