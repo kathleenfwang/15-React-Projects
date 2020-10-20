@@ -797,9 +797,7 @@ cursor:pointer;
   width: 100% !important;
   height: auto !important;
 }
-.photos img:hover {
-border:1px solid transparent;
-}
+ 
 @media (max-width: 1200px) {
   .photos {
   -moz-column-count:    4;
