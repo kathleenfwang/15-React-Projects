@@ -1,8 +1,10 @@
+ html {
+  scroll-behavior: smooth;
+ }
  body {
    padding:20px;
   color: #1E2939;
   font-size:.8em;
-    scroll-behavior: smooth;
  }
  
  .white, #white {
@@ -147,6 +149,7 @@ a {
   color: #9599E2;
   transform: scale(1.05);
   transform: translate3D(0, -2px, 0);
+
  
 }
  .links {

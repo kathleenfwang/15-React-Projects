@@ -79,7 +79,10 @@ const inktoberEntries = [
     {
         title: 'coral',
         src: 'https://media.discordapp.net/attachments/701277128951595030/767249630886101002/Shape_45.png?width=340&height=490'
-    }
+    }, 
+    {title: 'sleep',
+    src: 'https://media.discordapp.net/attachments/701277128951595030/768186930159943700/Shape_47.png?width=340&height=490'
+}
 ]
 const promptListUrl = 'https://media.discordapp.net/attachments/701277128951595030/762183039857065994/official-inktober-2020-prompt-list.png?width=490&height=490'
 

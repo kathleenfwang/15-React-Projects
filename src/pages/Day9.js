@@ -193,9 +193,9 @@ class Day9 extends React.Component {
         const darkBg = "https://i.gifer.com/2iiB.gif"
 
         return (
-            <div className="day9" style={{ backgroundImage: theme ? `url(${lightBg})` : `url(${darkBg})` }} >
+            <div   id ="start" className="day9" style={{ backgroundImage: theme ? `url(${lightBg})` : `url(${darkBg})` }} >
                 <div className="flex center bold">
-                    <h1><b>Inktober is here!</b> </h1>
+                    <h1 ><b>Inktober is here!</b> </h1>
                 </div>
                 <nav className="nav center " >
                     {this.getNavList()}
@@ -208,7 +208,11 @@ class Day9 extends React.Component {
                             return filtered.includes(x.props.i)
                         })}
                     </div> : <div className="down">{this.pageItems()}</div>}
+                   <div style ={{textAlign:"right"}}> 
+                       <button><a href="#start">Top</a></button>
+                   </div>
                 <div>{theme ? svgDark : svgLight}</div>
+            
                 </Fade>
             </div>
         )
