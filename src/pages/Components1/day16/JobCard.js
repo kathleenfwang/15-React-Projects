@@ -1,7 +1,6 @@
 import React from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
-import {handleThemeToggle} from "../redux"
 import { connect } from "react-redux";
 
 function JobCard({ data, theme}) {
@@ -14,7 +13,7 @@ function JobCard({ data, theme}) {
         height: 50
     }
     const cardStyle = {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: theme ? '#FFFFFF' : '#202530',
         position: 'relative',
         display:'flex',
         justifyContent:'space-between',
@@ -24,6 +23,7 @@ function JobCard({ data, theme}) {
         width:'60%',
 
     }
+    const title = theme ? "darkgrey" : "white"
     const getDate = date => {
         // Wed Oct 21 10:37:58 UTC 2020 -> Oct 21 
         return date.slice(4, 10)
@@ -38,7 +38,7 @@ function JobCard({ data, theme}) {
                 <p>{data.type}</p>
             </div>
             <div>
-                <h2 className ="darkgrey">{data.title}</h2>
+                <h2 className ={`${title} bold`}>{data.title}</h2>
                 <p className ="grey">{data.company}</p>
             </div>
             </div>
@@ -52,6 +52,5 @@ function JobCard({ data, theme}) {
 export default connect(
     state => {
         return { theme: state };
-      },
-    {handleThemeToggle}
+      }
   )(JobCard);

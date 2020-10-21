@@ -421,7 +421,7 @@ background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
   input {
     margin-left:5px;
     margin-right:5px;
-    background-color: whitesmoke;
+    background-color: #f2f2f2;
     color:#333;
     font-size:1.3em;
     border: 1px solid transparent;
@@ -778,8 +778,11 @@ cursor:pointer;
   animation-duration: .5s;
  
 }
-.day16 {
+.day16light {
   background-color: #F2F2F2;
+}
+.day16dark {
+  background-color:#131722;
 }
 .darkgrey {
   font-weight:bold;

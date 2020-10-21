@@ -1,10 +1,10 @@
 import React from "react"
 import axios from "axios"
-
+import { connect } from "react-redux";
 import JobCard from "./Components1/day16/JobCard"
-export default class Day16 extends React.Component {
-    constructor() {
-        super() 
+class Day16 extends React.Component {
+    constructor({theme}) {
+        super({theme}) 
         this.state = {
             url: 'https://jobs.github.com/positions.json?page=1&search=code',
             data:null
@@ -41,9 +41,12 @@ export default class Day16 extends React.Component {
         </div>)
     }
     render() {
+        const {theme} = this.props
         const {data} = this.state
+        const classTheme = theme ? "day16light" : "day16dark"
+        console.log(theme)
         return(
-            <div className ="day16">
+            <div className ={`${classTheme} Day16`}>
                 <header>
                     <h2>devjobs</h2>
                     <div>
@@ -61,3 +64,8 @@ export default class Day16 extends React.Component {
         )
     }
 }
+export default connect(
+    state => {
+        return { theme: state };
+      }
+  )(Day16);

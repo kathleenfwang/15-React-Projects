@@ -28,7 +28,7 @@ function Header({theme,handleThemeToggle}) {
  
     }
     else {
-        document.body.style.backgroundColor = "whitesmoke"
+        document.body.style.backgroundColor = "#f2f2f2"
         document.body.style.color = "#333"
     }
     return (
