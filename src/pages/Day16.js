@@ -6,7 +6,10 @@ class Day16 extends React.Component {
     constructor({theme}) {
         super({theme}) 
         this.state = {
-            url: 'https://jobs.github.com/positions.json?page=1&search=code',
+            url: 'https://jobs.github.com/positions.json?page=1&',
+            search: 'code',
+            location:'',
+            fullTime: false,
             data:null
         }
         this.proxyurl = "https://cors-anywhere.herokuapp.com/"
@@ -16,8 +19,9 @@ class Day16 extends React.Component {
         this.getCards()
     }
     getCards = () => {
-        const {url} = this.state 
-        axios.get(this.proxyurl + url)
+        const {url,search,location,fullTime} = this.state 
+        let fullUrl = `${this.proxyurl}${url}description=${search}&location=${location}&full_time=${fullTime}`
+        axios.get(fullUrl)
         .then(resp => {
             console.log(resp.data)
             this.setState({
@@ -33,12 +37,32 @@ class Day16 extends React.Component {
             <JobCard data = {job}/>)
         })
     }
+    handleRole = (e) => {
+        this.setState({
+            search: e.target.value
+        })
+    }
+    handleLocation= (e) => {
+        this.setState({
+            location: e.target.value
+        })
+    }
+    handleType = (e) => {
+        let checked = this.refs.type.checked
+        this.setState({
+            fullTime: checked
+        })
+    }
+    handleSearch = (e) => {
+        e.preventDefault()
+        this.getCards()
+    }
     navBar = () => {
         return (<div className ="center">
-            <input placeholder ="Find your next role"/>
-            <input placeholder = "Location"/>
-            <input type="checkbox" value ="true"/>Full Time Only 
-            <button>Search</button>
+            <input onChange ={this.handleRole} placeholder ="Find your next role"/>
+            <input onChange = {this.handleLocation}placeholder = "Location"/>
+            <input ref ="type" onChange = {this.handleType} type="checkbox"/>Full Time Only 
+            <button onClick ={this.handleSearch}>Search</button>
         </div>)
     }
     render() {
