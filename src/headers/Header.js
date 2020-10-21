@@ -13,6 +13,7 @@ function Header({theme,handleThemeToggle}) {
     function handleClick(e) {
      let url = window.location.href
      let page = window.location.href.slice(-2) 
+     console.log(page)
      if (page[1] === "/" || url.includes('Blog') || url.includes('Contact')) page = 1
      else if (page[0] === "/") page = page[1]
       page++

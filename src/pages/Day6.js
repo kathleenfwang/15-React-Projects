@@ -39,7 +39,6 @@ export default class Day6 extends React.Component {
             })
     }
     plantCardStyle = (plant) => {
-        console.log(plant)
         return {
             backgroundImage: `url(${plant.image})`,
             backgroundSize: "cover",

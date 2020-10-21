@@ -2,11 +2,12 @@
   scroll-behavior: smooth;
  }
  body {
+  font-family: 'Sawarabi Gothic', sans-serif;
    padding:20px;
   color: #1E2939;
-  font-size:.8em;
- }
  
+ }
+ @import url('https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap');
  .white, #white {
   color:white;
 }
@@ -317,7 +318,7 @@ a {
   }
   .threeGrid {
     justify-items: center;
-    margin:0 auto;
+    margin-top:50px;
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap:50px;
@@ -777,6 +778,11 @@ cursor:pointer;
 	animation-timing-function: ease-in-out;
   animation-duration: .5s;
  
+}
+.day16 {
+  font-family: 'Sawarabi Gothic', sans-serif;
+  border-radius:6px;
+  padding:30px;
 }
 .day16light {
   background-color: #F2F2F2;

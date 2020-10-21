@@ -46,9 +46,9 @@ class Day16 extends React.Component {
         const classTheme = theme ? "day16light" : "day16dark"
         console.log(theme)
         return(
-            <div className ={`${classTheme} Day16`}>
+            <div className ={`${classTheme} day16`}>
                 <header>
-                    <h2>devjobs</h2>
+                    <h1 className ="bold">devjobs</h1>
                     <div>
                         {this.navBar()}
                     </div>
