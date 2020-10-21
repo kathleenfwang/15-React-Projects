@@ -75,15 +75,19 @@
    transform: rotate(20deg);
  }
   
- button:hover, .active{
+ button:hover {
   transform: translate3D(0, -2px, 0);
    border: 1px solid transparent;
- background-color: #B3D4F3;
+ background-color: #88b;
  color:white;
  }
-.active {
-  background-color: #84bdf3;
+.active, .darkButton{
+  background-color: #88b;
    color:white;
+ }
+ .darkButton:hover {
+  color: #88b;
+  background-color:white;
  }
  .secondary   {
    border: 1px solid #68d388;
@@ -107,13 +111,12 @@
  }
  button {
   box-shadow: 2px 4px 25px rgba(0, 0, 0, .2);
-   border: 2px solid white;
    background-color:white;
    color:#B3D4F3;
    font-weight: bold;
    outline:none;
    padding:10px;
-   border:1px solid #B3D4F3;
+   border:1px solid transparent;
    border-radius:5px;
    cursor: pointer;
    margin-left:10px;
@@ -322,6 +325,7 @@ a {
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap:50px;
+ 
   }
  
   .titlePicture {
@@ -737,7 +741,7 @@ cursor:pointer;
   padding:20px;
  
 }
-.purple {
+.purple, button {
   font-weight:bold;
   color:  #88b;
 }
@@ -779,8 +783,10 @@ cursor:pointer;
   animation-duration: .5s;
  
 }
+.spaceBetween {
+  justify-content: space-between;
+}
 .day16 {
-  font-family: 'Sawarabi Gothic', sans-serif;
   border-radius:6px;
   padding:30px;
 }

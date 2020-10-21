@@ -15,15 +15,13 @@ function JobCard({ data, theme}) {
     const cardStyle = {
         backgroundColor: theme ? '#FFFFFF' : '#202530',
         position: 'relative',
-        display:'flex',
-        justifyContent:'space-between',
-        flexDirection:'column',
         borderRadius:5,
         padding: 30,
-        width:'60%',
+        width:'60%'
 
     }
     const title = theme ? "darkgrey" : "white"
+    const button = theme ? null : "darkButton"
     const getDate = date => {
         // Wed Oct 21 10:37:58 UTC 2020 -> Oct 21 
         return date.slice(4, 10)
@@ -42,8 +40,9 @@ function JobCard({ data, theme}) {
                 <p className ="grey">{data.company}</p>
             </div>
             </div>
-            <div>
+            <div className ="flex spaceBetween">
                 <p className ="purple">{data.location}</p>
+                <a target ="_blank" href ={data.url}><button className ="darkButton">Go to listing</button></a>
             </div>
             <a target ="_blank" href ={data.company_url}><img className="square" style={logoStyle} src={imgLogo} /></a>
         </div>

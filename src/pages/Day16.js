@@ -29,7 +29,8 @@ class Day16 extends React.Component {
     makeCards = () => {
         const {data} = this.state
         return data.map((job) => {
-            return <JobCard data = {job}/>
+            return (
+            <JobCard data = {job}/>)
         })
     }
     navBar = () => {
