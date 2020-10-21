@@ -1,5 +1,6 @@
 import React from "react"
 import axios from "axios"
+
 import JobCard from "./Components1/day16/JobCard"
 export default class Day16 extends React.Component {
     constructor() {
@@ -18,6 +19,7 @@ export default class Day16 extends React.Component {
         const {url} = this.state 
         axios.get(this.proxyurl + url)
         .then(resp => {
+            console.log(resp.data)
             this.setState({
                 data:resp.data
             })
@@ -41,7 +43,7 @@ export default class Day16 extends React.Component {
     render() {
         const {data} = this.state
         return(
-            <div>
+            <div className ="day16">
                 <header>
                     <h2>devjobs</h2>
                     <div>
@@ -49,8 +51,8 @@ export default class Day16 extends React.Component {
                     </div>
                 </header>
 
-                <div class ="container">
-                    <div class = "cards">
+                <div class ="container down">
+                    <div class = "threeGrid">
                     {data ? this.makeCards(): "Loading ... "}
                     </div>
 

@@ -1,27 +1,57 @@
 import React from "react"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircle } from '@fortawesome/free-solid-svg-icons'
+import {handleThemeToggle} from "../redux"
+import { connect } from "react-redux";
 
-export default function JobCard({data}) {
-    const logoStyle =  {
+function JobCard({ data, theme}) {
+    console.log(theme)
+    const logoStyle = {
         position: 'absolute',
-        left: 30, 
+        left: 30,
         top: -25,
-        width:50,
-        height:50
+        width: 50,
+        height: 50
     }
     const cardStyle = {
+        backgroundColor: '#FFFFFF',
         position: 'relative',
-        border:'2px solid white', 
-        padding:30,
+        display:'flex',
+        justifyContent:'space-between',
+        flexDirection:'column',
+        borderRadius:5,
+        padding: 30,
+        width:'60%',
+
     }
-    return(
-        <div style ={cardStyle}>
-            <h2>{data.title}</h2>
-            <p>{data.type}</p>
-            <p>{data.company}</p>
-            <p>{data.created_at}</p>
-            <p>{data.location}</p>
-            <p>{data.company_url}</p>
-            <img className = "square" style ={logoStyle} src ={data.company_logo}/>
+    const getDate = date => {
+        // Wed Oct 21 10:37:58 UTC 2020 -> Oct 21 
+        return date.slice(4, 10)
+    }
+    const imgLogo = data.company_logo ? data.company_logo : "https://static.thenounproject.com/png/47074-200.png"
+    return (
+        <div style={cardStyle}>
+            <div>
+            <div className="grey flexTitle down">
+                <p>{getDate(data.created_at)}</p>
+                <FontAwesomeIcon icon = {faCircle}/>
+                <p>{data.type}</p>
+            </div>
+            <div>
+                <h2 className ="darkgrey">{data.title}</h2>
+                <p className ="grey">{data.company}</p>
+            </div>
+            </div>
+            <div>
+                <p className ="purple">{data.location}</p>
+            </div>
+            <a target ="_blank" href ={data.company_url}><img className="square" style={logoStyle} src={imgLogo} /></a>
         </div>
     )
 }
+export default connect(
+    state => {
+        return { theme: state };
+      },
+    {handleThemeToggle}
+  )(JobCard);

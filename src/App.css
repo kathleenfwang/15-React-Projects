@@ -315,7 +315,13 @@ a {
     display:flex;
     flex-wrap: wrap;
   }
-
+  .threeGrid {
+    justify-items: center;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap:50px;
+  }
  
   .titlePicture {
     display: flex;
@@ -730,6 +736,13 @@ cursor:pointer;
   padding:20px;
  
 }
+.purple {
+  font-weight:bold;
+  color:  #88b;
+}
+.grey {
+  color: #bbc;
+}
 .lightDark {
   color: #777;
 }
@@ -764,6 +777,20 @@ cursor:pointer;
 	animation-timing-function: ease-in-out;
   animation-duration: .5s;
  
+}
+.day16 {
+  background-color: #F2F2F2;
+}
+.darkgrey {
+  font-weight:bold;
+  color: #545861;
+}
+.flexTitle {
+  width: 150px;
+  /* text-align: center; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
  
  
