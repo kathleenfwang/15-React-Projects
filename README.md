@@ -11,7 +11,7 @@ Curent Projects:
 - Day 4: feelings [view](http://kathleenwang180projects.surge.sh/day/4)
 - Day 3: Mental Health Message [view](http://kathleenwang180projects.surge.sh/day/3)
 - Day 2: Solar System [view](http://kathleenwang180projects.surge.sh/day/2)
-- Day 1: This Website
+- Day 1: This Website [view](kathleenwang180projects.surge.sh/)
 ### Uses: 
 - React/Redux 
 - MongoDB/Mongoose 
