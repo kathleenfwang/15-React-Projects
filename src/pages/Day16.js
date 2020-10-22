@@ -114,8 +114,11 @@ class Day16 extends React.Component {
         return (
             <div id="start" className={`${classTheme} day16`}>
                 <header>
-                    <div className="bold borderHeader"><img style={{ marginLeft: 100 }} src={this.devjobslogo}></img></div>
-                    <div className={`center ${theme}Bar searchBar`} style={{ position: "absolute", top: 90, left: '30%' }}>
+                    <div className="bold borderHeader">
+                        <img style={{ marginLeft: 100 }} src={this.devjobslogo}></img>
+                    </div>
+                    <div className={`center ${theme}Bar searchBar`} 
+                    style={{ position: "absolute", top: 90, left: '30%' }}>
                         {this.navBar()}
                     </div>
                 </header>

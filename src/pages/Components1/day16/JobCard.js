@@ -47,10 +47,14 @@ function JobCard({ data, theme}) {
                 <p className ="lightPurple">{data.location}</p>
                 <div>
                 {/* <a target ="_blank" href ={data.url}><button>Read More</button></a> */}
-                <a target ="_blank" href ={apply}><button className ="darkButton">Apply</button></a>
+                <a target ="_blank" href ={apply}>
+                    <button className ="darkButton">Apply</button>
+                </a>
                 </div>
             </div>
-            <a target ="_blank"  href ={data.company_url}><img alt = {data.company_url}className="square" style={logoStyle} src={imgLogo} /></a>
+            <a target ="_blank"  href ={data.company_url}>
+                <img alt = {data.company_url}className="square" style={logoStyle} src={imgLogo} />
+            </a>
         </div>
     )
 }
