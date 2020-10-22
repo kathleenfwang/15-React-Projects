@@ -18,6 +18,7 @@ Curent Projects:
 - React/Redux 
 - MongoDB/Mongoose 
 - Three.js 
+- Google Analytics
 ## Update: 🎉 10/10/20
 * Now responsive on iPad!
 * Added light mode/dark mode toggle
