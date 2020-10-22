@@ -1,25 +1,21 @@
 import redux, {createStore} from "redux"
  
-// 1. Create action creators for having the count "increment" and "decrement"
+// 1. Create action creators "theme"
 // can have export and default export in same file
-export function increment() {
-    return {
-        type: "INCREMENT"
-    }
-}
-export function decrement() {
-    return { 
-        type: "DECREMENT"
-    }
-}
-
 export function handleThemeToggle() {
     return {
         type: "CHANGE_THEME"
     }
 }
+
+function getTime() {
+ let d = new Date(); // for now
+let hour = d.getHours(); // => 9
+// have dark mode starting at 6 PM, or 18 Hour 
+return hour < 18 
+}
 // 2. Create a reducer to handle your increment and decrement actions
-function reducer(theme = true, action) {
+function reducer(theme = getTime(), action) {
     switch (action.type) {
         case "CHANGE_THEME": 
         theme = !theme
