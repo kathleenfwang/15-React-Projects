@@ -15,7 +15,6 @@ class Day16 extends React.Component {
             location:'',
             fullTime: false,
             data:null,
-            loaded: false,
             loadMore:false
         }
         this.proxyurl = "https://cors-anywhere.herokuapp.com/"
@@ -90,9 +89,19 @@ class Day16 extends React.Component {
            return  <div className ="flex center"><h2>No jobs found, maybe try changing the location?<FontAwesomeIcon icon ={faSadCry}/></h2></div>
         }
     }
+    getButtons = () => {
+        const {loadMore} = this.state
+        return (
+            <>
+            <a href="#start"> <button><FontAwesomeIcon icon ={faArrowUp}/></button></a>
+            <div className ="center">
+            <button onClick ={this.handleMore}> {loadMore ? "Show less" : "Load more" }</button>
+            </div></>
+        )
+    }
     render() {
         const {theme} = this.props
-        const {data,loadMore} = this.state
+        const {data} = this.state
         const classTheme = theme ? "day16light" : "day16dark"
         return(
             <div id ="start" className ={`${classTheme} day16`}>
@@ -110,10 +119,7 @@ class Day16 extends React.Component {
                 </div>
                 </Fade>
                 <div style ={{textAlign:"right", marginBottom:30}}>
-                <a href="#start"> <button><FontAwesomeIcon icon ={faArrowUp}/></button></a>
-                <div className ="center">
-                <button onClick ={this.handleMore}> {loadMore ? "Show less" : "Load more" }</button>
-                </div>
+                {this.getButtons()}
                 </div>
             </div>
         )
