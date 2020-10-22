@@ -35,6 +35,7 @@ class Day16 extends React.Component {
         let fullUrl = `${this.proxyurl}${url}description=${search}&location=${location}&full_time=${fullTime}`
         axios.get(fullUrl)
             .then(resp => {
+                console.log(resp.data)
                 this.setState({
                     data: resp.data
                 })

@@ -25,9 +25,12 @@ function JobCard({ data, theme}) {
         // Wed Oct 21 10:37:58 UTC 2020 -> Oct 21 
         return date.slice(4, 10)
     }
+    const applyLink = data.how_to_apply.indexOf("http")
+    const endApplyLink = data.how_to_apply.indexOf("\">")
+    const apply = data.how_to_apply.slice(applyLink,endApplyLink)
     const imgLogo = data.company_logo ? data.company_logo : "https://static.thenounproject.com/png/47074-200.png"
     return (
-        <div className ={`${themeClass} hover`} style={cardStyle}>
+        <div className ={`${themeClass} hover cursor`} style={cardStyle}>
             <div>
             <div className="grey flexTitle down">
                 <p>{getDate(data.created_at)}</p>
@@ -41,7 +44,10 @@ function JobCard({ data, theme}) {
             </div>
             <div className ="flex spaceBetween">
                 <p className ="lightPurple">{data.location}</p>
-                <a target ="_blank" href ={data.url}><button className ="darkButton">Go to listing</button></a>
+                <div>
+                <a target ="_blank" href ={data.url}><button>Read More</button></a>
+                <a target ="_blank" href ={apply}><button className ="darkButton">Apply</button></a>
+                </div>
             </div>
             <a target ="_blank" href ={data.company_url}><img className="square" style={logoStyle} src={imgLogo} /></a>
         </div>
