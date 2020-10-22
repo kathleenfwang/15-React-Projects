@@ -106,6 +106,9 @@ class Day16 extends React.Component {
                 </div></>
         )
     }
+    handleRefresh = () => {
+        window.location.reload(false);
+    }
     render() {
         const { theme } = this.props
         const { data } = this.state
@@ -114,8 +117,8 @@ class Day16 extends React.Component {
         return (
             <div id="start" className={`${classTheme} day16`}>
                 <header>
-                    <div className="bold borderHeader">
-                        <img style={{ marginLeft: 100 }} src={this.devjobslogo}></img>
+                    <div className="cursor bold borderHeader">
+                        <img onClick ={this.handleRefresh} style={{ marginLeft: 100 }} src={this.devjobslogo}></img>
                     </div>
                     <div className={`center ${theme}Bar searchBar`} 
                     style={{ position: "absolute", top: 90, left: '30%' }}>
