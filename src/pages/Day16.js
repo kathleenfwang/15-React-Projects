@@ -2,9 +2,10 @@ import React from "react"
 import axios from "axios"
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowUp, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faArrowUp, faHeart, faSearch, faLocationArrow, faSadCry } from '@fortawesome/free-solid-svg-icons'
 import JobCard from "./Components1/day16/JobCard"
 import { Fade, Slide, Rotate } from 'react-reveal';
+import { Font } from "three";
 class Day16 extends React.Component {
     constructor({theme}) {
         super({theme}) 
@@ -46,7 +47,7 @@ class Day16 extends React.Component {
         return data.map((job) => {
             return (
             <JobCard data = {job}/>)
-        })
+        }) 
     }
     handleRole = (e) => {
         this.setState({
@@ -70,8 +71,8 @@ class Day16 extends React.Component {
     }
     navBar = () => {
         return (<div className ="center">
-            <input onChange ={this.handleRole} placeholder ="Find your next role"/>
-            <input onChange = {this.handleLocation}placeholder = "Location"/>
+            <FontAwesomeIcon icon ={faSearch}/><input onChange ={this.handleRole} placeholder ="Find your next role"/>
+            <FontAwesomeIcon icon ={faLocationArrow}/><input onChange = {this.handleLocation}placeholder = "Location"/>
             <input ref ="type" onChange = {this.handleType} type="checkbox"/>Full Time Only 
             <button onClick ={this.handleSearch}>Search</button>
         </div>)
@@ -82,7 +83,12 @@ class Day16 extends React.Component {
     getAllCards = () => {
         const {loadMore} = this.state
         let cards = this.makeCards() 
+        if (cards.length > 0){
         return loadMore ? cards : cards.slice(0,20)
+        }
+        else {
+           return  <div className ="flex center"><h2>No jobs found, maybe try changing the location?<FontAwesomeIcon icon ={faSadCry}/></h2></div>
+        }
     }
     render() {
         const {theme} = this.props

@@ -792,12 +792,18 @@ cursor:pointer;
   border-radius:6px;
   padding:30px;
 }
+.day16 input {
+  text-align:center;
+}
 .day16light {
   background-color: #F2F2F2;
 }
-.day16dark {
+.day16dark, .day16dark input{
+  color:#F2F2F2;
   background-color:#131722;
 }
+ 
+ 
 .darkgrey {
   font-weight:bold;
   color: #545861;
