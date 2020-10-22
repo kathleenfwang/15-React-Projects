@@ -219,7 +219,8 @@ a {
  }
  .icons {
    font-size:1.5em;
- 
+    width:20%;
+    justify-content: space-evenly;
  }
  .icons p {
    margin-right:10px;

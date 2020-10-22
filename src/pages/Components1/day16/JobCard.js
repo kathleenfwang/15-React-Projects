@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 function JobCard({ data, theme}) {
     const logoStyle = {
+        objectFit: "contain",
         position: 'absolute',
         left: 30,
         top: -25,
@@ -28,7 +29,7 @@ function JobCard({ data, theme}) {
     const applyLink = data.how_to_apply.indexOf("http")
     const endApplyLink = data.how_to_apply.indexOf("\">")
     const apply = data.how_to_apply.slice(applyLink,endApplyLink)
-    const imgLogo = data.company_logo ? data.company_logo : "https://static.thenounproject.com/png/47074-200.png"
+    const imgLogo = data.company_logo ? data.company_logo : "https://www.iconpacks.net/icons/2/free-briefcase-icon-1965-thumb.png"
     return (
         <div className ={`${themeClass} hover cursor`} style={cardStyle}>
             <div>
@@ -45,11 +46,11 @@ function JobCard({ data, theme}) {
             <div className ="flex spaceBetween">
                 <p className ="lightPurple">{data.location}</p>
                 <div>
-                <a target ="_blank" href ={data.url}><button>Read More</button></a>
+                {/* <a target ="_blank" href ={data.url}><button>Read More</button></a> */}
                 <a target ="_blank" href ={apply}><button className ="darkButton">Apply</button></a>
                 </div>
             </div>
-            <a target ="_blank" href ={data.company_url}><img className="square" style={logoStyle} src={imgLogo} /></a>
+            <a target ="_blank"  href ={data.company_url}><img alt = {data.company_url}className="square" style={logoStyle} src={imgLogo} /></a>
         </div>
     )
 }

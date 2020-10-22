@@ -10,9 +10,9 @@ class Day16 extends React.Component {
     constructor({ theme }) {
         super({ theme })
         this.state = {
-            url: 'https://jobs.github.com/positions.json?page=1&',
-            search: 'code',
-            location: '',
+            url: 'https://jobs.github.com/positions.json?&',
+            search: '',
+            location: 'united states',
             fullTime: false,
             data: null,
             loadMore: false
@@ -78,7 +78,7 @@ class Day16 extends React.Component {
             <FontAwesomeIcon icon={faSearch} />
             <input onChange={this.handleRole} placeholder="Find your next role" />
             <FontAwesomeIcon icon={faMapMarkerAlt} />
-            <input value={location} onChange={this.handleLocation} placeholder="Location" />
+            <input onChange={this.handleLocation} placeholder="Location" />
             <button type="submit" className ="darkButton" onClick={this.handleSearch}>Search</button>
 
         </div>)
