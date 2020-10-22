@@ -78,15 +78,18 @@
  button:hover {
   transform: translate3D(0, -2px, 0);
    border: 1px solid transparent;
- background-color: #88b;
+ background-color: #5964E0;
  color:white;
  }
 .active, .darkButton{
-  background-color: #88b;
+  background-color: #5964E0;
    color:white;
  }
+ .lightPurple {
+   color: #5964E0;
+ }
  .darkButton:hover {
-  color: #88b;
+  color: #5964E0;
   background-color:white;
  }
  .secondary   {
@@ -323,7 +326,7 @@ a {
   }
   .threeGrid {
     justify-items: center;
-    margin-top:50px;
+    margin-top:200px;
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap:50px;
@@ -412,11 +415,7 @@ a {
   nav li {
     margin-left:20px;
   }
-   
-  :placeholder-shown{
-    font-family:sans-serif;
-    color: #666;
-  }
+  
   .form button, .blueButton {
     font-size:1.1em;
     color:white;
@@ -682,8 +681,12 @@ cursor:pointer;
    
   transition: all 0.2s ease-in-out;
 }
+.hover {
+  
+  transition: all 0.2s ease-in-out;
+}
 .hover:hover { 
- 
+  transform: translate3D(0, -5px, 0);
 }
 .padding {
   padding:10px;
@@ -745,7 +748,7 @@ cursor:pointer;
 }
 .purple, button {
   font-weight:bold;
-  color:  #88b;
+  color:  #5964E0;
 }
 .grey {
   color: #bbc;
@@ -789,26 +792,76 @@ cursor:pointer;
   justify-content: space-between;
 }
 .day16 {
+  position: relative;
   transition: all 1s;
   height:1000vh;
   border-radius:6px;
   padding:30px;
 }
+
+
 .day16 input {
   text-align:center;
 }
+.darkCard {
+
+  box-shadow: 2px 4px 25px rgba(250, 250, 250, 0.2);
+}
+.lightCard {
+  box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.2);
+}
 .day16light {
   background-color: #F2F2F2;
+  
 }
-.day16dark, .day16dark input{
-  color:#F2F2F2;
-  background-color:#131722;
+.trueBar, .trueBar {
+  color:#19202D;
+  background-color:rgba(255, 255, 255, 0.9);
+  box-shadow: 2px 4px 25px rgba(0, 0, 0, .2);
 }
+
+.falseBar {
+  color:white;
+  background-color:rgb(25, 32, 45,.9);
+  box-shadow: 2px 4px 25px rgba(0, 0, 0, .2);
+}
+.searchBar input {
+border:none;
+  background-color:transparent;
+}
+.searchBar {
+  padding: 5px 30px;
+  height: 80px;
+  border-radius: 5px;
+}
+.borderHeader {
+  height:160px;
+  width:100%;
+  position: absolute;
+  top: 0;
+  background-color: #8BC6EC;
+  background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+  line-height: 8;
+  border-bottom-left-radius: 60%;
+  border-top-left-radius: 5px;
  
+}
+.day16dark{
+  background-color: #121721;
+  color:#5964E0;
+}
+.day16dark input {
+  color:white;
+  background-color: transparent;
+}
+
+.lightgrey {
+  color: #6E8098;
+}
  
 .darkgrey {
   font-weight:bold;
-  color: #545861;
+ 
 }
 .flexTitle {
   width: 150px;
