@@ -787,6 +787,7 @@ cursor:pointer;
   justify-content: space-between;
 }
 .day16 {
+  transition: all 1s;
   height:500vh;
   border-radius:6px;
   padding:30px;

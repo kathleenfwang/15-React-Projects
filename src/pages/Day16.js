@@ -1,7 +1,10 @@
 import React from "react"
 import axios from "axios"
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUp, faHeart } from '@fortawesome/free-solid-svg-icons'
 import JobCard from "./Components1/day16/JobCard"
+import { Fade, Slide, Rotate } from 'react-reveal';
 class Day16 extends React.Component {
     constructor({theme}) {
         super({theme}) 
@@ -10,7 +13,9 @@ class Day16 extends React.Component {
             search: 'code',
             location:'',
             fullTime: false,
-            data:null
+            data:null,
+            loaded: false,
+            loadMore:false
         }
         this.proxyurl = "https://cors-anywhere.herokuapp.com/"
     }
@@ -18,12 +23,18 @@ class Day16 extends React.Component {
     componentDidMount() {
         this.getCards()
     }
+    componentDidUpdate(prevprops,prevState) {
+        const {loadMore} = this.state
+        console.log(loadMore)
+        if (loadMore !== prevState.loadMore) {
+            this.makeCards()
+        }
+    }
     getCards = () => {
         const {url,search,location,fullTime} = this.state 
         let fullUrl = `${this.proxyurl}${url}description=${search}&location=${location}&full_time=${fullTime}`
         axios.get(fullUrl)
         .then(resp => {
-            console.log(resp.data)
             this.setState({
                 data:resp.data
             })
@@ -65,25 +76,38 @@ class Day16 extends React.Component {
             <button onClick ={this.handleSearch}>Search</button>
         </div>)
     }
+    handleMore = () => {
+        this.setState(prevState => ({loadMore: !prevState.loadMore}))
+    }
+    getAllCards = () => {
+        const {loadMore} = this.state
+        let cards = this.makeCards() 
+        return loadMore ? cards : cards.slice(0,20)
+    }
     render() {
         const {theme} = this.props
-        const {data} = this.state
+        const {data,loadMore} = this.state
         const classTheme = theme ? "day16light" : "day16dark"
-        console.log(theme)
         return(
-            <div className ={`${classTheme} day16`}>
+            <div id ="start" className ={`${classTheme} day16`}>
                 <header>
                     <h1 className ="bold">devjobs</h1>
                     <div>
                         {this.navBar()}
                     </div>
                 </header>
-
+                <Fade cascade clear>
                 <div class ="container down">
                     <div class = "threeGrid">
-                    {data ? this.makeCards(): "Loading ... "}
+                    {data ? this.getAllCards() : "Loading..."}
                     </div>
-
+                </div>
+                </Fade>
+                <div style ={{textAlign:"right", marginBottom:30}}>
+                <a href="#start"> <button><FontAwesomeIcon icon ={faArrowUp}/></button></a>
+                <div className ="center">
+                <button onClick ={this.handleMore}> {loadMore ? "Show less" : "Load more" }</button>
+                </div>
                 </div>
             </div>
         )
