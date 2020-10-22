@@ -788,7 +788,7 @@ cursor:pointer;
 }
 .day16 {
   transition: all 1s;
-  height:500vh;
+  height:1000vh;
   border-radius:6px;
   padding:30px;
 }
