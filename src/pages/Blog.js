@@ -23,8 +23,8 @@ export default function Blog() {
             date: "10/10/2020"
         },
         {
-            p: "Write an entry!", 
-            date: ""
+            p: "I now realize what a difference changing the font can make. I have so much respect for people who can create their own fonts. It's also difficult for me to pick one; I have to rely on using font parsers online to find the name of the right one :)", 
+            date: "10/21/20"
         }, 
     ]
     function getEntries() {

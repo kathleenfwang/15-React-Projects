@@ -19,7 +19,7 @@ export function handleThemeToggle() {
     }
 }
 // 2. Create a reducer to handle your increment and decrement actions
-function reducer(theme = false, action) {
+function reducer(theme = true, action) {
     switch (action.type) {
         case "CHANGE_THEME": 
         theme = !theme
