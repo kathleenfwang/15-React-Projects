@@ -234,6 +234,7 @@ a {
    text-align: center;
  }
  .error {
+   color:#333;
    border-radius:5px;
   box-shadow: 2px 4px 25px rgba(0, 0, 0, .2);
    font-size:.8em;
@@ -244,6 +245,7 @@ a {
    background-repeat: no-repeat;
    background-size:cover;
  }
+
  .error li {
    list-style-type:none;
  }
