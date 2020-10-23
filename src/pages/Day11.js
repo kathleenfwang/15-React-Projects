@@ -22,22 +22,7 @@ class Day11 extends React.Component {
             active: [],
             activeList: 0
         }
-        this.bigDiv = {
-            borderRadius: 8,
-            width: '100vw',
-            height: '100vh',
-            backgroundColor: 'rgb(0,0,0,.5)',
-            position: "fixed", top: 0,
-            boxShadow: '2px 4px 25px rgba(0, 0, 0, .5)'
-        }
-        this.middleDiv = {
-            fontSize: '1.2em',
-            position: "relative",
-            padding: 30,
-            borderRadius: 5,
-            width: '70%',
-            height: '87%',
-        }
+   
         this.key = process.env.REACT_APP_ACCESS_KEY || null 
         this.unsplash = new Unsplash({ accessKey: this.key });
     }
@@ -191,8 +176,8 @@ class Day11 extends React.Component {
         const { isShown, imageData, activeList } = this.state
         const {theme} = this.props
         let heart = activeList === 0
-        return (<div className={`${isShown}Show flex center`} style={this.bigDiv}>
-            <div className = {theme ? 'light' : 'dark'}style={this.middleDiv}>
+        return (<div className={`${isShown}Show flex center bigDiv`}>
+            <div className = {`${theme ? 'light' : 'dark'} middleDiv`}>
                 <div>
                     <div className="flex padding" style={{ justifyContent: "space-between", }}>
                         <div className="flex">

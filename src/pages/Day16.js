@@ -2,20 +2,22 @@ import React from "react"
 import axios from "axios"
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowUp, faHeart, faSearch, faMapMarkerAlt, faSadCry } from '@fortawesome/free-solid-svg-icons'
+import { faArrowUp, faHeart, faSearch, faMapMarkerAlt, faTimes } from '@fortawesome/free-solid-svg-icons'
 import JobCard from "./Components1/day16/JobCard"
+import InnerJobCard from "./Components1/day16/InnerJobCard"
 import { Fade, Slide, Rotate } from 'react-reveal';
-import { Font } from "three";
 class Day16 extends React.Component {
     constructor({ theme }) {
         super({ theme })
         this.state = {
-            url: 'https://jobs.github.com/positions.json?&',
+            url: 'https://jobs.github.com/positions.json?/',
             search: '',
             location: 'united states',
             fullTime: false,
             data: null,
-            loadMore: false
+            loadMore: false, 
+            shown: false,
+            ids: {} 
         }
         this.proxyurl = "https://cors-anywhere.herokuapp.com/"
         this.devjobslogo = "https://media.discordapp.net/attachments/701277128951595030/768689587710197760/devjobs.png"
@@ -35,10 +37,10 @@ class Day16 extends React.Component {
         let fullUrl = `${this.proxyurl}${url}description=${search}&location=${location}&full_time=${fullTime}`
         axios.get(fullUrl)
             .then(resp => {
-                console.log(resp.data)
                 this.setState({
                     data: resp.data
-                })
+                    // when calling the getIds, cannot put getIds() because this will call the function right away before the data gets set! similarly to onClick functions, just pass in the function name so it doesn't get called immediately. 
+                }, this.getIds)
             })
             .catch((e) => console.log(e))
     }
@@ -46,7 +48,18 @@ class Day16 extends React.Component {
         const { data } = this.state
         return data.map((job) => {
             return (
-                <JobCard data={job} />)
+                <JobCard data={job} showPopOut = {this.handleShow} />)
+        })
+    }
+    getIds =() => {
+        const {data} = this.state 
+        // want to make a dictionary of ids -> indexes in data  
+        let ids = {} 
+            data.forEach((info,i) => {
+            ids[info['id']] = i 
+        })
+        this.setState({
+            ids: ids 
         })
     }
     handleRole = (e) => {
@@ -100,7 +113,9 @@ class Day16 extends React.Component {
         const { loadMore } = this.state
         return (
             <>
-                <a href="#start"> <button><FontAwesomeIcon icon={faArrowUp} /></button></a>
+                <a href="#start"> 
+                <button><FontAwesomeIcon icon={faArrowUp} /></button>
+                </a>
                 <div className="center">
                     <button onClick={this.handleMore}> {loadMore ? "Show less" : "Load more"}</button>
                 </div></>
@@ -109,6 +124,30 @@ class Day16 extends React.Component {
     handleRefresh = () => {
         window.location.reload(false);
     }
+  handleShow = (id) => {
+    const {ids} = this.state
+      this.setState(prevState =>({
+          shown: !prevState.shown, 
+          ind: ids[id]
+      }))
+}
+showPopOut = () => {
+    const {shown,data,ids,ind} = this.state
+    const {theme} = this.props
+    if (shown) {
+    const info = data[ind]
+    return (
+        <div className={`${shown}Form flex center bigDiv`}>
+            <div className={`${theme ? 'light' : 'dark'} middleDiv`}>
+            <FontAwesomeIcon icon={faTimes} className={`${theme ? 'light' : 'dark'} cursor bigger`}
+                style={{position: "absolute", top: 20,right:20}} 
+                onClick={this.handleShow} />
+            <InnerJobCard info = {info} />
+            </div>
+           
+        </div>)
+    }
+}
     render() {
         const { theme } = this.props
         const { data } = this.state
@@ -135,6 +174,7 @@ class Day16 extends React.Component {
                 <div style={{ textAlign: "right", marginBottom: 30 }}>
                     {this.getButtons()}
                 </div>
+                {this.showPopOut()}
             </div>
         )
     }
