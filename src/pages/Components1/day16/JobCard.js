@@ -48,9 +48,6 @@ return (
             <div className="flex spaceBetween">
                 <p className="lightPurple">{data.location}</p>
                 <div>
-                    <a target="_blank" href={data.url}>
-                        <button>Read More</button>
-                    </a>
                     <a target="_blank" href={apply}>
                         <button className="darkButton">Apply</button>
                     </a>

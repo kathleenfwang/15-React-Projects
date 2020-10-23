@@ -8,7 +8,7 @@ export default class InnerBody extends React.Component {
         this.divStyle = {
             display:'flex',
             alignItems: 'baseline',
-            height: '60vh'
+            height: '60vh',
         }
     }
     componentDidMount() {
@@ -37,9 +37,9 @@ export default class InnerBody extends React.Component {
     return (
         <div style ={this.divStyle} className={`midwidth ${themeColor}Container`}>
             {/* title  */}
-            <div className="flex spaceBetween">
-                <div>
-                    <div style={{ width: 150,marginBottom:-20}} className="grey smallTxt flexTitle">
+            <div style ={{padding: 20}} className="flex spaceBetween">
+                <div >
+                    <div style={{width: 150,marginBottom:-20}} className="grey smallTxt flexTitle">
                         <p>{this.getDate(data.created_at)}</p>
                         <FontAwesomeIcon style ={{fontSize: '.5em'}}icon={faCircle} />
                         <p>{data.type}</p>
@@ -55,7 +55,7 @@ export default class InnerBody extends React.Component {
                     </a>
                 </div>
             </div>
-            <div id ="desc" style ={{overflow:"auto",height:'60vh',marginLeft:30}}>
+            <div id ="desc" style ={{overflow:"auto",height:'60vh',marginLeft:30,paddingRight:20}}>
             </div>
         </div>
     )
