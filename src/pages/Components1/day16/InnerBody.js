@@ -32,14 +32,16 @@ export default class InnerBody extends React.Component {
     }
     render() {
         const {data} = this.props
+        const {theme} = this.props
+        const themeColor = theme ? "light" : "dark"
     return (
-        <div style ={this.divStyle} className="midwidth darkContainer">
+        <div style ={this.divStyle} className={`midwidth ${themeColor}Container`}>
             {/* title  */}
             <div className="flex spaceBetween">
                 <div>
                     <div style={{ width: 150,marginBottom:-20}} className="grey smallTxt flexTitle">
                         <p>{this.getDate(data.created_at)}</p>
-                        <FontAwesomeIcon icon={faCircle} />
+                        <FontAwesomeIcon style ={{fontSize: '.5em'}}icon={faCircle} />
                         <p>{data.type}</p>
                     </div>
                     <div>

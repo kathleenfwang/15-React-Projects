@@ -7,9 +7,9 @@ export default function InnerJobCard(props) {
     return(
         <div className ="centerFlexCol">
             {/*title*/}
-           <InnerTitle data = {data}/>
+           <InnerTitle theme ={props.theme} data = {data}/>
             {/* body */}
-            <InnerBody data = {data} />
+            <InnerBody theme ={props.theme} data = {data} />
         </div>
     )
 }

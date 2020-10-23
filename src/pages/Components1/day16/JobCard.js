@@ -17,7 +17,7 @@ function JobCard({ data, showPopOut, theme }) {
         position: 'relative',
         borderRadius: 5,
         padding: 30,
-        width: '60%'
+        width: '70%'
 
     }
     const title = theme ? "darkgrey" : "white"
@@ -37,10 +37,10 @@ return (
             <div>
                 <div className="grey flexTitle down">
                     <p>{getDate(data.created_at)}</p>
-                    <FontAwesomeIcon icon={faCircle} />
+                    <FontAwesomeIcon style ={{fontSize: '.5em'}} icon={faCircle} />
                     <p>{data.type}</p>
                 </div>
-                <div>
+                <div className ="up">
                     <h2 className={`${title} bold`}>{data.title}</h2>
                     <p className="grey">{data.company}</p>
                 </div>

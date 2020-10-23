@@ -328,7 +328,8 @@ a {
     margin-top:200px;
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap:50px;
+    grid-column-gap:80px;
+    grid-row-gap:70px;
  
   }
  
@@ -669,7 +670,7 @@ cursor:pointer;
 }
 .light {
   color: #333;
-  background: rgba(224, 224, 224, 0.9);
+  background: rgba(	244, 246, 248, 0.9);
 }
 .dark {
   color:whitesmoke;
@@ -798,6 +799,11 @@ cursor:pointer;
   padding: 20px 50px;
   border-radius: 5px;
   background-color: #19202D;
+}
+.lightContainer {
+  padding: 20px 50px;
+  border-radius: 5px;
+  background-color: white;
 }
 .midwidth {
   width:80%;

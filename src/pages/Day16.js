@@ -143,7 +143,7 @@ showPopOut = () => {
             <FontAwesomeIcon icon={faTimes} className={`${theme ? 'light' : 'dark'} cursor bigger`}
                 style={{position: "absolute", top: 20,right:20}} 
                 onClick={this.handleShow} />
-            <InnerJobCard info = {info} />
+            <InnerJobCard theme ={theme} info = {info} />
             </div>
            
         </div>)
