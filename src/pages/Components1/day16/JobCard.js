@@ -18,8 +18,6 @@ function JobCard({ data, showPopOut, theme }) {
         borderRadius: 5,
         padding: 30,
         width: '70%',
-        height:'80%',
-
     }
     const title = theme ? "darkgrey" : "white"
     const themeClass = theme ? "lightCard" : "darkCard"
