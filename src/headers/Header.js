@@ -34,7 +34,6 @@ function Header({ theme, handleThemeToggle }) {
         document.body.style.backgroundColor = "#f2f2f2"
         document.body.style.color = "#333"
     }
-    console.log(page)
     return (
         <div className="header">
             <button onClick={handleShow}><FontAwesomeIcon icon={faHamburger} /></button>

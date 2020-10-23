@@ -87,7 +87,7 @@
    color:white;
  }
  .lightPurple {
-   color: #5964E0;
+   color: #939BF4;
  }
  .darkButton:hover {
   color: #5964E0;
@@ -116,8 +116,8 @@
  }
  button {
   box-shadow: 2px 4px 25px rgba(0, 0, 0, .2);
-   background-color:white;
-   color:#B3D4F3;
+   background-color:#939BF4;
+   color:white;
    font-weight: bold;
    outline:none;
    padding:10px;
@@ -300,11 +300,7 @@ a {
     padding:30px;
     border-radius:8px;
   }
-  .smallTxt{
-    font-size:14px;
-    font-weight:bold;
-    color:palevioletred;
-  }
+  
   .titleImg {
     max-width: 266px;
     max-height: 134px;
@@ -749,7 +745,7 @@ cursor:pointer;
   padding:20px;
  
 }
-.purple, button {
+.purple{
   font-weight:bold;
   color:  #5964E0;
 }
@@ -790,6 +786,18 @@ cursor:pointer;
 	animation-timing-function: ease-in-out;
   animation-duration: .5s;
  
+}
+.centerFlexCol {
+  height:100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+}
+.darkContainer {
+  padding: 20px 50px;
+  border-radius: 5px;
+  background-color: #19202D;
 }
 .midwidth {
   width:80%;

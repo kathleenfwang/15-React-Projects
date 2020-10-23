@@ -3,14 +3,18 @@ import React from "react"
 export default function InnerTitle({data}) {
     const sqSize = 100
     const bgImg = {
+        borderRadius:5,
+        marginRight:10,
+        backgroundColor:"white",
         width:sqSize,
         height:sqSize,
-        backgroundImage: `url(${data.company_logo ? data.company_logo : "https://www.iconpacks.net/icons/2/free-briefcase-icon-1965-thumb.png"})`
+        objectFit:"contain"
     }
+    const img = data.company_logo ? data.company_logo : "https://www.iconpacks.net/icons/2/free-briefcase-icon-1965-thumb.png"
     return (
-        <div className ="flex spaceBetween midwidth">
+        <div className ="darkContainer flex spaceBetween midwidth">
         <div className ="flex">
-        <div style ={bgImg}></div>
+        <div><img src ={img} style ={bgImg}/></div>
         <div>
             <h1>{data.company}</h1>
             <p>{data.company_url}</p>

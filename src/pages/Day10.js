@@ -81,7 +81,7 @@ export default class Day10 extends React.Component {
                 </div>
                 <br></br>
                 <div>
-                    <button><a href="https://www.pride.com/pride/2018/6/13/complete-guide-queer-pride-flags-0#media-gallery-media-1" target="_blank">Learn more about the pride flags</a></button>
+                <a href="https://www.pride.com/pride/2018/6/13/complete-guide-queer-pride-flags-0#media-gallery-media-1" target="_blank"><button>Learn more about the pride flags</button></a>
                 </div>
             </div>
         )
