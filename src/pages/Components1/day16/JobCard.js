@@ -4,13 +4,14 @@ import { faCircle} from '@fortawesome/free-solid-svg-icons'
 import { connect } from "react-redux";
 
 function JobCard({ data, showPopOut, theme }) {
+    const sqSize = 60
     const logoStyle = {
         objectFit: "contain",
         position: 'absolute',
         left: 30,
         top: -25,
-        width: 50,
-        height: 50
+        width: sqSize,
+        height: sqSize
     }
     const cardStyle = {
         backgroundColor: theme ? '#FFFFFF' : '#19202D',
