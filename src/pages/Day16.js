@@ -127,10 +127,16 @@ class Day16 extends React.Component {
     }
   handleShow = (id) => {
     const {ids} = this.state
-      this.setState(prevState =>({
-          shown: !prevState.shown, 
-          ind: ids[id]
-      }))
+    const size = Object.keys(ids).length;
+      if (typeof id === "number") {
+          this.setState({ ind: id + 1 < size ? id + 1 : id})
+      }
+      else {
+        this.setState(prevState =>({
+            shown: !prevState.shown, 
+            ind: ids[id]
+        }))
+      }
 }
 showPopOut = () => {
     const {shown,data,ids,ind} = this.state
@@ -143,7 +149,7 @@ showPopOut = () => {
             <FontAwesomeIcon icon={faTimes} className={`${theme ? 'light' : 'dark'} cursor bigger`}
                 style={{position: "absolute", top: 20,right:20}} 
                 onClick={this.handleShow} />
-            <InnerJobCard theme ={theme} info = {info} />
+            <InnerJobCard ind = {ind} handleNext = {this.handleShow} theme ={theme} info = {info} />
             </div>
            
         </div>)

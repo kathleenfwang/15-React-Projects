@@ -35,7 +35,7 @@ export default class InnerBody extends React.Component {
         const {theme} = this.props
         const themeColor = theme ? "light" : "dark"
     return (
-        <div style ={this.divStyle} className={`midwidth ${themeColor}Container`}>
+        <div style ={this.divStyle} className={`down midwidth ${themeColor}Container`}>
             {/* title  */}
             <div style ={{padding: 20}} className="flex spaceBetween">
                 <div >
