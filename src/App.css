@@ -791,8 +791,8 @@ cursor:pointer;
   animation-duration: .5s;
  
 }
-.width {
-  width:100%;
+.midwidth {
+  width:80%;
 }
 .spaceBetween {
   justify-content: space-between;

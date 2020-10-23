@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faCircle} from '@fortawesome/free-solid-svg-icons'
 import { connect } from "react-redux";
 
 function JobCard({ data, showPopOut, theme }) {
