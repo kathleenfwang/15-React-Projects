@@ -3,7 +3,7 @@ import Projects from "./Projects"
 import Day from "./Day"
 import {Link, Redirect} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
+import { faGithub, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons"
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import Fade from 'react-reveal'
 export default function Home() {
@@ -45,13 +45,15 @@ export default function Home() {
                         <div className ="flex icons up" >
                         <p><a target="_blank" href ="https://github.com/kathleenfwang"><FontAwesomeIcon icon ={faGithub}/></a></p>
                         <p><a target="_blank" href ="https://www.linkedin.com/in/kathleen-wang/"><FontAwesomeIcon icon ={faLinkedin}/></a></p>
+                        <p><a target="_blank" href ="https://twitter.com/kathlee46915970"><FontAwesomeIcon icon ={faTwitter}/></a></p>
                         <p><Link to ="/Contact"><FontAwesomeIcon icon = {faEnvelope}/></Link></p>
                     </div> 
                     </Fade>
                     </div>
                     <div className="desc up">
                         <Fade clear cascade>
-                        <p>I enjoy working with multiple problems. I love design and enjoy looking for ways to incorporate the two in my work. Also a sucker for pixel art apparently. I am also interestd in AI and machine learning. </p>
+                        <p>I enjoy working with multiple problems. I love  
+                            looking for ways to <br></br>incorporate design and code into my work. Also a sucker for pixel art apparently. I am also interestd in AI and machine learning. </p>
                         </Fade>
                     </div>
                     <div>
