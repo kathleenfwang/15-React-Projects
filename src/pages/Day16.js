@@ -129,6 +129,7 @@ class Day16 extends React.Component {
     const {ids} = this.state
     const size = Object.keys(ids).length;
       if (typeof id === "number") {
+          // to handle "next", the function passes in the original index, we are checking if there is a next index available so the next information will be shown 
           this.setState({ ind: id + 1 < size ? id + 1 : id})
       }
       else {

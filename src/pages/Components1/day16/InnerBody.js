@@ -4,7 +4,10 @@ import { faCircle } from '@fortawesome/free-solid-svg-icons'
 export default class InnerBody extends React.Component {
     constructor(props) {
         super(props) 
-        this.state = {} 
+        this.state = {
+            props:null,
+            description: null 
+        } 
         this.divStyle = {
             display:'flex',
             alignItems: 'baseline',
@@ -14,7 +17,11 @@ export default class InnerBody extends React.Component {
     componentDidMount() {
         this.getDesc()
     }
-    
+    componentDidUpdate(prevProps) {
+        if (prevProps !== this.state.props) {
+            this.getDesc()
+        }
+    }
     getDate = date => {
         // Wed Oct 21 10:37:58 UTC 2020 -> Oct 21 
         return date.slice(4, 10)
@@ -26,9 +33,9 @@ export default class InnerBody extends React.Component {
         return data.how_to_apply.slice(applyLink, endApplyLink)
     }
    getDesc = () => {
-    const {data} = this.props
+    const {description} = this.props.data
     const div = document.getElementById("desc")
-    div.innerHTML = data.description
+    div.innerHTML = description
     }
     render() {
         const {data} = this.props
