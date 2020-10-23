@@ -17,7 +17,8 @@ function JobCard({ data, showPopOut, theme }) {
         position: 'relative',
         borderRadius: 5,
         padding: 30,
-        width: '70%'
+        width: '70%',
+        height:'80%',
 
     }
     const title = theme ? "darkgrey" : "white"
