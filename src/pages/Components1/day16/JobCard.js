@@ -45,9 +45,9 @@ return (
                 </div>
             </div>
             <div className="flex spaceBetween">
-                <p className="lightPurple">{data.location}</p>
+                <p className="bold lightPurple">{data.location}</p>
                 <div>
-                    <a target="_blank" href={apply}>
+                    <a target="_blank" href={data.apply}>
                         <button className="darkButton">Apply</button>
                     </a>
                 </div>
