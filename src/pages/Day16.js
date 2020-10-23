@@ -11,8 +11,8 @@ class Day16 extends React.Component {
         super({ theme })
         this.state = {
             url: 'https://jobs.github.com/positions.json?/',
-            search: 'python',
-            location: 'united states',
+            search: '',
+            location: '',
             fullTime: false,
             data: null,
             loadMore: false, 
