@@ -54,7 +54,7 @@ export default class InnerBody extends React.Component {
                 </div>
                 <div>
                     <a href={this.getApplyLink()} target="_blank">
-                        <button className ="darkButton" style ={{marginTop:20}}>Apply Now</button>
+                        <button className ="darkButton" style ={{marginTop:20, marginLeft:0}}>Apply Now</button>
                     </a>
                 </div>
             </div>
