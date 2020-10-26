@@ -82,6 +82,14 @@ const inktoberEntries = [
     }, 
     {title: 'sleep',
     src: 'https://media.discordapp.net/attachments/701277128951595030/768186930159943700/Shape_47.png?width=340&height=490'},
+    {
+        title: 'chef',
+        src: 'https://media.discordapp.net/attachments/701277128951595030/770122348548325406/Shape_54.png?width=340&height=490'
+    }, 
+    {
+        title: 'rip',
+        src: 'https://media.discordapp.net/attachments/701277128951595030/770120480177782854/Shape_53.png?width=340&height=490'
+    }
  
 
 ]
