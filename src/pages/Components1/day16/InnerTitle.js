@@ -24,7 +24,7 @@ export default function InnerTitle({data,theme}) {
         </div>
         <div>
             <a href = {data.company_url} target ="_blank">
-                <button>Company Site</button>
+                <button className ="noMargin">Company Site</button>
             </a>
         </div>
     </div>

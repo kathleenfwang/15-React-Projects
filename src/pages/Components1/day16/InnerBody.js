@@ -8,11 +8,7 @@ export default class InnerBody extends React.Component {
             props:null,
             description: null 
         } 
-        this.divStyle = {
-            display:'flex',
-            alignItems: 'baseline',
-            height: '60vh',
-        }
+  
     }
     componentDidMount() {
         this.getDesc()
@@ -42,9 +38,9 @@ export default class InnerBody extends React.Component {
         const {theme} = this.props
         const themeColor = theme ? "light" : "dark"
     return (
-        <div style ={this.divStyle} className={`down midwidth ${themeColor}Container`}>
+        <div className={`down innerBody midwidth ${themeColor}Container`}>
             {/* title  */}
-            <div style ={{padding: 20}} className="flex spaceBetween">
+            <div style ={{padding: 20,width:'100%'}} id ="innerBody" className="flex spaceBetween">
                 <div >
                     <div style={{width: 150,marginBottom:-20}} className="grey smallTxt flexTitle">
                         <p>{this.getDate(data.created_at)}</p>
@@ -58,7 +54,7 @@ export default class InnerBody extends React.Component {
                 </div>
                 <div>
                     <a href={this.getApplyLink()} target="_blank">
-                        <button className ="darkButton" style ={{marginLeft:0,marginTop:20}}>Apply Now</button>
+                        <button className ="darkButton" style ={{marginTop:20}}>Apply Now</button>
                     </a>
                 </div>
             </div>

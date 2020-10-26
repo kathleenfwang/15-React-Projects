@@ -148,7 +148,7 @@ showPopOut = () => {
         <div className={`${shown}Form flex center bigDiv`}>
             <div className={`${theme ? 'light' : 'dark'} middleDiv`}>
             <FontAwesomeIcon icon={faTimes} className={`${theme ? 'light' : 'dark'} cursor bigger`}
-                style={{position: "absolute", top: 20,right:20}} 
+                style={{position: "absolute", top: 10,right:10}} 
                 onClick={this.handleShow} />
             <InnerJobCard ind = {ind} handleNext = {this.handleShow} theme ={theme} info = {info} />
             </div>
@@ -167,8 +167,7 @@ showPopOut = () => {
                     <div className="cursor bold borderHeader">
                         <img onClick ={this.handleRefresh} style={{ marginLeft: 100 }} src={this.devjobslogo}></img>
                     </div>
-                    <div className={`center ${theme}Bar searchBar`} 
-                    style={{ position: "absolute", top: 90, left: '30%' }}>
+                    <div className={`center ${theme}Bar searchBar`}>
                         {this.navBar()}
                     </div>
                 </header>
