@@ -24,6 +24,8 @@ Curent Projects:
 * Added light mode/dark mode toggle
 
 ![Image Collage iPad](https://media.discordapp.net/attachments/701277128951595030/765401705256058910/image.png?width=338&height=400)
- 
+
+![DevJobs iPad](https://media.discordapp.net/attachments/701277128951595032/770101649820614676/unknown.png?width=338&height=440)
+![DevJobs iPad](https://media.discordapp.net/attachments/701277128951595032/770101800288124948/unknown.png?width=338&height=440)
 
  
