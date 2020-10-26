@@ -22,7 +22,7 @@ Curent Projects:
 ## Update: 🎉 10/10/20
 * Now responsive on iPad!
 * Added light mode/dark mode toggle
-## Responsiveness: 
+## Responsiveness: (Mobile/iPad)
 Collage Maker: 
 
 ![Image Collage iPad](https://media.discordapp.net/attachments/701277128951595030/765401705256058910/image.png?width=338&height=400)
