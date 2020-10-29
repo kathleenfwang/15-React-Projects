@@ -4,7 +4,8 @@ export default class Day17 extends React.Component {
     constructor(){
         super()
         this.state ={
-            grayscale:0
+            grayscale:0,
+            brightness: 100
         }
         this.penguinSrc = "https://unsplash.com/photos/3Xd5j9-drDA/download"
     
@@ -14,13 +15,14 @@ export default class Day17 extends React.Component {
         return {
             width:'50%',
             height:'50%',
-            filter: `grayscale(${this.state.grayscale}%)`    
+            filter: `
+            grayscale(${this.state.grayscale}%)        
+            brightness(${this.state.brightness}%)`, 
         }
     }
 
-    handleChange = (e) => {
-         
-        this.setState({grayscale:e.target.value})
+    handleChange = (e,type) => {
+        this.setState({[type]:e.target.value})
     }
     render() {
         return(
@@ -31,14 +33,14 @@ export default class Day17 extends React.Component {
         </div>
         <div className ="flex center">
         <p>Grayscale:</p>
-        <input value = {this.state.grayscale} onChange ={this.handleChange}type ="range"></input>
+        <input value = {this.state.grayscale} onChange ={(e) =>this.handleChange(e,'grayscale')}type ="range"></input>
         <p>{this.state.grayscale}%</p>
         </div>
 
         <div className ="flex center">
         <p>Brightness:</p>
-        <input value = {this.state.grayscale} onChange ={this.handleChange}type ="range"></input>
-        <p>{this.state.grayscale}%</p>
+        <input value = {this.state.brightness} onChange ={(e) => this.handleChange(e,'brightness')}type ="range"></input>
+        <p>{this.state.brightness}%</p>
         </div>
       
         </div>
