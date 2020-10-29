@@ -1,24 +1,48 @@
 import React from "react"
-
-export default function Day17() {
-    const borders = {
-        border:'2px solid black'
+import Image from "./Components2/day17/Image"
+export default class Day17 extends React.Component {
+    constructor(){
+        super()
+        this.state ={
+            grayscale:0
+        }
+        this.penguinSrc = "https://unsplash.com/photos/3Xd5j9-drDA/download"
+    
     }
-    return(
+    imgStyle1 = () => {
+        console.log(this.state.grayscale)
+        return {
+            width:'50%',
+            height:'50%',
+            filter: `grayscale(${this.state.grayscale}%)`    
+        }
+    }
+
+    handleChange = (e) => {
+         
+        this.setState({grayscale:e.target.value})
+    }
+    render() {
+        return(
+        <div className ="day17">
+            <h1>Image Filtering</h1>
         <div className ="flex center">
-           <div style ={borders}>
-               <h1>Fylo</h1>
-               <div>Buttons</div>
-           </div>
-           <div style ={borders}>
-               <p> You've used storage</p>
-               <input type="range" value="100" min="0" max="500"/>
-               <div className ="flex">
-                   <p>0 GB</p>
-                   <p>1000 GB</p>
-               </div>
-               <p>185 GB Left</p>
-           </div>
+           <Image style = {this.imgStyle1()}src = {this.penguinSrc}/>
         </div>
-    )
+        <div className ="flex center">
+        <p>Grayscale:</p>
+        <input value = {this.state.grayscale} onChange ={this.handleChange}type ="range"></input>
+        <p>{this.state.grayscale}%</p>
+        </div>
+
+        <div className ="flex center">
+        <p>Brightness:</p>
+        <input value = {this.state.grayscale} onChange ={this.handleChange}type ="range"></input>
+        <p>{this.state.grayscale}%</p>
+        </div>
+      
+        </div>
+        
+        )
+    }
 }

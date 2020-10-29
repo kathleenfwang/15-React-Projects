@@ -921,6 +921,9 @@ border:none;
   width: 70%;
   height: 87%;
 }
+.day17 {
+  transition: width 1s ease-in;
+}
 
 @keyframes fadeInOpacity {
 	0% {
