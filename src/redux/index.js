@@ -17,12 +17,12 @@ let hour = d.getHours(); // => 9
 // have dark mode starting at 6 PM, or 18 Hour 
 return hour < 18 
 }
-// 2. Create a reducer to handle your increment and decrement actions
+// 2. Create a reducer to handle actions
 function reducer(state = initialState, action) {
     switch (action.type) {
         case "CHANGE_THEME": 
-        return {...state,theme:!state.theme}
-        // if you don't have this default, IT WILL DEFAULT COUNT TO UNDEFINED
+            return {...state,theme:!state.theme}
+        // if you don't have default, IT WILL DEFAULT STATE TO UNDEFINED
         default: 
         return state
     }
