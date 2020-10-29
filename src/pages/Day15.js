@@ -22,7 +22,7 @@ const Day15 = ({ theme, handleThemeToggle}) => {
 };
 
 const mapStateToProps = state => {
-  return { theme: state };
+  return { theme: state.state};
 };
 
  

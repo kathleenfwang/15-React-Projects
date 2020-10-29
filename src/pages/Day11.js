@@ -231,7 +231,7 @@ class Day11 extends React.Component {
     }
 }
 const mapStateToProps = state => {
-    return { theme: state };
+    return { theme: state.theme };
 };
 
 export default connect(

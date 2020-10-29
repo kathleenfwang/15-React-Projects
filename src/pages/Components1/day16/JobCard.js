@@ -62,6 +62,6 @@ return (
 }
 export default connect(
     state => {
-        return { theme: state };
+        return { theme: state.theme };
     }
 )(JobCard);

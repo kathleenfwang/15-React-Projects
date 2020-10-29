@@ -7,6 +7,9 @@ export function handleThemeToggle() {
         type: "CHANGE_THEME"
     }
 }
+const initialState = {
+    theme: getTime()
+}
 
 function getTime() {
  let d = new Date(); // for now
@@ -15,14 +18,13 @@ let hour = d.getHours(); // => 9
 return hour < 18 
 }
 // 2. Create a reducer to handle your increment and decrement actions
-function reducer(theme = getTime(), action) {
+function reducer(state = initialState, action) {
     switch (action.type) {
         case "CHANGE_THEME": 
-        theme = !theme
-        return theme
+        return {...state,theme:!state.theme}
         // if you don't have this default, IT WILL DEFAULT COUNT TO UNDEFINED
         default: 
-        return theme
+        return state
     }
 }
 

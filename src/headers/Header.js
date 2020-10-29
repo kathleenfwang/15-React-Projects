@@ -54,7 +54,7 @@ function Header({ theme, handleThemeToggle }) {
 }
 export default connect(
     state => {
-        return { theme: state };
+        return { theme: state.theme};
     },
     { handleThemeToggle }
 )(Header);
