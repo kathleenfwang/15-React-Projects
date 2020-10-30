@@ -8,7 +8,7 @@ export function handleThemeToggle() {
     }
 }
 const initialState = {
-    theme: getTime()
+    theme: getTime(),
 }
 
 function getTime() {
