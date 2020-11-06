@@ -16,9 +16,14 @@
 .bold {
   font-weight:bold;
 }
-
+* {
+  transition: opacity .5s linear;
+}
  h1,h2,h4{
    font-weight:normal
+ }
+ .hoverOpacity:hover {
+   opacity:50%;
  }
  .pic {
    border:2px solid whitesmoke;
@@ -982,9 +987,7 @@ border:none;
   -webkit-column-count: 2;
   column-count:         2;
   }
-  .threeGrid {
-    grid-template-columns: none;
-  }
+
   .searchBar {
     left: auto;
   }
@@ -1000,6 +1003,9 @@ border:none;
   }
 }
 @media (max-width:1060px) {
+  .threeGrid {
+    grid-template-columns: none;
+  }
   .biggrid {
     display:flex;
     flex-wrap: wrap;

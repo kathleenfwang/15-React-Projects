@@ -27,7 +27,8 @@ export default function Home() {
         return [days,daysList]
     }
     function handleRecent() {
-        let max = (projList.current.children.length)
+        // let max = (projList.current.children.length)
+        let max = projList.current.children.length - 1   
         setClick(!clicked)
         setRandomNum(max)
     }
@@ -64,7 +65,7 @@ export default function Home() {
                         <p><i> Inspired by Jennifer Dewalt's <a href="https://jenniferdewalt.com/" target="_blank"> 180 Projects in 180 Days</a></i></p>
                 </div>
                 <div className="projectList">
-                <button className ="blueButton" onClick = {handleRecent}> Recent: <span style ={{color:"moccasin"}}>{days()[0][0]}</span></button>
+                <button className ="blueButton" onClick = {handleRecent}> Featured: <span style ={{color:"moccasin"}}>DevJobs</span></button>
                     <button className ="whiteButton" onClick = {handleClick}> Feeling Lucky </button>
                     <ul ref = {projList}>
                         {days()[1]}
