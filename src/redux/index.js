@@ -14,8 +14,8 @@ const initialState = {
 function getTime() {
  let d = new Date(); // for now
 let hour = d.getHours(); // => 9
-// have dark mode starting at 6 PM, or 18 Hour 
-return hour < 18 
+// have dark mode starting at 5 PM, or 17 Hour 
+return hour < 17
 }
 // 2. Create a reducer to handle actions
 function reducer(state = initialState, action) {
