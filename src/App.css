@@ -20,6 +20,9 @@
   transition: opacity .5s linear;
 }
 .cardStyle {
+  display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
   border-radius: 5px;
   padding: 20px;
   margin: 10px;
