@@ -26,6 +26,10 @@ export default function Blog() {
             p: "I now realize what a difference changing the font can make. I have so much respect for people who can create their own fonts. I'm glad there are font parsers online to find the name of the right one :)", 
             date: "10/21/20"
         }, 
+        {
+            p: "UPDATE: I am taking a break from my React projects to learn more and focus on backend, specifically Node and MongoDB.", 
+            date: "11/6/20"
+        }
     ]
     function getEntries() {
         entries = entries.reverse()
