@@ -12,7 +12,7 @@ export default function InnerJobCard(props) {
            <InnerTitle theme ={props.theme} data = {data}/>
             {/* body */}
             <InnerBody theme ={props.theme} data = {data} />
-            <p className ="cursor" onClick ={() => props.handleNext(props.ind)} >Next <FontAwesomeIcon  icon ={faArrowRight} /></p>
+            <button className ="down cursor" onClick ={() => props.handleNext(props.ind)} >Next <FontAwesomeIcon  icon ={faArrowRight} /></button>
         </div>
     )
 }
