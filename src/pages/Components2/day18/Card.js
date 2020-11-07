@@ -1,4 +1,5 @@
 import React, {useState} from "react"
+import Smallbutton from "./Smallbutton"
 export default function Card({ testimony }) {
     let [color,setColor] = useState("") 
     let [bg,setBgColor] = useState("") 
@@ -22,12 +23,13 @@ export default function Card({ testimony }) {
 
    
     const handleTheme = (color) => {
+        console.log('click')
         setColor(color)
     }
     const getButtons = () => {
         let colors = ['black','green','red']
         return colors.map((color) => {
-            return <button onClick = {() => handleTheme(color)}>{color}</button>
+            return <Smallbutton handleTheme = {handleTheme} color = {color}/>
         })
     }
     return (
