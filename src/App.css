@@ -19,9 +19,7 @@
 * {
   transition: opacity .5s linear;
 }
- h1,h2,h4{
-   font-weight:normal
- }
+ 
  .hoverOpacity:hover {
    opacity:50%;
  }
@@ -883,6 +881,9 @@ border:none;
   border-bottom-left-radius: 60%;
   border-top-left-radius: 5px;
  
+}
+.textcenter {
+  text-align: center;
 }
 .day16dark{
   background-color: #121721;

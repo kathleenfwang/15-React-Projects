@@ -16,6 +16,7 @@ import Day15 from "./Day15"
 import Day16 from "./Day16"
 import Day17 from "./Day17"
 import Day18 from "./Day18"
+import Day19 from "./Day19"
 import Footer from "../headers/Footer"
 function day2() {
     return <Day2 />
@@ -70,5 +71,8 @@ function day17() {
 function day18() {
     return <Day18/>
 }
-const dayList = [day2,day3,day4,day5,day6,day7,day8,day9,day10,day11,day13,day14,day16,day17,day18]
+function day19() {
+    return <Day19/>
+}
+const dayList = [day2,day3,day4,day5,day6,day7,day8,day9,day10,day11,day13,day14,day16,day17,day18,day19]
 export {dayList}
