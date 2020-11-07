@@ -19,7 +19,15 @@
 * {
   transition: opacity .5s linear;
 }
- 
+.cardStyle {
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px;
+  border: 2px solid white;
+  width: 30%;
+  height: 500px;
+
+}
  .hoverOpacity:hover {
    opacity:50%;
  }
