@@ -35,7 +35,7 @@ return (
     <>
         <div onClick ={() => showPopOut(data.id)} className={`${themeClass} hover cursor`} style={cardStyle}>
             <div>
-                <div className="grey flexTitle down">
+                <div id ="width" className="grey flexTitle down">
                     <p>{getDate(data.created_at)}</p>
                     <FontAwesomeIcon style ={{fontSize: '.5em'}} icon={faCircle} />
                     <p>{data.type}</p>

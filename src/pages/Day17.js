@@ -71,7 +71,7 @@ export default class Day17 extends React.Component {
         return (
             <div className="day17">
                 <h1>Image Filtering</h1>
-                <div className="flex center">
+                <div id ="nowrap" className="flex center">
                 <img onMouseLeave = {() => this.hover(false)}onMouseOver= {() => this.hover(true)} className = "hoverOpacity" style = {this.defaultImgStyle} src = {src} />
                 {/* <h2 className = {`${show}Show`}style = {this.hoverStyle}>Original</h2> */}
                 <img style = {this.imgStyle1()} src = {src} />
