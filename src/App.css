@@ -180,9 +180,7 @@ a {
    display:flex;
    grid-gap:20px;
  }
- .desc p {
- width:80%;
- }
+ 
  .smallTxt{ 
    font-size:14px;
  }
@@ -236,7 +234,7 @@ a {
  }
  .icons {
    font-size:1.5em;
-    width:200px;
+    width:300px;
     justify-content: space-around;
  }
  .icons p {
