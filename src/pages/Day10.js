@@ -38,7 +38,7 @@ export default class Day10 extends React.Component {
             }
             return (
                 <div style={{ marginLeft: 20 }}>
-                    <p style={{ color: "#5F73D7" }}>{name[0].toUpperCase() + name.slice(1)}</p>
+                    <p style={{ marginBottom: 0,color: "#5F73D7" }}>{name[0].toUpperCase() + name.slice(1)}</p>
                     <div className="flex">
                         {squares}
                     </div>
@@ -89,7 +89,7 @@ export default class Day10 extends React.Component {
     render() {
         return (
             <div className="day11">
-                <h2 style={{ marginBottom: -30, color: "white", textAlign: "center", fontStyle: "italic" }}>Pride month is celebrated every June to honor the 1969 Stonewall riots in Manhattan</h2>
+                <h2 style={{ marginBottom: -30, color: "white", textAlign: "center", fontStyle: "italic", fontSize:'1.2em' }}>Pride month is celebrated every June to honor the 1969 Stonewall riots in Manhattan</h2>
                 <div className="biggrid center">
                     <Fade clear cascade>
                         {this.getSquaresSection()}

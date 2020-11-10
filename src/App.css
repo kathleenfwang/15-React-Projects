@@ -1024,13 +1024,7 @@ border:none;
   .threeGrid {
     grid-template-columns: none;
   }
-  .biggrid {
-    display:flex;
-    flex-wrap: wrap;
-  }
-.day11 {
-  height:120vh;
-}
+ 
 }
 @media (max-width:1130px) {
   .firstPanel {
@@ -1062,5 +1056,12 @@ background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
 @media (max-width:1450px) {
   .threeGrid {
     grid-template-columns: 1fr 1fr;
+  }
+  .day11 {
+    height: 200%;
+}
+  .biggrid {
+    display:flex;
+    flex-wrap: wrap;
   }
 }
