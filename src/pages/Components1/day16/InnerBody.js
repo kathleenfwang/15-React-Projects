@@ -40,7 +40,7 @@ export default class InnerBody extends React.Component {
     return (
         <div className={`down innerBody midwidth ${themeColor}Container`}>
             {/* title  */}
-            <div style ={{padding: 20,width:'100%'}} id ="innerBody" className="flex spaceBetween">
+            <div style ={{padding: 20}} id ="innerBody" className="flex spaceBetween">
                 <div >
                     <div style={{width: 150,marginBottom:-20}} className="grey smallTxt flexTitle">
                         <p>{this.getDate(data.created_at)}</p>
