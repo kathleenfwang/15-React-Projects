@@ -41,7 +41,7 @@ return (
                     <p>{data.type}</p>
                 </div>
                 <div className ="up">
-                    <h2 className={`${title} bold`}>{data.title}</h2>
+                    <h1 className={`${title} bold`}>{data.title}</h1>
                     <p className="grey">{data.company}</p>
                 </div>
             </div>
