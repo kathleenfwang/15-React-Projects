@@ -201,7 +201,7 @@ class Day9 extends React.Component {
                 <div className="flex center bold">
                     <h1 ><b>Inktober is here!</b> </h1>
                 </div>
-                <nav style ={{lineHeight:3,margin: '-50px 30px -40px 0px',}} className="nav center" >
+                <nav style ={{lineHeight:3,margin: '-20px 30px -20px 0px',}} className="nav center" >
                     {this.getNavList()}
                     <li><input ref="input" value={value} placeholder="Search by day or name..." onChange={this.handleSearchInput}></input>{<FontAwesomeIcon className="left" style={{ visibility: value ? "visible" : "hidden" }} onClick={this.handleClear} icon={faTimes} />}</li>
                     <li style ={{position:"relative", right: 5, width:70, overflow:"hidden"}} className ={`${likes.length >0}Show bigger transitionVisible`}><FontAwesomeIcon className ="red" icon = {faHeart}></FontAwesomeIcon> = {likes.length}</li>
