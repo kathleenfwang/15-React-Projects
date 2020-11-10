@@ -1020,12 +1020,18 @@ border:none;
   column-count:         1;
   }
 }
+@media (max-width:1500px) {
+  .threeGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 @media (max-width:1060px) {
   .threeGrid {
     grid-template-columns: none;
   }
  
 }
+
 @media (max-width:1130px) {
   .firstPanel {
     margin-left:0px;
