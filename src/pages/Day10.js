@@ -38,7 +38,7 @@ export default class Day10 extends React.Component {
             }
             return (
                 <div style={{ marginLeft: 20 }}>
-                    <p style={{ marginBottom: 0,color: "#5F73D7" }}>{name[0].toUpperCase() + name.slice(1)}</p>
+                    <p style={{ marginBottom: 5,color: "#5F73D7" }}>{name[0].toUpperCase() + name.slice(1)}</p>
                     <div className="flex">
                         {squares}
                     </div>
