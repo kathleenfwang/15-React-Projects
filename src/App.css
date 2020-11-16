@@ -986,6 +986,7 @@ border:none;
   }
 }
 @media (max-width: 1000px) {
+ 
   .photos {
   -moz-column-count:    3;
   -webkit-column-count: 3;
@@ -1020,17 +1021,8 @@ border:none;
   column-count:         1;
   }
 }
-@media (max-width:1500px) {
-  .threeGrid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media (max-width:1060px) {
-  .threeGrid {
-    grid-template-columns: none;
-  }
  
-}
+ 
 
 @media (max-width:1130px) {
   .firstPanel {
@@ -1072,5 +1064,10 @@ background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
   .biggrid {
     display:flex;
     flex-wrap: wrap;
+  }
+}
+@media (max-width: 1000px) {
+  .threeGrid {
+    grid-template-columns: none;
   }
 }
