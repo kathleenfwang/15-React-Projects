@@ -26,7 +26,12 @@ export default class InnerBody extends React.Component {
        const {data} = this.props
         const applyLink = data.how_to_apply.indexOf("http")
         const endApplyLink = data.how_to_apply.indexOf("\">")
-        return data.how_to_apply.slice(applyLink, endApplyLink)
+        let finalLink = data.how_to_apply.slice(applyLink, endApplyLink)
+        if (finalLink.length <=10) {
+            finalLink = data.company_url
+        }
+        console.log(finalLink)
+        return finalLink
     }
    getDesc = () => {
     const {description} = this.props.data
