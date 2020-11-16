@@ -262,16 +262,16 @@ a {
    text-align: center;
  }
  .error {
-   color:#333;
+   color:white;
    border-radius:5px;
   box-shadow: 2px 4px 25px rgba(0, 0, 0, .2);
    font-size:.8em;
    padding:30px;
   text-align: center;
-  height: 50vw;
-   background-image: url("https://i.imgur.com/FujY37n.gif");
+   background-image: url("https://i.imgur.com/MAMdnKs.gif");
    background-repeat: no-repeat;
    background-size:cover;
+ 
  }
 
  .error li {

@@ -8,7 +8,7 @@ export default class Day19 extends React.Component {
     render() {
         return(
             <div>
-                hi
+ 
             </div>
         )
     }
