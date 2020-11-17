@@ -1,5 +1,6 @@
 ### Work In Progress - 180 React Projects in 180 Days 
 Curent Projects: 
+- Day 17: Computer Vision Images [view](http://kathleenwang180projects.surge.sh/day/17) | [code](https://github.com/kathleenfwang/180-React-Projects/blob/master/src/pages/Day19.js)
 - Day 16: Theme Changer [view](http://kathleenwang180projects.surge.sh/day/16) | [code](https://github.com/kathleenfwang/180-React-Projects/blob/master/src/pages/Day18.js)
 - Day 15: Image Filters [view](http://kathleenwang180projects.surge.sh/day/15) | [code](https://github.com/kathleenfwang/180-React-Projects/blob/master/src/pages/Day17.js)
 - Day 14: DevJobs [view](http://kathleenwang180projects.surge.sh/day/14) | [code](https://github.com/kathleenfwang/180-React-Projects/blob/master/src/pages/Day16.js)
