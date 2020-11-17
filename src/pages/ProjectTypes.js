@@ -74,5 +74,5 @@ function day18() {
 function day19() {
     return <Day19/>
 }
-const dayList = [day2,day3,day4,day5,day6,day7,day8,day9,day10,day11,day13,day14,day16,day17,day18]
+const dayList = [day2,day3,day4,day5,day6,day7,day8,day9,day10,day11,day13,day14,day16,day17,day18,day19]
 export {dayList}
