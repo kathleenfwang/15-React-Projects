@@ -1,5 +1,7 @@
 ### Work In Progress - 180 React Projects in 180 Days 
 Curent Projects: 
+- Day 16: Theme Changer [view](http://kathleenwang180projects.surge.sh/day/16) | [code](https://github.com/kathleenfwang/180-React-Projects/blob/master/src/pages/Day18.js)
+- Day 15: Image Filters [view](http://kathleenwang180projects.surge.sh/day/15) | [code](https://github.com/kathleenfwang/180-React-Projects/blob/master/src/pages/Day17.js)
 - Day 14: DevJobs [view](http://kathleenwang180projects.surge.sh/day/14) | [code](https://github.com/kathleenfwang/180-React-Projects/blob/master/src/pages/Day16.js)
 - Day 13: Animation Practice [view](http://kathleenwang180projects.surge.sh/day/13)  | [code](https://github.com/kathleenfwang/180-React-Projects/blob/master/src/pages/Day14.js)
 - Day 12: Animated Shapes [view](http://kathleenwang180projects.surge.sh/day/12)  | [code](https://github.com/kathleenfwang/180-React-Projects/blob/master/src/pages/Day13.js)
