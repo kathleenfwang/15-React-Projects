@@ -27,7 +27,7 @@ function Header({ theme, handleThemeToggle }) {
     }
     if (!theme) {
         document.body.style.backgroundColor = "#333";
-        document.body.style.color = "white";
+        document.body.style.color = "#f2f2f2";
 
     }
     else {

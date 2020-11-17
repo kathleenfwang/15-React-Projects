@@ -197,7 +197,7 @@ export default class Day19 extends React.Component {
                 <div className="center">
                     <button onClick={this.handleShow}>About</button>
                     <p style={{ width: 600, marginLeft: 10 }} className={`${show}Show`}>
-                        Using Microsoft Azure's Computer Vision API to generate dominant foreground and accent colors from the supplied image, as well as descriptive tags for each image. There are many different outputs that are not limited to just these that I would love to explore in the future.
+                        Using Microsoft Azure's Computer Vision API to generate dominant foreground and accent colors from the supplied image, as well as descriptive tags for each image. You can use the sample images provided or by pasting in an image URL. 
                 </p>
                 </div>
             </div>
