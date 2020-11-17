@@ -1,7 +1,7 @@
 import React from "react"
 import axios from "axios"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 export default class Day19 extends React.Component {
     constructor() {
         super()
@@ -10,8 +10,9 @@ export default class Day19 extends React.Component {
             loaded: false,
             img: img,
             imgUpload: null,
-            photos: ['https://www.goodinfonet.com/uploads/news/goodinfonet_whats_up_wednesday_1596012821_0.jpg','https://www.rightstufanime.com/images/productImages/816546022563_anime-the-promised-neverland-blu-ray-primary.jpg?resizeid=3', 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*'],
-            colors: {}
+            photos: [img, 'https://www.goodinfonet.com/uploads/news/goodinfonet_whats_up_wednesday_1596012821_0.jpg', 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/109778.jpg?output-format=auto&output-quality=auto',],
+            colors: {},
+            tags: []
         }
         this.url = process.env.REACT_APP_COMPVISION_URL
         this.key = process.env.REACT_APP_CV_AZURE_KEY
@@ -20,16 +21,16 @@ export default class Day19 extends React.Component {
     componentDidMount() {
         this.getData()
     }
-    componentDidUpdate(prevprops,prevState) {
+    componentDidUpdate(prevprops, prevState) {
         if (prevState.img !== this.state.img) {
             this.getData()
         }
     }
     getData = () => {
-        this.setState({loaded:false})
+        this.setState({ loaded: false })
         const { img } = this.state
         let data =
-            { "url": img}
+            { "url": img }
         let url = this.url
         axios({
             method: 'post',     //put
@@ -40,8 +41,10 @@ export default class Day19 extends React.Component {
             },
             data: data
         }).then((res) => {
+            console.log(res.data)
             this.setState({
                 colors: res.data.color,
+                tags: res.data.tags,
                 loaded: true
             })
         })
@@ -83,7 +86,7 @@ export default class Day19 extends React.Component {
         })
     }
     changePhoto = (photo) => {
-        this.setState({img: photo})
+        this.setState({ img: photo })
     }
     inputUpload = () => {
         let upload = this.refs.fileUpload
@@ -101,51 +104,67 @@ export default class Day19 extends React.Component {
     }
     getPhotos = () => {
         let photosArr = []
-        const {photos} = this.state 
+        const { photos } = this.state
         photosArr = photos.map((photo) => {
-            return (<div className ="square" onClick ={() => this.changePhoto(photo)} style={{
+            return (<div className="square" onClick={() => this.changePhoto(photo)} style={{
                 backgroundImage: `url(${photo})`,
-                backgroundSize: "cover",}}></div>)
+                backgroundSize: "cover",
+            }}></div>)
         })
         // push empty 
-        photosArr.push(<div className="square alignInMiddle" onClick={this.inputUpload}>
-        <input ref="fileUpload" style={{ display: "none" }} type="file" name="imgUpload" id="file" className="inputfile" onChange={(e) => this.handleUpload(e)}
-            accept=".png,.jpg"
-        />
-        <FontAwesomeIcon icon={faPlus} style={{ color: "lightgrey" }} />
-    </div>)
-    return photosArr
+        //     photosArr.push(<div className="square alignInMiddle" onClick={this.inputUpload}>
+        //     <input ref="fileUpload" style={{ display: "none" }} type="file" name="imgUpload" id="file" className="inputfile" onChange={(e) => this.handleUpload(e)}
+        //         accept=".png,.jpg"
+        //     />
+        //     <FontAwesomeIcon icon={faPlus} style={{ color: "lightgrey" }} />
+        // </div>)
+        return photosArr
     }
-    // getLoading = () => {
-    //     return (<img src ="https://i.gifer.com/YCZH.gif"/>)
-    // }
+
     handleChange = (e) => {
-        let value = e.target.value 
-        this.setState({img:value})
+        let value = e.target.value
+        this.setState({ img: value })
+    }
+    getTags = () => {
+        const { tags } = this.state
+        return tags.map((tag) => {
+            return (<div>
+                <p style={{ marginLeft: 5 }}>{tag.name} </p>
+            </div>)
+        })
     }
     render() {
         const { img, loaded } = this.state
         return (
             <div>
-                <div className ="flex">
-                <img style={{
-                    width: 500,
-                    height: 500,
-                    objectFit: 'cover',
-                }} src={img} />
-                <div>
-                    <p>Colors:</p>
-                    {loaded ? this.getColors() : 'Loading!'}
+                <div className="down flex spaceEvenly">
+                    <div>
+                        <img style={{
+                            width: 500,
+                            height: 500,
+                            objectFit: 'cover',
+                        }} src={img} />
+                        <div className='flex'>
+                            {this.getPhotos()}
+                        </div>
+                        <div className="flex">
+                            <h3>Image URL: </h3>
+                            <input placeHolder="Paste here" onChange={this.handleChange}></input>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Colors:</h3>
+                        {loaded ? this.getColors() : 'Loading!'}
+                    </div>
+                    <div style ={{width:'20%'}}>
+                        <h3>Tags:</h3>
+                        <div className="flex">
+                            {loaded ? this.getTags() : 'Loading!'}
+                        </div>
+                    </div>
                 </div>
-            
-                </div>
-                <div className ='flex'>
-                    {this.getPhotos()}
-                </div>
-                <div className ="flex">
-                <p>Image URL: </p>
-                <input onChange = {this.handleChange}></input>
-                </div>
+
+
             </div>
         )
     }
