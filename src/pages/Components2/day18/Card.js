@@ -29,7 +29,8 @@ export default function Card({ testimony }) {
         }   
         return {
             backgroundColor: bg, 
-            color: color
+            color: color, 
+           
         }
     }
 
@@ -66,7 +67,7 @@ export default function Card({ testimony }) {
             <p>{testimony.desc}</p>
             <div className ="flex spaceAround">
         <div className ="flex">
-            <p>Change theme: </p>
+            <p><b>Change theme:</b> </p>
             {getButtons()}
         </div>
         <div className ="box lessLineHeight">
