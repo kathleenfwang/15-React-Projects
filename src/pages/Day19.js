@@ -1,5 +1,7 @@
 import React from "react"
 import axios from "axios"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faPlus } from '@fortawesome/free-solid-svg-icons'
 export default class Day19 extends React.Component {
     constructor() {
         super()
@@ -7,6 +9,7 @@ export default class Day19 extends React.Component {
         this.state = {
             loaded: false,
             img: img,
+            imgUpload: null,
             photos: ['https://www.goodinfonet.com/uploads/news/goodinfonet_whats_up_wednesday_1596012821_0.jpg','https://www.rightstufanime.com/images/productImages/816546022563_anime-the-promised-neverland-blu-ray-primary.jpg?resizeid=3', 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*'],
             colors: {}
         }
@@ -26,7 +29,7 @@ export default class Day19 extends React.Component {
         this.setState({loaded:false})
         const { img } = this.state
         let data =
-            { "url": img }
+            { "url": img}
         let url = this.url
         axios({
             method: 'post',     //put
@@ -82,17 +85,44 @@ export default class Day19 extends React.Component {
     changePhoto = (photo) => {
         this.setState({img: photo})
     }
+    inputUpload = () => {
+        let upload = this.refs.fileUpload
+        upload.click()
+    }
+    handleUpload = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            let img = e.target.files[0];
+            let src = URL.createObjectURL(img);
+            this.setState({
+                img: src,
+                imgUpload: img
+            })
+        }
+    }
     getPhotos = () => {
+        let photosArr = []
         const {photos} = this.state 
-        return photos.map((photo) => {
+        photosArr = photos.map((photo) => {
             return (<div className ="square" onClick ={() => this.changePhoto(photo)} style={{
                 backgroundImage: `url(${photo})`,
                 backgroundSize: "cover",}}></div>)
         })
+        // push empty 
+        photosArr.push(<div className="square alignInMiddle" onClick={this.inputUpload}>
+        <input ref="fileUpload" style={{ display: "none" }} type="file" name="imgUpload" id="file" className="inputfile" onChange={(e) => this.handleUpload(e)}
+            accept=".png,.jpg"
+        />
+        <FontAwesomeIcon icon={faPlus} style={{ color: "lightgrey" }} />
+    </div>)
+    return photosArr
     }
     // getLoading = () => {
     //     return (<img src ="https://i.gifer.com/YCZH.gif"/>)
     // }
+    handleChange = (e) => {
+        let value = e.target.value 
+        this.setState({img:value})
+    }
     render() {
         const { img, loaded } = this.state
         return (
@@ -111,6 +141,10 @@ export default class Day19 extends React.Component {
                 </div>
                 <div className ='flex'>
                     {this.getPhotos()}
+                </div>
+                <div className ="flex">
+                <p>Image URL: </p>
+                <input onChange = {this.handleChange}></input>
                 </div>
             </div>
         )
