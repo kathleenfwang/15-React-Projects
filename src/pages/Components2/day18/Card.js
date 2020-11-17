@@ -45,16 +45,18 @@ export default function Card({ testimony }) {
             color: "#272343"
         }, 
         {
-            theme: "Chocolate",
+            theme: "Strawberry Chocolate",
             backgroundColor: "#55423d",
             secondText: "#e78fb3",
+            secondColor: "#e78fb3",
             color: "#ffc0ad"
         }, 
         {
             theme: "Festive",
-            backgroundColor: "#e16162",
-            secondText: "#f9bc60",
-            color:"#004643"
+            backgroundColor: "#004643",
+            secondText: "#001e1d",
+            secondColor: "#f9bc60",
+            color:"#e16162"
         }
     ]
   
