@@ -10,9 +10,11 @@ export default class Day19 extends React.Component {
             loaded: false,
             img: img,
             imgUpload: null,
-            photos: [img, 'https://www.goodinfonet.com/uploads/news/goodinfonet_whats_up_wednesday_1596012821_0.jpg', 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/109778.jpg?output-format=auto&output-quality=auto',],
+            photos: [img, 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/109778.jpg?output-format=auto&output-quality=auto', 'https://www.goodinfonet.com/uploads/news/goodinfonet_whats_up_wednesday_1596012821_0.jpg',],
             colors: {},
-            tags: []
+            tags: [],
+            description: {},
+            show: false
         }
         this.url = process.env.REACT_APP_COMPVISION_URL
         this.key = process.env.REACT_APP_CV_AZURE_KEY
@@ -45,6 +47,7 @@ export default class Day19 extends React.Component {
             this.setState({
                 colors: res.data.color,
                 tags: res.data.tags,
+                description: res.data.description,
                 loaded: true
             })
         })
@@ -125,20 +128,40 @@ export default class Day19 extends React.Component {
         let value = e.target.value
         this.setState({ img: value })
     }
+    isUnique = (words, word, i) => {
+        return words.indexOf(word) === i
+    }
     getTags = () => {
         const { tags } = this.state
-        return tags.map((tag) => {
+        // make sure tags are unique 
+        let filteredTags = tags.filter((tag, i) => this.isUnique(tags, tag, i))
+        return filteredTags.map((tag, i) => {
+            // even words are bolded
+            let even = i % 2 === 0
             return (<div>
-                <p style={{ marginLeft: 5 }}>{tag.name} </p>
+                <p className={even && "boldSize"} style={{ marginLeft: 5 }}>{tag.name}</p>
             </div>)
         })
     }
+    getDescription = () => {
+        const { description } = this.state
+        const { captions } = description
+        console.log(captions)
+        return <p>{captions[0].text}</p>
+    }
+    handleShow = () => {
+        this.setState(prevState => ({
+            show: !prevState.show
+        }))
+    }
     render() {
-        const { img, loaded } = this.state
+        const { img, loaded, show } = this.state
         return (
             <div>
-                <div className="down flex spaceEvenly">
+
+                <div className="down flex spaceEvenly start">
                     <div>
+                        <h3 className="underBorder">Computer Vision with Images</h3>
                         <img style={{
                             width: 500,
                             height: 500,
@@ -148,23 +171,35 @@ export default class Day19 extends React.Component {
                             {this.getPhotos()}
                         </div>
                         <div className="flex">
-                            <h3>Image URL: </h3>
+                            <h3>Image URL</h3>
                             <input placeHolder="Paste here" onChange={this.handleChange}></input>
                         </div>
                     </div>
-                    <div>
-                        <h3>Colors:</h3>
-                        {loaded ? this.getColors() : 'Loading!'}
-                    </div>
-                    <div style ={{width:'20%'}}>
-                        <h3>Tags:</h3>
-                        <div className="flex">
-                            {loaded ? this.getTags() : 'Loading!'}
+                    <div className="baseLine" style={{ width: 800 }}>
+                        <div>
+                            <div>
+                                <h3 className="underBorder">Colors</h3>
+                                {loaded ? this.getColors() : 'Loading...'}
+                            </div>
+                            <div>
+                                <h3 className="underBorder">Description</h3>
+                                {loaded ? this.getDescription() : 'Loading...'}
+                            </div>
+                        </div>
+                        <div>
+                            <h3 className="underBorder">Tags</h3>
+                            <div>
+                                {loaded ? <div className="up flex baseLine">{this.getTags()} </div> : 'Loading...'}
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
+                <div className="center">
+                    <button onClick={this.handleShow}>About</button>
+                    <p style={{ width: 600, marginLeft: 10 }} className={`${show}Show`}>
+                        Using Microsoft Azure's Computer Vision API to generate dominant foreground and accent colors from the supplied image, as well as descriptive tags for each image. There are many different outputs that are not limited to just these that I would love to explore in the future.
+                </p>
+                </div>
             </div>
         )
     }

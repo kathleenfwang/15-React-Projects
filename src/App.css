@@ -124,6 +124,13 @@
   background-color: #5964E0;
    color:white;
  }
+ .baseLine {
+   align-items: baseline;
+ }
+ .boldSize {
+   font-weight: bold;
+   font-size:1.1em;
+ }
  .lightPurple {
    color: #939BF4;
  }
@@ -635,9 +642,11 @@ background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
 }
 .trueShow {
   visibility: visible;
+ 
 }
 .falseShow {
   visibility: hidden;
+   
 }
 /* -----------------------------------Day 8-------------------------------  */
 .between {
@@ -952,9 +961,16 @@ border:none;
   background-color: #121721;
   color:#5964E0;
 }
+.start {
+  align-items: flex-start;
+}
 .day16dark input {
   color:white;
   background-color: transparent;
+}
+.underBorder {
+  padding-bottom:5px;
+  border-bottom: 1px solid lightgrey;
 }
 
 .lightgrey {
@@ -1065,9 +1081,14 @@ border:none;
   -webkit-column-count: 1;
   column-count:         1;
   }
+ 
 }
  
- 
+ @media (max-width: 700px) {
+  .flex {
+    align-items:baseline;
+  }
+ }
 
 @media (max-width:1130px) {
   .firstPanel {
