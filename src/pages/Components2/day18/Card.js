@@ -54,7 +54,7 @@ export default function Card({ testimony }) {
         {
             theme: "Festive",
             backgroundColor: "#004643",
-            secondText: "#001e1d",
+            secondText: "#fffffe",
             secondColor: "#f9bc60",
             color:"#e16162"
         }
