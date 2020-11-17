@@ -1,78 +1,101 @@
 import React, {useState} from "react"
 import Smallbutton from "./Smallbutton"
 export default function Card({ testimony }) {
-    let [color,setColor] = useState("") 
-    let [bg,setBgColor] = useState("") 
-    let [secondColor,setSecondColor] = useState("")
-    const getColor = () => {
-        switch(color){
-            case "black": 
-                bg = "#232946"
-                color = '#b8c1ec'
-                break
-            case "red": 
-                bg = "#faeee7"
-                color = '#ff8ba7'
-                break
-            case "green":
-                bg = "#c3f0ca"
-                color = '#594a4e'
-                break
-            case "yellow":
-                bg = "#ffd803"
-                color = "#272343"
-                break
-            case "purple":
-                bg = "#d9d4e7"
-                color = "#a786df"
-                break
-        }   
-        return {
-            backgroundColor: bg, 
-            color: color, 
-           
+    const [color,setColor] = useState("") 
+    const [bg,setBgColor] = useState("") 
+    const [secondColor, setSecondColor]= useState({})
+    const [secondText,setSecondText] = useState({})
+    const [secondColorText,setSecondColorText] = useState("")
+    const [themeName,setThemeName] = useState("     ")
+    const [theme,setTheme] = useState({})
+    const colors = [
+        {
+            theme: "Midnight",
+            backgroundColor:"#232946",
+            secondText: "#b8c1ec",
+            secondColor: "#b8c1ec",
+        color:'#eebbc3'},
+        {
+            theme: "Cherry Blossom",
+            backgroundColor:"#faeee7",
+            secondText: "#55423d",
+           color: '#ff8ba7',
+        }, 
+        {
+            theme: "Mint Chocolate",
+            secondText: "#ff8ba7",
+            backgroundColor: "#c3f0ca",
+            color:'#594a4e'
+        }, 
+        {
+            theme: "Charlie Brown",
+            secondText: "#e3f6f5",
+            backgroundColor:"#ffd803",
+            color:"#272343"
+        }, 
+        {   theme: "Lavender",
+            backgroundColor:"#d9d4e7",
+            secondText: "#232946",
+            color:"#a786df"
+        }, 
+        {
+            theme: "Seafoam",
+            backgroundColor: "#e3f6f5",
+            secondColor: "#ffd803",
+            color: "#272343"
+        }, 
+        {
+            theme: "Chocolate",
+            backgroundColor: "#55423d",
+            secondText: "#e78fb3",
+            color: "#ffc0ad"
+        }, 
+        {
+            theme: "Festive",
+            backgroundColor: "#e16162",
+            secondText: "#f9bc60",
+            color:"#004643"
         }
-    }
+    ]
+  
+    const handleTheme = () => {
+        const len = colors.length 
+        let randNum = Math.floor(Math.random() * len); 
+        // color names 
+        const colorName = colors[randNum]
+        const validText = colorName.secondText
+        const validColor = colorName.secondColor
+        const styleColor = {backgroundColor: validColor}
+        const styleText = {color: validText}
 
-    const getSecondColor = () => {
-        let newcolor = ""
-        switch(color) {
-            
-            case "black": 
-                newcolor = "white"
-                break
-        }
-        return {
-            color: newcolor
-        }
+        setColor(colorName.color)
+        setBgColor(colorName.backgroundColor)
+        setSecondColor(validColor ? styleColor : {})
+        setSecondText(validText ? styleText : {})
+        setSecondColorText(validText ? validText : validColor ? validColor: "")
+        setThemeName(colorName.theme)
+        // style 
+        setTheme(colorName)
     }
    
-    const handleTheme = (color) => {
-        console.log('click')
-        setColor(color)
-    }
-    const getButtons = () => {
-        let colors = ['black','green','red','yellow','purple']
-        return colors.map((color) => {
-            return <Smallbutton handleTheme = {handleTheme} color = {color}/>
-        })
-    }
     return (
-        <div className ="cardStyle" style={getColor()}>
+        <div className ="boxShadow cardStyle" style={theme}>
             <div className="textcenter lessLineHeight">
                 <h1 >{testimony.name}</h1>
-                <h2 style ={getSecondColor()}>{testimony.status}</h2>
+                <h2 style ={secondText}>{testimony.status}</h2>
             </div>
-            <h3> {testimony.highlight}</h3>
+            <h3 style ={secondColor}> {testimony.highlight}</h3>
             <p>{testimony.desc}</p>
             <div className ="flex spaceAround">
         <div className ="flex">
-            <p><b>Change theme:</b> </p>
-            {getButtons()}
+            <button onClick ={handleTheme}>Change Theme</button>
         </div>
         <div className ="box lessLineHeight">
+        <p className ="black"><b>Theme:</b> {themeName} </p>
+        <p><b>Text:</b> {color}</p>
         <p><b>Background:</b> {bg}</p>
-            <p><b>Text:</b> {color}</p>
+        <p><b>Inner:</b> {secondColorText}</p>
+           
         </div>
         </div>
         </div>

@@ -14,10 +14,10 @@ export default class Day18 extends React.Component {
     render() {
         return(
             <div>
-            <div className ="down twoGrid spaceEvenly">
+            <div className ="down cardtwoGrid spaceEvenly">
               {this.getCards()}
               </div>
-            <p className ="right">Colors from <a target ="_blank" href ="https://www.happyhues.co/">Happy Hues</a>. Thinking about adding more in the future!</p>
+            <p className ="right">Colors inspired by <a target ="_blank" href ="https://www.happyhues.co/">Happy Hues</a>. Thinking about adding more in the future!</p>
             </div>
         )
     }
