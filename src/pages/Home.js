@@ -21,7 +21,7 @@ export default function Home() {
     function days() {
         let daysList = []
         let days = [
-           "Computer Vision Images","Theme Changer","Image Filters","DevJobs","Animation Practice","Animated Shapes","Collage Maker","Pride Flags","Inktober","Text Analyzer","Pixel Art Maker","Plant Library","Picture Canvas","feelings", "Mental Health Message","Solar System","This Website"]
+           "Computer Vision Images","Theme Changer","Image Filters","DevJobs","Animation Practice","Animated Shapes","Collage Maker","Pride Flags","Inktober","Text Analyzer","Pixel Art Maker","Plant Library","feelings","Solar System","This Website"]
             for (let i = days.length;i>0;i--)
              daysList.push(<Day i = {i} title = {days[days.length - i]} /> )
         return [days,daysList]
@@ -52,16 +52,14 @@ export default function Home() {
                     </div>
                     <div className="desc up">
                         <Fade clear cascade>
-                        <p>I enjoy working with multiple problems. I love  
-                            looking for ways to <br></br>incorporate design and code into my work. Also a sucker for pixel art apparently. I am also interestd in AI and machine learning. </p>
+                        <p>I enjoy working with multiple problems and look for ways to <br></br>incorporate design and code into my work. I am also interested in AI and data science.</p>
                         </Fade>
                     </div>
                     <div>
                     </div>
                     <div className>
                 <div>
-                    <h1> Projects: <span className ="smallTxt">180 React Projects in 180 Days!</span></h1>
-                        <p><i> Inspired by Jennifer Dewalt's <a href="https://jenniferdewalt.com/" target="_blank"> 180 Projects in 180 Days</a></i></p>
+                    <h1> Projects: </h1>
                 </div>
                 <div className="projectList">
                 <button className ="blueButton" onClick = {handleRecent}> Most Recent: <span style ={{color:"moccasin"}}>{days()[0][0]}</span></button>
