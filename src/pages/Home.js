@@ -1,5 +1,4 @@
 import React, {useRef,useState} from "react"
-import Projects from "./Projects"
 import Day from "./Day"
 import {Link, Redirect} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,13 +9,11 @@ export default function Home() {
     const projList = useRef(null)
     const [clicked,setClick] = useState(false)
     const [randomNum,setRandomNum] = useState(null)
-    const [recentTitle,setRecentTitle] = useState(null)
     function handleClick(e) {
         let max = (projList.current.children.length) - 1
         let randomNum =  Math.floor(Math.random() * Math.floor(max)) + 2;
         setClick(!clicked)
         setRandomNum(randomNum)
-     
     }
     function days() {
         let daysList = []
