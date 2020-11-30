@@ -121,9 +121,9 @@ class Day9 extends React.Component {
         return (
             <>
              <p ><a href="https://inktober.com/" target="_blank">Official Inktober Website</a></p>
-                <p>{about}</p>
+                {/* <p>{about}</p> */}
                 <p>{future}</p>
-               <p>{inspo}</p>
+               {/* <p>{inspo}</p> */}
               </>
         )
     }
