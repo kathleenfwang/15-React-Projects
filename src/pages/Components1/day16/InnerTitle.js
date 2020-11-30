@@ -15,6 +15,7 @@ export default function InnerTitle({data,theme}) {
     const img = data.company_logo ? data.company_logo : "https://www.iconpacks.net/icons/2/free-briefcase-icon-1965-thumb.png"
 
     function getUrl(str) {
+        if (!str) return ""
         if (str.length <= 25) return str 
         return `${str.slice(0,25)}...`
     }
