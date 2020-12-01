@@ -125,8 +125,8 @@ export default class Day6 extends React.Component {
                 <label>Description *</label>
                 <textarea placeholder="Best plant" onChange={this.handleDesc} value={this.state.description}></textarea>
                 <br></br>
-                <label>Image Src *</label>
-                <input placeHolder="aloeplant.png" onChange={this.handleImg} value={this.state.image}></input>
+                <label>Image URL: *</label>
+                <input placeHolder="http://...aloeplant.png" onChange={this.handleImg} value={this.state.image}></input>
                 <br></br>
                 <button type="submit">Submit</button>
             </form>
