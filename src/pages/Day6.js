@@ -26,7 +26,7 @@ export default class Day6 extends React.Component {
             gridGap: 20
         }
         this.proxyurl = "https://cors-anywhere.herokuapp.com/"
-        this.url = `${this.proxyurl}https://plant-app-1.herokuapp.com/plants`
+        this.url = `${this.proxyurl}${process.env.REACT_APP_PLANT_URL}`
     }
     componentDidMount = () => {
         axios.get(this.url)
@@ -126,7 +126,7 @@ export default class Day6 extends React.Component {
                 <textarea placeholder="Best plant" onChange={this.handleDesc} value={this.state.description}></textarea>
                 <br></br>
                 <label>Image URL: *</label>
-                <input placeHolder="http://...aloeplant.png" onChange={this.handleImg} value={this.state.image}></input>
+                <input placeHolder="aloeplant.png" onChange={this.handleImg} value={this.state.image}></input>
                 <br></br>
                 <button type="submit">Submit</button>
             </form>
