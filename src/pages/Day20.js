@@ -44,14 +44,7 @@ class Day20 extends React.Component {
             if (!recipe.done) return <RecipeCard recipe = {recipe} /> 
         })
     }
-    getNav = () => {
-        return(
-        <nav className ="alignCenter">
-            <li> <h1>Recipe List </h1></li>
-            <li> <button onClick={this.addRecipe}>Add Recipe </button></li>
-            <li>{this.form()}</li>
-        </nav>)
-    }
+   
     addRecipe = (e) => {
         e.preventDefault()
         const { name, description, image } = this.state
@@ -103,6 +96,14 @@ class Day20 extends React.Component {
                 <button type="submit">Submit</button>
             </form>
         )
+    }
+    getNav = () => {
+        return(
+        <nav className ="alignCenter">
+            <li> <h1>Recipe Library </h1></li>
+            <li> <button onClick={this.addRecipe}>Add Recipe </button></li>
+            <li>{this.form()}</li>
+        </nav>)
     }
     render() {
         const {loaded} = this.state
