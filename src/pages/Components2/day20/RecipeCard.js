@@ -1,10 +1,13 @@
 import React from "react"
 import timeSince from "../../timestamp"
 import axios from "axios"
-export default class RecipeCard extends React.Component {
-    constructor({recipe}) {
-        super({recipe}) 
+import { connect } from "react-redux";
+import {handleCheckedToggle} from "../../../redux/index"
+class RecipeCard extends React.Component {
+    constructor(props) {
+        super(props) 
         this.state = {
+  
             checked: this.props.recipe.done
         } 
         this.proxyurl = "https://cors-anywhere.herokuapp.com/"
@@ -12,6 +15,7 @@ export default class RecipeCard extends React.Component {
     }
   
     handleChange = (e) => {
+      handleCheckedToggle()
       this.setState(prevState => ({
           checked: !prevState.checked
       }), () => {
@@ -28,7 +32,7 @@ export default class RecipeCard extends React.Component {
     }
    recipeCardStyle = (recipe) => {
         return {
-            backgroundImage: `url(${this.props.recipe.image})`,
+            backgroundImage: `url(${recipe.image})`,
             backgroundSize: "cover",
             height:387,
             marginRight:30,
@@ -36,6 +40,7 @@ export default class RecipeCard extends React.Component {
     }
     
    render() {
+       console.log(this.props.checked)
        const {checked } = this.state
     const aDay = this.props.recipe.date
     const time = timeSince(aDay)
@@ -54,3 +59,9 @@ export default class RecipeCard extends React.Component {
     )
    }  
 }
+export default connect(
+    state => {
+        return { checked: state.checked};
+    }, 
+    {handleCheckedToggle}
+)(RecipeCard);

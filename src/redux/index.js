@@ -14,7 +14,7 @@ export function handleCheckedToggle() {
 }
 const initialState = {
     theme: getTime(),
-    checked: false 
+    checked: 0 
 }
 
 function getTime() {
@@ -29,7 +29,7 @@ function reducer(state = initialState, action) {
         case "CHANGE_THEME": 
             return {...state,theme:!state.theme}
         case "CHANGE_CHECKED":
-            return {...state, checked: !state.checked}
+            return {...state, checked: state.checked++}
         // if you don't have default, IT WILL DEFAULT STATE TO UNDEFINED
         default: 
         return state
@@ -41,7 +41,9 @@ function reducer(state = initialState, action) {
 const store = createStore(reducer)
 
 // 4. Set up the subscribe function so we can more easily see the changes to the Redux state as they happen
-store.subscribe(() => console.log(store.getState()))
+store.subscribe(() => 
+{   
+    console.log(store.getState())})
 
 // 5. Export the store as a default export
 export default store
