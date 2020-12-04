@@ -5,6 +5,15 @@ export default class RecipeCard extends React.Component {
         super({recipe}) 
         this.state = {} 
     }
+    componentDidMount() {
+        const checkbox = this.refs.checkbox
+        console.log(checkbox)
+        checkbox.addEventListener('change',this.handleChange)
+    }
+    handleChange = (e) => {
+        console.log(e.target.value)
+        e.target.value = !e.target.value
+    }
    recipeCardStyle = (recipe) => {
         return {
             backgroundImage: `url(${this.props.recipe.image})`,
@@ -25,7 +34,7 @@ export default class RecipeCard extends React.Component {
                 <h4 className ="up">Ingredients:</h4>
                 <p style ={{width:300}} className ="up">{this.props.recipe.description}</p>
                 <img className="medImg" src={this.props.recipe.image} />
-                <p><b>Done? </b>{this.props.recipe.done ? <input ref ="checkbox" type="checkbox" checked/>:<input type="checkbox" />}</p>
+                <p><b>Done? </b>{this.props.recipe.done ? <input ref ="checkbox" value = "false" type="checkbox" checked/>:<input ref ="checkbox" value = "true" type="checkbox" />}</p>
             </div>
         </div>
     )
