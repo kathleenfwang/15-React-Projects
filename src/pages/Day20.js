@@ -19,27 +19,36 @@ export default class Day20 extends React.Component {
           this.setState({ recipes, loaded: true });
         })
     }
-    getRecipeCards = () => {
+    getRecipeCardsDone = () => {
         const {recipes}  = this.state
-        return recipes.map((recipe) => <RecipeCard recipe = {recipe} /> )
+        return recipes.map((recipe) => {
+            if (recipe.done) return <RecipeCard recipe = {recipe} /> 
+        })
+    }
+    getRecipeCardsNotDone = () => {
+        const {recipes}  = this.state
+        return recipes.map((recipe) => {
+            if (!recipe.done) return <RecipeCard recipe = {recipe} /> 
+        })
     }
     render() {
         const {loaded} = this.state
         return (
             <div>
-               <div >
-                   <h1>Recipe List:</h1>
+                <h1>Recipe List:</h1>
+               <div className ="flex">
+                   
                    <div className = "flex">
-                   <div>
+                   <div style ={{borderRight: '2px solid black',marginRight:30}}>
                    <h2>Doing:</h2>
                    <div className ="flex">
-                       {loaded && this.getRecipeCards()}
+                       {loaded && this.getRecipeCardsNotDone()}
                    </div>
                    </div>
                    <div>
                    <h2>Done:</h2>
                    <div className ="flex">
-                       {loaded && this.getRecipeCards()}
+                       {loaded && this.getRecipeCardsDone()}
                    </div>
                    </div>
                    </div>
