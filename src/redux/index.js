@@ -7,8 +7,14 @@ export function handleThemeToggle() {
         type: "CHANGE_THEME"
     }
 }
+export function handleCheckedToggle() {
+    return {
+        type: "CHANGE_CHECKED"
+    }
+}
 const initialState = {
     theme: getTime(),
+    checked: false 
 }
 
 function getTime() {
@@ -22,6 +28,8 @@ function reducer(state = initialState, action) {
     switch (action.type) {
         case "CHANGE_THEME": 
             return {...state,theme:!state.theme}
+        case "CHANGE_CHECKED":
+            return {...state, checked: !state.checked}
         // if you don't have default, IT WILL DEFAULT STATE TO UNDEFINED
         default: 
         return state
