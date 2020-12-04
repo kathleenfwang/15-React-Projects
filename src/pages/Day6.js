@@ -116,7 +116,6 @@ export default class Day6 extends React.Component {
         })
     }
     form = () => {
-        const { state } = this.state
         return (
             <form style={{ width: '70%' }} onSubmit={this.addPlant} className={`form ${this.state.showForm}Form`}>
                 <label>Name *</label>

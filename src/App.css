@@ -951,6 +951,9 @@ border:none;
   border-top-left-radius: 5px;
  
 }
+.alignCenter {
+  align-items: center;
+}
 .right {
   text-align: right;
 }

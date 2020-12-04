@@ -45,10 +45,10 @@ class RecipeCard extends React.Component {
     return (
         <div style={this.recipeCardStyle(this.props.recipe)} className="plantCard">
             <div className="innerPlantCard">
-                <h3>{this.props.recipe.name}</h3>
-                <p  className ="up"><span className="smallTxt"><b>Date Added:</b>{time} Ago</span></p>
-                <h4 className ="up">Ingredients:</h4>
-                <p style ={{width:300}} className ="up">{this.props.recipe.description}</p>
+                <h3 className ="bigger">{this.props.recipe.name}</h3>
+                <h className ="up"><b>Date Added:</b><span className="smallTxt">{time} Ago</span></h>
+                <h3 className = "upLess left">Ingredients:</h3>
+                <p style ={{width:300}} className ="upLess">{this.props.recipe.description}</p>
                 <img className="medImg" src={this.props.recipe.image} />
                 <p className = {checked ? "miniCardPass" : "miniCard"}><b>Done? </b>{<input onChange ={this.handleChange} value = {checked} type="checkbox" checked = {checked}/>}</p>
             </div>
