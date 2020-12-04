@@ -3,8 +3,8 @@ import axios from "axios"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 export default class Day19 extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         const img = "https://rb.gy/tt1rwg"
         this.state = {
             loaded: false,
@@ -43,7 +43,6 @@ export default class Day19 extends React.Component {
             },
             data: data
         }).then((res) => {
-            console.log(res.data)
             this.setState({
                 colors: res.data.color,
                 tags: res.data.tags,
@@ -146,8 +145,10 @@ export default class Day19 extends React.Component {
     getDescription = () => {
         const { description } = this.state
         const { captions } = description
-        console.log(captions)
         return <p>{captions[0].text}</p>
+    }
+    handleTest = (e) => {
+        this.handleShow()
     }
     handleShow = () => {
         this.setState(prevState => ({
@@ -195,7 +196,7 @@ export default class Day19 extends React.Component {
                     </div>
                 </div>
                 <div className="center">
-                    <button onClick={this.handleShow}>About</button>
+                    <button onClick={this.handleTest}>About</button>
                     <p style={{ width: 600, marginLeft: 10 }} className={`${show}Show`}>
                         Using Microsoft Azure's Computer Vision API. You can use the sample images provided or by pasting in an image URL. 
                 </p>

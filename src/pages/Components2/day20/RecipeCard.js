@@ -2,7 +2,7 @@ import React from "react"
 import timeSince from "../../timestamp"
 import axios from "axios"
 import { connect } from "react-redux";
-import {handleCheckedToggle} from "../../../redux/index"
+import {handleCountUpdate} from "../../../redux"
 class RecipeCard extends React.Component {
     constructor(props) {
         super(props) 
@@ -15,7 +15,6 @@ class RecipeCard extends React.Component {
     }
   
     handleChange = (e) => {
-      handleCheckedToggle()
       this.setState(prevState => ({
           checked: !prevState.checked
       }), () => {
@@ -25,10 +24,10 @@ class RecipeCard extends React.Component {
     updateDone = () => {
         const {checked } = this.state
         const id = this.props.recipe._id
-        console.log(id)
         axios.put(`${this.recipeUrl}/${id}`,{ done: checked })
-        .then((res) => console.log(res))
-       
+        .then((res) => {
+            this.props.handleCountUpdate()
+        })
     }
    recipeCardStyle = (recipe) => {
         return {
@@ -40,11 +39,9 @@ class RecipeCard extends React.Component {
     }
     
    render() {
-       console.log(this.props.checked)
        const {checked } = this.state
     const aDay = this.props.recipe.date
     const time = timeSince(aDay)
-    console.log(checked)
     return (
         <div style={this.recipeCardStyle(this.props.recipe)} className="plantCard">
             <div className="innerPlantCard">
@@ -53,15 +50,17 @@ class RecipeCard extends React.Component {
                 <h4 className ="up">Ingredients:</h4>
                 <p style ={{width:300}} className ="up">{this.props.recipe.description}</p>
                 <img className="medImg" src={this.props.recipe.image} />
-                <p><b>Done? </b>{checked ? <input onChange ={this.handleChange} value = {checked} type="checkbox" checked/>:<input onChange ={this.handleChange}value = {checked} type="checkbox" />}</p>
+                <p><b>Done? </b>{<input onChange ={this.handleChange} value = {checked} type="checkbox" checked = {checked}/>}</p>
             </div>
         </div>
     )
    }  
 }
+const mapStateToProps = state => {
+    return { count:state.count };
+};
+
 export default connect(
-    state => {
-        return { checked: state.checked};
-    }, 
-    {handleCheckedToggle}
+    mapStateToProps,
+    { handleCountUpdate }
 )(RecipeCard);

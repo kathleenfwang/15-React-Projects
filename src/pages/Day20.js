@@ -4,8 +4,8 @@ import RecipeCard from "./Components2/day20/RecipeCard"
 import { connect } from "react-redux";
 import { Fade, Slide, Rotate } from 'react-reveal';
 class Day20 extends React.Component {
-    constructor({checked}) {
-        super({checked})
+    constructor(props) {
+        super(props)
         this.state = {
             recipes:null,
             loaded:false
@@ -14,18 +14,18 @@ class Day20 extends React.Component {
         this.recipeUrl =   `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
     }
     componentDidMount() {
-        console.log(this.props.checked)
+        this.getRecipes()
+    }
+    getRecipes = () => {
         axios.get(this.recipeUrl)
         .then(res => {
           const recipes = res.data;
-          console.log(recipes)
           this.setState({ recipes, loaded: true });
         })
     }
-    componentDidUpdate(prevProps) {
-        console.log(prevProps.checked,this.props.checked)
-        if (prevProps.checked !== this.props.checked) {
-            console.log('wow')
+    componentDidUpdate(prevProps,prevState) {
+        if (prevProps.count !== this.props.count) {
+             this.getRecipes()
         }
     }
     getRecipeCardsDone = () => {
@@ -47,15 +47,15 @@ class Day20 extends React.Component {
                 <h1>Recipe List:</h1>
                <div className ="flex spaceEvenly">
                    
-                   <div className = "flex">
+                   <div className = "flex baseLine">
                    <div style ={{borderRight: '2px solid black',marginRight:30}}>
-                   <h2 style = {{borderBottom:'2px solid black',marginRight:30}}>Doing:</h2>
+                   <h2 style = {{borderBottom:'2px solid black',marginRight:30}}>In progress:</h2>
                    <div className ="flex">
                        {loaded && this.getRecipeCardsNotDone()}
                    </div>
                    </div>
                    <div>
-                   <h2 style = {{borderBottom:'2px solid black'}}>Done:</h2>
+                   <h2 style = {{borderBottom:'2px solid black'}}>Finished:</h2>
                    <div className ="flex">
                        {loaded && this.getRecipeCardsDone()}
                    </div>
@@ -68,6 +68,6 @@ class Day20 extends React.Component {
 }
 export default connect(
     state => {
-        return { checked: state.checked};
+        return { count:state.count};
     }
 )(Day20);

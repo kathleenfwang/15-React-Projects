@@ -12,9 +12,15 @@ export function handleCheckedToggle() {
         type: "CHANGE_CHECKED"
     }
 }
+export function handleCountUpdate() {
+    return {
+        type: "CHANGE_COUNT"
+    }
+}
 const initialState = {
     theme: getTime(),
-    checked: 0 
+    checked: false, 
+    count: 0 
 }
 
 function getTime() {
@@ -29,7 +35,9 @@ function reducer(state = initialState, action) {
         case "CHANGE_THEME": 
             return {...state,theme:!state.theme}
         case "CHANGE_CHECKED":
-            return {...state, checked: state.checked++}
+            return {...state, checked: !state.checked}
+        case "CHANGE_COUNT":
+            return {...state, count: state.count+=1}
         // if you don't have default, IT WILL DEFAULT STATE TO UNDEFINED
         default: 
         return state

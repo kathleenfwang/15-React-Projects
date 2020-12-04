@@ -9,8 +9,8 @@ import { inktoberEntries, promptListUrl, about, future,inspo} from './Components
 import { connect } from "react-redux";
 
 class Day9 extends React.Component {
-    constructor({ theme }) {
-        super({ theme })
+    constructor(props) {
+        super(props)
         this.state = {
             likes: [],
             active: [],

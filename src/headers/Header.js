@@ -2,10 +2,10 @@ import React, { useState } from "react"
 import { Link, Redirect } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHamburger, faArrowRight, faCommentDots, faSun, faMoon, faEnvelope } from '@fortawesome/free-solid-svg-icons'
-import { handleThemeToggle } from "../redux"
+import { handleCheckedToggle, handleThemeToggle } from "../redux"
 import { connect } from "react-redux";
 
-function Header({ theme, handleThemeToggle }) {
+function Header({ theme, checked, handleCheckedToggle, handleThemeToggle }) {
     const [show, setShow] = useState(true)
     const [random, setRandom] = useState(null)
     const [clicked, setClick] = useState(false)
@@ -34,6 +34,9 @@ function Header({ theme, handleThemeToggle }) {
         document.body.style.backgroundColor = "#f2f2f2"
         document.body.style.color = "#333"
     }
+    const handleTest = (e) => {
+        handleThemeToggle() 
+    }
     return (
         <div className="header">
             <button onClick={handleShow}><FontAwesomeIcon icon={faHamburger} /></button>
@@ -44,7 +47,7 @@ function Header({ theme, handleThemeToggle }) {
                         <li><Link to="/Blog">Blog</Link></li>
                         <li><Link to="/Contact"> <FontAwesomeIcon icon={faEnvelope} /></Link></li>
                         <li onClick={handleClick}>Next Project <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon> </li>
-                        <li onClick={handleThemeToggle}> <FontAwesomeIcon icon={theme ? faMoon : faSun} /> Mode</li>
+                        <li onClick={handleTest}> <FontAwesomeIcon icon={theme ? faMoon : faSun} /> Mode</li>
                     </ul>
                 </div>
                 : null}
@@ -54,7 +57,7 @@ function Header({ theme, handleThemeToggle }) {
 }
 export default connect(
     state => {
-        return { theme: state.theme};
+        return { theme: state.theme,checked: state.checked};
     },
-    { handleThemeToggle }
+    { handleThemeToggle,handleCheckedToggle}
 )(Header);
