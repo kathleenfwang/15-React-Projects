@@ -1008,6 +1008,25 @@ border:none;
 .day17 {
   transition: width 1s ease-in;
 }
+.no {
+  color: rgb(253, 178, 178);
+}
+.pass {
+  color: rgb(74, 193, 138);
+}
+.mr {
+  margin-right:30px;
+}
+.miniCard {
+  padding:10px;
+  background-color: rgb(253, 178, 178);
+  color:whitesmoke;
+}
+.miniCardPass {
+  padding:10px;
+  background-color: rgb(74, 193, 138);
+  color:whitesmoke;
+}
 
 @keyframes fadeInOpacity {
 	0% {

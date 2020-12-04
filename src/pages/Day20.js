@@ -42,32 +42,38 @@ class Day20 extends React.Component {
     }
     render() {
         const {loaded} = this.state
+        const {theme} = this.props 
+        const border = `2px solid ${theme ? "black" : "whitesmoke"}`
+        const pass = "2px solid rgb(74, 193, 138)"
+        const nopass = "2px solid  rgb(253, 178, 178)"
         return (
             <div>
                 <h1>Recipe List:</h1>
+                <Fade>
                <div className ="flex spaceEvenly">
                    
                    <div className = "flex baseLine">
-                   <div style ={{borderRight: '2px solid black',marginRight:30}}>
-                   <h2 style = {{borderBottom:'2px solid black',marginRight:30}}>In progress:</h2>
+                   <div className ="mr" style ={{borderRight: border}}>
+                   <h2 className ="no mr" style = {{borderBottom:nopass}}>In progress:</h2>
                    <div className ="flex">
                        {loaded && this.getRecipeCardsNotDone()}
                    </div>
                    </div>
                    <div>
-                   <h2 style = {{borderBottom:'2px solid black'}}>Finished:</h2>
+                   <h2 className =" pass" style = {{borderBottom:pass}}>Finished:</h2>
                    <div className ="flex">
                        {loaded && this.getRecipeCardsDone()}
                    </div>
                    </div>
                    </div>
                </div>
+               </Fade>
             </div>
         )
     }
 }
 export default connect(
     state => {
-        return { count:state.count};
+        return { count:state.count, theme: state.theme};
     }
 )(Day20);

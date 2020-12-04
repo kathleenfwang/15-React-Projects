@@ -50,7 +50,7 @@ class RecipeCard extends React.Component {
                 <h4 className ="up">Ingredients:</h4>
                 <p style ={{width:300}} className ="up">{this.props.recipe.description}</p>
                 <img className="medImg" src={this.props.recipe.image} />
-                <p><b>Done? </b>{<input onChange ={this.handleChange} value = {checked} type="checkbox" checked = {checked}/>}</p>
+                <p className = {checked ? "miniCardPass" : "miniCard"}><b>Done? </b>{<input onChange ={this.handleChange} value = {checked} type="checkbox" checked = {checked}/>}</p>
             </div>
         </div>
     )

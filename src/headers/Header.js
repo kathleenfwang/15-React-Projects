@@ -2,10 +2,10 @@ import React, { useState } from "react"
 import { Link, Redirect } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHamburger, faArrowRight, faCommentDots, faSun, faMoon, faEnvelope } from '@fortawesome/free-solid-svg-icons'
-import { handleCheckedToggle, handleThemeToggle } from "../redux"
+import { handleThemeToggle } from "../redux"
 import { connect } from "react-redux";
 
-function Header({ theme, checked, handleCheckedToggle, handleThemeToggle }) {
+function Header({ theme,handleThemeToggle }) {
     const [show, setShow] = useState(true)
     const [random, setRandom] = useState(null)
     const [clicked, setClick] = useState(false)
@@ -57,7 +57,7 @@ function Header({ theme, checked, handleCheckedToggle, handleThemeToggle }) {
 }
 export default connect(
     state => {
-        return { theme: state.theme,checked: state.checked};
+        return { theme: state.theme};
     },
-    { handleThemeToggle,handleCheckedToggle}
+    { handleThemeToggle}
 )(Header);
