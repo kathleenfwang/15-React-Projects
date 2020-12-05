@@ -46,11 +46,10 @@ class RecipeCard extends React.Component {
         <div style={this.recipeCardStyle(this.props.recipe)} className="plantCard">
             <div className="innerPlantCard">
                 <h3 className ="bigger">{this.props.recipe.name}</h3>
+                <h4 className ="up"><b>Date Added:</b><span className="smallTxt">{time} Ago</span></h4>
                 <h4 className ="up">By: {this.props.recipe.author}</h4>
-                <h3 className ="upLess right"><b>Date Added:</b><span className="smallTxt">{time} Ago</span></h3>
-                <h3 className = "upLess left">Ingredients:</h3>
-                <p style ={{width:300}} className ="upLess">{this.props.recipe.description}</p>
-                <img className="medImg" src={this.props.recipe.image} />
+                <h3 className = "up">Ingredients:</h3>
+                <p style ={{width:300}} className ="up">{this.props.recipe.description}</p>
                 <p className = {checked ? "miniCardPass" : "miniCard"}><b>Done? </b>{<input onChange ={this.handleChange} value = {checked} type="checkbox" checked = {checked}/>}</p>
             </div>
         </div>

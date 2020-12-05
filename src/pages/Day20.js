@@ -15,9 +15,11 @@ class Day20 extends React.Component {
             description: "", 
             image: "", 
             username: "", 
-            password: ""
+            password: "", 
+            isLoggedIn: false,
+            user: ""
         }
-        this.proxyurl = "https://secret-ocean-49799.herokuapp.com/"
+        this.proxyurl = "https://cors-anywhere.herokuapp.com/"
         this.recipeUrl =   `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
         this.userUrl =   `${this.proxyurl}${process.env.REACT_APP_USER_URL}`
     }
@@ -91,10 +93,18 @@ class Day20 extends React.Component {
         this.setState({ password: e.target.value })
     }
     form = () => {
+        if (!this.state.isLoggedIn) {
+            return (
+                <div>Must be logged in first to add recipe</div>
+            )
+        }
         return (
             <form style={{ width: '70%' }} onSubmit={this.addRecipe} className={`form ${this.state.showForm}Form`}>
                 <label>Name *</label>
                 <input placeholder="Spaghetti" onChange={this.handleName} value={this.state.name}></input>
+                <br></br>
+                <label>By: </label>
+                <input value={this.state.user}></input>
                 <br></br>
                 <label>Ingredients *</label>
                 <textarea placeholder="Marinara sauce, ground beef, pasta noodles, zucchini, basil, mushrooms" onChange={this.handleDesc} value={this.state.description}></textarea>
@@ -126,12 +136,21 @@ class Day20 extends React.Component {
             showLoginForm: !prevState.showLoginForm
         }))
         if (showLoginForm) {
-            axios.get(this.userUrl)
+            axios.post(`${this.userUrl}/login`, {username, password})
                 .then(res => {
-                    let users = res.data
-                    console.log(users)
+                    let result = res.status
+                    console.log(result)
+                    if (result == 200) {
+                        this.setState(
+                            {isLoggedIn:true, user: username
+                            })
+                    }
                 }).catch((e) => console.log(e))
         }
+        this.setState({
+            username: "",
+            password: "",
+        })
     }
     handleNewLogin = (e) => {
         e.preventDefault()
@@ -159,13 +178,19 @@ class Day20 extends React.Component {
         })
     }
     getNav = () => {
+        const {isLoggedIn, user} = this.state
         return(
         <nav className ="alignCenter">
+            <div className ="flex">
             <li> <h1>Recipe Library </h1></li>
             <li> <button onClick={this.addRecipe}>Add Recipe </button></li>
             <li><button onClick = {this.handleLogin}>Login/Logout</button></li>
             <li>{this.form()}</li>
             <li>{this.loginForm()}</li>
+            </div>
+            <div>
+                <li>{isLoggedIn && `Hi ${user}!`}</li>
+            </div>
         </nav>)
     }
     render() {
