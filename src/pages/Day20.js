@@ -10,12 +10,16 @@ class Day20 extends React.Component {
             recipes:null,
             loaded:false, 
             showForm: false, 
+            showLoginForm: false,
             name: "", 
             description: "", 
-            image: ""
+            image: "", 
+            username: "", 
+            password: ""
         }
-        this.proxyurl = "https://cors-anywhere.herokuapp.com/"
+        this.proxyurl = "https://secret-ocean-49799.herokuapp.com/"
         this.recipeUrl =   `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
+        this.userUrl =   `${this.proxyurl}${process.env.REACT_APP_USER_URL}`
     }
     componentDidMount() {
         this.getRecipes()
@@ -56,7 +60,6 @@ class Day20 extends React.Component {
             description,
             image
         }
-        console.log(recipe)
         if (this.state.showForm) {
             axios.post(this.recipeUrl, recipe)
                 .then(res => {
@@ -81,6 +84,12 @@ class Day20 extends React.Component {
     handleImg = (e) => {
         this.setState({ image: e.target.value })
     }
+    handleUserName = (e) => {
+        this.setState({ username: e.target.value })
+    }
+    handlePass = (e) => {
+        this.setState({ password: e.target.value })
+    }
     form = () => {
         return (
             <form style={{ width: '70%' }} onSubmit={this.addRecipe} className={`form ${this.state.showForm}Form`}>
@@ -97,12 +106,66 @@ class Day20 extends React.Component {
             </form>
         )
     }
+    loginForm = () => {
+        return (
+            <form style={{ width: '70%' }} onSubmit={this.handleLogin} className={`form ${this.state.showLoginForm}Form`}>
+                <label>Username *</label>
+                <input placeholder="Spaghetti" onChange={this.handleUserName} value={this.state.username}></input>
+                <br></br>
+                <label>Password *</label>
+                <textarea placeholder="" onChange={this.handlePass} value={this.state.password}></textarea>
+                <br></br>
+                <button type="submit">Submit</button>
+            </form>
+        )
+    }
+    handleLogin = (e) => {
+        e.preventDefault()
+        const { username,password,showLoginForm } = this.state
+        this.setState(prevState => ({
+            showLoginForm: !prevState.showLoginForm
+        }))
+        if (showLoginForm) {
+            axios.get(this.userUrl)
+                .then(res => {
+                    let users = res.data
+                    console.log(users)
+                }).catch((e) => console.log(e))
+        }
+    }
+    handleNewLogin = (e) => {
+        e.preventDefault()
+        const { username,password } = this.state
+        this.setState(prevState => ({
+            showLoginForm: !prevState.showLoginForm
+        }))
+        const user = {
+            username,
+            password
+        }
+        if (this.state.showLoginForm) {
+            axios.post(this.userUrl, user)
+                .then(res => {
+                    let recipe = res.data
+                    this.setState((prevState) => ({
+                        recipes: [...prevState.recipes, recipe],
+                    }));
+                }).catch((e) => console.log(e))
+        }
+        this.setState({
+            name: "",
+            description: "",
+            image: ""
+        })
+    }
     getNav = () => {
         return(
         <nav className ="alignCenter">
             <li> <h1>Recipe Library </h1></li>
             <li> <button onClick={this.addRecipe}>Add Recipe </button></li>
+            <li><button onClick = {this.handleLogin}>Login/Logout</button></li>
             <li>{this.form()}</li>
+            <li>{this.loginForm()}</li>
         </nav>)
     }
     render() {

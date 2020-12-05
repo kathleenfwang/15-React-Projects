@@ -25,7 +25,7 @@ export default class Day6 extends React.Component {
             padding: 30,
             gridGap: 20
         }
-        this.proxyurl = "https://cors-anywhere.herokuapp.com/"
+        this.proxyurl = "https://secret-ocean-49799.herokuapp.com/"
         this.url = `${this.proxyurl}${process.env.REACT_APP_PLANT_URL}`
     }
     componentDidMount = () => {
