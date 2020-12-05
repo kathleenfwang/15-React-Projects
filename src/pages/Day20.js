@@ -19,11 +19,13 @@ class Day20 extends React.Component {
             fakePass: "",
             isLoggedIn: false,
             user: "", 
-            buttonmsg: ""
+            buttonmsg: "", 
+            defaultMsg: "Must be logged in first to add/move recipes"
         }
         this.proxyurl = "https://cors-anywhere.herokuapp.com/"
         this.recipeUrl =   `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
         this.userUrl =   `${this.proxyurl}${process.env.REACT_APP_USER_URL}`
+        this.userLogin = `${this.proxyurl}${process.env.REACT_APP_USER_URL}/login`
     }
     componentDidMount() {
         this.getRecipes()
@@ -41,16 +43,16 @@ class Day20 extends React.Component {
         }
     }
     getRecipeCardsDone = () => {
-        const {recipes}  = this.state
+        const {recipes, username}  = this.state
         return recipes.map((recipe) => {
-            if (recipe.done) return <RecipeCard recipe = {recipe} /> 
-        })
+            if (recipe.done) return <RecipeCard username = {username} recipe = {recipe} /> 
+        }).reverse()
     }
     getRecipeCardsNotDone = () => {
-        const {recipes}  = this.state
+        const {recipes,username}  = this.state
         return recipes.map((recipe) => {
-            if (!recipe.done) return <RecipeCard recipe = {recipe} /> 
-        })
+            if (!recipe.done) return <RecipeCard username = {username} recipe = {recipe} /> 
+        }).reverse()
     }
    
     addRecipe = (e) => {
@@ -103,9 +105,10 @@ class Day20 extends React.Component {
         })
     }
     form = () => {
+        const {defaultMsg} = this.state
         if (!this.state.isLoggedIn) {
             return (
-                <div>Must be logged in first to add recipe</div>
+                <div className ="warning">{defaultMsg}</div>
             )
         }
         return (
@@ -128,13 +131,20 @@ class Day20 extends React.Component {
     }
     loginForm = () => {
         const {buttonmsg} = this.state
+        let placeholderUser = "" 
+        let placeholderPass = ""
+
+        if (buttonmsg == "Log In") {
+            placeholderUser = "Demo: a"
+            placeholderPass = "Demo: 123"
+        }
         return (
             <form style={{ width: '70%' }} onSubmit={this.handleLogin} className={`form ${this.state.showLoginForm}Form`}>
                 <label>Username *</label>
-                <input placeholder="Spaghetti" onChange={this.handleUserName} value={this.state.username}></input>
+                <input placeholder={placeholderUser} onChange={this.handleUserName} value={this.state.username}></input>
                 <br></br>
                 <label>Password *</label>
-                <input placeholder="" onChange={this.handlePass} value={this.state.fakePass}></input>
+                <input placeholder={placeholderPass} onChange={this.handlePass} value={this.state.fakePass}></input>
                 <br></br>
                 <button type="submit">{buttonmsg}</button>
             </form>
@@ -158,12 +168,17 @@ class Day20 extends React.Component {
             this.handleNewLogin(e)
         }
         else {
+
         this.setState(prevState => ({
             showLoginForm: !prevState.showLoginForm, 
             buttonmsg: msg
         }))
+        const user = {
+            username,
+            password
+        }
         if (showLoginForm) {
-            axios.post(`${this.userUrl}/login`, {username, password})
+            axios.post(`${this.userUrl}/login`, user)
                 .then(res => {
                     let result = res.status
                     console.log(result)
@@ -172,11 +187,16 @@ class Day20 extends React.Component {
                             {isLoggedIn:true, user: username
                             })
                     }
+                    else {
+                        let data = res.data 
+                        this.setState({defaultMsg: data})
+                    }
                 }).catch((e) => console.log(e))
         }
         this.setState({
             username: "",
             password: "",
+            fakePass: ""
         })
     }
     }
@@ -191,7 +211,7 @@ class Day20 extends React.Component {
             password
         }
         if (this.state.showLoginForm) {
-            axios.post(this.userUrl, user)
+            axios.post(this.userLogin, user)
                 .then(res => {
                     let result = res.data
                     console.log(result) 
@@ -203,7 +223,8 @@ class Day20 extends React.Component {
         }
         this.setState({
             username: "", 
-            password: "" 
+            password: "", 
+            fakePass: ""
         })
     }
     getNav = () => {
@@ -228,7 +249,7 @@ class Day20 extends React.Component {
         const {theme} = this.props 
         const border = `2px solid ${theme ? "black" : "whitesmoke"}`
         const pass = "2px solid rgb(74, 193, 138)"
-        const nopass = "2px solid  rgb(253, 178, 178)"
+        const nopass = "2px solid  rgb(248, 105, 105)"
         return (
             <div>
                 {this.getNav()}
@@ -236,15 +257,15 @@ class Day20 extends React.Component {
                <div className ="flex spaceEvenly">
                    
                    <div className = "flex baseLine">
-                   <div className ="mr" style ={{borderRight: border}}>
-                   <h2 className ="no mr" style = {{borderBottom:nopass}}>In progress:</h2>
-                   <div className ="flex">
+                   <div className ="mr" >
+                   <h2 className ="no miniTitle mr" style = {{border:nopass}}>In progress:</h2>
+                   <div className ="flex biggrid">
                        {loaded && this.getRecipeCardsNotDone()}
                    </div>
                    </div>
                    <div>
-                   <h2 className =" pass" style = {{borderBottom:pass}}>Finished:</h2>
-                   <div className ="flex">
+                   <h2 className ="miniTitle pass" style = {{border:pass}}>Finished:</h2>
+                   <div className ="flex biggrid">
                        {loaded && this.getRecipeCardsDone()}
                    </div>
                    </div>

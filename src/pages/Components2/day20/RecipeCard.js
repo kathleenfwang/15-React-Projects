@@ -7,13 +7,17 @@ class RecipeCard extends React.Component {
     constructor(props) {
         super(props) 
         this.state = {
-  
-            checked: this.props.recipe.done
+            checked: this.props.recipe.done,
+            correctUser: false
         } 
         this.proxyurl = "https://cors-anywhere.herokuapp.com/"
         this.recipeUrl =   `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
     }
-  
+    componentDidMount() {
+        if (this.props.username === this.props.recipe.author) {
+            this.setState({correctUser: true})
+        }
+    }
     handleChange = (e) => {
       this.setState(prevState => ({
           checked: !prevState.checked
@@ -34,12 +38,11 @@ class RecipeCard extends React.Component {
             backgroundImage: `url(${recipe.image})`,
             backgroundSize: "cover",
             height:387,
-            marginRight:30,
         }
     }
     
    render() {
-       const {checked } = this.state
+       const {checked, correctUser } = this.state
     const aDay = this.props.recipe.date
     const time = timeSince(aDay)
     return (
@@ -50,7 +53,7 @@ class RecipeCard extends React.Component {
                 <h4 className ="up">By: {this.props.recipe.author}</h4>
                 <h3 className = "up">Ingredients:</h3>
                 <p style ={{width:300}} className ="up">{this.props.recipe.description}</p>
-                <p className = {checked ? "miniCardPass" : "miniCard"}><b>Done? </b>{<input onChange ={this.handleChange} value = {checked} type="checkbox" checked = {checked}/>}</p>
+                <p className = {checked ? "miniCardPass" : "miniCard"}><b>Done? </b>{<input onChange ={correctUser && this.handleChange} value = {checked} type="checkbox" checked = {checked}/>}</p>
             </div>
         </div>
     )
