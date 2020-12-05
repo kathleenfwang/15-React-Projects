@@ -42,19 +42,18 @@ class Day20 extends React.Component {
              this.getRecipes()
         }
     }
-    getRecipeCardsDone = () => {
+    getRecipeCards = (done) => {
         const {recipes, username}  = this.state
         return recipes.map((recipe) => {
-            if (recipe.done) return <RecipeCard username = {username} recipe = {recipe} /> 
+            if (done) {
+                 if (recipe.done) return <RecipeCard username = {username} recipe = {recipe} /> 
+            }
+            else {
+                if (!recipe.done) return <RecipeCard username = {username} recipe = {recipe} /> 
+            }
         }).reverse()
     }
-    getRecipeCardsNotDone = () => {
-        const {recipes,username}  = this.state
-        return recipes.map((recipe) => {
-            if (!recipe.done) return <RecipeCard username = {username} recipe = {recipe} /> 
-        }).reverse()
-    }
-   
+  
     addRecipe = (e) => {
         e.preventDefault()
         const { name, description, image } = this.state
@@ -249,7 +248,7 @@ class Day20 extends React.Component {
         const {theme} = this.props 
         const border = `2px solid ${theme ? "black" : "whitesmoke"}`
         const pass = "2px solid rgb(74, 193, 138)"
-        const nopass = "2px solid  rgb(248, 105, 105)"
+        const nopass = "2px solid  rgb(249, 150, 150)"
         return (
             <div>
                 {this.getNav()}
@@ -260,13 +259,13 @@ class Day20 extends React.Component {
                    <div className ="mr" >
                    <h2 className ="no miniTitle mr" style = {{border:nopass}}>In progress:</h2>
                    <div className ="flex biggrid">
-                       {loaded && this.getRecipeCardsNotDone()}
+                       {loaded && this.getRecipeCards(false)}
                    </div>
                    </div>
                    <div>
                    <h2 className ="miniTitle pass" style = {{border:pass}}>Finished:</h2>
                    <div className ="flex biggrid">
-                       {loaded && this.getRecipeCardsDone()}
+                       {loaded && this.getRecipeCards(true)}
                    </div>
                    </div>
                    </div>

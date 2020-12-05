@@ -14,7 +14,7 @@ class RecipeCard extends React.Component {
         this.recipeUrl =   `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
     }
     componentDidMount() {
-        if (this.props.username === this.props.recipe.author) {
+        if (this.props.username === this.props.recipe.author || this.props.recipe.author == "a") {
             this.setState({correctUser: true})
         }
     }
@@ -45,9 +45,12 @@ class RecipeCard extends React.Component {
        const {checked, correctUser } = this.state
     const aDay = this.props.recipe.date
     const time = timeSince(aDay)
+    const demo = this.props.recipe.author == "a"
+    console.log(demo)
     return (
         <div style={this.recipeCardStyle(this.props.recipe)} className="plantCard">
             <div className="innerPlantCard">
+                <div className ={demo && "demo"}>{demo && "DEMO"}</div>
                 <h3 className ="bigger">{this.props.recipe.name}</h3>
                 <h4 className ="up"><b>Date Added:</b><span className="smallTxt">{time} Ago</span></h4>
                 <h4 className ="up">By: {this.props.recipe.author}</h4>
