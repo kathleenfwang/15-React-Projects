@@ -16,8 +16,10 @@ class Day20 extends React.Component {
             image: "", 
             username: "", 
             password: "", 
+            fakePass: "",
             isLoggedIn: false,
-            user: ""
+            user: "", 
+            buttonmsg: ""
         }
         this.proxyurl = "https://cors-anywhere.herokuapp.com/"
         this.recipeUrl =   `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
@@ -90,7 +92,15 @@ class Day20 extends React.Component {
         this.setState({ username: e.target.value })
     }
     handlePass = (e) => {
-        this.setState({ password: e.target.value })
+        let fakePass = ""
+        let value = e.target.value
+        for (let i =0;i<value.length;i++) {
+            fakePass +="*"
+        }
+        this.setState({ 
+            password: value,
+            fakePass: fakePass 
+        })
     }
     form = () => {
         if (!this.state.isLoggedIn) {
@@ -117,23 +127,40 @@ class Day20 extends React.Component {
         )
     }
     loginForm = () => {
+        const {buttonmsg} = this.state
         return (
             <form style={{ width: '70%' }} onSubmit={this.handleLogin} className={`form ${this.state.showLoginForm}Form`}>
                 <label>Username *</label>
                 <input placeholder="Spaghetti" onChange={this.handleUserName} value={this.state.username}></input>
                 <br></br>
                 <label>Password *</label>
-                <textarea placeholder="" onChange={this.handlePass} value={this.state.password}></textarea>
+                <input placeholder="" onChange={this.handlePass} value={this.state.fakePass}></input>
                 <br></br>
-                <button type="submit">Submit</button>
+                <button type="submit">{buttonmsg}</button>
             </form>
         )
     }
-    handleLogin = (e) => {
+    handleLogin = (e,msg) => {
         e.preventDefault()
-        const { username,password,showLoginForm } = this.state
+        const { username,password,showLoginForm,isLoggedIn } = this.state
+        // logout 
+        if (isLoggedIn) {
+            this.setState({
+                user: "",
+                isLoggedIn: false
+            })
+        }
+        //signup
+        else if (msg === "Sign Up") {
+            this.setState(prevState => ({
+                buttonmsg: msg
+            }))
+            this.handleNewLogin(e)
+        }
+        else {
         this.setState(prevState => ({
-            showLoginForm: !prevState.showLoginForm
+            showLoginForm: !prevState.showLoginForm, 
+            buttonmsg: msg
         }))
         if (showLoginForm) {
             axios.post(`${this.userUrl}/login`, {username, password})
@@ -152,6 +179,7 @@ class Day20 extends React.Component {
             password: "",
         })
     }
+    }
     handleNewLogin = (e) => {
         e.preventDefault()
         const { username,password } = this.state
@@ -165,16 +193,17 @@ class Day20 extends React.Component {
         if (this.state.showLoginForm) {
             axios.post(this.userUrl, user)
                 .then(res => {
-                    let recipe = res.data
-                    this.setState((prevState) => ({
-                        recipes: [...prevState.recipes, recipe],
-                    }));
+                    let result = res.data
+                    console.log(result) 
+                    this.setState({
+                        user: username, 
+                        isLoggedIn: true
+                    })
                 }).catch((e) => console.log(e))
         }
         this.setState({
-            name: "",
-            description: "",
-            image: ""
+            username: "", 
+            password: "" 
         })
     }
     getNav = () => {
@@ -184,12 +213,13 @@ class Day20 extends React.Component {
             <div className ="flex">
             <li> <h1>Recipe Library </h1></li>
             <li> <button onClick={this.addRecipe}>Add Recipe </button></li>
-            <li><button onClick = {this.handleLogin}>Login/Logout</button></li>
+            <li><button onClick = {(e) => this.handleLogin(e,"Log In")}>{isLoggedIn? "Logout" : "Login"}</button></li>
             <li>{this.form()}</li>
             <li>{this.loginForm()}</li>
             </div>
-            <div>
+            <div className ="flex">
                 <li>{isLoggedIn && `Hi ${user}!`}</li>
+                <li><button onClick ={(e) => this.handleLogin(e,"Sign Up")}>{!isLoggedIn && "Sign Up"}</button></li>
             </div>
         </nav>)
     }
