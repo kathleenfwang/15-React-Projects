@@ -7,24 +7,24 @@ class Day20 extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            recipes:null,
-            loaded:false, 
-            showForm: false, 
+            recipes: null,
+            loaded: false,
+            showForm: false,
             showLoginForm: false,
-            name: "", 
-            description: "", 
-            image: "", 
-            username: "", 
-            password: "", 
+            name: "",
+            description: "",
+            image: "",
+            username: "",
+            password: "",
             fakePass: "",
             isLoggedIn: false,
-            user: "", 
-            buttonmsg: "", 
+            user: "",
+            buttonmsg: "",
             defaultMsg: "Must be logged in first to add/move recipes"
         }
         this.proxyurl = "https://agile-temple-52305.herokuapp.com/"
-        this.recipeUrl =   `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
-        this.userUrl =   `${this.proxyurl}${process.env.REACT_APP_USER_URL}`
+        this.recipeUrl = `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
+        this.userUrl = `${this.proxyurl}${process.env.REACT_APP_USER_URL}`
         this.userLogin = `${this.proxyurl}${process.env.REACT_APP_USER_URL}/login`
     }
     componentDidMount() {
@@ -32,28 +32,28 @@ class Day20 extends React.Component {
     }
     getRecipes = () => {
         axios.get(this.recipeUrl)
-        .then(res => {
-          const recipes = res.data;
-          this.setState({ recipes, loaded: true });
-        })
+            .then(res => {
+                const recipes = res.data;
+                this.setState({ recipes, loaded: true });
+            })
     }
-    componentDidUpdate(prevProps,prevState) {
+    componentDidUpdate(prevProps, prevState) {
         if (prevProps.count !== this.props.count) {
-             this.getRecipes()
+            this.getRecipes()
         }
     }
     getRecipeCards = (done) => {
-        const {recipes, username}  = this.state
+        const { recipes, username } = this.state
         return recipes.map((recipe) => {
             if (done) {
-                 if (recipe.done) return <RecipeCard username = {username} recipe = {recipe} /> 
+                if (recipe.done) return <RecipeCard username={username} recipe={recipe} />
             }
             else {
-                if (!recipe.done) return <RecipeCard username = {username} recipe = {recipe} /> 
+                if (!recipe.done) return <RecipeCard username={username} recipe={recipe} />
             }
         }).reverse()
     }
-  
+
     addRecipe = (e) => {
         e.preventDefault()
         const { name, description, image } = this.state
@@ -90,24 +90,26 @@ class Day20 extends React.Component {
         this.setState({ image: e.target.value })
     }
     handleUserName = (e) => {
-        this.setState({ username: e.target.value })
+        if (e.target.value !== "") this.setState({ username: e.target.value })
     }
     handlePass = (e) => {
         let fakePass = ""
         let value = e.target.value
-        for (let i =0;i<value.length;i++) {
-            fakePass +="*"
+        for (let i = 0; i < value.length; i++) {
+            fakePass += "*"
         }
-        this.setState({ 
-            password: value,
-            fakePass: fakePass 
-        })
+        if (value !== "") {
+            this.setState({
+                password: value,
+                fakePass: fakePass
+            })
+        }
     }
     form = () => {
-        const {defaultMsg} = this.state
+        const { defaultMsg } = this.state
         if (!this.state.isLoggedIn) {
             return (
-                <div className ="warning">{defaultMsg}</div>
+                <div className="warning">{defaultMsg}</div>
             )
         }
         return (
@@ -129,8 +131,8 @@ class Day20 extends React.Component {
         )
     }
     loginForm = () => {
-        const {buttonmsg} = this.state
-        let placeholderUser = "" 
+        const { buttonmsg } = this.state
+        let placeholderUser = ""
         let placeholderPass = ""
         let loginFunc = this.handleNewLogin
 
@@ -151,9 +153,9 @@ class Day20 extends React.Component {
             </form>
         )
     }
-    handleLogin = (e,msg) => {
+    handleLogin = (e, msg) => {
         e.preventDefault()
-        const { username,password,showLoginForm,isLoggedIn } = this.state
+        const { username, password, showLoginForm, isLoggedIn } = this.state
         // logout 
         if (isLoggedIn) {
             this.setState({
@@ -170,40 +172,44 @@ class Day20 extends React.Component {
         }
         else {
 
-        this.setState(prevState => ({
-            showLoginForm: !prevState.showLoginForm, 
-            buttonmsg: msg
-        }))
-        const user = {
-            username,
-            password
+            this.setState(prevState => ({
+                showLoginForm: !prevState.showLoginForm,
+                buttonmsg: msg
+            }))
+            const user = {
+                username,
+                password
+            }
+            if (showLoginForm) {
+                axios.post(`${this.userLogin}`, user)
+                    .then(res => {
+                        let result = res.status
+                        console.log(result)
+                        if (result == 200) {
+                            this.setState(
+                                {
+                                    isLoggedIn: true, user: username
+                                })
+                        }
+                        else {
+                            this.setState({ defaultMsg: 'Invalid username/password' })
+                        }
+                    }).catch((e) => {
+                        if (e.response.data.message) {
+                            this.setState({ defaultMsg: e.response.data.message})
+                        }
+                    })
+            }
+            this.setState({
+                username: "",
+                password: "",
+                fakePass: ""
+            })
         }
-        if (showLoginForm) {
-            axios.post(`${this.userLogin}`, user)
-                .then(res => {
-                    let result = res.status
-                    console.log(result)
-                    if (result == 200) {
-                        this.setState(
-                            {isLoggedIn:true, user: username
-                            })
-                    }
-                    else {
-                        let data = res.data 
-                        this.setState({defaultMsg: data})
-                    }
-                }).catch((e) => console.log(e))
-        }
-        this.setState({
-            username: "",
-            password: "",
-            fakePass: ""
-        })
-    }
     }
     handleNewLogin = (e) => {
         e.preventDefault()
-        const { username,password } = this.state
+        const { username, password } = this.state
         this.setState(prevState => ({
             showLoginForm: !prevState.showLoginForm
         }))
@@ -214,38 +220,44 @@ class Day20 extends React.Component {
         if (this.state.showLoginForm) {
             axios.post(this.userUrl, user)
                 .then(res => {
+                    console.log('res', res)
                     this.setState({
-                        user: username, 
+                        user: username,
                         isLoggedIn: true
                     })
-                }).catch((e) => console.log(e))
+                }).catch((error) => {
+                    if (error.response) {
+                        if (error.response.status !== 500) {
+                            this.setState({ defaultMsg: "Username already exists" })}}
+                    else {console.log(error)}
+                })
         }
         this.setState({
-            username: "", 
-            password: "", 
+            username: "",
+            password: "",
             fakePass: ""
         })
     }
     getNav = () => {
-        const {isLoggedIn, user} = this.state
-        return(
-        <nav className ="alignCenter">
-            <div className ="flex">
-            <li> <h1>Recipe Library </h1></li>
-            <li> <button onClick={this.addRecipe}>Add Recipe </button></li>
-            <li><button onClick = {(e) => this.handleLogin(e,"Log In")}>{isLoggedIn? "Logout" : "Login"}</button></li>
-            <li>{this.form()}</li>
-            <li>{this.loginForm()}</li>
-            </div>
-            <div className ="flex">
-                <li>{isLoggedIn && `Hi ${user}!`}</li>
-        <li>{!isLoggedIn &&<button onClick ={(e) => this.handleLogin(e,"Sign Up")}>Sign Up</button>}</li>
-            </div>
-        </nav>)
+        const { isLoggedIn, user } = this.state
+        return (
+            <nav className="alignCenter">
+                <div className="flex">
+                    <li> <h1>Recipe Library </h1></li>
+                    <li> <button onClick={this.addRecipe}>Add Recipe </button></li>
+                    <li><button onClick={(e) => this.handleLogin(e, "Log In")}>{isLoggedIn ? "Logout" : "Login"}</button></li>
+                    <li>{this.form()}</li>
+                    <li>{this.loginForm()}</li>
+                </div>
+                <div className="flex">
+                    {isLoggedIn && <li className="miniCard">{`Hi ${user}!`}</li>}
+                    <li>{!isLoggedIn && <button onClick={(e) => this.handleLogin(e, "Sign Up")}>Sign Up</button>}</li>
+                </div>
+            </nav>)
     }
     render() {
-        const {loaded} = this.state
-        const {theme} = this.props 
+        const { loaded } = this.state
+        const { theme } = this.props
         const border = `2px solid ${theme ? "black" : "whitesmoke"}`
         const pass = "2px solid rgb(74, 193, 138)"
         const nopass = "2px solid  rgb(249, 150, 150)"
@@ -253,30 +265,30 @@ class Day20 extends React.Component {
             <div>
                 {this.getNav()}
                 <Fade>
-               <div className ="flex spaceEvenly">
-                   
-                   <div className = "flex baseLine">
-                   <div className ="mr" >
-                   <h2 className ="no miniTitle mr" style = {{border:nopass}}>In progress:</h2>
-                   <div className ="flex biggrid">
-                       {loaded && this.getRecipeCards(false)}
-                   </div>
-                   </div>
-                   <div>
-                   <h2 className ="miniTitle pass" style = {{border:pass}}>Finished:</h2>
-                   <div className ="flex biggrid">
-                       {loaded && this.getRecipeCards(true)}
-                   </div>
-                   </div>
-                   </div>
-               </div>
-               </Fade>
+                    <div className="flex spaceEvenly">
+
+                        <div className="flex baseLine">
+                            <div className="mr" >
+                                <h2 className="no miniTitle mr" style={{ border: nopass }}>In progress:</h2>
+                                <div className="flex biggrid">
+                                    {loaded && this.getRecipeCards(false)}
+                                </div>
+                            </div>
+                            <div>
+                                <h2 className="miniTitle pass" style={{ border: pass }}>Finished:</h2>
+                                <div className="flex biggrid">
+                                    {loaded && this.getRecipeCards(true)}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Fade>
             </div>
         )
     }
 }
 export default connect(
     state => {
-        return { count:state.count, theme: state.theme};
+        return { count: state.count, theme: state.theme };
     }
 )(Day20);
