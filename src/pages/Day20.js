@@ -22,7 +22,7 @@ class Day20 extends React.Component {
             buttonmsg: "", 
             defaultMsg: "Must be logged in first to add/move recipes"
         }
-        this.proxyurl = "https://cors-anywhere.herokuapp.com/"
+        this.proxyurl = "https://agile-temple-52305.herokuapp.com/"
         this.recipeUrl =   `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
         this.userUrl =   `${this.proxyurl}${process.env.REACT_APP_USER_URL}`
         this.userLogin = `${this.proxyurl}${process.env.REACT_APP_USER_URL}/login`
@@ -132,13 +132,15 @@ class Day20 extends React.Component {
         const {buttonmsg} = this.state
         let placeholderUser = "" 
         let placeholderPass = ""
+        let loginFunc = this.handleNewLogin
 
         if (buttonmsg == "Log In") {
+            loginFunc = this.handleLogin
             placeholderUser = "Demo: a"
             placeholderPass = "Demo: 123"
         }
         return (
-            <form style={{ width: '70%' }} onSubmit={this.handleLogin} className={`form ${this.state.showLoginForm}Form`}>
+            <form style={{ width: '70%' }} onSubmit={loginFunc} className={`form ${this.state.showLoginForm}Form`}>
                 <label>Username *</label>
                 <input placeholder={placeholderUser} onChange={this.handleUserName} value={this.state.username}></input>
                 <br></br>
@@ -177,7 +179,7 @@ class Day20 extends React.Component {
             password
         }
         if (showLoginForm) {
-            axios.post(`${this.userUrl}/login`, user)
+            axios.post(`${this.userLogin}`, user)
                 .then(res => {
                     let result = res.status
                     console.log(result)
@@ -210,10 +212,8 @@ class Day20 extends React.Component {
             password
         }
         if (this.state.showLoginForm) {
-            axios.post(this.userLogin, user)
+            axios.post(this.userUrl, user)
                 .then(res => {
-                    let result = res.data
-                    console.log(result) 
                     this.setState({
                         user: username, 
                         isLoggedIn: true
@@ -239,7 +239,7 @@ class Day20 extends React.Component {
             </div>
             <div className ="flex">
                 <li>{isLoggedIn && `Hi ${user}!`}</li>
-                <li><button onClick ={(e) => this.handleLogin(e,"Sign Up")}>{!isLoggedIn && "Sign Up"}</button></li>
+        <li>{!isLoggedIn &&<button onClick ={(e) => this.handleLogin(e,"Sign Up")}>Sign Up</button>}</li>
             </div>
         </nav>)
     }

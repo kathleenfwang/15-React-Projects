@@ -46,7 +46,6 @@ class RecipeCard extends React.Component {
     const aDay = this.props.recipe.date
     const time = timeSince(aDay)
     const demo = this.props.recipe.author == "a"
-    console.log(demo)
     return (
         <div style={this.recipeCardStyle(this.props.recipe)} className="plantCard">
             <div className="innerPlantCard">
