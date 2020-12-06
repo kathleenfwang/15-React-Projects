@@ -271,13 +271,13 @@ class Day20 extends React.Component {
                             <div className="mr" >
                                 <h2 className="no miniTitle mr" style={{ border: nopass }}>In progress:</h2>
                                 <div className="flex biggrid">
-                                    {loaded && this.getRecipeCards(false)}
+                                    {loaded ?this.getRecipeCards(false) : "Loading..."}
                                 </div>
                             </div>
                             <div>
                                 <h2 className="miniTitle pass" style={{ border: pass }}>Finished:</h2>
                                 <div className="flex biggrid">
-                                    {loaded && this.getRecipeCards(true)}
+                                    {loaded ? this.getRecipeCards(true) : "Loading..."}
                                 </div>
                             </div>
                         </div>
