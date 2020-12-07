@@ -1,7 +1,8 @@
-### 15 React Projects
-#### Backend: 
-[Back End Live](http://plant-app-1.herokuapp.com/plants) | [Back End Code](https://github.com/kathleenfwang/react-backend-apis)<br>
-Curent Projects: 
+## 15 React Projects
+### Backend: 
+[Back End Live](http://plant-app-1.herokuapp.com/plants)<br>
+[Back End Code](https://github.com/kathleenfwang/react-backend-apis)<br>
+### Curent Projects: 
 - Day 16: **Recipe Library** [view](http://kathleenwang180projects.surge.sh/day/16) | [code](https://github.com/kathleenfwang/180-React-Projects/blob/master/src/pages/Day20.js)
 - Day 15: **Computer Vision Images** [view](http://kathleenwang180projects.surge.sh/day/17) | [code](https://github.com/kathleenfwang/180-React-Projects/blob/master/src/pages/Day19.js)
 - Day 14: **Theme Changer** [view](http://kathleenwang180projects.surge.sh/day/16) | [code](https://github.com/kathleenfwang/180-React-Projects/blob/master/src/pages/Day18.js)
