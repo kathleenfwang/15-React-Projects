@@ -20,7 +20,8 @@ class Day20 extends React.Component {
             isLoggedIn: false,
             user: "",
             buttonmsg: "",
-            defaultMsg: "Must be logged in first to add/move recipes"
+            defaultMsg: "Must be logged in first to add/move recipes",
+            tab: 0
         }
         this.proxyurl = "https://agile-temple-52305.herokuapp.com/"
         this.recipeUrl = `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
@@ -41,16 +42,31 @@ class Day20 extends React.Component {
         if (prevProps.count !== this.props.count) {
             this.getRecipes()
         }
+        if (prevState.username !== this.state.username) {
+            this.getRecipes()
+        }
     }
-    getRecipeCards = (done) => {
-        const { recipes, username } = this.state
+    getRecipeCards = (done,showUser=false) => {
+        const { recipes,  user } = this.state
         return recipes.map((recipe) => {
+            if (!showUser) {
             if (done) {
-                if (recipe.done) return <RecipeCard username={username} recipe={recipe} />
+                if (recipe.done) return <RecipeCard username={user} recipe={recipe} />
             }
             else {
-                if (!recipe.done) return <RecipeCard username={username} recipe={recipe} />
+                if (!recipe.done) return <RecipeCard username={user} recipe={recipe} />
             }
+        }
+            else {
+                console.log(recipe.author, user, '*')
+                if (done) {
+                    if (recipe.done && (user === recipe.author)) return <RecipeCard username={user} recipe={recipe} />
+                }
+                else {
+                    if (!recipe.done && (user === recipe.author)) return <RecipeCard username={user} recipe={recipe} />
+                }
+            }
+        
         }).reverse()
     }
 
@@ -184,7 +200,6 @@ class Day20 extends React.Component {
                 axios.post(`${this.userLogin}`, user)
                     .then(res => {
                         let result = res.status
-                        console.log(result)
                         if (result == 200) {
                             this.setState(
                                 {
@@ -196,7 +211,7 @@ class Day20 extends React.Component {
                         }
                     }).catch((e) => {
                         if (e.response.data.message) {
-                            this.setState({ defaultMsg: e.response.data.message})
+                            this.setState({ defaultMsg: e.response.data.message })
                         }
                     })
             }
@@ -220,7 +235,6 @@ class Day20 extends React.Component {
         if (this.state.showLoginForm) {
             axios.post(this.userUrl, user)
                 .then(res => {
-                    console.log('res', res)
                     this.setState({
                         user: username,
                         isLoggedIn: true
@@ -228,8 +242,10 @@ class Day20 extends React.Component {
                 }).catch((error) => {
                     if (error.response) {
                         if (error.response.status !== 500) {
-                            this.setState({ defaultMsg: "Username already exists" })}}
-                    else {console.log(error)}
+                            this.setState({ defaultMsg: "Username already exists" })
+                        }
+                    }
+                    else { console.log(error) }
                 })
         }
         this.setState({
@@ -255,32 +271,76 @@ class Day20 extends React.Component {
                 </div>
             </nav>)
     }
-    render() {
-        const { loaded } = this.state
+    setOptionNav = (tab) => {
+        this.setState({ tab: tab })
+    }
+    handleOptionNav = () => {
+        const { isLoggedIn } = this.state
+        const { loaded, tab } = this.state
         const { theme } = this.props
         const border = `2px solid ${theme ? "black" : "whitesmoke"}`
         const pass = "2px solid rgb(74, 193, 138)"
         const nopass = "2px solid  rgb(249, 150, 150)"
+        if (tab === 1) {
+            if (!isLoggedIn) {
+                return (<div className="down">Must be logged in to view!</div>)
+            }
+            else {
+                return (<div className="flex baseLine">
+                    <div className="mr" >
+                        <h2 className="no miniTitle mr" style={{ border: nopass }}>In progress:</h2>
+                        <div className="flex biggrid">
+                            {loaded ? this.getRecipeCards(false,"user") : "Loading..."}
+                        </div>
+                    </div>
+                    <div>
+                        <h2 className="miniTitle pass" style={{ border: pass }}>Finished:</h2>
+                        <div className="flex biggrid">
+                            {loaded ? this.getRecipeCards(true,"user") : "Loading..."}
+                        </div>
+                    </div>
+                </div>)
+            }
+        }
+        if (tab === 0) {
+            // return "all" 
+            return (<div className="flex baseLine">
+                <div className="mr" >
+                    <h2 className="no miniTitle mr" style={{ border: nopass }}>In progress:</h2>
+                    <div className="flex biggrid">
+                        {loaded ? this.getRecipeCards(false) : "Loading..."}
+                    </div>
+                </div>
+                <div>
+                    <h2 className="miniTitle pass" style={{ border: pass }}>Finished:</h2>
+                    <div className="flex biggrid">
+                        {loaded ? this.getRecipeCards(true) : "Loading..."}
+                    </div>
+                </div>
+            </div>)
+        }
+    }
+    getOptionNav = () => {
+        const { tab } = this.state
+        const titles = ["All", "My Recipes"]
+        const navTitles = titles.map((title, i) => {
+            return (<li style={{ borderBottom: i === tab ? "2px solid pink" : "none" }} onClick={() => this.setOptionNav(i)}>{title}</li>)
+        })
+        return (
+            <nav className="center">
+                {navTitles}
+            </nav>
+        )
+    }
+    render() {
+
         return (
             <div>
                 {this.getNav()}
                 <Fade>
                     <div className="flex spaceEvenly">
-
-                        <div className="flex baseLine">
-                            <div className="mr" >
-                                <h2 className="no miniTitle mr" style={{ border: nopass }}>In progress:</h2>
-                                <div className="flex biggrid">
-                                    {loaded ?this.getRecipeCards(false) : "Loading..."}
-                                </div>
-                            </div>
-                            <div>
-                                <h2 className="miniTitle pass" style={{ border: pass }}>Finished:</h2>
-                                <div className="flex biggrid">
-                                    {loaded ? this.getRecipeCards(true) : "Loading..."}
-                                </div>
-                            </div>
-                        </div>
+                        {this.getOptionNav()}
+                        {this.handleOptionNav()}
                     </div>
                 </Fade>
             </div>
