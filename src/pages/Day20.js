@@ -200,6 +200,7 @@ class Day20 extends React.Component {
                 axios.post(`${this.userLogin}`, user)
                     .then(res => {
                         let result = res.status
+                        console.log(res)
                         if (result == 200) {
                             this.setState(
                                 {
@@ -211,6 +212,7 @@ class Day20 extends React.Component {
                         }
                     }).catch((e) => {
                         if (e.response.data.message) {
+                            console.log(e.response)
                             this.setState({ defaultMsg: e.response.data.message })
                         }
                     })
