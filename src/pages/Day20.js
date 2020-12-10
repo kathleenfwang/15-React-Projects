@@ -152,10 +152,10 @@ class Day20 extends React.Component {
         return (
             <form style={{ width: '70%' }} onSubmit={loginFunc} className={`form ${this.state.showLoginForm}Form`}>
                 <label>Username *</label>
-                <input placeholder={placeholderUser} onChange={this.handleUserName} value={this.state.username}></input>
+                <input required placeholder={placeholderUser} onChange={this.handleUserName} value={this.state.username}></input>
                 <br></br>
                 <label>Password *</label>
-                <input type = "password" placeholder={placeholderPass} onChange={this.handlePass} value={this.state.password}></input>
+                <input required type = "password" placeholder={placeholderPass} onChange={this.handlePass} value={this.state.password}></input>
                 <br></br>
                 <button type="submit">{buttonmsg}</button>
             </form>
