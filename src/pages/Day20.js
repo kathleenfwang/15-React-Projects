@@ -16,7 +16,6 @@ class Day20 extends React.Component {
             image: "",
             username: "",
             password: "",
-            fakePass: "",
             isLoggedIn: false,
             user: "",
             buttonmsg: "",
@@ -109,16 +108,9 @@ class Day20 extends React.Component {
         if (e.target.value !== "") this.setState({ username: e.target.value })
     }
     handlePass = (e) => {
-        let fakePass = ""
         let value = e.target.value
-        for (let i = 0; i < value.length; i++) {
-            fakePass += "*"
-        }
         if (value !== "") {
-            this.setState({
-                password: value,
-                fakePass: fakePass
-            })
+            this.setState({password: value})
         }
     }
     form = () => {
@@ -163,7 +155,7 @@ class Day20 extends React.Component {
                 <input placeholder={placeholderUser} onChange={this.handleUserName} value={this.state.username}></input>
                 <br></br>
                 <label>Password *</label>
-                <input placeholder={placeholderPass} onChange={this.handlePass} value={this.state.fakePass}></input>
+                <input type = "password" placeholder={placeholderPass} onChange={this.handlePass} value={this.state.password}></input>
                 <br></br>
                 <button type="submit">{buttonmsg}</button>
             </form>
@@ -196,6 +188,7 @@ class Day20 extends React.Component {
                 username,
                 password
             }
+            console.log(username,password)
             if (showLoginForm) {
                 axios.post(`${this.userLogin}`, user)
                     .then(res => {
@@ -220,7 +213,6 @@ class Day20 extends React.Component {
             this.setState({
                 username: "",
                 password: "",
-                fakePass: ""
             })
         }
     }
@@ -253,7 +245,6 @@ class Day20 extends React.Component {
         this.setState({
             username: "",
             password: "",
-            fakePass: ""
         })
     }
     getNav = () => {
