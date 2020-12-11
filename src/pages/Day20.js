@@ -24,7 +24,7 @@ class Day20 extends React.Component {
             defaultMsg: "Must be logged in first to add/move recipes",
             tab: 0
         }
-        this.proxyurl = "https://agile-temple-52305.herokuapp.com/"
+        this.proxyurl = "https://tranquil-bastion-97053.herokuapp.com/"
         this.recipeUrl = `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
         this.userUrl = `${this.proxyurl}${process.env.REACT_APP_USER_URL}`
         this.userLogin = `${this.proxyurl}${process.env.REACT_APP_USER_URL}/login`
@@ -71,15 +71,14 @@ class Day20 extends React.Component {
             description,
             image
         }
-        if (this.state.showForm) {
             axios.post(this.recipeUrl, recipe)
                 .then(res => {
                     let recipe = res.data
+                    console.log(recipe)
                     this.setState((prevState) => ({
                         recipes: [...prevState.recipes, recipe],
                     }));
                 }).catch((e) => console.log(e))
-        }
         this.setState({
             name: "",
             description: "",
@@ -179,12 +178,10 @@ class Day20 extends React.Component {
                 username,
                 password
             }
-            console.log(username, password)
             if (showLoginForm) {
                 axios.post(`${this.userLogin}`, user)
                     .then(res => {
                         let result = res.status
-                        console.log(res)
                         if (result == 200) {
                             this.setState(
                                 {
