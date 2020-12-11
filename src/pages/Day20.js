@@ -277,7 +277,7 @@ class Day20 extends React.Component {
     }
     getOptionNav = () => {
         const { tab } = this.state
-        const titles = ["All", "My Recipes"]
+        const titles = ["All", "|","My Recipes"]
         return (
             <NavOptions titles = {titles} tab = {tab} functionName = {this.setOptionNav} />
         )
@@ -289,7 +289,9 @@ class Day20 extends React.Component {
                 <Fade>
                     <div className="flex spaceEvenly">
                         {this.getOptionNav()}
+                        <div className ="lemon">
                         {this.handleOptionNav()}
+                        </div>
                     </div>
                 </Fade>
             </div>

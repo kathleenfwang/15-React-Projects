@@ -717,6 +717,14 @@ padding-left:30px;
 .relative {
   position: relative;
 }
+.lemon {
+  border-radius:8px;
+  padding:30px;
+  background-image: url(https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1868&q=80);
+  /* background-image: url(https://images.unsplash.com/photo-1543362906-acfc16c67564?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1901&q=80); */
+  background-size:cover;
+  background-repeat: no-repeat;
+}
 .positionRight {
    position: absolute;
    top:10px;
