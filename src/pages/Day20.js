@@ -25,7 +25,8 @@ class Day20 extends React.Component {
             tab: 0
         }
         this.proxyurl = "https://tranquil-bastion-97053.herokuapp.com/"
-        this.recipeUrl = `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
+        this.secondProxy = "https://cors-anywhere.herokuapp.com/"
+        this.recipeUrl = `${this.secondProxy}${process.env.REACT_APP_RECIPE_URL}`
         this.userUrl = `${this.proxyurl}${process.env.REACT_APP_USER_URL}`
         this.userLogin = `${this.proxyurl}${process.env.REACT_APP_USER_URL}/login`
     }
@@ -61,17 +62,23 @@ class Day20 extends React.Component {
     }
 
     addRecipe = (e) => {
+    
         e.preventDefault()
-        const { name, description, image } = this.state
+        const { name, description, image, user} = this.state
         this.setState(prevState => ({
             showForm: !prevState.showForm
         }))
         const recipe = {
             name,
             description,
-            image
+            image,
+            author: user
         }
-            axios.post(this.recipeUrl, recipe)
+            axios.post(this.recipeUrl, recipe, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*"
+                }
+            })
                 .then(res => {
                     let recipe = res.data
                     console.log(recipe)
