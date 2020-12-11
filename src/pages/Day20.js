@@ -2,6 +2,7 @@ import React from "react"
 import axios from "axios"
 import RecipeCard from "./Components2/day20/RecipeCard"
 import GetRecipeCards from "./Components2/day20/GetRecipeCards"
+import NavOptions from "./Components2/day20/NavOptions"
 import { connect } from "react-redux";
 import { Fade, Slide, Rotate } from 'react-reveal';
 class Day20 extends React.Component {
@@ -46,19 +47,18 @@ class Day20 extends React.Component {
             this.getRecipes()
         }
     }
-    getRecipeCards = (done,showUser=false) => {
-        const { recipes,  user } = this.state
+    getRecipeCards = (done, showUser = false) => {
+        const { recipes, user } = this.state
         return recipes.map((recipe) => {
             if (!showUser) {
-            if (done) {
-                if (recipe.done) return <RecipeCard username={user} recipe={recipe} />
+                if (done) {
+                    if (recipe.done) return <RecipeCard username={user} recipe={recipe} />
+                }
+                else {
+                    if (!recipe.done) return <RecipeCard username={user} recipe={recipe} />
+                }
             }
             else {
-                if (!recipe.done) return <RecipeCard username={user} recipe={recipe} />
-            }
-        }
-            else {
-                console.log(recipe.author, user, '*')
                 if (done) {
                     if (recipe.done && (user === recipe.author)) return <RecipeCard username={user} recipe={recipe} />
                 }
@@ -66,7 +66,7 @@ class Day20 extends React.Component {
                     if (!recipe.done && (user === recipe.author)) return <RecipeCard username={user} recipe={recipe} />
                 }
             }
-        
+
         }).reverse()
     }
 
@@ -111,7 +111,7 @@ class Day20 extends React.Component {
     handlePass = (e) => {
         let value = e.target.value
         if (value !== "") {
-            this.setState({password: value})
+            this.setState({ password: value })
         }
     }
     form = () => {
@@ -156,7 +156,7 @@ class Day20 extends React.Component {
                 <input required placeholder={placeholderUser} onChange={this.handleUserName} value={this.state.username}></input>
                 <br></br>
                 <label>Password *</label>
-                <input required type = "password" placeholder={placeholderPass} onChange={this.handlePass} value={this.state.password}></input>
+                <input required type="password" placeholder={placeholderPass} onChange={this.handlePass} value={this.state.password}></input>
                 <br></br>
                 <button type="submit">{buttonmsg}</button>
             </form>
@@ -189,7 +189,7 @@ class Day20 extends React.Component {
                 username,
                 password
             }
-            console.log(username,password)
+            console.log(username, password)
             if (showLoginForm) {
                 axios.post(`${this.userLogin}`, user)
                     .then(res => {
@@ -272,35 +272,27 @@ class Day20 extends React.Component {
         const { isLoggedIn } = this.state
         const { loaded, tab } = this.state
         const { theme } = this.props
-        const border = `2px solid ${theme ? "black" : "whitesmoke"}`
-  
         if (tab === 1) {
             if (!isLoggedIn) {
                 return (<div className="down">Must be logged in to view!</div>)
             }
             else {
-                return (<GetRecipeCards loaded = {loaded} function = {this.getRecipeCards} params = {{first: [false,"user"], second: [true,"user"]}}/>)
+                return (<GetRecipeCards loaded={loaded} function={this.getRecipeCards} params={{ first: [false, "user"], second: [true, "user"] }} />)
             }
         }
         if (tab === 0) {
             // return "all" 
-            return (<GetRecipeCards loaded = {loaded} function = {this.getRecipeCards} params = {{first:[false],second:[true]}}/>)
+            return (<GetRecipeCards loaded={loaded} function={this.getRecipeCards} params={{ first: [false], second: [true] }} />)
         }
     }
     getOptionNav = () => {
         const { tab } = this.state
         const titles = ["All", "My Recipes"]
-        const navTitles = titles.map((title, i) => {
-            return (<li style={{ borderBottom: i === tab ? "2px solid pink" : "none" }} onClick={() => this.setOptionNav(i)}>{title}</li>)
-        })
         return (
-            <nav className="center">
-                {navTitles}
-            </nav>
+            <NavOptions titles = {titles} tab = {tab} functionName = {this.setOptionNav} />
         )
     }
     render() {
-
         return (
             <div>
                 {this.getNav()}

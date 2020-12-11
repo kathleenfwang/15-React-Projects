@@ -1,9 +1,8 @@
 import React from "react"
 
 export default function GetRecipeCards(props) {
-    const {loaded} = props
+    const {loaded,params} = props
     const getRecipeCards = props.function
-    const {params} = props
     const pass = "2px solid rgb(74, 193, 138)"
     const nopass = "2px solid  rgb(249, 150, 150)"
     return (<div className="flex baseLine">
