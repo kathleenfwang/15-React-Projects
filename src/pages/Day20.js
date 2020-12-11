@@ -40,33 +40,23 @@ class Day20 extends React.Component {
             })
     }
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.count !== this.props.count) {
-            this.getRecipes()
-        }
-        if (prevState.username !== this.state.username) {
-            this.getRecipes()
-        }
+        if (prevProps.count !== this.props.count || prevState.username !== this.state.username) this.getRecipes()
     }
     getRecipeCards = (done, showUser = false) => {
         const { recipes, user } = this.state
         return recipes.map((recipe) => {
             if (!showUser) {
                 if (done) {
-                    if (recipe.done) return <RecipeCard username={user} recipe={recipe} />
-                }
+                    if (recipe.done) return <RecipeCard username={user} recipe={recipe} />}
                 else {
-                    if (!recipe.done) return <RecipeCard username={user} recipe={recipe} />
-                }
+                    if (!recipe.done) return <RecipeCard username={user} recipe={recipe} />}
             }
             else {
                 if (done) {
-                    if (recipe.done && (user === recipe.author)) return <RecipeCard username={user} recipe={recipe} />
-                }
+                    if (recipe.done && (user === recipe.author)) return <RecipeCard username={user} recipe={recipe} />}
                 else {
-                    if (!recipe.done && (user === recipe.author)) return <RecipeCard username={user} recipe={recipe} />
-                }
+                    if (!recipe.done && (user === recipe.author)) return <RecipeCard username={user} recipe={recipe} />}
             }
-
         }).reverse()
     }
 
@@ -273,17 +263,13 @@ class Day20 extends React.Component {
         const { loaded, tab } = this.state
         const { theme } = this.props
         if (tab === 1) {
-            if (!isLoggedIn) {
-                return (<div className="down">Must be logged in to view!</div>)
-            }
+            if (!isLoggedIn) return (<div className="down">Must be logged in to view!</div>)
             else {
-                return (<GetRecipeCards loaded={loaded} function={this.getRecipeCards} params={{ first: [false, "user"], second: [true, "user"] }} />)
-            }
+                return (<GetRecipeCards loaded={loaded} function={this.getRecipeCards} params={{ first: [false, "user"], second: [true, "user"] }} />) }
         }
         if (tab === 0) {
             // return "all" 
-            return (<GetRecipeCards loaded={loaded} function={this.getRecipeCards} params={{ first: [false], second: [true] }} />)
-        }
+            return (<GetRecipeCards loaded={loaded} function={this.getRecipeCards} params={{ first: [false], second: [true] }} />)}
     }
     getOptionNav = () => {
         const { tab } = this.state
