@@ -1,6 +1,7 @@
 import React from "react"
 import axios from "axios"
 import RecipeCard from "./Components2/day20/RecipeCard"
+import GetRecipeCards from "./Components2/day20/GetRecipeCards"
 import { connect } from "react-redux";
 import { Fade, Slide, Rotate } from 'react-reveal';
 class Day20 extends React.Component {
@@ -272,45 +273,18 @@ class Day20 extends React.Component {
         const { loaded, tab } = this.state
         const { theme } = this.props
         const border = `2px solid ${theme ? "black" : "whitesmoke"}`
-        const pass = "2px solid rgb(74, 193, 138)"
-        const nopass = "2px solid  rgb(249, 150, 150)"
+  
         if (tab === 1) {
             if (!isLoggedIn) {
                 return (<div className="down">Must be logged in to view!</div>)
             }
             else {
-                return (<div className="flex baseLine">
-                    <div className="mr" >
-                        <h2 className="no miniTitle mr" style={{ border: nopass }}>In progress:</h2>
-                        <div className="flex biggrid">
-                            {loaded ? this.getRecipeCards(false,"user") : "Loading..."}
-                        </div>
-                    </div>
-                    <div>
-                        <h2 className="miniTitle pass" style={{ border: pass }}>Finished:</h2>
-                        <div className="flex biggrid">
-                            {loaded ? this.getRecipeCards(true,"user") : "Loading..."}
-                        </div>
-                    </div>
-                </div>)
+                return (<GetRecipeCards loaded = {loaded} function = {this.getRecipeCards} params = {{first: [false,"user"], second: [true,"user"]}}/>)
             }
         }
         if (tab === 0) {
             // return "all" 
-            return (<div className="flex baseLine">
-                <div className="mr" >
-                    <h2 className="no miniTitle mr" style={{ border: nopass }}>In progress:</h2>
-                    <div className="flex biggrid">
-                        {loaded ? this.getRecipeCards(false) : "Loading..."}
-                    </div>
-                </div>
-                <div>
-                    <h2 className="miniTitle pass" style={{ border: pass }}>Finished:</h2>
-                    <div className="flex biggrid">
-                        {loaded ? this.getRecipeCards(true) : "Loading..."}
-                    </div>
-                </div>
-            </div>)
+            return (<GetRecipeCards loaded = {loaded} function = {this.getRecipeCards} params = {{first:[false],second:[true]}}/>)
         }
     }
     getOptionNav = () => {
