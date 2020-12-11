@@ -102,13 +102,11 @@ class Day20 extends React.Component {
         this.setState({ image: e.target.value })
     }
     handleUserName = (e) => {
-        if (e.target.value !== "") this.setState({ username: e.target.value })
+        this.setState({ username: e.target.value })
     }
     handlePass = (e) => {
         let value = e.target.value
-        if (value !== "") {
             this.setState({ password: value })
-        }
     }
     form = () => {
         const { defaultMsg } = this.state
