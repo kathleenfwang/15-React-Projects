@@ -3,6 +3,8 @@ import timeSince from "../../timestamp"
 import axios from "axios"
 import { connect } from "react-redux";
 import {handleCountUpdate} from "../../../redux"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 class RecipeCard extends React.Component {
     constructor(props) {
         super(props) 
@@ -49,6 +51,7 @@ class RecipeCard extends React.Component {
     }
    recipeCardStyle = (recipe) => {
         return {
+            position: "relative",
             backgroundImage: `url(${recipe.image})`,
             backgroundSize: "cover",
             height:387,
@@ -63,9 +66,11 @@ class RecipeCard extends React.Component {
     return (
         <div style={this.recipeCardStyle(this.props.recipe)} className="plantCard">
             <div className="innerPlantCard">
-                <div className ="flex">
+                <div  >
+                    <div className ="flex positionRight" >
                 <div className ={demo && "demo"}>{demo && "DEMO"}</div>
-    <div classname ="">{correctUser && <button onClick ={this.handleDelete}>Delete</button>}</div>
+  {correctUser && <button onClick ={this.handleDelete}><FontAwesomeIcon icon = {faTrashAlt}/></button>} 
+  </div>
     </div>
 
                 <h3 className ="bigger">{this.props.recipe.name}</h3>
