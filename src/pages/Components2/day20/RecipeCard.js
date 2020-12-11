@@ -18,6 +18,20 @@ class RecipeCard extends React.Component {
             this.setState({correctUser: true})
         }
     }
+    componentDidUpdate(prevprops) {
+        if (this.props.count !== prevprops.count) {
+            if (this.props.username === this.props.recipe.author || this.props.recipe.author == "a") {
+                this.setState({correctUser: true})
+            }
+        }
+    }
+    handleDelete = () => {
+        const id = this.props.recipe._id
+        axios.delete(`${this.recipeUrl}/${id}`)
+        .then((res) => {
+            this.props.handleCountUpdate()
+        })
+      }
     handleChange = (e) => {
       this.setState(prevState => ({
           checked: !prevState.checked
@@ -49,7 +63,11 @@ class RecipeCard extends React.Component {
     return (
         <div style={this.recipeCardStyle(this.props.recipe)} className="plantCard">
             <div className="innerPlantCard">
+                <div className ="flex">
                 <div className ={demo && "demo"}>{demo && "DEMO"}</div>
+    <div classname ="">{correctUser && <button onClick ={this.handleDelete}>Delete</button>}</div>
+    </div>
+
                 <h3 className ="bigger">{this.props.recipe.name}</h3>
                 <h4 className ="up"><b>Date Added:</b><span className="smallTxt">{time} Ago</span></h4>
                 <h4 className ="up">By: {this.props.recipe.author}</h4>

@@ -3,6 +3,7 @@ import axios from "axios"
 import RecipeCard from "./Components2/day20/RecipeCard"
 import GetRecipeCards from "./Components2/day20/GetRecipeCards"
 import NavOptions from "./Components2/day20/NavOptions"
+import {handleCountUpdate} from "../redux"
 import { connect } from "react-redux";
 import { Fade, Slide, Rotate } from 'react-reveal';
 class Day20 extends React.Component {
@@ -192,15 +193,16 @@ class Day20 extends React.Component {
                                 {
                                     isLoggedIn: true, user: username
                                 })
+                                this.props.handleCountUpdate()
                         }
                         else {
                             this.setState({ defaultMsg: 'Invalid username/password' })
                         }
                     }).catch((e) => {
-                        if (e.response.data.message) {
-                            console.log(e.response)
+                        if (e.response) {
                             this.setState({ defaultMsg: e.response.data.message })
                         }
+                        console.log(e )
                     })
             }
             this.setState({
@@ -294,8 +296,11 @@ class Day20 extends React.Component {
         )
     }
 }
+const mapStateToProps = state => {
+    return { count:state.count };
+};
+
 export default connect(
-    state => {
-        return { count: state.count, theme: state.theme };
-    }
+    mapStateToProps,
+    { handleCountUpdate }
 )(Day20);
