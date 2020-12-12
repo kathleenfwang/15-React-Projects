@@ -5,7 +5,7 @@ export default function GetRecipeCards(props) {
     const getRecipeCards = props.function
     const pass = "2px solid rgb(74, 193, 138)"
     const nopass = "2px solid  rgb(249, 150, 150)"
-    return (<div className="flex baseLine">
+    return (<div className="lemon flex baseLine">
                 <div className="mr" >
                     <h2 className="no miniTitle mr" style={{ border: nopass }}>In progress:</h2>
                     <div className="flex biggrid">

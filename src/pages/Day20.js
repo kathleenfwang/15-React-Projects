@@ -265,9 +265,11 @@ class Day20 extends React.Component {
     handleOptionNav = () => {
         const { isLoggedIn } = this.state
         const { loaded, tab } = this.state
-        const { theme } = this.props
-        if (tab === 1) {
-            if (!isLoggedIn) return (<div className="down">Must be logged in to view!</div>)
+        if (tab === 2) {
+            console.log(isLoggedIn)
+            if (!isLoggedIn) {
+                return (<div className="down  ">Must be logged in to view!</div>)
+            }
             else {
                 return (<GetRecipeCards loaded={loaded} function={this.getRecipeCards} params={{ first: [false, "user"], second: [true, "user"] }} />) }
         }
@@ -289,9 +291,7 @@ class Day20 extends React.Component {
                 <Fade>
                     <div className="flex spaceEvenly">
                         {this.getOptionNav()}
-                        <div className ="lemon">
                         {this.handleOptionNav()}
-                        </div>
                     </div>
                 </Fade>
             </div>
