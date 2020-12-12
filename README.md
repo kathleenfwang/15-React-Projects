@@ -6,7 +6,7 @@
 - Day 16: **Recipe Library** [view](http://kathleenwang15projects.surge.sh/day/16) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day20.js)
 - Day 15: **Computer Vision Images** [view](http://kathleenwang15projects.surge.sh/day/15) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day19.js)
 - Day 14: **Theme Changer** [view](http://kathleenwang15projects.surge.sh/day/14) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day18.js)
-- Day 13: **Image Filters** [view](http://kathleenwang15projects.surge.sh/day/14) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day17.js)
+- Day 13: **Image Filters** [view](http://kathleenwang15projects.surge.sh/day/13) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day17.js)
 - Day 12: **DevJobs** [view](http://kathleenwang15projects.surge.sh/day/12) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day16.js)
 - Day 11: **Animation Practice** [view](http://kathleenwang15projects.surge.sh/day/11)  | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day14.js)
 - Day 10: **Animated Shapes** [view](http://kathleenwang15projects.surge.sh/day/10)  | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day13.js)
