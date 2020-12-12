@@ -69,7 +69,7 @@ class RecipeCard extends React.Component {
                 <div className="innerPlantCard">
                     <div  >
                         <div className="flex positionRight" >
-                            <div className={demo && "demo"}>{demo && "DEMO"}</div>
+                            <div className={demo && "demo darkShadow"}>{demo && "DEMO"}</div>
                             {correctUser && <button onClick={this.handleDelete}><FontAwesomeIcon icon={faTrashAlt} /></button>}
                         </div>
                     </div>
@@ -78,7 +78,7 @@ class RecipeCard extends React.Component {
                     <h4 className="up">By: {this.props.recipe.author}</h4>
                     <h3 className="up">Ingredients:</h3>
                     <p style={{ width: 300 }} className="up">{this.props.recipe.description}</p>
-                    <p className={checked ? "miniCardPass" : "miniCard"}><b>Done? </b>{<input onChange={correctUser && this.handleChange} value={checked} type="checkbox" checked={checked} />}</p>
+                    <p className={checked ? "miniCardPass darkShadow" : "miniCard darkShadow"}><b>Done? </b>{<input onChange={correctUser && this.handleChange} value={checked} type="checkbox" checked={checked} />}</p>
                 </div>
             </div>
         )
