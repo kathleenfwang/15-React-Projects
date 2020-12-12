@@ -7,13 +7,13 @@ export default function GetRecipeCards(props) {
     const nopass = "2px solid  rgb(249, 150, 150)"
     return (<div className="lemon flex baseLine">
                 <div className="mr" >
-                    <h2 className="no miniTitle mr" style={{ border: nopass }}>In progress:</h2>
+                    <h2 className="upLess center darkShadow no miniTitle mr" style={{ border: nopass }}>In progress:</h2>
                     <div className="flex biggrid">
                         {loaded ? getRecipeCards(...params.first) : "Loading..."}
                     </div>
                 </div>
                 <div>
-                    <h2 className="miniTitle pass" style={{ border: pass }}>Finished:</h2>
+                    <h2 className="center upLess darkShadow miniTitle pass" style={{ border: pass }}>Finished:</h2>
                     <div className="flex biggrid">
                         {loaded ? getRecipeCards(...params.second) : "Loading..."}
                     </div>

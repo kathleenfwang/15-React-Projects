@@ -163,7 +163,7 @@
   font-size:1.5em;
  }
  .darkShadow {
-  box-shadow: 2px 4px 25px rgba(137,137,137);
+  box-shadow: 2px 4px 25px rgba(137,137,137 );
  }
  button {
   box-shadow: 2px 4px 25px rgba(0, 0, 0, .2);
@@ -1040,7 +1040,7 @@ border:none;
 }
 .miniTitle {
   color:white;
-    width: 200px;
+    width: 150px;
     border-radius: 8px;
     padding: 6px;
 }
