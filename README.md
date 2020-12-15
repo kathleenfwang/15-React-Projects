@@ -1,6 +1,6 @@
 ## 15 React Projects
-Currently 16 React projects, some which are full-stack and connected to MongoDB Atlas Database
-Full stack apps: 
+Currently 16 React projects, some which are full-stack and connected to MongoDB Atlas Database <br>
+## Full stack apps: 
 - **Recipe Library** [view](http://kathleenwang15projects.surge.sh/day/16) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day20.js)
 - **Plant Library** [view](http://kathleenwang15projects.surge.sh/day/4) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day6.js)
 ### Backend: 
