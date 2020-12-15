@@ -85,7 +85,7 @@ export default class Container extends React.Component {
                     </div>
                     <div>
                         <h1>Searches: </h1>
-                        <div className="heightScroll">
+                        <div className="heightScroll noScroll">
                         {newLoaded ? <Fade>{this.getBody(data) }</Fade> : <div className ="falseShow">{this.getBody(currentData)}</div>}
                         </div>
                     </div>
