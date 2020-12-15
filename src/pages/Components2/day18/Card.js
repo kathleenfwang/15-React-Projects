@@ -81,7 +81,7 @@ export default function Card({ testimony }) {
     }
    
     return (
-        <div className ="  cardStyle" style={theme}>
+        <div className ="noScroll cardStyle" style={theme}>
             <div className="textcenter lessLineHeight">
                 <h1 >{testimony.name}</h1>
                 <h2 style ={secondText}>{testimony.status}</h2>

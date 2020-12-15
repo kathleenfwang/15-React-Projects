@@ -22,11 +22,11 @@ export default class StreamCard extends React.Component {
             <div className ="flex spaceBetween noWrap streamCard hover">
                     <div className="flex ">
                         <div>
-                            <a href={this.twitchUrl} target="_blank"><img className="square" src={data.thumbnail_url} /></a>
+                            <a href={this.twitchUrl} target="_blank"><img className="bigCircle" src={data.thumbnail_url} /></a>
                         </div>
 
                         <div>
-                            <div className="big blackText">{data.display_name}</div>
+                            <div className="big whiteText">{data.display_name}</div>
                             <div className ="whiteText">{data.title}</div>
                         </div>
                     </div>

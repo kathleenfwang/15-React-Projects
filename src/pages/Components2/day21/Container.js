@@ -2,11 +2,13 @@ import React from "react"
 import axios from "axios"
 import StreamCard from "./StreamCard"
 import {Fade,Slide,Rotate} from 'react-reveal';
+import {faSearch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default class Container extends React.Component {
     constructor() {
         super()
         this.state = {
-            queries: ["Lilypichu", "Pokimane", "Sykkuno"],
+            queries: ["Lilypichu", "Pokimane", "Sykkuno", "Scarra"],
             name: "",
             loaded: false,
             newLoaded: false,
@@ -58,9 +60,12 @@ export default class Container extends React.Component {
         // title 
         // search bar 
         return (
-            <div>
-                <h1>Check if your favorite streamer is online ... </h1>
-                <input onChange={this.handleChange} placeholder="Search.."></input>
+            <div >
+                <h1>Check if your favorite streamer is online: </h1>
+                <div className ="center">
+                <input className ="darkInput" onChange={this.handleChange} placeholder="Search"></input>
+                <FontAwesomeIcon style ={{color:"grey",padding:5}} icon ={faSearch}/>
+                </div>
             </div>
         )
     }
@@ -80,11 +85,13 @@ export default class Container extends React.Component {
                 </div>
                 <div className="flex baseLine spaceEvenly">
                     <div>
-                        <h1>Past:</h1>
-                        {loaded && this.getBody(currentData)}
+                        <h1 style ={{color: '#6441A4'}}>Suggested:</h1>
+                        <div>
+                        {loaded ? <Fade>{this.getBody(currentData)} </Fade>: null }
+                        </div>
                     </div>
                     <div>
-                        <h1>Searches: </h1>
+                        <h1 style ={{color: '#6441A4'}}>Searches: </h1>
                         <div className="heightScroll noScroll">
                         {newLoaded ? <Fade>{this.getBody(data) }</Fade> : <div className ="falseShow">{this.getBody(currentData)}</div>}
                         </div>
