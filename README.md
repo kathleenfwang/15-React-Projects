@@ -3,9 +3,7 @@ Currently 16 React projects, some which are full-stack and connected to MongoDB 
 ## Full stack apps: 
 - **Recipe Library** [view](http://kathleenwang15projects.surge.sh/day/16) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day20.js)
 - **Plant Library** [view](http://kathleenwang15projects.surge.sh/day/4) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day6.js)
-### Backend: 
-[Back End Live](http://plant-app-1.herokuapp.com/plants)<br>
-[Back End Code](https://github.com/kathleenfwang/react-backend-apis)<br>
+
 ### Curent Projects: 
 - Day 16: **Recipe Library** [view](http://kathleenwang15projects.surge.sh/day/16) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day20.js)
 - Day 15: **Computer Vision Images** [view](http://kathleenwang15projects.surge.sh/day/15) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day19.js)
@@ -23,7 +21,9 @@ Currently 16 React projects, some which are full-stack and connected to MongoDB 
 - Day 3: **feelings** [view](http://kathleenwang15projects.surge.sh/day/3) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day4.js)
 - Day 2: **Solar System** [view](http://kathleenwang15projects.surge.sh/day/2) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day2.js)
 - Day 1: **Home**[view](kathleenwang15projects.surge.sh/)
-
+### Backend: 
+[Back End Live](http://plant-app-1.herokuapp.com/plants)<br>
+[Back End Code](https://github.com/kathleenfwang/react-backend-apis)<br>
 ### Uses: 
 - React/Redux 
 - MongoDB/Mongoose 
