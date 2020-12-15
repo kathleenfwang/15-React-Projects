@@ -1,6 +1,9 @@
 import React from "react"
 import axios from "axios"
 import RecipeCard from "./Components2/day20/RecipeCard"
+import GetRecipeCards from "./Components2/day20/GetRecipeCards"
+import NavOptions from "./Components2/day20/NavOptions"
+import {handleCountUpdate} from "../redux"
 import { connect } from "react-redux";
 import { Fade, Slide, Rotate } from 'react-reveal';
 class Day20 extends React.Component {
@@ -16,15 +19,15 @@ class Day20 extends React.Component {
             image: "",
             username: "",
             password: "",
-            fakePass: "",
             isLoggedIn: false,
             user: "",
             buttonmsg: "",
             defaultMsg: "Must be logged in first to add/move recipes",
             tab: 0
         }
-        this.proxyurl = "https://agile-temple-52305.herokuapp.com/"
-        this.recipeUrl = `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
+        this.proxyurl = "https://tranquil-bastion-97053.herokuapp.com/"
+        this.secondProxy = "https://cors-anywhere.herokuapp.com/"
+        this.recipeUrl = `${this.secondProxy}${process.env.REACT_APP_RECIPE_URL}`
         this.userUrl = `${this.proxyurl}${process.env.REACT_APP_USER_URL}`
         this.userLogin = `${this.proxyurl}${process.env.REACT_APP_USER_URL}/login`
     }
@@ -39,57 +42,51 @@ class Day20 extends React.Component {
             })
     }
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.count !== this.props.count) {
-            this.getRecipes()
-        }
-        if (prevState.username !== this.state.username) {
-            this.getRecipes()
-        }
+        if (prevProps.count !== this.props.count || prevState.username !== this.state.username) this.getRecipes()
     }
-    getRecipeCards = (done,showUser=false) => {
-        const { recipes,  user } = this.state
+    getRecipeCards = (done, showUser = false) => {
+        const { recipes, user } = this.state
         return recipes.map((recipe) => {
             if (!showUser) {
-            if (done) {
-                if (recipe.done) return <RecipeCard username={user} recipe={recipe} />
-            }
-            else {
-                if (!recipe.done) return <RecipeCard username={user} recipe={recipe} />
-            }
-        }
-            else {
-                console.log(recipe.author, user, '*')
                 if (done) {
-                    if (recipe.done && (user === recipe.author)) return <RecipeCard username={user} recipe={recipe} />
-                }
+                    if (recipe.done) return <RecipeCard username={user} recipe={recipe} />}
                 else {
-                    if (!recipe.done && (user === recipe.author)) return <RecipeCard username={user} recipe={recipe} />
-                }
+                    if (!recipe.done) return <RecipeCard username={user} recipe={recipe} />}
             }
-        
+            else {
+                if (done) {
+                    if (recipe.done && (user === recipe.author)) return <RecipeCard username={user} recipe={recipe} />}
+                else {
+                    if (!recipe.done && (user === recipe.author)) return <RecipeCard username={user} recipe={recipe} />}
+            }
         }).reverse()
     }
 
     addRecipe = (e) => {
+    
         e.preventDefault()
-        const { name, description, image } = this.state
+        const { name, description, image, user} = this.state
         this.setState(prevState => ({
             showForm: !prevState.showForm
         }))
         const recipe = {
             name,
             description,
-            image
+            image,
+            author: user
         }
-        if (this.state.showForm) {
-            axios.post(this.recipeUrl, recipe)
+            axios.post(this.recipeUrl, recipe, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*"
+                }
+            })
                 .then(res => {
                     let recipe = res.data
+                    console.log(recipe)
                     this.setState((prevState) => ({
                         recipes: [...prevState.recipes, recipe],
                     }));
                 }).catch((e) => console.log(e))
-        }
         this.setState({
             name: "",
             description: "",
@@ -106,20 +103,11 @@ class Day20 extends React.Component {
         this.setState({ image: e.target.value })
     }
     handleUserName = (e) => {
-        if (e.target.value !== "") this.setState({ username: e.target.value })
+        this.setState({ username: e.target.value })
     }
     handlePass = (e) => {
-        let fakePass = ""
         let value = e.target.value
-        for (let i = 0; i < value.length; i++) {
-            fakePass += "*"
-        }
-        if (value !== "") {
-            this.setState({
-                password: value,
-                fakePass: fakePass
-            })
-        }
+            this.setState({ password: value })
     }
     form = () => {
         const { defaultMsg } = this.state
@@ -160,10 +148,10 @@ class Day20 extends React.Component {
         return (
             <form style={{ width: '70%' }} onSubmit={loginFunc} className={`form ${this.state.showLoginForm}Form`}>
                 <label>Username *</label>
-                <input placeholder={placeholderUser} onChange={this.handleUserName} value={this.state.username}></input>
+                <input required placeholder={placeholderUser} onChange={this.handleUserName} value={this.state.username}></input>
                 <br></br>
                 <label>Password *</label>
-                <input placeholder={placeholderPass} onChange={this.handlePass} value={this.state.fakePass}></input>
+                <input required type="password" placeholder={placeholderPass} onChange={this.handlePass} value={this.state.password}></input>
                 <br></br>
                 <button type="submit">{buttonmsg}</button>
             </form>
@@ -205,20 +193,21 @@ class Day20 extends React.Component {
                                 {
                                     isLoggedIn: true, user: username
                                 })
+                                this.props.handleCountUpdate()
                         }
                         else {
                             this.setState({ defaultMsg: 'Invalid username/password' })
                         }
                     }).catch((e) => {
-                        if (e.response.data.message) {
+                        if (e.response) {
                             this.setState({ defaultMsg: e.response.data.message })
                         }
+                        console.log(e )
                     })
             }
             this.setState({
                 username: "",
                 password: "",
-                fakePass: ""
             })
         }
     }
@@ -251,7 +240,6 @@ class Day20 extends React.Component {
         this.setState({
             username: "",
             password: "",
-            fakePass: ""
         })
     }
     getNav = () => {
@@ -277,63 +265,26 @@ class Day20 extends React.Component {
     handleOptionNav = () => {
         const { isLoggedIn } = this.state
         const { loaded, tab } = this.state
-        const { theme } = this.props
-        const border = `2px solid ${theme ? "black" : "whitesmoke"}`
-        const pass = "2px solid rgb(74, 193, 138)"
-        const nopass = "2px solid  rgb(249, 150, 150)"
-        if (tab === 1) {
+        if (tab === 2) {
+            console.log(isLoggedIn)
             if (!isLoggedIn) {
-                return (<div className="down">Must be logged in to view!</div>)
+                return (<div className="down  ">Must be logged in to view!</div>)
             }
             else {
-                return (<div className="flex baseLine">
-                    <div className="mr" >
-                        <h2 className="no miniTitle mr" style={{ border: nopass }}>In progress:</h2>
-                        <div className="flex biggrid">
-                            {loaded ? this.getRecipeCards(false,"user") : "Loading..."}
-                        </div>
-                    </div>
-                    <div>
-                        <h2 className="miniTitle pass" style={{ border: pass }}>Finished:</h2>
-                        <div className="flex biggrid">
-                            {loaded ? this.getRecipeCards(true,"user") : "Loading..."}
-                        </div>
-                    </div>
-                </div>)
-            }
+                return (<GetRecipeCards loaded={loaded} function={this.getRecipeCards} params={{ first: [false, "user"], second: [true, "user"] }} />) }
         }
         if (tab === 0) {
             // return "all" 
-            return (<div className="flex baseLine">
-                <div className="mr" >
-                    <h2 className="no miniTitle mr" style={{ border: nopass }}>In progress:</h2>
-                    <div className="flex biggrid">
-                        {loaded ? this.getRecipeCards(false) : "Loading..."}
-                    </div>
-                </div>
-                <div>
-                    <h2 className="miniTitle pass" style={{ border: pass }}>Finished:</h2>
-                    <div className="flex biggrid">
-                        {loaded ? this.getRecipeCards(true) : "Loading..."}
-                    </div>
-                </div>
-            </div>)
-        }
+            return (<GetRecipeCards loaded={loaded} function={this.getRecipeCards} params={{ first: [false], second: [true] }} />)}
     }
     getOptionNav = () => {
         const { tab } = this.state
-        const titles = ["All", "My Recipes"]
-        const navTitles = titles.map((title, i) => {
-            return (<li style={{ borderBottom: i === tab ? "2px solid pink" : "none" }} onClick={() => this.setOptionNav(i)}>{title}</li>)
-        })
+        const titles = ["All", "|","My Recipes"]
         return (
-            <nav className="center">
-                {navTitles}
-            </nav>
+            <NavOptions titles = {titles} tab = {tab} functionName = {this.setOptionNav} />
         )
     }
     render() {
-
         return (
             <div>
                 {this.getNav()}
@@ -347,8 +298,11 @@ class Day20 extends React.Component {
         )
     }
 }
+const mapStateToProps = state => {
+    return { count:state.count };
+};
+
 export default connect(
-    state => {
-        return { count: state.count, theme: state.theme };
-    }
+    mapStateToProps,
+    { handleCountUpdate }
 )(Day20);

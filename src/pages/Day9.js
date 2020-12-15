@@ -113,8 +113,7 @@ class Day9 extends React.Component {
         const { activeList } = this.state
         return list.map((x, i) => {
             return (
-                <li i={i} className="navList" style={{ fontSize: '1.2em', borderBottom: activeList == i ? "2px solid #E0C3FC" : "2px solid transparent" }} onClick={() => this.handleToggle(i)} >{x}</li>
-            )
+                <li i={i} className="navList" style={{ fontSize: '1.3em', borderBottom: activeList == i ? "2px solid #E0C3FC" : "2px solid transparent" }} onClick={() => this.handleToggle(i)} >{x}</li>)
         })
     }
     getAbout = () => {

@@ -162,6 +162,9 @@
  h1 {
   font-size:1.5em;
  }
+ .darkShadow {
+  box-shadow: 2px 4px 25px rgba(137,137,137 );
+ }
  button {
   box-shadow: 2px 4px 25px rgba(0, 0, 0, .2);
    background-color:#939BF4;
@@ -459,12 +462,12 @@ a {
   box-shadow: 2px 2px 0px rgba(208, 208, 208, 0.2);
  }
   .plantCard {
-    
+    cursor: pointer;
     color:#333;
-    box-shadow: 5px 10px 20px #d6d6d6 ;
-    border: 1px solid whitesmoke;
+    box-shadow: 5px 10px 20px #5f5f5f ;
+    transition: all .5s ease-out;
     padding: 20px;
-    border-radius: 4px;
+    border-radius:6px;
   }
   .plantCard h3,img {
     text-align:center
@@ -746,6 +749,27 @@ padding-left:30px;
 #outerHeart:hover, #icon:hover {
   color:#ff8080;
 }
+.relative {
+  position: relative;
+}
+.textOnImage {
+  background-color:black;
+  color:white;
+  padding:30px;
+}
+.lemon {
+  border-radius:8px;
+  padding:30px;
+  background-image: url(https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1868&q=80);
+  /* background-image: url(https://images.unsplash.com/photo-1543362906-acfc16c67564?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1901&q=80); */
+  background-size: cover;
+  background-repeat:  no-repeat;
+}
+.positionRight {
+   position: absolute;
+   top:10px;
+   right:15px;
+}
 .inktoberCard {
   box-shadow: 2px 4px 25px rgba(0, 0, 0, .1);
   background-color: white;
@@ -781,7 +805,7 @@ cursor:pointer;
   
   transition: all 0.2s ease-in-out;
 }
-.hover:hover { 
+.hover:hover, .plantCard:hover{ 
   transform: translate3D(0, -5px, 0);
 }
 .padding {
@@ -1048,7 +1072,7 @@ border:none;
 }
 .miniTitle {
   color:white;
-    width: 200px;
+    width: 150px;
     border-radius: 8px;
     padding: 6px;
 }

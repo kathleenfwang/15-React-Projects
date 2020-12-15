@@ -36,7 +36,7 @@ class Day11 extends React.Component {
         }
     }
     callImages = () => {
-        const defaultSearch = "cats"
+        const defaultSearch = "christmas"
         const start = 1, imgAmount = 30
         let { value } = this.state
         if (!value) value = defaultSearch
