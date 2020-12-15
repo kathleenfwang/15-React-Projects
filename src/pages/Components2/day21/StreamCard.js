@@ -6,13 +6,6 @@ export default class StreamCard extends React.Component {
     constructor(props) {
         super(props)
         this.state = {}
-        this.streamCardStyle = {
-            margin: 10,
-            padding: 10,
-            width: 600,
-            background: 'lightslategrey',
-            borderRadius: 5,
-        }
         this.twitchUrl = "https://www.twitch.tv/" + this.props.data.display_name
     }
     getLiveIcon = (isLive) => {
@@ -26,15 +19,15 @@ export default class StreamCard extends React.Component {
     render() {
         const { data } = this.props
         return (
-            <div className ="flex spaceBetween noWrap" style={this.streamCardStyle}>
+            <div className ="flex spaceBetween noWrap streamCard hover">
                     <div className="flex ">
                         <div>
                             <a href={this.twitchUrl} target="_blank"><img className="square" src={data.thumbnail_url} /></a>
                         </div>
 
                         <div>
-                            <div className="big">{data.display_name}</div>
-                            <div>{data.title}</div>
+                            <div className="big blackText">{data.display_name}</div>
+                            <div className ="whiteText">{data.title}</div>
                         </div>
                     </div>
                     <div>
