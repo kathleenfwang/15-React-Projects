@@ -36,7 +36,6 @@ export default class Container extends React.Component {
         }
         axios.get(url, { headers })
             .then((res) => {
-                console.log(res.data.data)
                 let data = res.data.data
                 if (first) {
                     this.setState(prevState => ({

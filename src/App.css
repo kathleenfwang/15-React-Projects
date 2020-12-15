@@ -852,7 +852,7 @@ cursor:pointer;
 .day21 {
   color:white;
   border-radius:10px;
-  height:100vh;
+  height:100%;
   background-color:#0E0C0C;
   padding:30px;
 }
