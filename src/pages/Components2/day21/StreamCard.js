@@ -31,7 +31,7 @@ export default class StreamCard extends React.Component {
                         </div>
                     </div>
                     <div>
-                        <div>{data.is_live ? this.getLiveIcon(true) : this.getLiveIcon(false)}</div>
+                        <div><a className ="whiteText" href ={this.twitchUrl} target ="_blank">{data.is_live ? this.getLiveIcon(true) : this.getLiveIcon(false)}</a></div>
                     </div>
                 </div>
         )

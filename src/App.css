@@ -612,8 +612,7 @@ background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
   overflow: auto;
 }
 .liveIcon {
-  background-color: lightgrey;
-    padding: 5px 10px;
+  padding: 5px 10px 5px 5px;
     border-radius: 8px;
 }
 .noWrap {
@@ -641,7 +640,7 @@ background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
   border-radius: 100%;
   width:20px;
   height:20px;
-  
+  margin:5px;
 }
 .bigCircle {
   box-shadow: 2px 4px 25px rgba(0, 0, 0, .2);
@@ -775,7 +774,7 @@ padding-left:30px;
   color: white;
   font-size: 1.3em;
   border: 1px solid transparent;
-  padding: 15px;
+  padding: 12px;
   border-radius: 8px;
   outline: none;
 }
@@ -783,7 +782,7 @@ padding-left:30px;
     margin: 10px;
     padding: 10px;
     width: 600px;
-    background:  #1E1814;
+    background:  #302f2f;
     border-radius: 5px;
 }
 #nav li:hover {
@@ -1118,6 +1117,11 @@ border:none;
 }
 .no {
     background-color:  rgb(249, 150, 150);
+}
+.purpleBorder {
+  width:300px;
+  padding:8px;
+  border-bottom: 1px dotted #6441A4;
 }
 .miniTitle {
   color:white;

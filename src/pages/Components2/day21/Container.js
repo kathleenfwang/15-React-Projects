@@ -61,7 +61,7 @@ export default class Container extends React.Component {
         // search bar 
         return (
             <div >
-                <h1>Check if your favorite streamer is online: </h1>
+                <h1 style ={{color:"#6441A4"}}>Check if your favorite Twitch streamer is online: </h1>
                 <div className ="center">
                 <input className ="darkInput" onChange={this.handleChange} placeholder="Search"></input>
                 <FontAwesomeIcon style ={{color:"grey",padding:5}} icon ={faSearch}/>
@@ -85,13 +85,13 @@ export default class Container extends React.Component {
                 </div>
                 <div className="flex baseLine spaceEvenly">
                     <div>
-                        <h1 style ={{color: '#6441A4'}}>Suggested:</h1>
+                        <h1>Suggested:</h1>
                         <div>
                         {loaded ? <Fade>{this.getBody(currentData)} </Fade>: null }
                         </div>
                     </div>
                     <div>
-                        <h1 style ={{color: '#6441A4'}}>Searches: </h1>
+                        <h1>Searches: </h1>
                         <div className="heightScroll noScroll">
                         {newLoaded ? <Fade>{this.getBody(data) }</Fade> : <div className ="falseShow">{this.getBody(currentData)}</div>}
                         </div>
