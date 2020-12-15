@@ -1,6 +1,7 @@
 import React from "react"
 import axios from "axios"
 import StreamCard from "./StreamCard"
+import {Fade,Slide,Rotate} from 'react-reveal';
 export default class Container extends React.Component {
     constructor() {
         super()
@@ -72,6 +73,7 @@ export default class Container extends React.Component {
     render() {
         const { loaded, newLoaded, currentData, data } = this.state
         return (
+            <Fade>
             <div className="day21">
                 <div className="flex center">
                     {this.getHeader()}
@@ -83,11 +85,13 @@ export default class Container extends React.Component {
                     </div>
                     <div>
                         <h1>Searches: </h1>
-                        {newLoaded && this.getBody(data)}
+                        <div className="heightScroll">
+                        {newLoaded ? <Fade>{this.getBody(data) }</Fade> : <div className ="falseShow">{this.getBody(currentData)}</div>}
+                        </div>
                     </div>
                 </div>
             </div>
-
+            </Fade>
         )
     }
 }
