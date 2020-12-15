@@ -1,8 +1,8 @@
 import React from "react"
 import axios from "axios"
 import StreamCard from "./StreamCard"
-import {Fade,Slide,Rotate} from 'react-reveal';
-import {faSearch } from '@fortawesome/free-solid-svg-icons'
+import { Fade, Slide, Rotate } from 'react-reveal';
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default class Container extends React.Component {
     constructor() {
@@ -60,10 +60,10 @@ export default class Container extends React.Component {
         // search bar 
         return (
             <div >
-                <h1 style ={{color:"#6441A4"}}>Check if your favorite Twitch streamer is online: </h1>
-                <div className ="center">
-                <input className ="darkInput" onChange={this.handleChange} placeholder="Search"></input>
-                <FontAwesomeIcon style ={{color:"grey",padding:5}} icon ={faSearch}/>
+                <h1 style={{ color: "#6441A4" }}>Check if your favorite Twitch streamer is online: </h1>
+                <div className="center">
+                    <input className="darkInput" onChange={this.handleChange} placeholder="Search"></input>
+                    <FontAwesomeIcon style={{ color: "grey", padding: 5 }} icon={faSearch} />
                 </div>
             </div>
         )
@@ -78,25 +78,25 @@ export default class Container extends React.Component {
         const { loaded, newLoaded, currentData, data } = this.state
         return (
             <Fade>
-            <div className="day21">
-                <div className="flex center">
-                    {this.getHeader()}
-                </div>
-                <div className="flex baseLine spaceEvenly">
-                    <div>
-                        <h1>Suggested:</h1>
+                <div className="day21">
+                    <div className="flex center">
+                        {this.getHeader()}
+                    </div>
+                    <div className="flex baseLine spaceEvenly">
                         <div>
-                        {loaded ? <Fade>{this.getBody(currentData)} </Fade>: null }
+                            <h1>Suggested:</h1>
+                            <div>
+                                {loaded ? <Fade>{this.getBody(currentData)} </Fade> : null}
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <h1>Searches: </h1>
-                        <div className="heightScroll noScroll">
-                        {newLoaded ? <Fade>{this.getBody(data) }</Fade> : <div className ="falseShow">{this.getBody(currentData)}</div>}
+                        <div>
+                            <h1>Searches: </h1>
+                            <div className="heightScroll noScroll">
+                                {newLoaded ? <Fade>{this.getBody(data)}</Fade> : <div className="falseShow">{this.getBody(currentData)}</div>}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </Fade>
         )
     }
