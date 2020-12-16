@@ -68,9 +68,9 @@ export default class Container extends React.Component {
             </div>
         )
     }
-    getBody = (data) => {
+    getBody = (data,filled = false) => {
         return data.map((data) => {
-            return <StreamCard data={data} />
+            return <StreamCard data={data} filled ={filled}/>
         })
     }
 
@@ -86,7 +86,7 @@ export default class Container extends React.Component {
                         <div>
                             <h1>Suggested:</h1>
                             <div>
-                                {loaded ? <Fade>{this.getBody(currentData)} </Fade> : null}
+                                {loaded ? <Fade>{this.getBody(currentData,true)} </Fade> : null}
                             </div>
                         </div>
                         <div>
