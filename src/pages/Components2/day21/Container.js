@@ -115,7 +115,7 @@ export default class Container extends React.Component {
                     </div>
                     <div className="flex baseLine spaceEvenly">
                         <div>
-                            <h1>Suggested:</h1>
+                            <h1>Community Favorited:</h1>
                             <div className="heightScroll noScroll">
                                 {loaded ? <Fade>{this.getBody(currentData,true,true)} </Fade> : null}
                             </div>
