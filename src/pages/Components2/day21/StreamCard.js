@@ -5,10 +5,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default class StreamCard extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            filled:null
+        }
         this.twitchUrl = "https://www.twitch.tv/"
     }
-
+    componentDidMount() {
+        this.setState({filled:this.props.filled})
+    }
+    resetState = () => {
+        this.setState({filled:this.props.filled})
+    }
     getLiveIcon = (isLive) => {
         return (
             <div className={`${isLive}Color flex liveIcon`}>
@@ -17,13 +24,17 @@ export default class StreamCard extends React.Component {
             </div>
         )
     }
+    handleHeartClick = (e) => {
+        this.setState(prevState => ({filled: !prevState.filled}))
+    }
     getHeartIcon = () => {
-        const { filled } = this.props
+        const { filled} = this.state
         const heartStyle = {color: "#ff8080"}
         const heartType = filled ? faFilledHeart : faHeart 
-        return <FontAwesomeIcon icon ={heartType} style ={heartStyle} className ={"left"}/> 
+        return <FontAwesomeIcon icon ={heartType} style ={heartStyle} className ={"left"} onClick ={this.handleHeartClick}/> 
     }
     render() {
+        console.log(this.state.filled)
         const { data} = this.props
         const twitchUrl = this.twitchUrl + data.display_name
         return (

@@ -68,9 +68,10 @@ export default class Container extends React.Component {
             </div>
         )
     }
+  
     getBody = (data,filled = false) => {
         return data.map((data) => {
-            return <StreamCard data={data} filled ={filled}/>
+            return <StreamCard key = {data.id} data={data} filled ={filled}/>
         })
     }
 
