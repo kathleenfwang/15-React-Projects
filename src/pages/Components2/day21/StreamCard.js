@@ -2,6 +2,7 @@ import React from "react"
 import { faHeart as faFilledHeart} from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios"
 export default class StreamCard extends React.Component {
     constructor(props) {
         super(props)
@@ -9,6 +10,7 @@ export default class StreamCard extends React.Component {
             filled:null
         }
         this.twitchUrl = "https://www.twitch.tv/"
+        this.streamerDbUrl = process.env.REACT_APP_STREAMER_URL
     }
     componentDidMount() {
         this.setState({filled:this.props.filled})
@@ -24,12 +26,44 @@ export default class StreamCard extends React.Component {
             </div>
         )
     }
-    handleHeartClick = (e) => {
-        this.setState(prevState => ({filled: !prevState.filled}))
+    addToDB = (name,id) => {
+        const params = {
+            name,
+            id
+        }
+        axios.post(this.streamerDbUrl, params)
+        .then(res => console.log('succesfully added ',name,id))
+        .catch(e => console.log(e))
     }
-    test = () => {
-        console.log( "test"
-        )
+    updateStreamerDB = () => {
+        const {filled} = this.state 
+        const {display_name,id} = this.props.data
+        const findurl = `${this.streamerDbUrl}/id/${id}`
+        // if filled is not true, we are removing from db 
+        // if filled is true, we are adding streamer to db
+        if (filled) {
+            // first make sure streamer not currently in db     
+            axios.get(findurl)
+            .then((res) => {
+                // if data is null, means streamer does not exist (yet!) 
+                // we can now add 
+                const {data} = res
+                if (!data) {
+                    this.addToDB(display_name,id)
+                }
+                // else if already exists, don't do anything. 
+            })
+            .catch((e) => console.log(e))
+        } 
+        else {
+            // since streamer is now unliked, remove from DB :(
+            axios.delete(findurl)
+            .then((res) => console.log(res))
+            .catch(e => console.log(e))
+        }
+    }
+    handleHeartClick = (e) => {
+        this.setState(prevState => ({filled: !prevState.filled}), () => this.updateStreamerDB()) 
     }
     getHeartIcon = () => {
         const {addToQueries,data} = this.props
