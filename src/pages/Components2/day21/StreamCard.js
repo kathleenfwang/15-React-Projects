@@ -27,14 +27,21 @@ export default class StreamCard extends React.Component {
     handleHeartClick = (e) => {
         this.setState(prevState => ({filled: !prevState.filled}))
     }
+    test = () => {
+        console.log( "test"
+        )
+    }
     getHeartIcon = () => {
+        const {addToQueries,data} = this.props
         const { filled} = this.state
         const heartStyle = {color: "#ff8080"}
         const heartType = filled ? faFilledHeart : faHeart 
-        return <FontAwesomeIcon icon ={heartType} style ={heartStyle} className ={"left"} onClick ={this.handleHeartClick}/> 
+        return <FontAwesomeIcon icon ={heartType} style ={heartStyle} className ={"left"} onClick ={() => {
+            addToQueries(data.display_name, filled)
+            this.handleHeartClick()
+        }}/> 
     }
     render() {
-        console.log(this.state.filled)
         const { data} = this.props
         const twitchUrl = this.twitchUrl + data.display_name
         return (

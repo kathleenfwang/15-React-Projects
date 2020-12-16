@@ -4,11 +4,12 @@ import StreamCard from "./StreamCard"
 import { Fade, Slide, Rotate } from 'react-reveal';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { queries } from "@testing-library/react";
 export default class Container extends React.Component {
     constructor() {
         super()
         this.state = {
-            queries: ["Lilypichu", "Pokimane", "Sykkuno", "Scarra"],
+            queries: ["lilypichu", "pokimane", "sykkuno", "scarra"],
             name: "",
             loaded: false,
             newLoaded: false,
@@ -22,9 +23,16 @@ export default class Container extends React.Component {
         this.state.queries.forEach((query) => this.getStreams(query, true))
     }
     componentDidUpdate(prevprops, prevState) {
-        const { name } = this.state
+        const { name,queries } = this.state
         if (prevState.name !== name) {
             this.getStreams(name, false)
+        }
+        if (prevState.queries !== queries) {
+            // check if added one: 
+            if (prevState.queries.length < queries.length) {
+                const last = queries.length - 1
+                this.getStreams(queries[last],true)
+            }
         }
     }
     getStreams = (query, first) => {
@@ -68,11 +76,33 @@ export default class Container extends React.Component {
             </div>
         )
     }
-  
-    getBody = (data,filled = false) => {
+    addToQueries = (name,liked) => {
+        const {queries, currentData} = this.state
+        if (!liked) {
+            // make sure was not previously added 
+            if (queries.indexOf(name) == -1) {
+            this.setState(prevState => ({
+            queries: [...prevState.queries,name]
+        }))
+    }
+    }
+    else {
+        //remove from queries 
+        const newQueries = queries.filter((username) => username !== name)
+        console.log(currentData)
+        const newCurrentData = currentData.filter((username) => username.display_name !== name)
+        this.setState({queries: newQueries, currentData: newCurrentData})
+    }
+}
+    getBody = (data,filled = false,reverse = false) => {
+        if (reverse) {
+            return data.map((data) => {
+                return <StreamCard key = {data.id} data={data} filled ={filled} addToQueries = {this.addToQueries}/>}).reverse()
+    }
+    else {
         return data.map((data) => {
-            return <StreamCard key = {data.id} data={data} filled ={filled}/>
-        })
+            return <StreamCard key = {data.id} data={data} filled ={filled} addToQueries = {this.addToQueries}/>}) 
+    }
     }
 
     render() {
@@ -86,8 +116,8 @@ export default class Container extends React.Component {
                     <div className="flex baseLine spaceEvenly">
                         <div>
                             <h1>Suggested:</h1>
-                            <div>
-                                {loaded ? <Fade>{this.getBody(currentData,true)} </Fade> : null}
+                            <div className="heightScroll noScroll">
+                                {loaded ? <Fade>{this.getBody(currentData,true,true)} </Fade> : null}
                             </div>
                         </div>
                         <div>

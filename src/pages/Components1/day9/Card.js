@@ -2,7 +2,7 @@ import React from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHeart as faFilledHeart,faTrash} from '@fortawesome/free-solid-svg-icons'
 import { faHeart,faTrashAlt } from '@fortawesome/free-regular-svg-icons'
-import {Fade,Slide,Rotate} from 'react-reveal';
+import {Fade} from 'react-reveal';
 export default function Card(props) {
     return (
         <div className="inktoberCard"  >
