@@ -1,10 +1,10 @@
 import React from "react"
 import axios from "axios"
 import StreamCard from "./StreamCard"
-import { Fade, Slide, Rotate } from 'react-reveal';
+import { Fade } from 'react-reveal';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { queries } from "@testing-library/react";
+
 export default class Container extends React.Component {
     constructor() {
         super()
@@ -23,7 +23,7 @@ export default class Container extends React.Component {
         this.state.queries.forEach((query) => this.getStreams(query, true))
     }
     componentDidUpdate(prevprops, prevState) {
-        const { name,queries } = this.state
+        const { name, queries } = this.state
         if (prevState.name !== name) {
             this.getStreams(name, false)
         }
@@ -31,7 +31,7 @@ export default class Container extends React.Component {
             // check if added one: 
             if (prevState.queries.length < queries.length) {
                 const last = queries.length - 1
-                this.getStreams(queries[last],true)
+                this.getStreams(queries[last], true)
             }
         }
     }
@@ -76,33 +76,35 @@ export default class Container extends React.Component {
             </div>
         )
     }
-    addToQueries = (name,liked) => {
-        const {queries, currentData} = this.state
+    addToQueries = (name, liked) => {
+        const { queries, currentData } = this.state
         if (!liked) {
             // make sure was not previously added 
             if (queries.indexOf(name) == -1) {
-            this.setState(prevState => ({
-            queries: [...prevState.queries,name]
-        }))
+                this.setState(prevState => ({
+                    queries: [...prevState.queries, name]
+                }))
+            }
+        }
+        else {
+            //remove from queries 
+            const newQueries = queries.filter((username) => username !== name)
+            console.log(currentData)
+            const newCurrentData = currentData.filter((username) => username.display_name !== name)
+            this.setState({ queries: newQueries, currentData: newCurrentData })
+        }
     }
-    }
-    else {
-        //remove from queries 
-        const newQueries = queries.filter((username) => username !== name)
-        console.log(currentData)
-        const newCurrentData = currentData.filter((username) => username.display_name !== name)
-        this.setState({queries: newQueries, currentData: newCurrentData})
-    }
-}
-    getBody = (data,filled = false,reverse = false) => {
+    getBody = (data, filled = false, reverse = false) => {
         if (reverse) {
             return data.map((data) => {
-                return <StreamCard key = {data.id} data={data} filled ={filled} addToQueries = {this.addToQueries}/>}).reverse()
-    }
-    else {
-        return data.map((data) => {
-            return <StreamCard key = {data.id} data={data} filled ={filled} addToQueries = {this.addToQueries}/>}) 
-    }
+                return <StreamCard key={data.id} data={data} filled={filled} addToQueries={this.addToQueries} />
+            }).reverse()
+        }
+        else {
+            return data.map((data) => {
+                return <StreamCard key={data.id} data={data} filled={filled} addToQueries={this.addToQueries} />
+            })
+        }
     }
 
     render() {
@@ -117,7 +119,7 @@ export default class Container extends React.Component {
                         <div>
                             <h1>Community Favorited:</h1>
                             <div className="heightScroll noScroll">
-                                {loaded ? <Fade>{this.getBody(currentData,true,true)} </Fade> : null}
+                                {loaded ? <Fade>{this.getBody(currentData, true, true)} </Fade> : null}
                             </div>
                         </div>
                         <div>
