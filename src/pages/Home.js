@@ -49,7 +49,7 @@ export default function Home() {
                     </div>
                     <div className="desc up">
                         <Fade clear cascade>
-                        <p>I enjoy working with multiple problems and look for ways to <br></br>incorporate design and code into my work. I am passionate about using art and code to convey a delightful experience for each user. </p>
+                        <p>I enjoy working with multiple problems and look for ways to <br></br>incorporate design and code into my work. I am passionate about using art and code to convey a delightful experience for each user. In my free time, I enjoy cooking, gaming, and karoke!</p>
                         </Fade>
                     </div>
                     <div>
