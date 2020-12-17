@@ -19,10 +19,11 @@ export default class StreamCard extends React.Component {
         this.setState({filled:this.props.filled})
     }
     getLiveIcon = (isLive) => {
+        const boxShadow = isLive ? "lightBoxShadow" : "darkBoxShadow"
         return (
-            <div className={`${isLive}Color flex liveIcon`}>
+            <div className={`${isLive}Color flex liveIcon ${boxShadow}`}>
                 <div className={`${isLive}Icon circle`}></div>
-                <div>{isLive ? "LIVE" : "OFFLINE"}</div>
+                <div className = {isLive && "darkgrey"}>{isLive ? "LIVE" : "OFFLINE"}</div>
             </div>
         )
     }
@@ -75,12 +76,15 @@ export default class StreamCard extends React.Component {
             this.handleHeartClick()
         }}/> 
     }
+    getShortenedDesc = (desc) => {
+       return desc.length >=42 ? `${desc.slice(0,42)}...` : desc
+    }
     render() {
         const { data} = this.props
         const twitchUrl = this.twitchUrl + data.display_name
         return (
             <div className="flex spaceBetween noWrap streamCard hover">
-                <div className="flex ">
+                <div className="flex noWrap">
                     <div>
                         <a href={twitchUrl} target="_blank"><img className="bigCircle" src={data.thumbnail_url} /></a>
                     </div>
@@ -90,7 +94,7 @@ export default class StreamCard extends React.Component {
                         <div className="big whiteText">{data.display_name}</div>
                         {this.getHeartIcon()}
                         </div>
-                        <div className="whiteText">{data.title}</div>
+                        <div className="whiteText">{this.getShortenedDesc(data.title)}</div>
                     </div>
                 </div>
                 <div>

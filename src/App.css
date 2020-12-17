@@ -614,6 +614,13 @@ background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
 .liveIcon {
   padding: 5px 10px 5px 5px;
     border-radius: 8px;
+    
+}
+.darkBoxShadow {
+  box-shadow: 2px 4px 25px rgba(236, 73, 73, 0.5);
+}
+.lightBoxShadow {
+  box-shadow: 2px 4px 25px rgba(172, 249, 177, 0.5);
 }
 .noWrap {
   flex-wrap: nowrap;
@@ -1014,7 +1021,7 @@ cursor:pointer;
   box-shadow: 2px 4px 25px rgba(250, 250, 250, 0.2);
 }
 .lightCard {
-  box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 4px 25px rgba(57, 57, 57, 0.2);
 }
 .day16light {
   background-color: #F2F2F2;
