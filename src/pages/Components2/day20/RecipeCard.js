@@ -16,9 +16,7 @@ class RecipeCard extends React.Component {
         this.recipeUrl = `${this.proxyurl}${process.env.REACT_APP_RECIPE_URL}`
     }
     componentDidMount() {
-        if ((this.props.username === this.props.recipe.author) || this.props.recipe.author == "a") {
-            this.setState({ correctUser: true })
-        }
+        if ((this.props.username === this.props.recipe.author) || this.props.recipe.author == "a") this.setState({ correctUser: true })
     }
     componentDidUpdate(prevprops) {
         if (this.props.count !== prevprops.count) {
@@ -46,9 +44,8 @@ class RecipeCard extends React.Component {
         const { checked } = this.state
         const id = this.props.recipe._id
         axios.put(`${this.recipeUrl}/${id}`, { done: checked })
-            .then((res) => {
-                this.props.handleCountUpdate()
-            })
+            .then((res) => this.props.handleCountUpdate())
+            .catch((e) => console.log('Error upadting: ', e))
     }
     recipeCardStyle = (recipe) => {
         return {

@@ -24,15 +24,12 @@ export default class Container extends React.Component {
     }
     componentDidUpdate(prevprops, prevState) {
         const { name, queries } = this.state
-        if (prevState.name !== name) {
-            this.getStreams(name, false)
-        }
+        if (prevState.name !== name) this.getStreams(name, false)
         if (prevState.queries !== queries) {
             // check if added one: 
             if (prevState.queries.length < queries.length) {
                 const last = queries.length - 1
-                this.getStreams(queries[last], true)
-            }
+                this.getStreams(queries[last], true)}
         }
     }
     getStreams = (query, first) => {
@@ -40,22 +37,19 @@ export default class Container extends React.Component {
         const headers = {
             'client-id': this.client_id,
             Authorization: 'Bearer ' + this.client_auth,
-            //the token is a variable which holds the token
         }
         axios.get(url, { headers })
             .then((res) => {
-                let data = res.data.data
+                const {data} = res.data 
                 if (first) {
                     this.setState(prevState => ({
                         currentData: [...prevState.currentData, data[0]],
-                        loaded: true
-                    }))
+                        loaded: true }))
                 }
                 else {
                     this.setState({
                         newLoaded: true,
-                        data: data
-                    })
+                        data: data })
                 }
             })
             .catch((e) => console.log(e.response))
@@ -82,8 +76,7 @@ export default class Container extends React.Component {
             // make sure was not previously added 
             if (queries.indexOf(name) == -1) {
                 this.setState(prevState => ({
-                    queries: [...prevState.queries, name]
-                }))
+                    queries: [...prevState.queries, name]}))
             }
         }
         else {
@@ -102,8 +95,7 @@ export default class Container extends React.Component {
         }
         else {
             return data.map((data) => {
-                return <StreamCard key={data.id} data={data} filled={filled} addToQueries={this.addToQueries} />
-            })
+                return <StreamCard key={data.id} data={data} filled={filled} addToQueries={this.addToQueries} /> })
         }
     }
 
