@@ -22,14 +22,10 @@ export default class StreamCard extends React.Component {
             <div className={`${isLive}Color flex liveIcon ${boxShadow}`}>
                 <div className={`${isLive}Icon circle`}></div>
                 <div className = {isLive && "darkgrey"}>{isLive ? "LIVE" : "OFFLINE"}</div>
-            </div>
-        )
+            </div> )
     }
     addToDB = (name,id) => {
-        const params = {
-            name,
-            id
-        }
+        const params = { name,id }
         axios.post(this.streamerDbUrl, params)
         .then(res => console.log('succesfully added ',name,id))
         .catch(e => console.log(e))
@@ -44,8 +40,7 @@ export default class StreamCard extends React.Component {
             // first make sure streamer not currently in db     
             axios.get(findurl)
             .then((res) => {
-                // if data is null, means streamer does not exist (yet!) 
-                // we can now add 
+                // if data is null, means streamer does not exist (yet!) so we can  add 
                 const {data} = res
                 if (!data) this.addToDB(display_name,id)
                 // else if already exists, don't do anything. 
