@@ -15,9 +15,7 @@ export default class StreamCard extends React.Component {
     componentDidMount() {
         this.setState({filled:this.props.filled})
     }
-    resetState = () => {
-        this.setState({filled:this.props.filled})
-    }
+
     getLiveIcon = (isLive) => {
         const boxShadow = isLive ? "lightBoxShadow" : "darkBoxShadow"
         return (
@@ -49,12 +47,9 @@ export default class StreamCard extends React.Component {
                 // if data is null, means streamer does not exist (yet!) 
                 // we can now add 
                 const {data} = res
-                if (!data) {
-                    this.addToDB(display_name,id)
-                }
+                if (!data) this.addToDB(display_name,id)
                 // else if already exists, don't do anything. 
-            })
-            .catch((e) => console.log(e))
+            }).catch((e) => console.log(e))
         } 
         else {
             // since streamer is now unliked, remove from DB :(
