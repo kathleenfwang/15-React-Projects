@@ -1166,6 +1166,9 @@ border:none;
   background-color: rgb(74, 193, 138);
   color:whitesmoke;
 }
+.day22 {
+ padding:20px;
+}
 
 @keyframes fadeInOpacity {
 	0% {

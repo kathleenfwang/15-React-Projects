@@ -29,10 +29,8 @@ export default class Day22 extends React.Component {
     render() {
         const {loaded,animalData} = this.state
          return (
-            <div className ="flex center">
-                <Fade top cascade>
+            <div>
                 {loaded && <Animals data = {animalData}/>}
-                </Fade>
             </div>
         )
     }
