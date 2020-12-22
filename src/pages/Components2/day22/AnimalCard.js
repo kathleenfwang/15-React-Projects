@@ -17,7 +17,6 @@ export default class AnimalCard extends React.Component {
     imageData = () => {
         const {data} = this.props
         const {clicked} = this.state
-        console.log(data)
         return (
             <div className ={`${clicked}Show floatingCard`}>
                 <div className ="up flex spaceBetween">

@@ -1,7 +1,7 @@
 import React from "react"
 import AnimalCard from "./AnimalCard"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faSmile, faArrowUp, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faSmile, faArrowUp, faHeart, faHamburger } from '@fortawesome/free-solid-svg-icons'
 import { faBluetooth } from "@fortawesome/free-brands-svg-icons"
 export default class Animals extends React.Component {
     constructor(props) {
@@ -10,7 +10,8 @@ export default class Animals extends React.Component {
             animalDic: {},
             animalPersonalities: {},
             animalHobbies: {},
-            loaded:false
+            loaded:false,
+            clickedHamburger:true,
         }
     }
     componentDidMount() {
@@ -54,6 +55,9 @@ export default class Animals extends React.Component {
         }
         return animalCards
     }
+    handleHamburger = (e) => {
+        this.setState(prevState =>({clickedHamburger: !prevState.clickedHamburger}))
+    }
     getHeader = () => {
         const {animalDic} = this.state
         let i = 0
@@ -79,13 +83,19 @@ export default class Animals extends React.Component {
     }
     
     render() {
-        const {loaded} = this.state
+        const {loaded,clickedHamburger} = this.state
+        console.log(clickedHamburger)
         return (
             <div className ="day22" id ="start">
-                <div className ="flex center">
+               <div className ="flex fixedHeader">
+                <div><button style ={{width:40}}className ="cursor" onClick ={this.handleHamburger}><FontAwesomeIcon icon ={faHamburger}/></button></div>
+                <div className ={`flex ${clickedHamburger}Show`}>
                 {loaded && this.getHeader()}
                 </div>
+                </div>
+                <div className ="downHeader">
                 {loaded && this.getAnimalCards()}
+                </div>
                 {this.getArrow()}
             </div>
         )
