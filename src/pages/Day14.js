@@ -13,7 +13,6 @@ export default class Day14 extends React.Component {
     }
     handleScroll = (e) => {
         let y = window.scrollY
-        console.log(y)
         if (y > 600 && y < 1500) {
             this.setState({ show: true,div2:false})
         }
@@ -36,7 +35,6 @@ export default class Day14 extends React.Component {
     }
     render() {
         const { show,div2 } = this.state
-        console.log(div2)
         return (
             <div className ="bigger">
                 <Fade>
