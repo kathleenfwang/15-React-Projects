@@ -39,7 +39,7 @@ export default class Animals extends React.Component {
                 <div id ={animal}>
                     <h1 className="textCenter button" style ={this.getColor(i)}>{animal}</h1>
                     <div className="flex center">
-                        {animalDic[animal].map((animal) => <AnimalCard data={animal} />)}
+                        {animalDic[animal].map((animal) => <AnimalCard  key ={animal.id} data={animal} />)}
                     </div>
                 </div>)
                 i++
@@ -51,15 +51,15 @@ export default class Animals extends React.Component {
         let i = 0
         let buttons = [] 
         for (let animal in animalDic) {
-            buttons.push(<div className ="margin"><a href ={`#${animal}`}><button style ={this.getColor(i)}>{animal}</button></a></div>)
+            buttons.push(<div className ="bigger margin"><a href ={`#${animal}`}><button style ={this.getColor(i)}>{animal}</button></a></div>)
             i++ 
         }
         return buttons
     }
     getColor = (i) => {
-        const colors = ["#C1A7FF", "#C2CBFF", "#C7FCBA", "#FDFEC9", "#FFD8B6", " #FEBCC2"]
-        const color = i % colors.length
-        return {backgroundColor: colors[color],color:"#333"}
+        const colors = {pastel: ["#C1A7FF", "#C2CBFF", "#C7FCBA", "#FDFEC9", "#FFD8B6", " #FEBCC2"], beach: ["#C8F69B", "#FFEEA5", "#FFCBA5", "#FFB1AF", " #D6D4FF", "#B3EEFF"]}
+        const color = i % colors.beach.length
+        return {backgroundColor: colors.beach[color],color:"#333"}
     }
     getArrow = () => {
         const arrowStyle = {
