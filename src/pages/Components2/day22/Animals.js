@@ -8,6 +8,8 @@ export default class Animals extends React.Component {
         super(props)
         this.state = {
             animalDic: {},
+            animalPersonalities: {},
+            animalHobbies: {},
             loaded:false
         }
     }
@@ -16,22 +18,28 @@ export default class Animals extends React.Component {
     }
  
     getAnimals = () => {
-        const { data } = this.props
+
         // headers: ["ant", "cow", etc.. ]
+        const animalDic = this.makeDictionary("species")
+        const animalPersonalities = this.makeDictionary("personality")
+        const animalHobbies = this.makeDictionary("hobby")
+        this.setState({animalDic, animalPersonalities, animalHobbies, loaded:true})
+    }
+    makeDictionary = (type) => {
+        const { data } = this.props
         let animalDic = {}
         data.forEach((animal) => {
-            let type = animal.species
-            if (animalDic[type]) {
-                animalDic[type].push(animal)
+            if (animalDic[animal[type]]) {
+                animalDic[animal[type]].push(animal)
             }
             else {
-                animalDic[type] = [animal]
+                animalDic[animal[type]] = [animal]
             }
         })
-        this.setState({animalDic,loaded:true})
+        return animalDic
     }
     getAnimalCards = () => {
-        const {animalDic} = this.state
+        const {animalDic,animalPersonalities, animalHobbies} = this.state
         let animalCards = []
         let i = 0
         for (let animal in animalDic) {
@@ -39,7 +47,7 @@ export default class Animals extends React.Component {
                 <div id ={animal}>
                     <h1 className="textCenter button" style ={this.getColor(i)}>{animal}</h1>
                     <div className="flex center">
-                        {animalDic[animal].map((animal) => <AnimalCard  key ={animal.id} data={animal} />)}
+                        {animalDic[animal].map((animal) => <AnimalCard  key ={animal.id} data={animal} animalPersonalities = {animalPersonalities} animalHobbies = {animalHobbies}/>)}
                     </div>
                 </div>)
                 i++
@@ -59,7 +67,7 @@ export default class Animals extends React.Component {
     getColor = (i) => {
         const colors = {pastel: ["#C1A7FF", "#C2CBFF", "#C7FCBA", "#FDFEC9", "#FFD8B6", " #FEBCC2"], beach: ["#C8F69B", "#FFEEA5", "#FFCBA5", "#FFB1AF", " #D6D4FF", "#B3EEFF"]}
         const color = i % colors.beach.length
-        return {backgroundColor: colors.beach[color],color:"#333"}
+        return {backgroundColor: colors.beach[color],color:"rgb(99, 89, 89)"}
     }
     getArrow = () => {
         const arrowStyle = {
