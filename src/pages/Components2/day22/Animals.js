@@ -58,7 +58,7 @@ export default class Animals extends React.Component {
     handleHamburger = (e) => {
         this.setState(prevState =>({clickedHamburger: !prevState.clickedHamburger}))
     }
-    getHeader = () => {
+    getHeaderTags = () => {
         const {animalDic} = this.state
         let i = 0
         let buttons = [] 
@@ -81,18 +81,22 @@ export default class Animals extends React.Component {
         }
         return <a href="#start" style ={arrowStyle}> <button><FontAwesomeIcon icon ={faArrowUp}/></button></a>
     }
-    
+    getFixedHeader = () => {
+        const {loaded,clickedHamburger} = this.state
+        return (
+        <div className ="flex fixedHeader">
+        <div><button style ={{width:40}}className ="cursor" onClick ={this.handleHamburger}><FontAwesomeIcon icon ={faHamburger}/></button></div>
+        <div className ={`flex ${clickedHamburger}Show`}>
+        {loaded && this.getHeaderTags()}
+        </div>
+        </div> )
+    }
     render() {
         const {loaded,clickedHamburger} = this.state
         console.log(clickedHamburger)
         return (
             <div className ="day22" id ="start">
-               <div className ="flex fixedHeader">
-                <div><button style ={{width:40}}className ="cursor" onClick ={this.handleHamburger}><FontAwesomeIcon icon ={faHamburger}/></button></div>
-                <div className ={`flex ${clickedHamburger}Show`}>
-                {loaded && this.getHeader()}
-                </div>
-                </div>
+                {this.getFixedHeader()}
                 <div className ="downHeader">
                 {loaded && this.getAnimalCards()}
                 </div>
