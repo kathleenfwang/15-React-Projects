@@ -163,7 +163,7 @@
  .darkShadow {
   box-shadow: 2px 4px 25px rgba(137,137,137 );
  }
- button {
+ button, .button{
   box-shadow: 2px 4px 25px rgba(0, 0, 0, .2);
    background-color:#939BF4;
    color:white;

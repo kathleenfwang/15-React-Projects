@@ -33,31 +33,32 @@ export default class Animals extends React.Component {
     getAnimalCards = () => {
         const {animalDic} = this.state
         let animalCards = []
+        let i = 0
         for (let animal in animalDic) {
             animalCards.push(
                 <div id ={animal}>
-                    <h1 className="textCenter">{animal}</h1>
+                    <h1 className="textCenter button" style ={this.getColor(i)}>{animal}</h1>
                     <div className="flex center">
                         {animalDic[animal].map((animal) => <AnimalCard data={animal} />)}
                     </div>
                 </div>)
+                i++
         }
         return animalCards
     }
     getHeader = () => {
         const {animalDic} = this.state
-        
         let i = 0
         let buttons = [] 
         for (let animal in animalDic) {
-            i++ 
             buttons.push(<div className ="margin"><a href ={`#${animal}`}><button style ={this.getColor(i)}>{animal}</button></a></div>)
+            i++ 
         }
         return buttons
     }
     getColor = (i) => {
         const colors = ["#C1A7FF", "#C2CBFF", "#C7FCBA", "#FDFEC9", "#FFD8B6", " #FEBCC2"]
-        const color = ((i - 1) % colors.length)
+        const color = i % colors.length
         return {backgroundColor: colors[color],color:"#333"}
     }
     getArrow = () => {
