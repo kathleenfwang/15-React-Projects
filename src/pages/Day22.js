@@ -1,6 +1,6 @@
 import React from "react"
 import axios from "axios"
-import AnimalCard from "./Components2/day22/AnimalCard"
+import Animals from "./Components2/day22/Animals"
 import { Fade } from 'react-reveal';
 export default class Day22 extends React.Component {
     constructor() {
@@ -25,17 +25,13 @@ export default class Day22 extends React.Component {
         .catch((e) => console.log(e))
     }
  
-    getAnimalCards = () => {
-        const {animalData} = this.state
-        return animalData.map( animal => <AnimalCard data ={animal}/>)
-    }
     
     render() {
-        const {loaded} = this.state
-        return (
+        const {loaded,animalData} = this.state
+         return (
             <div className ="flex center">
                 <Fade top cascade>
-                {loaded && this.getAnimalCards() }
+                {loaded && <Animals data = {animalData}/>}
                 </Fade>
             </div>
         )
