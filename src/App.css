@@ -1166,6 +1166,9 @@ border:none;
   background-color: rgb(74, 193, 138);
   color:whitesmoke;
 }
+.margin {
+  margin:5px;
+}
 .day22 {
  padding:20px;
 }

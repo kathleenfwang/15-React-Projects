@@ -2,6 +2,7 @@ import React from "react"
 import AnimalCard from "./AnimalCard"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faSmile, faArrowUp, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faBluetooth } from "@fortawesome/free-brands-svg-icons"
 export default class Animals extends React.Component {
     constructor(props) {
         super(props)
@@ -45,11 +46,19 @@ export default class Animals extends React.Component {
     }
     getHeader = () => {
         const {animalDic} = this.state
+        
+        let i = 0
         let buttons = [] 
         for (let animal in animalDic) {
-            buttons.push(<a href ={`#${animal}`}><button>{animal}</button></a>)
+            i++ 
+            buttons.push(<div className ="margin"><a href ={`#${animal}`}><button style ={this.getColor(i)}>{animal}</button></a></div>)
         }
         return buttons
+    }
+    getColor = (i) => {
+        const colors = ["#C1A7FF", "#C2CBFF", "#C7FCBA", "#FDFEC9", "#FFD8B6", " #FEBCC2"]
+        const color = ((i - 1) % colors.length)
+        return {backgroundColor: colors[color],color:"#333"}
     }
     getArrow = () => {
         const arrowStyle = {
