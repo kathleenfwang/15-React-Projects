@@ -1218,6 +1218,8 @@ border:none;
 }
 .day22 {
  padding:20px;
+ padding-left:10%;
+ padding-right:10%;
 }
 
 @keyframes fadeInOpacity {
