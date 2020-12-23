@@ -2,6 +2,7 @@ import React from "react"
 import AnimalCard from "./AnimalCard"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowUp, faHamburger } from '@fortawesome/free-solid-svg-icons'
+import NavOptions from "../day20/NavOptions"
 export default class Animals extends React.Component {
     constructor(props) {
         super(props)
@@ -10,9 +11,9 @@ export default class Animals extends React.Component {
             animalPersonalities: {},
             animalHobbies: {},
             loaded: false,
-            firstLoad: false,
-            finalLoad: false,
             clickedHamburger: true,
+            tab: 0, 
+            liked: []
         }
         this.animalData = null
     }
@@ -35,6 +36,16 @@ export default class Animals extends React.Component {
         const animalHobbies = this.makeDictionary("hobby")
         this.setState({ animalDic, animalPersonalities, animalHobbies, firstLoad: true }, () => this.getAnimalCards())
     }
+    handleLike = (data,filled) => {
+        const {liked} = this.state
+        console.log(data,filled)
+        if (filled) this.setState(prevState => ({liked: [...prevState.liked, data]}))
+        else {
+            // remove from likes 
+            const filteredLikes = liked.filter((like) => like !== data)
+            this.setState({liked:filteredLikes})
+        }
+    }
     getAnimalCards = async () => {
         const result = await this.makeAnimalCards()
         this.animalData = result
@@ -49,7 +60,7 @@ export default class Animals extends React.Component {
                 <div id={animal}>
                     <h1 className="textCenter button" style={this.getColor(i)}>{animal}</h1>
                     <div className="flex center">
-                        {animalDic[animal].map((animal) => <AnimalCard key={animal.id} data={animal} animalPersonalities={animalPersonalities} animalHobbies={animalHobbies} />)}
+                        {animalDic[animal].map((animal) => <AnimalCard filled = {false}key={animal.id} data={animal} animalPersonalities={animalPersonalities} animalHobbies={animalHobbies} handleLike = {this.handleLike} />)}
                     </div>
                 </div>)
             i++
@@ -92,14 +103,43 @@ export default class Animals extends React.Component {
                 </div>
             </div>)
     }
+    setOptionNav = (tab) => {
+        this.setState({ tab: tab })
+    }
+    getOptionNav = () => {
+        const { tab } = this.state
+        const titles = ["All", "|","My Collection"]
+        return (
+            <NavOptions titles = {titles} tab = {tab} functionName = {this.setOptionNav} />
+        )
+    }
+    getLikedVillagers = () => {
+        const {liked,animalPersonalities,animalHobbies} = this.state 
+        return liked.map((animal) => <AnimalCard key={animal.id} filled ={true} data={animal} animalPersonalities={animalPersonalities} animalHobbies={animalHobbies} handleLike = {this.handleLike} />)
+    }
+    handleOptionNav = () => {
+        // const { isLoggedIn } = this.state
+        const { loaded, tab,liked } = this.state
+        if (tab === 2) {
+              return (liked.length == 0) ? <h1>Add villagers to your collection by clicking the star icon</h1> : (<>
+                  <div className ="flex center">{this.getLikedVillagers()}</div>
+                  {/* <h2 className ="textCenter">Log in to save your collection!</h2> */}
+                  </>)
+        }
+        if (tab === 0) {
+            // return "all" 
+            return (loaded && this.animalData)
+        }
+    }
     render() {
-        const { loaded } = this.state
-        console.log(loaded, this.animalData)
+        const {liked,tab} = this.state
+        console.log(liked)
         return (
             <div className="day22" id="start">
-                {this.getFixedHeader()}
+                {tab == 0 ? this.getFixedHeader() : null}
                 <div className="downHeader">
-                    {loaded && this.animalData}
+                {this.getOptionNav()}
+                {this.handleOptionNav()}
                 </div>
                 {this.getArrow()}
             </div>

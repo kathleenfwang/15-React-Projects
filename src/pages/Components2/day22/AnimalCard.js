@@ -1,13 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTimes, faSmile, faArrowUp, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faStar as faStarOutline } from '@fortawesome/free-regular-svg-icons'
+import { faTimes, faStar } from '@fortawesome/free-solid-svg-icons'
 import React from "react"
 import { Fade } from 'react-reveal';
 export default class AnimalCard extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            clicked: false
+            clicked: false,
+            filled: false 
         }
+    }
+    componentDidMount() {
+        this.setState({filled: this.props.filled})
     }
     getImageData = () => {
         this.setState(prevState => ({ clicked: !prevState.clicked }))
@@ -15,14 +20,24 @@ export default class AnimalCard extends React.Component {
     handleClick = (e) => {
         this.setState({ clicked: false })
     }
+    fillStar = (data) => {
+        const {handleLike} = this.props 
+        this.setState(prevState => ({filled: !prevState.filled}), () => handleLike(data,this.state.filled))
+    }
     imageData = () => {
-        const { data } = this.props
-        const { clicked } = this.state
+        const { data} = this.props
+        const { clicked, filled} = this.state
+        const starStyle = {color: "gold", marginLeft:5, fontSize:"1.2em", fontWeight:"bold"}
         return (
             <div className={`${clicked}Show floatingCard`}>
                 <div className="up flex spaceBetween">
+                    <div className ="flex">
                     <h2>{data.name["name-USen"]}</h2>
+                    <FontAwesomeIcon className ="cursor" style ={starStyle} onClick ={() => this.fillStar(data)}icon ={filled ? faStar : faStarOutline} />
+                    </div>
+                    <div>
                     <FontAwesomeIcon className="cursor red" icon={faTimes} onClick={this.handleClick} />
+                    </div>
                 </div>
                 <img className="bigSquare" src={data["image_uri"]} />
                 <div className="flexVertical spaceAround">
@@ -55,7 +70,7 @@ export default class AnimalCard extends React.Component {
         const { data } = this.props
         return (
             <Fade cascade>
-                <div className="relative">
+                <div className=" relative">
                     <img onClick={this.getImageData} className="cursor" src={data.icon_uri} />
                     {this.imageData()}
                 </div>

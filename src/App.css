@@ -423,8 +423,9 @@ a {
     padding:5px;
   }
   .floatingCard {
-    position: absolute;
     background-color: white;
+    color:#333;
+    position: absolute;
     top: -70px;
     left: 140px;
     width: 200px;
