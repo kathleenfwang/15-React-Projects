@@ -1,12 +1,13 @@
 ## React Projects
-Currently **17** React projects, some which are full-stack and connected to MongoDB Atlas Database and I plan on adding more later.<br>
+Currently **18** React projects, some which are full-stack and connected to MongoDB Atlas Database and I plan on adding more later.<br>
 ## Full stack apps: 
 - **Live Twitch Streamers** [view](http://kathleenwang15projects.surge.sh/day/17) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day21.js)
    - Users can favorite/unfavorite streamers and the streamer will be saved on the "Community Suggested" page 
 - **Recipe Library** [view](http://kathleenwang15projects.surge.sh/day/16) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day20.js)
 - **Plant Library** [view](http://kathleenwang15projects.surge.sh/day/4) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day6.js)
 
-### Curent Projects: 
+### Curent Projects:
+- Day 18: **Animal Crossing Library** [view](http://kathleenwang15projects.surge.sh/day/18) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day22.js)
 - Day 17: **Live Twitch Streamers** [view](http://kathleenwang15projects.surge.sh/day/17) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day21.js)
 - Day 16: **Recipe Library** [view](http://kathleenwang15projects.surge.sh/day/16) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day20.js)
 - Day 15: **Computer Vision Images** [view](http://kathleenwang15projects.surge.sh/day/15) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day19.js)
