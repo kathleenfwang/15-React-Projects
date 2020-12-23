@@ -33,19 +33,15 @@ export default class Animals extends React.Component {
         return animalDic
     }
     getAnimals = () => {
-        // headers: ["ant", "cow", etc.. ]
         const animalDic = this.makeDictionary("species")
         const animalPersonalities = this.makeDictionary("personality")
         const animalHobbies = this.makeDictionary("hobby")
-        this.setState({ animalDic, animalPersonalities, animalHobbies, firstLoad: true }, () => {
-            this.getDefaultColors()
-        })
+        this.setState({ animalDic, animalPersonalities, animalHobbies, firstLoad: true }, () => this.getDefaultColors())
     }
     handleLike = (data,filled) => {
         const {liked} = this.state
         if (filled) this.setState(prevState => ({liked: [...prevState.liked, data]}))
         else {
-            // remove from likes 
             const filteredLikes = liked.filter((like) => like !== data)
             this.setState({liked:filteredLikes})
         }
@@ -57,7 +53,6 @@ export default class Animals extends React.Component {
     }
     makeAnimalCards = () => {
         const { animalDic, defaultColors, defaultHobbyColors} = this.state
-        console.log(defaultColors)
         let animalCards = []
         let i = 0
         for (let animal in animalDic) {
@@ -96,8 +91,7 @@ export default class Animals extends React.Component {
         const {colors} = this
         const defaultColors = array.reduce((prev,next,i) => {
             prev[next] = colors[palette][i % colors[palette].length]
-            return prev
-        },{})
+            return prev},{})
         return defaultColors
     }
     getColor = (i) => {
@@ -139,12 +133,12 @@ export default class Animals extends React.Component {
     }
     getLikedStats = () => {
         const {liked,defaultColors} = this.state 
-       const likedStats =  liked.reduce((prev,next) => {
-            prev[next.personality] ? prev[next.personality]++ : prev[next.personality] = 1 
-            return prev
-        }, {})
         const likedStatsArray = []
         let i = 0 
+       const likedStats =  liked.reduce((prev,next) => {
+            prev[next.personality] ? prev[next.personality]++ : prev[next.personality] = 1 
+            return prev}, {})
+      
         for (let stat in likedStats) {
             likedStatsArray.push(<p style ={{fontWeight:"bold",backgroundColor: defaultColors[stat]}}className="smallTag upLess">{`${stat} | ${likedStats[stat]}`}</p>)
             i++
@@ -153,12 +147,11 @@ export default class Animals extends React.Component {
     }
     getTypeStats = () => {
         const {liked} = this.state 
-       const likedStats =  liked.reduce((prev,next) => {
-            prev[next.species] ? prev[next.species]++ : prev[next.species] = 1 
-            return prev
-        }, {})
         const likedStatsArray = []
         let i = 0 
+       const likedStats =  liked.reduce((prev,next) => {
+            prev[next.species] ? prev[next.species]++ : prev[next.species] = 1 
+            return prev}, {})
         for (let stat in likedStats) {
             likedStatsArray.push(<p style ={this.getColor(i)}className="smallTag upLess"><b>{`${stat} | ${likedStats[stat]}`}</b></p>)
             i++
@@ -176,13 +169,10 @@ export default class Animals extends React.Component {
                   {/* <h2 className ="textCenter">Log in to save your collection!</h2> */}
                   </>)
         }
-        if (tab === 0) {
-            // return "all" 
-            return (loaded && this.animalData)
-        }
+        if (tab === 0) return (loaded && this.animalData)
     }
     render() {
-        const {liked,tab} = this.state
+        const {tab} = this.state
         return (
             <div className="day22" id="start">
                 {tab == 0 ? this.getFixedHeader() : null}
