@@ -24,18 +24,18 @@ export default class Animals extends React.Component {
             showLoginForm:false,
             buttonmsg:"",
             defaultMsg: "Must be logged in first to add/move recipes",
-            userLikes: [] 
+            userLikes: [], 
+            userId: ""
         }
         this.animalData = null
         this.colors = { pastel: ["#C1A7FF", "#C2CBFF", "#C7FCBA", "#FDFEC9", "#FFD8B6", " #FEBCC2", "#FD63B0", "#67D0DD"], beach: ["#C8F69B", "#FFEEA5", "#FFCBA5", "#FFB1AF", " #9EE09E", "#B3EEFF", "#E5A4BE", "#A890C3"] }
         this.proxyurl = "https://tranquil-bastion-97053.herokuapp.com/"
         this.userUrl = `${this.proxyurl}${process.env.REACT_APP_USER_URL}`
         this.userLogin = `${this.proxyurl}${process.env.REACT_APP_USER_URL}/login`
-        this.userVillagerUpdate = `${this.proxyurl}${process.env.REACT_APP_USER_VILLAGERS_URL}`
+        this.userVillagerURL = `${this.proxyurl}${process.env.REACT_APP_USER_VILLAGERS_URL}`
     }
     componentDidMount() {
         this.getAnimals()
-        this.getUsers()
     }
    
     makeDictionary = (type) => {
@@ -146,12 +146,17 @@ export default class Animals extends React.Component {
         )
     }
     getLikedVillagers = () => {
-        const {liked,defaultHobbyColors, defaultColors, isLoggedIn, userLikes} = this.state 
+        const {isLoggedIn, userLikes,liked} = this.state 
         const {data} = this.props
-        // if (isLoggedIn) {
-        //     const likedAnimals = data.filter((animal) => userLikes.indexOf(Number(animal.id)) !== -1 )
-        // }
-       
+        if (isLoggedIn && userLikes.length > 0) {
+           const userLikesData = userLikes.map((id) => data[id-1])
+           const combinedLikes = [...liked,...userLikesData]
+           return this.mapLikedAnimalCards(combinedLikes)
+        }
+        else { return this.mapLikedAnimalCards(liked)}
+    }
+    mapLikedAnimalCards = (liked) => {
+        const {defaultColors, defaultHobbyColors} = this.state
         return liked.map((animal) => <AnimalCard key={animal.id} filled ={true} data={animal}  defaultColors = {defaultColors} defaultHobbyColors = {defaultHobbyColors} handleLike = {this.handleLike} />)
     }
     getLikedStats = () => {
@@ -183,9 +188,9 @@ export default class Animals extends React.Component {
     }
     handleOptionNav = () => {
         // const { isLoggedIn } = this.state
-        const { loaded, tab,liked, isLoggedIn } = this.state
+        const { loaded, tab,liked, isLoggedIn, userLikes } = this.state
         if (tab === 2) {
-              return (liked.length == 0) ? null : (<>
+              return (liked.length == 0 && userLikes.length == 0) ? null : (<>
                  <div className ="flex center">{this.getLikedStats()}</div>
                  <div className ="flex center">{this.getTypeStats()}</div>
                   <div className ="flex center">{this.getLikedVillagers()}</div>
@@ -207,6 +212,11 @@ export default class Animals extends React.Component {
                     <li>{!isLoggedIn && <button onClick={(e) => this.handleLogin(e, "Sign Up")}>Sign Up</button>}</li>
                 </div>
             </nav>)
+    }
+    getUserData = () => {
+        const {user} = this.state
+        axios.get(`${this.userVillagerURL}/${user}`)
+        .then((res) => this.setState({userId: res.data["_id"], userLikes: res.data.likedVillagers}))
     }
     handleLogin = (e, msg) => {
         e.preventDefault()
@@ -236,9 +246,10 @@ export default class Animals extends React.Component {
             if (showLoginForm) {
                 axios.post(`${this.userLogin}`, user)
                     .then(res => {
-                        console.log(res)
                         let result = res.status
-                        if (result == 200) this.setState({isLoggedIn: true, user: username})
+                        if (result == 200) {
+                            this.setState({isLoggedIn: true, user: username}, () => this.getUserData())
+                        }
                         else {
                             this.setState({ defaultMsg: 'Invalid username/password' })
                         }
@@ -315,7 +326,6 @@ export default class Animals extends React.Component {
     }
     render() {
         const {tab,user} = this.state
-        console.log(user)
         return (
             <div className="day22" id="start">
                 {this.getNav()}
