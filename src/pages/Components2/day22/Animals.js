@@ -171,13 +171,13 @@ export default class Animals extends React.Component {
     }
     handleOptionNav = () => {
         // const { isLoggedIn } = this.state
-        const { loaded, tab,liked } = this.state
+        const { loaded, tab,liked, isLoggedIn } = this.state
         if (tab === 2) {
-              return (liked.length == 0) ? <h1>Add villagers to your collection by clicking the star icon</h1> : (<>
+              return (liked.length == 0) ? null : (<>
                  <div className ="flex center">{this.getLikedStats()}</div>
                  <div className ="flex center">{this.getTypeStats()}</div>
                   <div className ="flex center">{this.getLikedVillagers()}</div>
-                  {/* <h2 className ="textCenter">Log in to save your collection!</h2> */}
+                  {!isLoggedIn && <h2 className ="textCenter">Log in to save your collection!</h2>}
                   </>)
         }
         if (tab === 0) return (loaded && this.animalData)
@@ -309,7 +309,7 @@ export default class Animals extends React.Component {
                 {tab == 0 ? this.getFixedHeader() : null}
                 <div className="downHeader">
                 {this.getOptionNav()}
-                <h2>Double click an icon to add to your collection!</h2>
+                <h2>Double click an icon to add/remove to your collection!</h2>
                 {this.handleOptionNav()}
                 </div>
                 {this.getArrow()}
