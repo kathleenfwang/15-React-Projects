@@ -13,6 +13,9 @@
  .white, #white {
   color:white;
 }
+.width20 {
+  width:20%;
+}
 .bold {
   font-weight:bold;
 }
@@ -414,7 +417,7 @@ a {
     color: rgb(99, 89, 89);
     border-radius: 10px;
     margin-left:5px;
-    width: 40%;
+    min-width: 70px;
   }
   .quote {
     font-style: italic;
