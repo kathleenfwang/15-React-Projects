@@ -444,6 +444,9 @@ a {
   .falseForm {
     display:none;
   }
+  .flexEnd {
+    justify-content: flex-end;
+  }
   form {
     color: #555;
     display: flex;

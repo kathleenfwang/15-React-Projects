@@ -3,6 +3,7 @@ import AnimalCard from "./AnimalCard"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowUp, faHamburger } from '@fortawesome/free-solid-svg-icons'
 import NavOptions from "../day20/NavOptions"
+import axios from "axios"
 export default class Animals extends React.Component {
     constructor(props) {
         super(props)
@@ -15,10 +16,20 @@ export default class Animals extends React.Component {
             tab: 0, 
             defaultColors: {}, 
             defaultHobbyColors:{},
-            liked: []
+            liked: [], 
+            isLoggedIn:false,
+            user: "",
+            username: "",
+            password: "",
+            showLoginForm:false,
+            buttonmsg:"",
+            defaultMsg: "Must be logged in first to add/move recipes",
         }
         this.animalData = null
         this.colors = { pastel: ["#C1A7FF", "#C2CBFF", "#C7FCBA", "#FDFEC9", "#FFD8B6", " #FEBCC2", "#FD63B0", "#67D0DD"], beach: ["#C8F69B", "#FFEEA5", "#FFCBA5", "#FFB1AF", " #9EE09E", "#B3EEFF", "#E5A4BE", "#A890C3"] }
+        this.proxyurl = "https://tranquil-bastion-97053.herokuapp.com/"
+        this.userUrl = `${this.proxyurl}${process.env.REACT_APP_USER_URL}`
+        this.userLogin = `${this.proxyurl}${process.env.REACT_APP_USER_URL}/login`
     }
     componentDidMount() {
         this.getAnimals()
@@ -171,10 +182,130 @@ export default class Animals extends React.Component {
         }
         if (tab === 0) return (loaded && this.animalData)
     }
+    getNav = () => {
+        const { isLoggedIn, user } = this.state
+        return (
+            <nav className="alignCenter flexEnd">
+                <div className="flex">
+                    <li><button onClick={(e) => this.handleLogin(e, "Log In")}>{isLoggedIn ? "Logout" : "Login"}</button></li>
+                    <li>{this.loginForm()}</li>
+                </div>
+                <div className="flex">
+                    {isLoggedIn && <li className="miniCard">{`Hi ${user}!`}</li>}
+                    <li>{!isLoggedIn && <button onClick={(e) => this.handleLogin(e, "Sign Up")}>Sign Up</button>}</li>
+                </div>
+            </nav>)
+    }
+    handleLogin = (e, msg) => {
+        e.preventDefault()
+        const { username, password, showLoginForm, isLoggedIn } = this.state
+        // logout 
+        if (isLoggedIn) {
+            this.setState({
+                user: "",
+                isLoggedIn: false
+            })
+        }
+        //signup
+        else if (msg === "Sign Up") {
+            this.setState(prevState => ({buttonmsg: msg}))
+            this.handleNewLogin(e)
+        }
+        else {
+
+            this.setState(prevState => ({
+                showLoginForm: !prevState.showLoginForm,
+                buttonmsg: msg
+            }))
+            const user = {
+                username,
+                password
+            }
+            if (showLoginForm) {
+                axios.post(`${this.userLogin}`, user)
+                    .then(res => {
+                        let result = res.status
+                        if (result == 200) this.setState({isLoggedIn: true, user: username})
+                        else {
+                            this.setState({ defaultMsg: 'Invalid username/password' })
+                        }
+                    }).catch((e) => {
+                        if (e.response) this.setState({ defaultMsg: e.response.data.message })
+                    })
+            }
+            this.setState({
+                username: "",
+                password: "",
+            })
+        }
+    }
+    loginForm = () => {
+        const { buttonmsg } = this.state
+        let placeholderUser = ""
+        let placeholderPass = ""
+        let loginFunc = this.handleNewLogin
+
+        if (buttonmsg == "Log In") {
+            loginFunc = this.handleLogin
+            placeholderUser = "Demo: a"
+            placeholderPass = "Demo: 123"
+        }
+        return (
+            <form style={{ width: '70%' }} onSubmit={loginFunc} className={`form ${this.state.showLoginForm}Form`}>
+                <label>Username *</label>
+                <input required placeholder={placeholderUser} onChange={this.handleUserName} value={this.state.username}></input>
+                <br></br>
+                <label>Password *</label>
+                <input required type="password" placeholder={placeholderPass} onChange={this.handlePass} value={this.state.password}></input>
+                <br></br>
+                <button type="submit">{buttonmsg}</button>
+            </form>
+        )
+    }
+    handleUserName = (e) => {
+        this.setState({ username: e.target.value })
+    }
+    handlePass = (e) => {
+        let value = e.target.value
+            this.setState({ password: value })
+    }
+    handleNewLogin = (e) => {
+        e.preventDefault()
+        const { username, password } = this.state
+        this.setState(prevState => ({
+            showLoginForm: !prevState.showLoginForm
+        }))
+        const user = {
+            username,
+            password
+        }
+        if (this.state.showLoginForm) {
+            axios.post(this.userUrl, user)
+                .then(res => {
+                    this.setState({
+                        user: username,
+                        isLoggedIn: true
+                    })
+                }).catch((error) => {
+                    if (error.response) {
+                        if (error.response.status !== 500) {
+                            this.setState({ defaultMsg: "Username already exists" })
+                        }
+                    }
+                    else { console.log(error) }
+                })
+        }
+        this.setState({
+            username: "",
+            password: "",
+        })
+    }
     render() {
-        const {tab} = this.state
+        const {tab,user} = this.state
+        console.log(user)
         return (
             <div className="day22" id="start">
+                {this.getNav()}
                 {tab == 0 ? this.getFixedHeader() : null}
                 <div className="downHeader">
                 {this.getOptionNav()}
