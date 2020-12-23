@@ -24,16 +24,20 @@ export default class Animals extends React.Component {
             showLoginForm:false,
             buttonmsg:"",
             defaultMsg: "Must be logged in first to add/move recipes",
+            userLikes: [] 
         }
         this.animalData = null
         this.colors = { pastel: ["#C1A7FF", "#C2CBFF", "#C7FCBA", "#FDFEC9", "#FFD8B6", " #FEBCC2", "#FD63B0", "#67D0DD"], beach: ["#C8F69B", "#FFEEA5", "#FFCBA5", "#FFB1AF", " #9EE09E", "#B3EEFF", "#E5A4BE", "#A890C3"] }
         this.proxyurl = "https://tranquil-bastion-97053.herokuapp.com/"
         this.userUrl = `${this.proxyurl}${process.env.REACT_APP_USER_URL}`
         this.userLogin = `${this.proxyurl}${process.env.REACT_APP_USER_URL}/login`
+        this.userVillagerUpdate = `${this.proxyurl}${process.env.REACT_APP_USER_VILLAGERS_URL}`
     }
     componentDidMount() {
         this.getAnimals()
+        this.getUsers()
     }
+   
     makeDictionary = (type) => {
         const { data } = this.props
         let animalDic = {}
@@ -51,7 +55,10 @@ export default class Animals extends React.Component {
     }
     handleLike = (data,filled) => {
         const {liked} = this.state
-        if (filled) this.setState(prevState => ({liked: [...prevState.liked, data]}))
+        if (filled) {
+ 
+            this.setState(prevState => ({liked: [...prevState.liked, data]}))
+        }
         else {
             const filteredLikes = liked.filter((like) => like !== data)
             this.setState({liked:filteredLikes})
@@ -139,7 +146,12 @@ export default class Animals extends React.Component {
         )
     }
     getLikedVillagers = () => {
-        const {liked,defaultHobbyColors, defaultColors} = this.state 
+        const {liked,defaultHobbyColors, defaultColors, isLoggedIn, userLikes} = this.state 
+        const {data} = this.props
+        // if (isLoggedIn) {
+        //     const likedAnimals = data.filter((animal) => userLikes.indexOf(Number(animal.id)) !== -1 )
+        // }
+       
         return liked.map((animal) => <AnimalCard key={animal.id} filled ={true} data={animal}  defaultColors = {defaultColors} defaultHobbyColors = {defaultHobbyColors} handleLike = {this.handleLike} />)
     }
     getLikedStats = () => {
@@ -224,6 +236,7 @@ export default class Animals extends React.Component {
             if (showLoginForm) {
                 axios.post(`${this.userLogin}`, user)
                     .then(res => {
+                        console.log(res)
                         let result = res.status
                         if (result == 200) this.setState({isLoggedIn: true, user: username})
                         else {
