@@ -71,7 +71,7 @@ export default class AnimalCard extends React.Component {
         return (
             <Fade cascade>
                 <div className=" relative">
-                    <img onClick={this.getImageData} className="cursor" src={data.icon_uri} />
+                    <img onDoubleClick={() => this.fillStar(data)}onClick={this.getImageData} className="cursor" src={data.icon_uri} />
                     {this.imageData()}
                 </div>
             </Fade>

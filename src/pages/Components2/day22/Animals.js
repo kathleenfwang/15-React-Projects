@@ -139,6 +139,7 @@ export default class Animals extends React.Component {
                 {tab == 0 ? this.getFixedHeader() : null}
                 <div className="downHeader">
                 {this.getOptionNav()}
+                <h2>Double click an icon to add to your collection!</h2>
                 {this.handleOptionNav()}
                 </div>
                 {this.getArrow()}
