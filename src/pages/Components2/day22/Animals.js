@@ -328,7 +328,7 @@ export default class Animals extends React.Component {
         const {tab,user} = this.state
         return (
             <div className="day22" id="start">
-                {this.getNav()}
+                {/* {this.getNav()} */}
                 {tab == 0 ? this.getFixedHeader() : null}
                 <div className="downHeader">
                 {this.getOptionNav()}
