@@ -51,12 +51,10 @@ export default class AnimalCard extends React.Component {
             </div>)
     }
     getColor = (personality) => {
-        const { animalPersonalities } = this.props
-        const personalities = Object.keys(animalPersonalities) // ["Peppy", "Normal".. ]
-        const personalityIndex = personalities.indexOf(personality)
-        const colors = { pastel: ["#C1A7FF", "#C2CBFF", "#C7FCBA", "#FDFEC9", "#FFD8B6", " #FEBCC2"], beach: ["#C8F69B", "#FFEEA5", "#FFCBA5", "#FFB1AF", " #D6D4FF", "#B3EEFF"] }
-        const color = personalityIndex % colors.beach.length
-        return { backgroundColor: colors.beach[color], color: "rgb(99, 89, 89)" }
+        const {defaultColors} = this.props
+        console.log(defaultColors)
+        console.log(defaultColors[personality])
+        return { backgroundColor: defaultColors[personality], color: "rgb(99, 89, 89)" }
     }
     getHobbyColor = (hobby) => {
         const { animalHobbies } = this.props

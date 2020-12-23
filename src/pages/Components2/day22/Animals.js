@@ -13,9 +13,11 @@ export default class Animals extends React.Component {
             loaded: false,
             clickedHamburger: true,
             tab: 0, 
+            defaultColors: {}, 
             liked: []
         }
         this.animalData = null
+        this.colors = { pastel: ["#C1A7FF", "#C2CBFF", "#C7FCBA", "#FDFEC9", "#FFD8B6", " #FEBCC2", "#FF6663", "#CC99C9"], beach: ["#C8F69B", "#FFEEA5", "#FFCBA5", "#FFB1AF", " #9EE09E", "#B3EEFF"] }
     }
     componentDidMount() {
         this.getAnimals()
@@ -34,11 +36,12 @@ export default class Animals extends React.Component {
         const animalDic = this.makeDictionary("species")
         const animalPersonalities = this.makeDictionary("personality")
         const animalHobbies = this.makeDictionary("hobby")
-        this.setState({ animalDic, animalPersonalities, animalHobbies, firstLoad: true }, () => this.getAnimalCards())
+        this.setState({ animalDic, animalPersonalities, animalHobbies, firstLoad: true }, () => {
+            this.getDefaultColors()
+        })
     }
     handleLike = (data,filled) => {
         const {liked} = this.state
-        console.log(data,filled)
         if (filled) this.setState(prevState => ({liked: [...prevState.liked, data]}))
         else {
             // remove from likes 
@@ -52,7 +55,8 @@ export default class Animals extends React.Component {
         this.setState({ loaded: true })
     }
     makeAnimalCards = () => {
-        const { animalDic, animalPersonalities, animalHobbies } = this.state
+        const { animalDic, defaultColors, animalPersonalities, animalHobbies } = this.state
+        console.log(defaultColors)
         let animalCards = []
         let i = 0
         for (let animal in animalDic) {
@@ -60,7 +64,7 @@ export default class Animals extends React.Component {
                 <div id={animal}>
                     <h1 className="textCenter button" style={this.getColor(i)}>{animal}</h1>
                     <div className="flex center">
-                        {animalDic[animal].map((animal) => <AnimalCard filled = {false}key={animal.id} data={animal} animalPersonalities={animalPersonalities} animalHobbies={animalHobbies} handleLike = {this.handleLike} />)}
+                        {animalDic[animal].map((animal) => <AnimalCard filled = {false}key={animal.id} data={animal} animalPersonalities={animalPersonalities} defaultColors = {defaultColors}animalHobbies={animalHobbies} handleLike = {this.handleLike} />)}
                     </div>
                 </div>)
             i++
@@ -80,8 +84,19 @@ export default class Animals extends React.Component {
         }
         return buttons
     }
+    getDefaultColors = () => {
+        const {animalPersonalities} = this.state
+        const {colors} = this
+        const personalityNames =  Object.keys(animalPersonalities)  // snooty ,lazy
+        console.log(personalityNames)
+        const defaultColors = personalityNames.reduce((prev,next,i) => {
+            prev[next] = colors.pastel[i % colors.pastel.length]
+            return prev
+        },{}) 
+        this.setState({defaultColors}, () => this.getAnimalCards())
+    }
     getColor = (i) => {
-        const colors = { pastel: ["#C1A7FF", "#C2CBFF", "#C7FCBA", "#FDFEC9", "#FFD8B6", " #FEBCC2"], beach: ["#C8F69B", "#FFEEA5", "#FFCBA5", "#FFB1AF", " #D6D4FF", "#B3EEFF"] }
+        const {colors} = this
         const color = i % colors.beach.length
         return { backgroundColor: colors.beach[color], color: "rgb(99, 89, 89)" }
     }
@@ -114,14 +129,30 @@ export default class Animals extends React.Component {
         )
     }
     getLikedVillagers = () => {
-        const {liked,animalPersonalities,animalHobbies} = this.state 
-        return liked.map((animal) => <AnimalCard key={animal.id} filled ={true} data={animal} animalPersonalities={animalPersonalities} animalHobbies={animalHobbies} handleLike = {this.handleLike} />)
+        const {liked,animalPersonalities,animalHobbies, defaultColors} = this.state 
+        return liked.map((animal) => <AnimalCard key={animal.id} filled ={true} data={animal} animalPersonalities={animalPersonalities} defaultColors = {defaultColors} animalHobbies={animalHobbies} handleLike = {this.handleLike} />)
+    }
+    getLikedStats = () => {
+        const {liked,defaultColors} = this.state 
+        console.log(defaultColors)
+       const likedStats =  liked.reduce((prev,next) => {
+            prev[next.personality] ? prev[next.personality]++ : prev[next.personality] = 1 
+            return prev
+        }, {})
+        const likedStatsArray = []
+        let i = 0 
+        for (let stat in likedStats) {
+            likedStatsArray.push(<p style ={{backgroundColor: defaultColors[stat]}}className="smallTag upLess">{`${stat}|${likedStats[stat]}`}</p>)
+            i++
+        }
+        return likedStatsArray
     }
     handleOptionNav = () => {
         // const { isLoggedIn } = this.state
         const { loaded, tab,liked } = this.state
         if (tab === 2) {
               return (liked.length == 0) ? <h1>Add villagers to your collection by clicking the star icon</h1> : (<>
+                 <div className ="flex center">{this.getLikedStats()}</div>
                   <div className ="flex center">{this.getLikedVillagers()}</div>
                   {/* <h2 className ="textCenter">Log in to save your collection!</h2> */}
                   </>)
@@ -133,7 +164,6 @@ export default class Animals extends React.Component {
     }
     render() {
         const {liked,tab} = this.state
-        console.log(liked)
         return (
             <div className="day22" id="start">
                 {tab == 0 ? this.getFixedHeader() : null}
