@@ -32,7 +32,7 @@ export default class AnimalCard extends React.Component {
             <div className={`${clicked}Show floatingCard`}>
                 <div className="up flex spaceBetween">
                     <div className ="flex">
-                    <h2>{data.name["name-USen"]}</h2>
+                    <h3>{data.name["name-USen"]}</h3>
                     <FontAwesomeIcon className ="cursor" style ={starStyle} onClick ={() => this.fillStar(data)}icon ={filled ? faStar : faStarOutline} />
                     </div>
                     <div>
@@ -41,7 +41,7 @@ export default class AnimalCard extends React.Component {
                 </div>
                 <img className="bigSquare" src={data["image_uri"]} />
                 <div className="flexVertical spaceAround">
-                    <p>Birthday: {data["birthday-string"]}</p>
+                    <p>Birthday: <b>{data["birthday-string"]}</b></p>
                     <div className="flex">
                         <p style={this.getColor(data.personality)} className="smallTag upLess">{data.personality}</p>
                         <p style={this.getHobbyColor(data.hobby)} className="smallTag upLess">{data.hobby}</p>

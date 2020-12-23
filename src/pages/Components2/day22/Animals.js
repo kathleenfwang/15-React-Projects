@@ -112,7 +112,7 @@ export default class Animals extends React.Component {
         return (
             <div className="flex fixedHeader">
                 <div  className="cursor" onClick={this.handleHamburger} ><button style={{ width: 40 }}><FontAwesomeIcon icon={faHamburger} /></button></div>
-                <div className={`flex ${clickedHamburger}Show`}>
+                <div className={`flex ${clickedHamburger}Form`}>
                     {loaded && this.getHeaderTags()}
                 </div>
             </div>)
