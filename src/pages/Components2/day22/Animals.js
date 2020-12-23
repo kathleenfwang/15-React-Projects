@@ -1,7 +1,7 @@
 import React from "react"
 import AnimalCard from "./AnimalCard"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faSmile, faArrowUp, faHeart, faHamburger } from '@fortawesome/free-solid-svg-icons'
+import {faArrowUp, faHamburger } from '@fortawesome/free-solid-svg-icons'
 export default class Animals extends React.Component {
     constructor(props) {
         super(props)
@@ -86,7 +86,7 @@ export default class Animals extends React.Component {
         const { loaded, clickedHamburger } = this.state
         return (
             <div className="flex fixedHeader">
-                <div><button style={{ width: 40 }} className="cursor" onClick={this.handleHamburger}><FontAwesomeIcon icon={faHamburger} /></button></div>
+                <div  className="cursor" onClick={this.handleHamburger} ><button style={{ width: 40 }}><FontAwesomeIcon icon={faHamburger} /></button></div>
                 <div className={`flex ${clickedHamburger}Show`}>
                     {loaded && this.getHeaderTags()}
                 </div>
