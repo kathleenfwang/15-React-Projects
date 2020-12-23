@@ -1223,7 +1223,7 @@ border:none;
 .fixedHeader {
   position: fixed;
   z-index: 1;
-  opacity: 50%;
+  opacity: .5;
   width:85%;
 }
 .fixedHeader:hover {
