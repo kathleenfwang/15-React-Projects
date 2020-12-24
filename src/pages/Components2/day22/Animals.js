@@ -60,16 +60,18 @@ export default class Animals extends React.Component {
                 if (userLikes.indexOf(data.id) == -1) {
                     const newLikes = [...userLikes, data.id]
                     axios.put(`${this.userVillagerURL}/${userId}`, {likedVillagers:newLikes  })
-                    .then((res) => this.setState(prevState => ({userLikes: [...prevState.userLikes,data.id]})))
+                    .then()
                     .catch((e) => console.log(e))
                 }
-             
+                this.setState(prevState => ({liked: [...prevState.liked, data]}))
             }
             else {
                 const filteredLikes = userLikes.filter((like) => like !== data.id)
                 axios.put(`${this.userVillagerURL}/${userId}`, {likedVillagers:filteredLikes})
                 .then((res) => this.setState({userLikes: filteredLikes}))
                 .catch((e) => console.log(e))
+                const filteredLikesState = liked.filter((like) => like !== data)
+            this.setState({liked:filteredLikesState})
             }
         }
         else {
