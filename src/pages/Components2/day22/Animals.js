@@ -23,7 +23,7 @@ export default class Animals extends React.Component {
             password: "",
             showLoginForm:false,
             buttonmsg:"",
-            defaultMsg: "Must be logged in first to add/move recipes",
+            defaultMsg: "Must be logged in first to save",
             userLikes: [], 
             userId: "", 
             combinedLikes: []
@@ -231,7 +231,7 @@ export default class Animals extends React.Component {
         if (tab === 0) return (loaded && this.animalData)
     }
     getNav = () => {
-        const { isLoggedIn, user } = this.state
+        const { isLoggedIn, user, defaultMsg } = this.state
         return (
             <nav className="alignCenter flexEnd">
                 <div className="flex">
@@ -239,7 +239,7 @@ export default class Animals extends React.Component {
                     <li>{this.loginForm()}</li>
                 </div>
                 <div className="flex">
-                    {isLoggedIn && <li className="miniCard">{`Hi ${user}!`}</li>}
+                    <li className="miniCard">{isLoggedIn ? `Hi ${user}!` : defaultMsg}</li>
                     <li>{!isLoggedIn && <button onClick={(e) => this.handleLogin(e, "Sign Up")}>Sign Up</button>}</li>
                 </div>
             </nav>)
@@ -248,6 +248,7 @@ export default class Animals extends React.Component {
         const {user,liked} = this.state
         const {data} = this.props
         let newLikes = []
+        let combinedLikes = []
         axios.get(`${this.userVillagerURL}/${user}`)
         .then((res) => {
             const result = res.data
@@ -261,12 +262,12 @@ export default class Animals extends React.Component {
             if (liked.length > 0) {
                 // add liked data to user if any 
                 newLikes = liked.map((like) => like.id)
-                let combinedLikes = [...result.likedVillagers,...newLikes]
+                combinedLikes = [...result.likedVillagers,...newLikes]
                 axios.put(`${this.userVillagerURL}/${result._id}`, {likedVillagers:combinedLikes })
                 .then((res)=>console.log('added to new person')).catch((e) => console.log(e.response))
                 }
             
-            this.setState({userId: result["_id"], userLikes: [...result.likedVillagers,...newLikes]})
+            this.setState({userId: result["_id"], combinedLikes: combinedLikes, userLikes: [...result.likedVillagers,...newLikes]})
         })
     }
     handleLogin = (e, msg) => {
@@ -361,14 +362,14 @@ export default class Animals extends React.Component {
                     this.setState({
                         user: username,
                         isLoggedIn: true
-                    })
+                    }, () => this.getUserData())
                 }).catch((error) => {
                     if (error.response) {
                         if (error.response.status !== 500) {
                             this.setState({ defaultMsg: "Username already exists" })
                         }
                     }
-                    else { console.log(error) }
+                    else { console.log(error.response) }
                 })
         }
         this.setState({
