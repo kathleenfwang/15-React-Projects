@@ -28,6 +28,7 @@ export default class Animals extends React.Component {
             userId: "", 
             combinedLikes: []
         }
+        this.defaultMsg = "Must be logged in first to save"
         this.animalData = null
         this.colors = { pastel: ["#C1A7FF", "#C2CBFF", "#C7FCBA", "#FDFEC9", "#FFD8B6", " #FEBCC2", "#FD63B0", "#67D0DD"], beach: ["#C8F69B", "#FFEEA5", "#FFCBA5", "#FFB1AF", " #9EE09E", "#B3EEFF", "#E5A4BE", "#A890C3"] }
         this.proxyurl = "https://tranquil-bastion-97053.herokuapp.com/"
@@ -281,7 +282,8 @@ export default class Animals extends React.Component {
                 isLoggedIn: false, 
                 liked: [],
                 combinedLikes: [],
-                userLikes: []
+                userLikes: [], 
+                defaultMsg: this.defaultMsg
             })
         }
         //signup
@@ -290,7 +292,6 @@ export default class Animals extends React.Component {
             this.handleNewLogin(e)
         }
         else {
-
             this.setState(prevState => ({
                 showLoginForm: !prevState.showLoginForm,
                 buttonmsg: msg, 
@@ -318,7 +319,6 @@ export default class Animals extends React.Component {
                 password: "",
             })
         }
-      
         }
     }
     loginForm = () => {
