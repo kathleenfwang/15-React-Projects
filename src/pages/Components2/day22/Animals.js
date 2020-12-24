@@ -54,15 +54,31 @@ export default class Animals extends React.Component {
         this.setState({ animalDic, animalPersonalities, animalHobbies, firstLoad: true }, () => this.getDefaultColors())
     }
     handleLike = (data,filled) => {
-        const {liked} = this.state
-        if (filled) {
- 
-            this.setState(prevState => ({liked: [...prevState.liked, data]}))
+        const {liked, isLoggedIn,userId,userLikes} = this.state
+        if (isLoggedIn) {
+            if (filled) {
+                if (userLikes.indexOf(data.id) == -1) {
+                    const newLikes = [...userLikes, data.id]
+                    axios.put(`${this.userVillagerURL}/${userId}`, {likedVillagers:newLikes  })
+                    .then((res) => this.setState(prevState => ({userLikes: [...prevState.userLikes,data.id]})))
+                    .catch((e) => console.log(e))
+                }
+             
+            }
+            else {
+                const filteredLikes = userLikes.filter((like) => like !== data.id)
+                axios.put(`${this.userVillagerURL}/${userId}`, {likedVillagers:filteredLikes})
+                .then((res) => this.setState({userLikes: filteredLikes}))
+                .catch((e) => console.log(e))
+            }
         }
+        else {
+        if (filled) this.setState(prevState => ({liked: [...prevState.liked, data]}))
         else {
             const filteredLikes = liked.filter((like) => like !== data)
             this.setState({liked:filteredLikes})
         }
+    }
     }
     getAnimalCards = async () => {
         const result = await this.makeAnimalCards()
@@ -328,7 +344,7 @@ export default class Animals extends React.Component {
         const {tab,user} = this.state
         return (
             <div className="day22" id="start">
-                {/* {this.getNav()} */}
+                {this.getNav()}
                 {tab == 0 ? this.getFixedHeader() : null}
                 <div className="downHeader">
                 {this.getOptionNav()}
