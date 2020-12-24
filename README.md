@@ -8,7 +8,9 @@ Currently **18** React projects, some which are full-stack and connected to Mong
    - Users can favorite/unfavorite streamers and the streamer will be saved on the "Community Suggested" page 
 - **Recipe Library** [view](http://kathleenwang15projects.surge.sh/day/16) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day20.js)
 - **Plant Library** [view](http://kathleenwang15projects.surge.sh/day/4) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day6.js)
-
+### Backend: 
+[Back End Live](http://plant-app-1.herokuapp.com/plants)<br>
+[Back End Code](https://github.com/kathleenfwang/react-backend-apis)<br>
 ### Curent Projects:
 - Day 18: **Animal Crossing Library** [view](http://kathleenwang15projects.surge.sh/day/18) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day22.js)
 - Day 17: **Live Twitch Streamers** [view](http://kathleenwang15projects.surge.sh/day/17) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day21.js)
@@ -28,9 +30,7 @@ Currently **18** React projects, some which are full-stack and connected to Mong
 - Day 3: **feelings** [view](http://kathleenwang15projects.surge.sh/day/3) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day4.js)
 - Day 2: **Solar System** [view](http://kathleenwang15projects.surge.sh/day/2) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day2.js)
 - Day 1: **Home**[view](kathleenwang15projects.surge.sh/)
-### Backend: 
-[Back End Live](http://plant-app-1.herokuapp.com/plants)<br>
-[Back End Code](https://github.com/kathleenfwang/react-backend-apis)<br>
+
 ### Uses: 
 - React/Redux 
 - MongoDB/Mongoose 
