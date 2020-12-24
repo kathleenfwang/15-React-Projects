@@ -25,7 +25,8 @@ export default class Animals extends React.Component {
             buttonmsg:"",
             defaultMsg: "Must be logged in first to add/move recipes",
             userLikes: [], 
-            userId: ""
+            userId: "", 
+            combinedLikes: []
         }
         this.animalData = null
         this.colors = { pastel: ["#C1A7FF", "#C2CBFF", "#C7FCBA", "#FDFEC9", "#FFD8B6", " #FEBCC2", "#FD63B0", "#67D0DD"], beach: ["#C8F69B", "#FFEEA5", "#FFCBA5", "#FFB1AF", " #9EE09E", "#B3EEFF", "#E5A4BE", "#A890C3"] }
@@ -54,24 +55,23 @@ export default class Animals extends React.Component {
         this.setState({ animalDic, animalPersonalities, animalHobbies, firstLoad: true }, () => this.getDefaultColors())
     }
     handleLike = (data,filled) => {
-        const {liked, isLoggedIn,userId,userLikes} = this.state
+        const {liked, isLoggedIn,userId,userLikes,combinedLikes} = this.state
         if (isLoggedIn) {
             if (filled) {
                 if (userLikes.indexOf(data.id) == -1) {
                     const newLikes = [...userLikes, data.id]
                     axios.put(`${this.userVillagerURL}/${userId}`, {likedVillagers:newLikes  })
-                    .then()
-                    .catch((e) => console.log(e))
+                    .then().catch((e) => console.log(e))
                 }
-                this.setState(prevState => ({liked: [...prevState.liked, data]}))
+                this.setState(prevState => ({liked: [...prevState.liked, data], combinedLikes: [...prevState.combinedLikes, data ], userLikes: [...prevState.userLikes, data.id]}))
             }
             else {
                 const filteredLikes = userLikes.filter((like) => like !== data.id)
                 axios.put(`${this.userVillagerURL}/${userId}`, {likedVillagers:filteredLikes})
                 .then((res) => this.setState({userLikes: filteredLikes}))
                 .catch((e) => console.log(e))
-                const filteredLikesState = liked.filter((like) => like !== data)
-            this.setState({liked:filteredLikesState})
+                const filteredLikesState = combinedLikes.filter((like) => like !== data)
+            this.setState({liked:filteredLikesState, combinedLikes: filteredLikesState,userLikes: filteredLikes})
             }
         }
         else {
@@ -164,13 +164,8 @@ export default class Animals extends React.Component {
         )
     }
     getLikedVillagers = () => {
-        const {isLoggedIn, userLikes,liked} = this.state 
-        const {data} = this.props
-        if (isLoggedIn && userLikes.length > 0) {
-           const userLikesData = userLikes.map((id) => data[id-1])
-           const combinedLikes = [...liked,...userLikesData]
-           return this.mapLikedAnimalCards(combinedLikes)
-        }
+        const {isLoggedIn, userLikes,liked, combinedLikes} = this.state 
+        if (isLoggedIn && userLikes.length > 0) return this.mapLikedAnimalCards(combinedLikes)
         else { return this.mapLikedAnimalCards(liked)}
     }
     mapLikedAnimalCards = (liked) => {
@@ -178,13 +173,20 @@ export default class Animals extends React.Component {
         return liked.map((animal) => <AnimalCard key={animal.id} filled ={true} data={animal}  defaultColors = {defaultColors} defaultHobbyColors = {defaultHobbyColors} handleLike = {this.handleLike} />)
     }
     getLikedStats = () => {
-        const {liked,defaultColors} = this.state 
+        const {combinedLikes,defaultColors,liked} = this.state 
         const likedStatsArray = []
+        let likedStats = []
         let i = 0 
-       const likedStats =  liked.reduce((prev,next) => {
-            prev[next.personality] ? prev[next.personality]++ : prev[next.personality] = 1 
-            return prev}, {})
-      
+        if (combinedLikes.length > 0) {
+           likedStats= combinedLikes.reduce((prev,next) => {
+                prev[next.personality] ? prev[next.personality]++ : prev[next.personality] = 1 
+                return prev}, {})
+        }
+        else {
+            likedStats= liked.reduce((prev,next) => {
+                prev[next.personality] ? prev[next.personality]++ : prev[next.personality] = 1 
+                return prev}, {})
+        }
         for (let stat in likedStats) {
             likedStatsArray.push(<p style ={{fontWeight:"bold",backgroundColor: defaultColors[stat]}}className="smallTag upLess">{`${stat} | ${likedStats[stat]}`}</p>)
             i++
@@ -192,12 +194,21 @@ export default class Animals extends React.Component {
         return likedStatsArray
     }
     getTypeStats = () => {
-        const {liked} = this.state 
+        const {combinedLikes,liked} = this.state 
         const likedStatsArray = []
+        let likedStats = []
         let i = 0 
-       const likedStats =  liked.reduce((prev,next) => {
-            prev[next.species] ? prev[next.species]++ : prev[next.species] = 1 
-            return prev}, {})
+        if (combinedLikes.length > 0) {
+           likedStats =  combinedLikes.reduce((prev,next) => {
+                prev[next.species] ? prev[next.species]++ : prev[next.species] = 1 
+                return prev}, {})
+        }
+        else {
+           likedStats =  liked.reduce((prev,next) => {
+                prev[next.species] ? prev[next.species]++ : prev[next.species] = 1 
+                return prev}, {})
+        }
+      
         for (let stat in likedStats) {
             likedStatsArray.push(<p style ={this.getColor(i)}className="smallTag upLess"><b>{`${stat} | ${likedStats[stat]}`}</b></p>)
             i++
@@ -232,13 +243,24 @@ export default class Animals extends React.Component {
             </nav>)
     }
     getUserData = () => {
-        const {user} = this.state
+        const {user,liked} = this.state
+        const {data} = this.props
         axios.get(`${this.userVillagerURL}/${user}`)
-        .then((res) => this.setState({userId: res.data["_id"], userLikes: res.data.likedVillagers}))
+        .then((res) => {
+            const result = res.data
+            if (result.likedVillagers.length > 0) {
+                const userLikes = result.likedVillagers
+                const userLikesData = userLikes.map((id) => data[id-1])
+                const combinedLikes = [...liked,...userLikesData]
+                this.setState({combinedLikes})
+            }
+            this.setState({userId: result["_id"], userLikes: result.likedVillagers})
+        })
     }
     handleLogin = (e, msg) => {
         e.preventDefault()
-        const { username, password, showLoginForm, isLoggedIn } = this.state
+        const {data} = this.props
+        const { username, password, showLoginForm, isLoggedIn,userLikes,liked} = this.state
         // logout 
         if (isLoggedIn) {
             this.setState({
@@ -265,9 +287,7 @@ export default class Animals extends React.Component {
                 axios.post(`${this.userLogin}`, user)
                     .then(res => {
                         let result = res.status
-                        if (result == 200) {
-                            this.setState({isLoggedIn: true, user: username}, () => this.getUserData())
-                        }
+                        if (result == 200) this.setState({isLoggedIn: true, user: username}, () => this.getUserData())
                         else {
                             this.setState({ defaultMsg: 'Invalid username/password' })
                         }
