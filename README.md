@@ -1,6 +1,8 @@
 ## React Projects
 Currently **18** React projects, some which are full-stack and connected to MongoDB Atlas Database and I plan on adding more later.<br>
 ## Full stack apps: 
+- **Animal Crossing Library** [view](http://kathleenwang15projects.surge.sh/day/18) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day22.js)
+   - Users can add or remove favorite villagers from their collection and sign in/sign up to save their collection
 - **Live Twitch Streamers** [view](http://kathleenwang15projects.surge.sh/day/17) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day21.js)
    - Users can favorite/unfavorite streamers and the streamer will be saved on the "Community Suggested" page 
 - **Recipe Library** [view](http://kathleenwang15projects.surge.sh/day/16) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day20.js)
