@@ -58,12 +58,14 @@ export default class Animals extends React.Component {
         const {liked, isLoggedIn,userId,userLikes,combinedLikes} = this.state
         if (isLoggedIn) {
             if (filled) {
+                console.log(userLikes.indexOf(data.id))
                 if (userLikes.indexOf(data.id) == -1) {
                     const newLikes = [...userLikes, data.id]
                     axios.put(`${this.userVillagerURL}/${userId}`, {likedVillagers:newLikes  })
-                    .then().catch((e) => console.log(e))
+                    .then((res) => {
+                        this.setState(prevState => ({liked: [...prevState.liked, data], combinedLikes: [...prevState.combinedLikes, data ], userLikes: [...prevState.userLikes, data.id]}))
+                    }).catch((e) => console.log(e))
                 }
-                this.setState(prevState => ({liked: [...prevState.liked, data], combinedLikes: [...prevState.combinedLikes, data ], userLikes: [...prevState.userLikes, data.id]}))
             }
             else {
                 const filteredLikes = userLikes.filter((like) => like !== data.id)
@@ -245,6 +247,7 @@ export default class Animals extends React.Component {
     getUserData = () => {
         const {user,liked} = this.state
         const {data} = this.props
+        let newLikes = []
         axios.get(`${this.userVillagerURL}/${user}`)
         .then((res) => {
             const result = res.data
@@ -254,18 +257,29 @@ export default class Animals extends React.Component {
                 const combinedLikes = [...liked,...userLikesData]
                 this.setState({combinedLikes})
             }
-            this.setState({userId: result["_id"], userLikes: result.likedVillagers})
+                
+            if (liked.length > 0) {
+                // add liked data to user if any 
+                newLikes = liked.map((like) => like.id)
+                let combinedLikes = [...result.likedVillagers,...newLikes]
+                axios.put(`${this.userVillagerURL}/${result._id}`, {likedVillagers:combinedLikes })
+                .then((res)=>console.log('added to new person')).catch((e) => console.log(e.response))
+                }
+            
+            this.setState({userId: result["_id"], userLikes: [...result.likedVillagers,...newLikes]})
         })
     }
     handleLogin = (e, msg) => {
         e.preventDefault()
-        const {data} = this.props
-        const { username, password, showLoginForm, isLoggedIn,userLikes,liked} = this.state
+        const { username, password, showLoginForm, isLoggedIn} = this.state
         // logout 
         if (isLoggedIn) {
             this.setState({
                 user: "",
-                isLoggedIn: false
+                isLoggedIn: false, 
+                liked: [],
+                combinedLikes: [],
+                userLikes: []
             })
         }
         //signup
