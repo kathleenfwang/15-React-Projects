@@ -255,18 +255,18 @@ export default class Animals extends React.Component {
             if (result.likedVillagers.length > 0) {
                 const userLikes = result.likedVillagers
                 const userLikesData = userLikes.map((id) => data[id-1])
-                const combinedLikes = [...liked,...userLikesData]
+                combinedLikes =[...liked,...userLikesData]
                 this.setState({combinedLikes})
             }
                 
             if (liked.length > 0) {
                 // add liked data to user if any 
                 newLikes = liked.map((like) => like.id)
-                combinedLikes = [...result.likedVillagers,...newLikes]
-                axios.put(`${this.userVillagerURL}/${result._id}`, {likedVillagers:combinedLikes })
+                let newAddedLikes = [...result.likedVillagers,...newLikes]
+                axios.put(`${this.userVillagerURL}/${result._id}`, {likedVillagers:newAddedLikes })
                 .then((res)=>console.log('added to new person')).catch((e) => console.log(e.response))
                 }
-            
+            combinedLikes = combinedLikes.length == 0 ? combinedLikes = liked : combinedLikes
             this.setState({userId: result["_id"], combinedLikes: combinedLikes, userLikes: [...result.likedVillagers,...newLikes]})
         })
     }
