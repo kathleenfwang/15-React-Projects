@@ -249,25 +249,26 @@ export default class Animals extends React.Component {
         const {data} = this.props
         let newLikes = []
         let combinedLikes = []
+        let userLikesData = [] 
         axios.get(`${this.userVillagerURL}/${user}`)
         .then((res) => {
             const result = res.data
             if (result.likedVillagers.length > 0) {
                 const userLikes = result.likedVillagers
-                const userLikesData = userLikes.map((id) => data[id-1])
-                combinedLikes =[...liked,...userLikesData]
-                this.setState({combinedLikes})
+                userLikesData = userLikes.map((id) => data[id-1])
             }
-                
             if (liked.length > 0) {
                 // add liked data to user if any 
-                newLikes = liked.map((like) => like.id)
-                let newAddedLikes = [...result.likedVillagers,...newLikes]
-                axios.put(`${this.userVillagerURL}/${result._id}`, {likedVillagers:newAddedLikes })
+                newLikes = liked.map((like) => like.id)  
+                let newAddedLikes = new Set([...result.likedVillagers,...newLikes])  
+                let finalLikes = [...newAddedLikes]
+                console.log('should be uniq',finalLikes)
+                axios.put(`${this.userVillagerURL}/${result._id}`, {likedVillagers:finalLikes })
                 .then((res)=>console.log('added to new person')).catch((e) => console.log(e.response))
                 }
-            combinedLikes = combinedLikes.length == 0 ? combinedLikes = liked : combinedLikes
-            this.setState({userId: result["_id"], combinedLikes: combinedLikes, userLikes: [...result.likedVillagers,...newLikes]})
+            combinedLikes = new Set([...liked,...userLikesData])
+            let finalCombinedLikes = [...combinedLikes]
+            this.setState({userId: result["_id"], combinedLikes: finalCombinedLikes, userLikes: [...result.likedVillagers,...newLikes]})
         })
     }
     handleLogin = (e, msg) => {
