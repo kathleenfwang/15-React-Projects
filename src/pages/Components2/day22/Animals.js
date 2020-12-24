@@ -266,7 +266,7 @@ export default class Animals extends React.Component {
                 axios.put(`${this.userVillagerURL}/${result._id}`, {likedVillagers:finalLikes })
                 .then((res)=>console.log('added to new person')).catch((e) => console.log(e.response))
                 }
-            combinedLikes = new Set([...liked,...userLikesData])
+            combinedLikes = new Set([...userLikesData,...liked,])
             let finalCombinedLikes = [...combinedLikes]
             this.setState({userId: result["_id"], combinedLikes: finalCombinedLikes, userLikes: [...result.likedVillagers,...newLikes]})
         })
@@ -293,8 +293,10 @@ export default class Animals extends React.Component {
 
             this.setState(prevState => ({
                 showLoginForm: !prevState.showLoginForm,
-                buttonmsg: msg
+                buttonmsg: msg, 
             }))
+            if (username.length > 0) {
+            this.setState({defaultMsg: "Signing in... "})
             const user = {
                 username,
                 password
@@ -315,6 +317,8 @@ export default class Animals extends React.Component {
                 username: "",
                 password: "",
             })
+        }
+      
         }
     }
     loginForm = () => {
