@@ -42,9 +42,9 @@ const client = new ApolloClient({
 export default function Day23() {
   return (
     <ApolloProvider client={client}>
-      <div>
+      <div style ={{padding:10}}>
         <h2>Currency Exchange Apollo App 🚀</h2>
-        <h3 style ={{backgroundColor: "yellow", width:300, padding:10}}> Exchange rates for 1 USD (USA) </h3> 
+        <h3 style ={{backgroundColor: "yellow", width:300, padding:10, borderRadius:8}}> Exchange rates for 1 USD (USA) </h3> 
         <ExchangeRates />
       </div>
     </ApolloProvider>
