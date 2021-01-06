@@ -19,6 +19,7 @@ const client = new ApolloClient({
         rates(currency: "USD") {
           currency
           rate
+          name
         }
       }
     `);
@@ -26,20 +27,23 @@ const client = new ApolloClient({
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
   
-    return data.rates.map(({ currency, rate }) => (
-      <div key={currency}>
-        <p>
-          {currency}: {rate}
-        </p>
-      </div>
-    ));
+    return data.rates.map(({ currency, rate,name }) => 
+    {
+      if (name)
+      { return (<div key={currency}>
+      <p>
+        <h1>{name}</h1>
+        {currency}: { Math.round(rate * 100) / 100}
+      </p>
+    </div>)}}
+    )
   }
 
 export default function Day23() {
   return (
     <ApolloProvider client={client}>
       <div>
-        <h2>My first Apollo app 🚀</h2>
+        <h2>Currency Exchange Apollo App 🚀</h2>
         <ExchangeRates />
       </div>
     </ApolloProvider>
