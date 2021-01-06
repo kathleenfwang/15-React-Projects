@@ -44,6 +44,7 @@ export default function Day23() {
     <ApolloProvider client={client}>
       <div>
         <h2>Currency Exchange Apollo App 🚀</h2>
+        <h3> Exchange rates for 1 USD (USA) </h3> 
         <ExchangeRates />
       </div>
     </ApolloProvider>
