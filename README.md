@@ -11,6 +11,7 @@
 [Back End Live](http://plant-app-1.herokuapp.com/plants)<br>
 [Back End Code](https://github.com/kathleenfwang/react-backend-apis)<br>
 ### Curent Projects:
+- Day 19: **Currency Exchange Rate with GraphQL** [view](http://kathleenwang15projects.surge.sh/day/19) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day23.js)
 - Day 18: **Animal Crossing Library** [view](http://kathleenwang15projects.surge.sh/day/18) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day22.js)
 - Day 17: **Live Twitch Streamers** [view](http://kathleenwang15projects.surge.sh/day/17) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day21.js)
 - Day 16: **Recipe Library** [view](http://kathleenwang15projects.surge.sh/day/16) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day20.js)
