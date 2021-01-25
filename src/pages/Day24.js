@@ -19,9 +19,13 @@ export default class Day24 extends React.Component {
     handleInput =(e) => {
         let value = e.target.value 
         const {countries} = this.state 
+    
+        // filtered = ["Andorra, Angola, Antigua"] 
+
         let filtered = countries.filter((country) => {
+            // only want the beginning letters to match 
             country = country.toLowerCase()
-            return country.includes(value)
+            return country.slice(0,value.length) == value 
         })
         console.log(filtered)
         this.setState({filtered:filtered})
