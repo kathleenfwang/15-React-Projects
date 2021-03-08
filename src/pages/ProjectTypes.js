@@ -22,6 +22,8 @@ import Day21 from "./Day21"
 import Day22 from "./Day22"
 import Day23 from "./Day23"
 import Day24 from "./Day24"
+import Day25 from "./Day25"
+import Day26 from "./Day26"
 import Footer from "../headers/Footer"
 function day2() {
     return <Day2 />
@@ -94,5 +96,11 @@ function day23() {
 function day24() {
     return <Day24/>
 }
-const dayList = [day2,day4,day6,day7,day8,day9,day10,day11,day13,day14,day16,day17,day18,day19,day20,day21,day22,day23,day24]
+function day25() {
+    return <Day25/>
+}
+function day26() {
+    return <Day26/>
+}
+const dayList = [day2,day4,day6,day7,day8,day9,day10,day11,day13,day14,day16,day17,day18,day19,day20,day21,day22,day23,day24,day25,day26]
 export {dayList}
