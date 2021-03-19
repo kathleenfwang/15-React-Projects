@@ -102,5 +102,5 @@ function day25() {
 function day26() {
     return <Day26/>
 }
-const dayList = [day2,day4,day6,day7,day8,day9,day10,day11,day13,day14,day16,day17,day18,day19,day20,day21,day22,day23,day24,day25,day26]
+const dayList = [day2,day4,day6,day7,day8,day9,day10,day11,day13,day14,day16,day17,day18,day19,day20,day21,day22,day23,day24]
 export {dayList}
