@@ -71,8 +71,10 @@ export default class AnimalCard extends React.Component {
             style={{
               background: '#E8E8E8',
               borderRadius:8,
-              height: '128px',
-              width: '128px',
+              marginBottom:9, 
+              marginRight:9,
+              height: '118px',
+              width: '118px',
             }}
           />
         }
