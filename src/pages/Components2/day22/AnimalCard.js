@@ -69,7 +69,7 @@ export default class AnimalCard extends React.Component {
                 {loaded ? null :
           <div
             style={{
-              background: 'rgb(232,232,232,.5)',
+              background: 'rgb(232,232,232,.7)',
               borderRadius:8,
               height: '128px',
               width: '128px',

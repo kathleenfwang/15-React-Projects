@@ -26,7 +26,7 @@ export default class Animals extends React.Component {
             defaultMsg: "Must be logged in first to save",
             userLikes: [], 
             userId: "", 
-            combinedLikes: []
+            combinedLikesIds: []
         }
         this.defaultMsg = "Must be logged in first to save"
         this.animalData = null
@@ -56,14 +56,14 @@ export default class Animals extends React.Component {
         this.setState({ animalDic, animalPersonalities, animalHobbies, firstLoad: true }, () => this.getDefaultColors())
     }
     handleLike = (data,filled) => {
-        const {liked, isLoggedIn,userId,userLikes,combinedLikes} = this.state
+        const {liked, isLoggedIn,userId,userLikes,combinedLikesIds} = this.state
         if (isLoggedIn) {
             if (filled) {
                 if (userLikes.indexOf(data.id) == -1) {
                     const newLikes = [...userLikes, data.id]
                     axios.put(`${this.userVillagerURL}/${userId}`, {likedVillagers:newLikes  })
                     .then((res) => {
-                        this.setState(prevState => ({liked: [...prevState.liked, data], combinedLikes: [...prevState.combinedLikes, data ], userLikes: [...prevState.userLikes, data.id]}))
+                        this.setState(prevState => ({liked: [...prevState.liked, data], combinedLikesIds: [...prevState.combinedLikesIds, data ], userLikes: [...prevState.userLikes, data.id]}))
                     }).catch((e) => console.log(e))
                 }
             }
@@ -72,8 +72,8 @@ export default class Animals extends React.Component {
                 axios.put(`${this.userVillagerURL}/${userId}`, {likedVillagers:filteredLikes})
                 .then((res) => this.setState({userLikes: filteredLikes}))
                 .catch((e) => console.log(e))
-                const filteredLikesState = combinedLikes.filter((like) => like !== data)
-            this.setState({liked:filteredLikesState, combinedLikes: filteredLikesState,userLikes: filteredLikes})
+                const filteredLikesState = combinedLikesIds.filter((like) => like !== data)
+            this.setState({liked:filteredLikesState, combinedLikesIds: filteredLikesState,userLikes: filteredLikes})
             }
         }
         else {
@@ -166,8 +166,8 @@ export default class Animals extends React.Component {
         )
     }
     getLikedVillagers = () => {
-        const {isLoggedIn, userLikes,liked, combinedLikes} = this.state 
-        if (isLoggedIn && userLikes.length > 0) return this.mapLikedAnimalCards(combinedLikes)
+        const {isLoggedIn, userLikes,liked, combinedLikesIds} = this.state 
+        if (isLoggedIn && userLikes.length > 0) return this.mapLikedAnimalCards(combinedLikesIds)
         else { return this.mapLikedAnimalCards(liked)}
     }
     mapLikedAnimalCards = (liked) => {
@@ -175,12 +175,12 @@ export default class Animals extends React.Component {
         return liked.map((animal) => <AnimalCard key={animal.id} filled ={true} data={animal}  defaultColors = {defaultColors} defaultHobbyColors = {defaultHobbyColors} handleLike = {this.handleLike} />)
     }
     getLikedStats = () => {
-        const {combinedLikes,defaultColors,liked} = this.state 
+        const {combinedLikesIds,defaultColors,liked} = this.state 
         const likedStatsArray = []
         let likedStats = []
         let i = 0 
-        if (combinedLikes.length > 0) {
-           likedStats= combinedLikes.reduce((prev,next) => {
+        if (combinedLikesIds.length > 0) {
+           likedStats= combinedLikesIds.reduce((prev,next) => {
                 prev[next.personality] ? prev[next.personality]++ : prev[next.personality] = 1 
                 return prev}, {})
         }
@@ -196,12 +196,12 @@ export default class Animals extends React.Component {
         return likedStatsArray
     }
     getTypeStats = () => {
-        const {combinedLikes,liked} = this.state 
+        const {combinedLikesIds,liked} = this.state 
         const likedStatsArray = []
         let likedStats = []
         let i = 0 
-        if (combinedLikes.length > 0) {
-           likedStats =  combinedLikes.reduce((prev,next) => {
+        if (combinedLikesIds.length > 0) {
+           likedStats =  combinedLikesIds.reduce((prev,next) => {
                 prev[next.species] ? prev[next.species]++ : prev[next.species] = 1 
                 return prev}, {})
         }
@@ -247,33 +247,31 @@ export default class Animals extends React.Component {
         const {user,liked} = this.state
         const {data} = this.props
         let newLikes = []
-        let combinedLikes = []
-        let userLikesData = [] 
+        let userLikesIds = [] 
+        // retrieve current logged in user's liked list 
         axios.get(`${this.userVillagerURL}/${user}`)
         .then((res) => {
             const result = res.data
-            // if the user already has liked villagers, add liked villagers to userLikesData
-            if (result.likedVillagers.length > 0) {
-                const userLikes = result.likedVillagers
-                userLikesData = userLikes.map((id) => data[id-1])
+            const resultVillagers = result.likedVillagers
+            // if the user already has liked villagers, populate userLikesIds with those ids 
+            if (resultVillagers.length > 0) {
+                userLikesIds = resultVillagers.map((id) => data[id-1])
             }
-            // add current liked data to user if any 
+            // add current liked ids to user if any
+            // update user database to store new likes  
             if (liked.length > 0) {
                 newLikes = liked.map((like) => like.id) 
                 // combine user likes and current likes into a set to avoid duplicates  
-                let newAddedLikes = new Set([...result.likedVillagers,...newLikes])  
-                let finalLikes = [...newAddedLikes]
-                
-                // update the user's likedVillagers with the current likes 
+                let finalLikes = [...new Set([...result.likedVillagers,...newLikes]) ]
+                // update the user's likedVillagers with the current likes' ids 
                 axios.put(`${this.userVillagerURL}/${result._id}`, {likedVillagers:finalLikes })
                 .catch((e) => console.log(e.response))
                 }
-                // update the combined likes to contain all userlikes and current likes 
-            combinedLikes = new Set([...userLikesData,...liked,])
-            let finalCombinedLikes = [...combinedLikes]
-            // userLikes contains all of the data of the likes, 
-            //combinedLikes just stores the ids of the liked villagers
-            this.setState({userId: result["_id"], combinedLikes: finalCombinedLikes, userLikes: [...result.likedVillagers,...newLikes]})
+                // update the combined likes id's to contain all user liked ids and current likes ids
+            let finalCombinedLikesIds = [...new Set([...userLikesIds,...liked])]
+            //combinedLikesIds stores the ids of the liked villagers
+             // userLikes contains all of the data of the likes, 
+            this.setState({userId: result["_id"], combinedLikesIds: finalCombinedLikesIds, userLikes: [...resultVillagers,...newLikes]})
         })
     }
     handleLogin = (e, msg) => {
@@ -285,7 +283,7 @@ export default class Animals extends React.Component {
                 user: "",
                 isLoggedIn: false, 
                 liked: [],
-                combinedLikes: [],
+                combinedLikesIds: [],
                 userLikes: [], 
                 defaultMsg: this.defaultMsg
             })
