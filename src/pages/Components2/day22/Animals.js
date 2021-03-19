@@ -219,7 +219,6 @@ export default class Animals extends React.Component {
         return likedStatsArray
     }
     handleOptionNav = () => {
-        // const { isLoggedIn } = this.state
         const { loaded, tab,liked, isLoggedIn, userLikes } = this.state
         if (tab === 2) {
               return (liked.length == 0 && userLikes.length == 0) ? null : (<>
@@ -229,7 +228,7 @@ export default class Animals extends React.Component {
                   {!isLoggedIn && <h2 className ="textCenter">Log in to save your collection!</h2>}
                   </>)
         }
-        if (tab === 0) return (loaded && this.animalData)
+        if (tab === 0) return (loaded ? this.animalData : "Loading...")
     }
     getNav = () => {
         const { isLoggedIn, user, defaultMsg } = this.state

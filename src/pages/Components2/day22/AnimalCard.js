@@ -3,10 +3,12 @@ import { faStar as faStarOutline } from '@fortawesome/free-regular-svg-icons'
 import { faTimes, faStar } from '@fortawesome/free-solid-svg-icons'
 import React from "react"
 import { Fade } from 'react-reveal';
+import { urlencoded } from "body-parser";
 export default class AnimalCard extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            loaded:false,
             clicked: false,
             filled: false 
         }
@@ -60,10 +62,28 @@ export default class AnimalCard extends React.Component {
     }
     render() {
         const { data } = this.props
+        const {loaded} = this.state
         return (
             <Fade cascade>
-                <div className=" relative">
-                    <img onDoubleClick={() => this.fillStar(data)}onClick={this.getImageData} className="cursor" src={data.icon_uri} />
+                <div className="relative">
+                {loaded ? null :
+          <div
+            style={{
+              background: '#E0E0E0',
+              borderRadius:8,
+              marginBottom:9, 
+              marginRight:9,
+              height: '118px',
+              width: '118px',
+            }}
+          />
+        }
+                    <img 
+                    onDoubleClick={() => this.fillStar(data)}onClick={this.getImageData} className="cursor" 
+                    src={data.icon_uri} 
+                    style={loaded ? {} : {display: 'none'}}
+                    onLoad={() => this.setState({loaded: true})}
+                    />
                     {this.imageData()}
                 </div>
             </Fade>
