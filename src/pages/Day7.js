@@ -6,6 +6,7 @@ import domtoimage from 'dom-to-image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTh, faThLarge, faPlus, faSquare, faEraser, faDownload, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Fade from "react-reveal"
+import { saveAs } from 'file-saver';
 
 export default class Day7 extends React.Component {
     constructor() {
@@ -261,17 +262,9 @@ export default class Day7 extends React.Component {
     }
     download = () => {
         domtoimage.toBlob(this.refs.grid)
-            .then(function (blob) {
-                window.saveAs(blob, 'pixel-art.png');
-            });
-        domtoimage.toPng(this.refs.grid)
-            .then(function (dataUrl) {
-                var img = new Image();
-                img.src = dataUrl;
-            })
-            .catch(function (error) {
-                console.error('oops, something went wrong!', error);
-            });
+    .then(function (blob) {
+        window.saveAs(blob, 'pixelart.png');
+    });
     }
     removeLines = () => {
         this.setState(prevState => ({
