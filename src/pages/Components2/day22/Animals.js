@@ -1,7 +1,7 @@
 import React from "react"
 import AnimalCard from "./AnimalCard"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faArrowUp, faHamburger } from '@fortawesome/free-solid-svg-icons'
+import {faArrowUp, faHamburger, faStar } from '@fortawesome/free-solid-svg-icons'
 import NavOptions from "../day20/NavOptions"
 import axios from "axios"
 export default class Animals extends React.Component {
@@ -160,7 +160,7 @@ export default class Animals extends React.Component {
     }
     getOptionNav = () => {
         const { tab } = this.state
-        const titles = ["All", "|","My Collection"]
+        const titles = ["All", "|",'Favorited']
         return (
             <NavOptions titles = {titles} tab = {tab} functionName = {this.setOptionNav} />
         )

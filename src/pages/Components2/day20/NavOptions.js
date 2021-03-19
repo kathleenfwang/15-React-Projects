@@ -9,7 +9,7 @@ export default function NavOptions(props) {
             )
         }
         else {
-        return (  <li i={i} className="navList" style={{ fontSize: '1.3em', padding: 10, borderBottom: tab == i ? "2px solid #E0C3FC" : "2px solid transparent", boxShadow: tab == i ? ' 2px 4px 25px rgba(0, 0, 0, .1)' : 'none' }} onClick={() => functionName(i)} >{title}</li> )
+        return (  <li i={i} className="navList" style={{ fontSize: '1.3em', fontWeight: tab == i && "bold", padding: 10, borderBottom: tab == i ? "2px solid #E0C3FC" : "2px solid transparent", boxShadow: tab == i ? ' 2px 4px 25px rgba(0, 0, 0, .1)' : 'none' }} onClick={() => functionName(i)} >{title}</li> )
         }
     })
     return (
