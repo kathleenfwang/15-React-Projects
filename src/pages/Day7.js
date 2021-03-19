@@ -57,9 +57,8 @@ export default class Day7 extends React.Component {
     }
     images = () => {
         let { photos } = this.state
-        while (photos.length < 6) {
-            photos.push("")
-        }
+        while (photos.length < 6) photos.push("")
+
         return photos.map((photo, i) => {
             if (photo === "") {
                 return <div id={i} className="square alignInMiddle" onClick={() => this.inputUpload(i)}>
@@ -89,27 +88,20 @@ export default class Day7 extends React.Component {
             let src = URL.createObjectURL(img);
             if (i !== 5 && i) {
                 photos.splice(i, 1, src)
-                this.setState({
-                    photos: photos
-                })
+                this.setState({ photos: photos })
             }
-            this.setState({
-                img: src
-            })
+            this.setState({ img: src })
         }
     }
     onDrop = (picture) => {
         this.setState({
             photos: this.state.photos.concat(picture),
-            img: picture
-        });
+            img: picture });
     }
     handleClickImage = (e) => {
         const { photos } = this.state
         let id = e.target.id
-        this.setState({
-            img: photos[id]
-        })
+        this.setState({ img: photos[id] })
     }
     loadImg = () => {
         let img = new Image();
@@ -155,14 +147,10 @@ export default class Day7 extends React.Component {
         var data = pixel.data;
         var rgba = 'rgba(' + data[0] + ', ' + data[1] +
             ', ' + data[2] + ', ' + (data[3] / 255) + ')';
-        this.setState({
-            rgba: rgba
-        });
+        this.setState({ rgba: rgba });
     }
     componentDidUpdate(prevprops, prevState) {
-        if (prevState.img !== this.state.img) {
-            this.loadImg()
-        }
+        if (prevState.img !== this.state.img) this.loadImg()
     }
     handleSubmit = (e) => {
         e.preventDefault()
@@ -172,10 +160,7 @@ export default class Day7 extends React.Component {
         img.onload = () => {
             if (img.width) {
                 this.setState({
-                    img: input
-                })
-            }
-        }
+                    img: input })}}
     }
 
     handleChange = (e) => {
@@ -257,44 +242,45 @@ export default class Day7 extends React.Component {
         let grid = this.refs.grid
         grid.style.cursor = "crosshair"
         this.setState(prevState => ({
+            // setting eraser state - this will affect the hanleGridClick() function 
             eraser: !prevState.eraser
         }))
     }
     download = () => {
+        // first have to make sure lines are removed
+        const prevLineState = this.state.removeLines
+        this.setState({ removeLines: false })
+        // convert grid to image and save as pixelart.png
         domtoimage.toBlob(this.refs.grid)
-    .then(function (blob) {
-        window.saveAs(blob, 'pixelart.png');
-    });
+            .then(blob => {
+                window.saveAs(blob, 'pixelart.png');
+                // set lines back if it was originally there 
+                this.setState({ removeLines: prevLineState })
+            });
     }
     removeLines = () => {
-        this.setState(prevState => ({
-            removeLines: !prevState.removeLines
-        }))
+        this.setState(prevState => ({ removeLines: !prevState.removeLines }))
     }
     handleSmall = (e) => {
         this.setState({
             sqSize: "smSq",
-            columns: 40
-        })
+            columns: 40 })
     }
     handleMedium = (e) => {
         this.setState({
             sqSize: "medSq",
-            columns: 20
-        })
+            columns: 20 })
     }
     handleLarge = (e) => {
         this.setState({
             sqSize: "lgSq",
-            columns: 10
-        })
+            columns: 10 })
     }
     pixelImgs = () => {
         let pixelImgs = ['https://media.discordapp.net/attachments/701277128951595032/760395150382989342/pixel-art_9.png', 'https://media.discordapp.net/attachments/701277128951595032/760060989982113832/pixel-art_2.png']
         return pixelImgs.map((img) => {
             return (
-                <div className="smallImgDiv" style={{ backgroundImage: `url(${img})` }}></div>
-            )
+                <div className="smallImgDiv" style={{ backgroundImage: `url(${img})` }}></div>)
         })
     }
     handleDelete = () => {
@@ -306,30 +292,29 @@ export default class Day7 extends React.Component {
     }
     getHeader = () => {
         return <> <div className="flex" style={{ justifyContent: "space-around" }}>
-        <div className='flex'>
-            {this.pixelImgs()}
+            <div className='flex'>
+                {this.pixelImgs()}
+            </div>
+            <h1>Create your own pixel art</h1>
+            <div className='flex' style={{ flexDirection: 'row-reverse' }}>
+                {this.pixelImgs()}
+            </div>
         </div>
-        <h1>Create your own pixel art</h1>
-        <div className='flex' style={{ flexDirection: 'row-reverse' }}>
-            {this.pixelImgs()}
-        </div>
-    </div>
-    <div className="twoGrid">
-        <h4>Click anywhere on the image to extract colors to create pixel art!</h4>
-        <h4><span>&nbsp;</span>Use your extracted colors or click anywhere on the image for colors to create pixel art</h4>
-    </div> </>
+            <div className="twoGrid">
+                <h4>Click anywhere on the image to extract colors to create pixel art!</h4>
+                <h4><span>&nbsp;</span>Use your extracted colors or click anywhere on the image for colors to create pixel art</h4>
+            </div> </>
     }
     getEmptySquares = () => {
-        const {clickRgba} = this.state
-        return  (
-        <>
-        <div className="square" style={{ backgroundColor: this.state.rgba, }} onClick={this.handleColor}></div>
-        {this.colorDivs()}
-        <button style={{ marginTop: 5, backgroundColor: clickRgba.length ? "whitesmoke" : "lightgrey" }} onClick={this.handleDelete}><FontAwesomeIcon icon={faTrash} /></button>
-        </>)
+        const { clickRgba } = this.state
+        return (
+            <>
+                <div className="square" style={{ backgroundColor: this.state.rgba, }} onClick={this.handleColor}></div>
+                {this.colorDivs()}
+                <button style={{ marginTop: 5, backgroundColor: clickRgba.length ? "whitesmoke" : "lightgrey" }} onClick={this.handleDelete}><FontAwesomeIcon icon={faTrash} /></button>
+            </>)
     }
     render() {
-        const { clickRgba } = this.state
         let buttons = [
             <button className={this.state.sqSize === "smSq" ? 'active' : ''} onClick={this.handleSmall}><FontAwesomeIcon icon={faTh} /></button>,
             <button className={this.state.sqSize === "medSq" ? 'active' : ''} onClick={this.handleMedium}><FontAwesomeIcon icon={faThLarge} /></button>,
@@ -343,45 +328,45 @@ export default class Day7 extends React.Component {
         return (
             <div className="day7" >
                 <Fade clear>
-                <div className="block">
-                    {this.getHeader()}
-                    <br></br>
-                    <div className="twoGrid">
+                    <div className="block">
+                        {this.getHeader()}
+                        <br></br>
                         <div className="twoGrid">
                             <div className="twoGrid">
-                                <div>
-                                    <div style={this.canvasDiv}>
-                                        <canvas style={this.canvasStyle} ref="canvas" />
+                                <div className="twoGrid">
+                                    <div>
+                                        <div style={this.canvasDiv}>
+                                            <canvas style={this.canvasStyle} ref="canvas" />
+                                        </div>
+                                        <div className="flex">
+                                            {this.images()}
+                                        </div>
                                     </div>
-                                    <div className="flex">
-                                        {this.images()}
+                                    <div>
+                                        {this.getEmptySquares()}
                                     </div>
                                 </div>
-                                <div>
-                                   {this.getEmptySquares()}
-                                </div>
-                            </div>
-                            <div className="twoGrid">
-                                <div>
-                                    <div ref="grid" className="grid" style={{ gridTemplateColumns: `repeat(${this.state.columns}, 1fr)`, }}>
-                                        {this.grids()}
+                                <div className="twoGrid">
+                                    <div>
+                                        <div ref="grid" className="grid" style={{ gridTemplateColumns: `repeat(${this.state.columns}, 1fr)`, }}>
+                                            {this.grids()}
+                                        </div>
+                                        <br></br>
+                                        <div>
+                                            {buttons}
+                                            {downloadButtons}
+                                        </div>
                                     </div>
                                     <br></br>
-                                    <div>
-                                        {buttons}
-                                        {downloadButtons}
-                                    </div>
                                 </div>
-                                <br></br>
                             </div>
                         </div>
                     </div>
-                </div>
                 </Fade>
             </div>
         )
     }
 }
 // future additions:
-// create pixel art from image 
+// save to database displayed on side 
 // share to twitter
