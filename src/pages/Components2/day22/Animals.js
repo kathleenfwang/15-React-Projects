@@ -59,7 +59,6 @@ export default class Animals extends React.Component {
         const {liked, isLoggedIn,userId,userLikes,combinedLikes} = this.state
         if (isLoggedIn) {
             if (filled) {
-                console.log(userLikes.indexOf(data.id))
                 if (userLikes.indexOf(data.id) == -1) {
                     const newLikes = [...userLikes, data.id]
                     axios.put(`${this.userVillagerURL}/${userId}`, {likedVillagers:newLikes  })
@@ -269,9 +268,11 @@ export default class Animals extends React.Component {
                 axios.put(`${this.userVillagerURL}/${result._id}`, {likedVillagers:finalLikes })
                 .catch((e) => console.log(e.response))
                 }
-                // update the 
+                // update the combined likes to contain all userlikes and current likes 
             combinedLikes = new Set([...userLikesData,...liked,])
             let finalCombinedLikes = [...combinedLikes]
+            // userLikes contains all of the data of the likes, 
+            //combinedLikes just stores the ids of the liked villagers
             this.setState({userId: result["_id"], combinedLikes: finalCombinedLikes, userLikes: [...result.likedVillagers,...newLikes]})
         })
     }
