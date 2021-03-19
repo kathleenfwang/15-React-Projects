@@ -1,7 +1,6 @@
 import React from "react"
 import axios from "axios"
 import Animals from "./Components2/day22/Animals"
-import { Fade } from 'react-reveal';
 export default class Day22 extends React.Component {
     constructor() {
         super() 

@@ -228,7 +228,7 @@ export default class Animals extends React.Component {
                   {!isLoggedIn && <h2 className ="textCenter">Log in to save your collection!</h2>}
                   </>)
         }
-        if (tab === 0) return (loaded ? this.animalData : "Loading...")
+        if (tab === 0) return (loaded && this.animalData )
     }
     getNav = () => {
         const { isLoggedIn, user, defaultMsg } = this.state
@@ -253,19 +253,23 @@ export default class Animals extends React.Component {
         axios.get(`${this.userVillagerURL}/${user}`)
         .then((res) => {
             const result = res.data
+            // if the user already has liked villagers, add liked villagers to userLikesData
             if (result.likedVillagers.length > 0) {
                 const userLikes = result.likedVillagers
                 userLikesData = userLikes.map((id) => data[id-1])
             }
+            // add current liked data to user if any 
             if (liked.length > 0) {
-                // add liked data to user if any 
-                newLikes = liked.map((like) => like.id)  
+                newLikes = liked.map((like) => like.id) 
+                // combine user likes and current likes into a set to avoid duplicates  
                 let newAddedLikes = new Set([...result.likedVillagers,...newLikes])  
                 let finalLikes = [...newAddedLikes]
-                console.log('should be uniq',finalLikes)
+                
+                // update the user's likedVillagers with the current likes 
                 axios.put(`${this.userVillagerURL}/${result._id}`, {likedVillagers:finalLikes })
-                .then((res)=>console.log('added to new person')).catch((e) => console.log(e.response))
+                .catch((e) => console.log(e.response))
                 }
+                // update the 
             combinedLikes = new Set([...userLikesData,...liked,])
             let finalCombinedLikes = [...combinedLikes]
             this.setState({userId: result["_id"], combinedLikes: finalCombinedLikes, userLikes: [...result.likedVillagers,...newLikes]})
