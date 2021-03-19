@@ -103,6 +103,7 @@ export default class Day7 extends React.Component {
         let id = e.target.id
         this.setState({ img: photos[id] })
     }
+     // loading user uploaded images
     loadImg = () => {
         let img = new Image();
         img.crossOrigin = "Use-Credentials";
