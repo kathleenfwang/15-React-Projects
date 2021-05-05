@@ -2,6 +2,7 @@ import React from "react"
 import axios from "axios"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import translate from 'moji-translate';
 export default class Day19 extends React.Component {
     constructor(props) {
         super(props)
@@ -138,7 +139,19 @@ export default class Day19 extends React.Component {
             // even words are bolded
             let even = i % 2 === 0
             return (<div>
-                <p className={even && "boldSize"} style={{ marginLeft: 5 }}>{tag.name}</p>
+                <p className={even && "boldSize"} style={{ marginLeft: 5 }}>#{tag.name}</p>
+            </div>)
+        })
+    }
+    getEmojiTags = () => {
+        const { tags } = this.state
+        // make sure tags are unique 
+        let filteredTags = tags.filter((tag, i) => this.isUnique(tags, tag, i))
+        return filteredTags.map((tag, i) => {
+            const emoji = (translate.getEmojiForWord(tag.name))
+            console.log(emoji)
+            return (emoji && <div>
+                <p className={"big"} style={{ marginLeft: 5 }}>#{emoji}</p>
             </div>)
         })
     }
@@ -191,6 +204,12 @@ export default class Day19 extends React.Component {
                             <h3 className="underBorder">Tags</h3>
                             <div>
                                 {loaded ? <div className="up flex baseLine">{this.getTags()} </div> : 'Loading...'}
+                            </div>
+                        </div>
+                        <div>
+                            <h3 className="underBorder">Emoji Tags</h3>
+                            <div>
+                                {loaded ? <div className="up flex baseLine">{this.getEmojiTags()} </div> : 'Loading...'}
                             </div>
                         </div>
                     </div>

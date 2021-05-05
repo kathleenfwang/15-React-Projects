@@ -23,6 +23,7 @@
     "file-saver": "^2.0.2",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
+    "moji-translate": "^1.0.8",
     "radium": "^0.26.0",
     "react": "^16.13.1",
     "react-animate-on-scroll": "^2.1.5",
