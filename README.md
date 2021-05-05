@@ -25,7 +25,7 @@
 - Day 8: **Pride Flags** [view](http://kathleenwang15projects.surge.sh/day/8) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day10.js)
 - Day 7: **Inktober** [view](http://kathleenwang15projects.surge.sh/day/7) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day9.js)
 - Day 6: **Text Analyzer** [view](http://kathleenwang15projects.surge.sh/day/6) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day8.js)
-- Day 5: **Pixel Art Maker** [view](http://kathleenwang15projects.surge.sh/day/7) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day5.js)
+- Day 5: **Pixel Art Maker** [view](http://kathleenwang15projects.surge.sh/day/5) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day5.js)
 - Day 4: **Plant Library** [view](http://kathleenwang15projects.surge.sh/day/4) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day6.js)
 - Day 3: **feelings** [view](http://kathleenwang15projects.surge.sh/day/3) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day4.js)
 - Day 2: **Solar System** [view](http://kathleenwang15projects.surge.sh/day/2) | [code](https://github.com/kathleenfwang/15-React-Projects/blob/master/src/pages/Day2.js)
